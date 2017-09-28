@@ -2,11 +2,11 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <comment>KhanzaHMS</comment>
-    <entry key="HOST">localhost</entry>
-    <entry key="DATABASE">sik</entry>
+    <entry key="HOST">jadibaru.com</entry>
+    <entry key="DATABASE">jadibar2_sik</entry>
     <entry key="PORT">3306</entry>
-    <entry key="USER">root</entry>
-    <entry key="PAS"></entry>
+    <entry key="USER">jadibar2_sik</entry>
+    <entry key="PAS">rspau2017</entry>
     <entry key="CARICEPAT">nonaktif</entry>
     <entry key="HYBRIDWEB">webapps</entry>
     <entry key="ANTRIAN">sender</entry>
