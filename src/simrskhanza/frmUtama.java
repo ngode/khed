@@ -338,6 +338,10 @@ public class frmUtama extends javax.swing.JFrame {
             });
         } 
             
+        log();
+        
+        edAdmin.setText("spv");
+        edPwd.setText("server");
     }
     
     public static frmUtama getInstance() {
@@ -4058,7 +4062,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20/09/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30/09/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -5001,6 +5005,11 @@ public class frmUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCancelActionPerformed
 
     private void BtnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogActionPerformed
+        log();
+    }//GEN-LAST:event_BtnLogActionPerformed
+
+    private void log()
+    {
         try{
             com.sun.awt.AWTUtilities.setWindowOpacity(DlgLogin,0.7f);
         }catch(Exception e){            
@@ -5035,8 +5044,8 @@ public class frmUtama extends javax.swing.JFrame {
                 edAdmin.requestFocus();
                 break;
         }
-    }//GEN-LAST:event_BtnLogActionPerformed
-
+    }
+    
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
         if(edAdmin.getText().trim().equals("")){
             Valid.textKosong(edAdmin,"ID User");

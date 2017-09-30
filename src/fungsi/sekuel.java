@@ -34,7 +34,11 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -194,7 +198,7 @@ public final class sekuel {
         }
     }
     
-    public boolean menyimpantf2(String table,String value,String sama,int i,String[] a){
+    public boolean menyimpantf2(String table,String value,String samra,int i,String[] a){
         bool=true;
         try{ 
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
@@ -1458,5 +1462,52 @@ public final class sekuel {
             outFile.close();
         }
     }
+   
+   public List<String[]> select(String q)
+   {
+        List<String[]> res = new ArrayList<>();
+       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+            
+        try
+        {
+            ps = connect.prepareStatement(q);
+            rs = ps.executeQuery();
+            
+            while (rs.next())
+            {
+                String[] sa = new String[rs.getMetaData().getColumnCount()];
+                
+                for (int a = 0; a < sa.length; a++)
+                {
+                    sa[a] = rs.getString(a + 1);
+                }
+                
+                res.add(sa);
+            }
+        } 
+        catch (SQLException ex)
+        {
+            Logger.getLogger(sekuel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            try
+            {
+                if (rs != null)
+                    rs.close();
+                
+                if (ps != null)
+                    ps.close();
+            } 
+            catch (SQLException ex)
+            {
+                Logger.getLogger(sekuel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return res;
+   }
 
 }

@@ -52,6 +52,7 @@ import simrskhanza.DlgKelurahan;
 import simrskhanza.DlgPasien;
 import simrskhanza.DlgPenanggungJawab;
 import simrskhanza.DlgPilihanCetakDokumen;
+import widget.AutoCompleteTextBox;
 
 /**
  *
@@ -545,6 +546,14 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         } catch (Exception e) {
             user=var.getkode();
         }
+        
+        // Inisiaalisa Auto COmplete
+        ((AutoCompleteTextBox)Kelurahan).init("kelurahan", "kd_kel", "nm_kel");
+        ((AutoCompleteTextBox)KelurahanPj).init("kelurahan", "kd_kel", "nm_kel");
+        ((AutoCompleteTextBox)Kecamatan).init("kecamatan", "kd_kec", "nm_kec");
+        ((AutoCompleteTextBox)KecamatanPj).init("kecamatan", "kd_kec", "nm_kec");
+        ((AutoCompleteTextBox)Kabupaten).init("kabupaten", "kd_kab", "nm_kab");
+        ((AutoCompleteTextBox)KabupatenPj).init("kabupaten", "kd_kab", "nm_kab");
     }
     
     
@@ -556,7 +565,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         TNm = new widget.TextBox();
         CmbJk = new widget.ComboBox();
@@ -572,6 +582,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnDocument = new javax.swing.JMenuItem();
         NoBalasan = new widget.TextBox();
+        groupKategori = new javax.swing.ButtonGroup();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -610,9 +621,9 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         Kdpnj = new widget.TextBox();
         nmpnj = new widget.TextBox();
         BtnPenjab = new widget.Button();
-        Kelurahan = new widget.TextBox();
-        Kecamatan = new widget.TextBox();
-        Kabupaten = new widget.TextBox();
+        Kelurahan = new widget.AutoCompleteTextBox();
+        Kecamatan = new widget.AutoCompleteTextBox();
+        Kabupaten = new widget.AutoCompleteTextBox();
         BtnKelurahan = new widget.Button();
         BtnKecamatan = new widget.Button();
         BtnKabupaten = new widget.Button();
@@ -624,14 +635,32 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel28 = new widget.Label();
         jLabel29 = new widget.Label();
         AlamatPj = new widget.TextBox();
-        KecamatanPj = new widget.TextBox();
+        KecamatanPj = new widget.AutoCompleteTextBox();
         BtnKecamatanPj = new widget.Button();
-        KabupatenPj = new widget.TextBox();
+        KabupatenPj = new widget.AutoCompleteTextBox();
         BtnKabupatenPj = new widget.Button();
         BtnKelurahanPj = new widget.Button();
-        KelurahanPj = new widget.TextBox();
+        KelurahanPj = new widget.AutoCompleteTextBox();
         ChkRM = new widget.CekBox();
         R6 = new widget.RadioButton();
+        jLabel37 = new widget.Label();
+        rbTniAu = new widget.RadioButton();
+        rbTniAl = new widget.RadioButton();
+        txtNamaKelDinas = new widget.TextBox();
+        txtPangkat = new widget.TextBox();
+        label1 = new widget.Label();
+        label2 = new widget.Label();
+        txtNrpNip = new widget.TextBox();
+        txtKesatuan = new widget.TextBox();
+        label3 = new widget.Label();
+        label4 = new widget.Label();
+        rbTniAd = new widget.RadioButton();
+        rbPolri = new widget.RadioButton();
+        rbPns = new widget.RadioButton();
+        rbUmum = new widget.RadioButton();
+        label5 = new widget.Label();
+        txtNoTelpPj = new widget.TextBox();
+        rbKeluarga = new widget.RadioButton();
         FormKelengkapanSEP = new widget.PanelBiasa();
         jLabel4 = new widget.Label();
         TNoRw = new widget.TextBox();
@@ -685,8 +714,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         TNm.setHighlighter(null);
         TNm.setName("TNm"); // NOI18N
-        TNm.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNm.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNmKeyPressed(evt);
             }
         });
@@ -694,63 +725,79 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         CmbJk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LAKI-LAKI", "PEREMPUAN" }));
         CmbJk.setName("CmbJk"); // NOI18N
         CmbJk.setOpaque(false);
-        CmbJk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbJk.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbJkKeyPressed(evt);
             }
         });
 
         DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-08-2017" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
-        DTPLahir.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        DTPLahir.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 DTPLahirItemStateChanged(evt);
             }
         });
-        DTPLahir.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        DTPLahir.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 DTPLahirKeyPressed(evt);
             }
         });
 
         TUmur.setName("TUmur"); // NOI18N
-        TUmur.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TUmur.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TUmurKeyPressed(evt);
             }
         });
 
         TNoPeserta.setHighlighter(null);
         TNoPeserta.setName("TNoPeserta"); // NOI18N
-        TNoPeserta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoPeserta.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoPesertaKeyPressed(evt);
             }
         });
 
         TKtp.setName("TKtp"); // NOI18N
-        TKtp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TKtp.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TKtpKeyPressed(evt);
             }
         });
 
         NoRm.setHighlighter(null);
         NoRm.setName("NoRm"); // NOI18N
-        NoRm.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        NoRm.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 NoRmKeyPressed(evt);
             }
         });
 
         kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
-        kdpoli.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdpoli.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdpoliKeyPressed(evt);
             }
         });
@@ -759,8 +806,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         TPoli.setName("TPoli"); // NOI18N
 
         TBiaya.setName("TBiaya"); // NOI18N
-        TBiaya.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TBiaya.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TBiayaKeyPressed(evt);
             }
         });
@@ -774,8 +823,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         MnDocument.setText("Cetak Document");
         MnDocument.setName("MnDocument"); // NOI18N
         MnDocument.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnDocument.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnDocument.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnDocumentActionPerformed(evt);
             }
         });
@@ -789,11 +840,14 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         setIconImages(null);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
-            public void windowActivated(java.awt.event.WindowEvent evt) {
+            public void windowActivated(java.awt.event.WindowEvent evt)
+            {
                 formWindowActivated(evt);
             }
         });
@@ -813,7 +867,6 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
-        PanelInput.setBorder(null);
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
         PanelInput.setPreferredSize(new java.awt.Dimension(200, 517));
@@ -846,8 +899,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel3.setBounds(3, 25, 100, 23);
 
         TTmp.setName("TTmp"); // NOI18N
-        TTmp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TTmp.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TTmpKeyPressed(evt);
             }
         });
@@ -857,8 +912,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         CMbGd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A", "B", "AB", "O" }));
         CMbGd.setName("CMbGd"); // NOI18N
         CMbGd.setOpaque(false);
-        CMbGd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CMbGd.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CMbGdKeyPressed(evt);
             }
         });
@@ -885,8 +942,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         cmbAgama.setLightWeightPopupEnabled(false);
         cmbAgama.setName("cmbAgama"); // NOI18N
         cmbAgama.setOpaque(false);
-        cmbAgama.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        cmbAgama.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 cmbAgamaKeyPressed(evt);
             }
         });
@@ -903,8 +962,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         CmbStts.setLightWeightPopupEnabled(false);
         CmbStts.setName("CmbStts"); // NOI18N
         CmbStts.setOpaque(false);
-        CmbStts.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbStts.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbSttsKeyPressed(evt);
             }
         });
@@ -922,8 +983,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel21.setBounds(3, 145, 100, 23);
 
         Pekerjaan.setName("Pekerjaan"); // NOI18N
-        Pekerjaan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Pekerjaan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 PekerjaanKeyPressed(evt);
             }
         });
@@ -938,18 +1001,24 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         Alamat.setText("ALAMAT");
         Alamat.setHighlighter(null);
         Alamat.setName("Alamat"); // NOI18N
-        Alamat.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        Alamat.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 AlamatMouseMoved(evt);
             }
         });
-        Alamat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+        Alamat.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 AlamatMouseExited(evt);
             }
         });
-        Alamat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Alamat.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 AlamatKeyPressed(evt);
             }
         });
@@ -958,8 +1027,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         TTlp.setHighlighter(null);
         TTlp.setName("TTlp"); // NOI18N
-        TTlp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TTlp.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TTlpKeyPressed(evt);
             }
         });
@@ -971,8 +1042,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         TNo.setHighlighter(null);
         TNo.setName("TNo"); // NOI18N
         TNo.setOpaque(true);
-        TNo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNo.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoKeyPressed(evt);
             }
         });
@@ -981,12 +1054,14 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         DTPDaftar.setEditable(false);
         DTPDaftar.setForeground(new java.awt.Color(50, 70, 50));
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-08-2017" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
-        DTPDaftar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        DTPDaftar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 DTPDaftarKeyPressed(evt);
             }
         });
@@ -1006,8 +1081,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         CMbPnd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "TS", "TK", "SD", "SMP", "SMA", "D1", "D2", "D3", "D4", "S1", "S2", "S3" }));
         CMbPnd.setName("CMbPnd"); // NOI18N
         CMbPnd.setOpaque(false);
-        CMbPnd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CMbPnd.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CMbPndKeyPressed(evt);
             }
         });
@@ -1015,8 +1092,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         CMbPnd.setBounds(325, 115, 90, 23);
 
         Saudara.setName("Saudara"); // NOI18N
-        Saudara.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Saudara.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 SaudaraKeyPressed(evt);
             }
         });
@@ -1073,8 +1152,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         Kdpnj.setText("-");
         Kdpnj.setHighlighter(null);
         Kdpnj.setName("Kdpnj"); // NOI18N
-        Kdpnj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kdpnj.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KdpnjKeyPressed(evt);
             }
         });
@@ -1091,8 +1172,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnPenjab.setMnemonic('1');
         BtnPenjab.setToolTipText("ALt+1");
         BtnPenjab.setName("BtnPenjab"); // NOI18N
-        BtnPenjab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPenjab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPenjabActionPerformed(evt);
             }
         });
@@ -1100,20 +1183,25 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnPenjab.setBounds(387, 205, 28, 23);
 
         Kelurahan.setText("KELURAHAN");
-        Kelurahan.setHighlighter(null);
         Kelurahan.setName("Kelurahan"); // NOI18N
-        Kelurahan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        Kelurahan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 KelurahanMouseMoved(evt);
             }
         });
-        Kelurahan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+        Kelurahan.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 KelurahanMouseExited(evt);
             }
         });
-        Kelurahan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kelurahan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KelurahanKeyPressed(evt);
             }
         });
@@ -1121,20 +1209,25 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         Kelurahan.setBounds(749, 25, 130, 23);
 
         Kecamatan.setText("KECAMATAN");
-        Kecamatan.setHighlighter(null);
         Kecamatan.setName("Kecamatan"); // NOI18N
-        Kecamatan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        Kecamatan.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 KecamatanMouseMoved(evt);
             }
         });
-        Kecamatan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+        Kecamatan.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 KecamatanMouseExited(evt);
             }
         });
-        Kecamatan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kecamatan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KecamatanKeyPressed(evt);
             }
         });
@@ -1142,20 +1235,25 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         Kecamatan.setBounds(534, 55, 130, 23);
 
         Kabupaten.setText("KABUPATEN");
-        Kabupaten.setHighlighter(null);
         Kabupaten.setName("Kabupaten"); // NOI18N
-        Kabupaten.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        Kabupaten.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 KabupatenMouseMoved(evt);
             }
         });
-        Kabupaten.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+        Kabupaten.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 KabupatenMouseExited(evt);
             }
         });
-        Kabupaten.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kabupaten.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KabupatenKeyPressed(evt);
             }
         });
@@ -1166,8 +1264,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKelurahan.setMnemonic('2');
         BtnKelurahan.setToolTipText("ALt+2");
         BtnKelurahan.setName("BtnKelurahan"); // NOI18N
-        BtnKelurahan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKelurahan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKelurahanActionPerformed(evt);
             }
         });
@@ -1178,8 +1278,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKecamatan.setMnemonic('3');
         BtnKecamatan.setToolTipText("ALt+3");
         BtnKecamatan.setName("BtnKecamatan"); // NOI18N
-        BtnKecamatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKecamatan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKecamatanActionPerformed(evt);
             }
         });
@@ -1190,8 +1292,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKabupaten.setMnemonic('4');
         BtnKabupaten.setToolTipText("ALt+4");
         BtnKabupaten.setName("BtnKabupaten"); // NOI18N
-        BtnKabupaten.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKabupaten.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKabupatenActionPerformed(evt);
             }
         });
@@ -1204,8 +1308,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel14.setBounds(3, 175, 100, 23);
 
         NmIbu.setName("NmIbu"); // NOI18N
-        NmIbu.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        NmIbu.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 NmIbuKeyPressed(evt);
             }
         });
@@ -1223,8 +1329,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel27.setBounds(430, 115, 100, 23);
 
         PekerjaanPj.setName("PekerjaanPj"); // NOI18N
-        PekerjaanPj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        PekerjaanPj.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 PekerjaanPjKeyPressed(evt);
             }
         });
@@ -1244,18 +1352,24 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         AlamatPj.setText("ALAMAT");
         AlamatPj.setHighlighter(null);
         AlamatPj.setName("AlamatPj"); // NOI18N
-        AlamatPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        AlamatPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 AlamatPjMouseMoved(evt);
             }
         });
-        AlamatPj.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+        AlamatPj.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 AlamatPjMouseExited(evt);
             }
         });
-        AlamatPj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        AlamatPj.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 AlamatPjKeyPressed(evt);
             }
         });
@@ -1263,20 +1377,25 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         AlamatPj.setBounds(534, 175, 213, 23);
 
         KecamatanPj.setText("KECAMATAN");
-        KecamatanPj.setHighlighter(null);
         KecamatanPj.setName("KecamatanPj"); // NOI18N
-        KecamatanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        KecamatanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 KecamatanPjMouseMoved(evt);
             }
         });
-        KecamatanPj.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+        KecamatanPj.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 KecamatanPjMouseExited(evt);
             }
         });
-        KecamatanPj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        KecamatanPj.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KecamatanPjKeyPressed(evt);
             }
         });
@@ -1287,8 +1406,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKecamatanPj.setMnemonic('3');
         BtnKecamatanPj.setToolTipText("ALt+3");
         BtnKecamatanPj.setName("BtnKecamatanPj"); // NOI18N
-        BtnKecamatanPj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKecamatanPj.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKecamatanPjActionPerformed(evt);
             }
         });
@@ -1296,20 +1417,25 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKecamatanPj.setBounds(666, 205, 28, 23);
 
         KabupatenPj.setText("KABUPATEN");
-        KabupatenPj.setHighlighter(null);
         KabupatenPj.setName("KabupatenPj"); // NOI18N
-        KabupatenPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        KabupatenPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 KabupatenPjMouseMoved(evt);
             }
         });
-        KabupatenPj.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+        KabupatenPj.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 KabupatenPjMouseExited(evt);
             }
         });
-        KabupatenPj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        KabupatenPj.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KabupatenPjKeyPressed(evt);
             }
         });
@@ -1320,8 +1446,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKabupatenPj.setMnemonic('4');
         BtnKabupatenPj.setToolTipText("ALt+4");
         BtnKabupatenPj.setName("BtnKabupatenPj"); // NOI18N
-        BtnKabupatenPj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKabupatenPj.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKabupatenPjActionPerformed(evt);
             }
         });
@@ -1332,8 +1460,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKelurahanPj.setMnemonic('2');
         BtnKelurahanPj.setToolTipText("ALt+2");
         BtnKelurahanPj.setName("BtnKelurahanPj"); // NOI18N
-        BtnKelurahanPj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKelurahanPj.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKelurahanPjActionPerformed(evt);
             }
         });
@@ -1341,20 +1471,25 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKelurahanPj.setBounds(881, 175, 28, 23);
 
         KelurahanPj.setText("KELURAHAN");
-        KelurahanPj.setHighlighter(null);
         KelurahanPj.setName("KelurahanPj"); // NOI18N
-        KelurahanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        KelurahanPj.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 KelurahanPjMouseMoved(evt);
             }
         });
-        KelurahanPj.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+        KelurahanPj.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
                 KelurahanPjMouseExited(evt);
             }
         });
-        KelurahanPj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        KelurahanPj.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KelurahanPjKeyPressed(evt);
             }
         });
@@ -1370,8 +1505,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         ChkRM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChkRM.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkRM.setName("ChkRM"); // NOI18N
-        ChkRM.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        ChkRM.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 ChkRMItemStateChanged(evt);
             }
         });
@@ -1385,6 +1522,120 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         R6.setName("R6"); // NOI18N
         FormKelengkapanPasien.add(R6);
         R6.setBounds(783, 85, 60, 23);
+
+        jLabel37.setText("Kategori Pasien: ");
+        jLabel37.setName("jLabel37"); // NOI18N
+        FormKelengkapanPasien.add(jLabel37);
+        jLabel37.setBounds(920, 50, 90, 23);
+
+        groupKategori.add(rbTniAu);
+        rbTniAu.setText("TNI AU");
+        rbTniAu.setName("rbTniAu"); // NOI18N
+        rbTniAu.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                rbTniAuActionPerformed(evt);
+            }
+        });
+        FormKelengkapanPasien.add(rbTniAu);
+        rbTniAu.setBounds(1030, 50, 53, 16);
+
+        groupKategori.add(rbTniAl);
+        rbTniAl.setText("TNI AL");
+        rbTniAl.setName("rbTniAl"); // NOI18N
+        FormKelengkapanPasien.add(rbTniAl);
+        rbTniAl.setBounds(1170, 50, 80, 16);
+
+        txtNamaKelDinas.setName("txtNamaKelDinas"); // NOI18N
+        txtNamaKelDinas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtNamaKelDinasActionPerformed(evt);
+            }
+        });
+        FormKelengkapanPasien.add(txtNamaKelDinas);
+        txtNamaKelDinas.setBounds(1030, 120, 190, 24);
+
+        txtPangkat.setName("txtPangkat"); // NOI18N
+        FormKelengkapanPasien.add(txtPangkat);
+        txtPangkat.setBounds(1030, 150, 150, 24);
+
+        label1.setText("PANGKAT :");
+        label1.setName("label1"); // NOI18N
+        FormKelengkapanPasien.add(label1);
+        label1.setBounds(920, 150, 90, 30);
+
+        label2.setText("NAMA KEL DINAS :");
+        label2.setName("label2"); // NOI18N
+        FormKelengkapanPasien.add(label2);
+        label2.setBounds(920, 120, 90, 30);
+
+        txtNrpNip.setName("txtNrpNip"); // NOI18N
+        FormKelengkapanPasien.add(txtNrpNip);
+        txtNrpNip.setBounds(1030, 180, 150, 24);
+
+        txtKesatuan.setName("txtKesatuan"); // NOI18N
+        FormKelengkapanPasien.add(txtKesatuan);
+        txtKesatuan.setBounds(1030, 210, 150, 24);
+
+        label3.setText("NRP / NIP :");
+        label3.setName("label3"); // NOI18N
+        FormKelengkapanPasien.add(label3);
+        label3.setBounds(920, 180, 90, 30);
+
+        label4.setText("KESATUAN :");
+        label4.setName("label4"); // NOI18N
+        FormKelengkapanPasien.add(label4);
+        label4.setBounds(920, 220, 90, 20);
+
+        groupKategori.add(rbTniAd);
+        rbTniAd.setText("TNI AD");
+        rbTniAd.setName("rbTniAd"); // NOI18N
+        FormKelengkapanPasien.add(rbTniAd);
+        rbTniAd.setBounds(1100, 50, 53, 16);
+
+        groupKategori.add(rbPolri);
+        rbPolri.setText("POLRI");
+        rbPolri.setName("rbPolri"); // NOI18N
+        rbPolri.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                rbPolriActionPerformed(evt);
+            }
+        });
+        FormKelengkapanPasien.add(rbPolri);
+        rbPolri.setBounds(1030, 70, 49, 16);
+
+        groupKategori.add(rbPns);
+        rbPns.setText("PNS");
+        rbPns.setName("rbPns"); // NOI18N
+        FormKelengkapanPasien.add(rbPns);
+        rbPns.setBounds(1100, 70, 38, 16);
+
+        groupKategori.add(rbUmum);
+        rbUmum.setSelected(true);
+        rbUmum.setText("UMUM");
+        rbUmum.setName("rbUmum"); // NOI18N
+        FormKelengkapanPasien.add(rbUmum);
+        rbUmum.setBounds(1030, 90, 80, 16);
+
+        label5.setText("No. Telp P.J :");
+        label5.setName("label5"); // NOI18N
+        FormKelengkapanPasien.add(label5);
+        label5.setBounds(920, 30, 90, 14);
+
+        txtNoTelpPj.setName("txtNoTelpPj"); // NOI18N
+        FormKelengkapanPasien.add(txtNoTelpPj);
+        txtNoTelpPj.setBounds(1030, 20, 150, 24);
+
+        groupKategori.add(rbKeluarga);
+        rbKeluarga.setText("KELUARGA");
+        rbKeluarga.setName("rbKeluarga"); // NOI18N
+        FormKelengkapanPasien.add(rbKeluarga);
+        rbKeluarga.setBounds(1170, 70, 80, 16);
 
         FormInput.add(FormKelengkapanPasien);
 
@@ -1412,13 +1663,15 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel23.setBounds(430, 55, 100, 23);
 
         TanggalSEP.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-08-2017 07:23:21" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017 01:58:53" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
         TanggalSEP.setPreferredSize(new java.awt.Dimension(95, 23));
-        TanggalSEP.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TanggalSEP.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TanggalSEPKeyPressed(evt);
             }
         });
@@ -1432,13 +1685,15 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel30.setBounds(430, 25, 100, 23);
 
         TanggalRujuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-08-2017 07:23:21" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017 01:58:53" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
         TanggalRujuk.setPreferredSize(new java.awt.Dimension(95, 23));
-        TanggalRujuk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TanggalRujuk.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TanggalRujukKeyPressed(evt);
             }
         });
@@ -1453,8 +1708,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         NoRujukan.setHighlighter(null);
         NoRujukan.setName("NoRujukan"); // NOI18N
-        NoRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        NoRujukan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 NoRujukanKeyPressed(evt);
             }
         });
@@ -1484,13 +1741,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         btnPPKRujukan.setMnemonic('X');
         btnPPKRujukan.setToolTipText("Alt+X");
         btnPPKRujukan.setName("btnPPKRujukan"); // NOI18N
-        btnPPKRujukan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPPKRujukan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPPKRujukanActionPerformed(evt);
             }
         });
-        btnPPKRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        btnPPKRujukan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 btnPPKRujukanKeyPressed(evt);
             }
         });
@@ -1539,13 +1800,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         btnDiagnosa.setMnemonic('X');
         btnDiagnosa.setToolTipText("Alt+X");
         btnDiagnosa.setName("btnDiagnosa"); // NOI18N
-        btnDiagnosa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDiagnosa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDiagnosaActionPerformed(evt);
             }
         });
-        btnDiagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        btnDiagnosa.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 btnDiagnosaKeyPressed(evt);
             }
         });
@@ -1556,13 +1821,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         btnPoli.setMnemonic('X');
         btnPoli.setToolTipText("Alt+X");
         btnPoli.setName("btnPoli"); // NOI18N
-        btnPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPoliActionPerformed(evt);
             }
         });
-        btnPoli.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        btnPoli.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 btnPoliKeyPressed(evt);
             }
         });
@@ -1600,8 +1869,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         Catatan.setHighlighter(null);
         Catatan.setName("Catatan"); // NOI18N
-        Catatan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Catatan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CatatanKeyPressed(evt);
             }
         });
@@ -1611,13 +1882,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         JenisPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Rawat Inap", "2. Rawat Jalan" }));
         JenisPelayanan.setName("JenisPelayanan"); // NOI18N
         JenisPelayanan.setOpaque(false);
-        JenisPelayanan.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        JenisPelayanan.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 JenisPelayananItemStateChanged(evt);
             }
         });
-        JenisPelayanan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        JenisPelayanan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 JenisPelayananKeyPressed(evt);
             }
         });
@@ -1632,8 +1907,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         Kelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Kelas 1", "2. Kelas 2", "3. kelas 3" }));
         Kelas.setName("Kelas"); // NOI18N
         Kelas.setOpaque(false);
-        Kelas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kelas.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KelasKeyPressed(evt);
             }
         });
@@ -1649,8 +1926,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         LakaLantas.setSelectedIndex(1);
         LakaLantas.setName("LakaLantas"); // NOI18N
         LakaLantas.setOpaque(false);
-        LakaLantas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        LakaLantas.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 LakaLantasKeyPressed(evt);
             }
         });
@@ -1664,8 +1943,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         LokasiLaka.setHighlighter(null);
         LokasiLaka.setName("LokasiLaka"); // NOI18N
-        LokasiLaka.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        LokasiLaka.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 LokasiLakaKeyPressed(evt);
             }
         });
@@ -1679,8 +1960,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
-        TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoReg.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoRegKeyPressed(evt);
             }
         });
@@ -1694,8 +1977,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
-        kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kddokter.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kddokterKeyPressed(evt);
             }
         });
@@ -1711,8 +1996,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnDokter.setMnemonic('3');
         BtnDokter.setToolTipText("ALt+3");
         BtnDokter.setName("BtnDokter"); // NOI18N
-        BtnDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnDokterActionPerformed(evt);
             }
         });
@@ -1741,8 +2028,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         ChkCari.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         ChkCari.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkCari.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ChkCari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ChkCariActionPerformed(evt);
             }
         });
@@ -1759,8 +2048,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         NoKartu.setName("NoKartu"); // NOI18N
         NoKartu.setPreferredSize(new java.awt.Dimension(250, 23));
-        NoKartu.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        NoKartu.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 NoKartuKeyPressed(evt);
             }
         });
@@ -1771,13 +2062,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         btnPasien.setToolTipText("Alt+5");
         btnPasien.setName("btnPasien"); // NOI18N
         btnPasien.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPasienActionPerformed(evt);
             }
         });
-        btnPasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        btnPasien.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 btnPasienKeyPressed(evt);
             }
         });
@@ -1788,13 +2083,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -1810,8 +2109,10 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrintActionPerformed(evt);
             }
         });
@@ -1823,13 +2124,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSimpanActionPerformed(evt);
             }
         });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnSimpanKeyPressed(evt);
             }
         });
@@ -1841,13 +2146,17 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -2532,7 +2841,28 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             Valid.textKosong(KdPoli, "Poli/Kamar");
         }else if(Catatan.getText().trim().equals("")){
             Valid.textKosong(Catatan, "Catatan");
-        }else{            
+        }
+        else if (txtNoTelpPj.getText().trim().isEmpty())
+        {
+            Valid.textKosong(txtNoTelpPj, "No Telp PJ ");  
+        }
+        else if (txtNamaKelDinas.getText().trim().isEmpty())
+        {
+            Valid.textKosong(txtNamaKelDinas, "Nama Kel Dinas ");  
+        }
+        else if (txtPangkat.getText().trim().isEmpty())
+        {
+            Valid.textKosong(txtPangkat, "Pangkat ");  
+        }
+        else if (txtNrpNip.getText().trim().isEmpty())
+        {
+            Valid.textKosong(txtNrpNip, "NRP / NIP ");  
+        }
+        else if (txtKesatuan.getText().trim().isEmpty())
+        {
+            Valid.textKosong(txtKesatuan, "Kesatuan ");  
+        }
+        else{            
             if((JenisPelayanan.getSelectedIndex()==1)&&(NmPoli.getText().toLowerCase().contains("darurat"))){
                 if(Sequel.cariInteger("select count(no_kartu) from bridging_sep where "+
                         "no_kartu='"+no_peserta+"' and jnspelayanan='"+JenisPelayanan.getSelectedItem().toString().substring(0,1)+"' "+
@@ -2641,6 +2971,21 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_MnDocumentActionPerformed
 
+    private void rbTniAuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rbTniAuActionPerformed
+    {//GEN-HEADEREND:event_rbTniAuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbTniAuActionPerformed
+
+    private void txtNamaKelDinasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtNamaKelDinasActionPerformed
+    {//GEN-HEADEREND:event_txtNamaKelDinasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaKelDinasActionPerformed
+
+    private void rbPolriActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_rbPolriActionPerformed
+    {//GEN-HEADEREND:event_rbPolriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbPolriActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2742,6 +3087,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
     private widget.Button btnPoli;
     private javax.swing.ButtonGroup buttonGroup1;
     private widget.ComboBox cmbAgama;
+    private javax.swing.ButtonGroup groupKategori;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
@@ -2771,17 +3117,35 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
     private widget.Label jLabel34;
     private widget.Label jLabel35;
     private widget.Label jLabel36;
+    private widget.Label jLabel37;
     private widget.Label jLabel4;
     private widget.Label jLabel5;
     private widget.Label jLabel9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.TextBox kddokter;
     private widget.TextBox kdpoli;
+    private widget.Label label1;
+    private widget.Label label2;
+    private widget.Label label3;
+    private widget.Label label4;
+    private widget.Label label5;
     private widget.TextBox nmpnj;
     private widget.panelisi panelCari;
     private widget.panelisi panelGlass6;
+    private widget.RadioButton rbKeluarga;
+    private widget.RadioButton rbPns;
+    private widget.RadioButton rbPolri;
+    private widget.RadioButton rbTniAd;
+    private widget.RadioButton rbTniAl;
+    private widget.RadioButton rbTniAu;
+    private widget.RadioButton rbUmum;
     private widget.ScrollPane scrollPane2;
     private widget.Table tbKamar;
+    private widget.TextBox txtKesatuan;
+    private widget.TextBox txtNamaKelDinas;
+    private widget.TextBox txtNoTelpPj;
+    private widget.TextBox txtNrpNip;
+    private widget.TextBox txtPangkat;
     // End of variables declaration//GEN-END:variables
 
     public void tampil(String nomorpeserta) {
@@ -2939,7 +3303,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                    "pasien.pekerjaan,pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,"+
                    "pasien.no_tlp,pasien.umur,pasien.pnd, pasien.keluarga, pasien.namakeluarga,"+
                    "penjab.png_jawab,pasien.no_peserta,pasien.pekerjaanpj,pasien.alamatpj,"+
-                   "pasien.kelurahanpj,pasien.kecamatanpj,pasien.kabupatenpj from pasien "+
+                   "pasien.kelurahanpj,pasien.kecamatanpj,pasien.kabupatenpj," +
+                   "pasien.no_telp_pj, pasien.kategori_pasien, pasien.nm_keldinas, pasien.pangkat, pasien.nrpnip, pasien.kesatuan from pasien "+
                    "inner join kelurahan inner join kecamatan inner join kabupaten "+
                    "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "+
@@ -2968,6 +3333,13 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                         KelurahanPj.setText(rs.getString("kelurahanpj"));      
                         KecamatanPj.setText(rs.getString("kecamatanpj"));      
                         KabupatenPj.setText(rs.getString("kabupatenpj")); 
+                        
+                        txtNoTelpPj.setText(rs.getString("no_telp_pj"));
+                        txtNamaKelDinas.setText(rs.getString("nm_keldinas"));
+                        txtPangkat.setText(rs.getString("pangkat"));
+                        txtNrpNip.setText(rs.getString("nrpnip"));
+                        txtKesatuan.setText(rs.getString("kesatuan"));
+                        
                         switch (rs.getString("namakeluarga")) {
                             case "AYAH":
                                 R1.setSelected(true);
@@ -2989,6 +3361,44 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                                 break;
 
                         } 
+                        
+                        if (rs.getString("kategori_pasien") == null)
+                        {
+                            rbUmum.setSelected(true);
+                        }
+                        else
+                        {
+                            switch (rs.getString("kategori_pasien"))
+                            {
+                                case "TNI AU" :
+                                    rbTniAu.setSelected(true);
+                                    break;
+
+                                case "TNI AD" :
+                                    rbTniAu.setSelected(true);
+                                    break;
+
+                                case "TNI AL" :
+                                    rbTniAl.setSelected(true);
+                                    break;
+
+                                case "POLRI" :
+                                    rbPolri.setSelected(true);
+                                    break;
+
+                                case "PNS" :
+                                    rbPns.setSelected(true);
+                                    break;
+
+                                case "KELUARGA" :
+                                    rbKeluarga.setSelected(true);
+                                    break;
+
+                                case "UMUM" :
+                                    rbUmum.setSelected(true);
+                                    break;
+                            }
+                        }
                     }else{
                         statuspasien="baru";
                         autoNomor();
@@ -3428,6 +3838,21 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             klg="ANAK";
         }    
 
+        String kategoriPasien = "UMUM";
+            
+            if (rbTniAu.isSelected())
+                kategoriPasien = "TNI AU";
+            else if (rbTniAd.isSelected())
+                kategoriPasien = "TNI AD";
+            else if (rbTniAl.isSelected())
+                kategoriPasien = "TNI AL";
+            else if (rbPolri.isSelected())
+                kategoriPasien = "POLRI";
+            else if (rbPns.isSelected())
+                kategoriPasien = "PNS";
+            else if (rbKeluarga.isSelected())
+                kategoriPasien = "KELUARGA";
+        
         Sequel.AutoComitFalse();                
         Sequel.queryu3("insert into kelurahan values(?,?)",2,new String[]{"0",Kelurahan.getText().replaceAll("KELURAHAN","-")});
         Sequel.queryu3("insert into kecamatan values(?,?)",2,new String[]{"0",Kecamatan.getText().replaceAll("KECAMATAN","-")});
@@ -3443,7 +3868,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         if(statuspasien.equals("baru")){
             autoNomor();
-            if(Sequel.menyimpantf2("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",28,new String[]{
+            if(Sequel.menyimpantf2("pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rekam Medis Pasien",34,new String[]{
                     TNo.getText(),TNm.getText(),TKtp.getText(),CmbJk.getSelectedItem().toString().substring(0,1),TTmp.getText(),
                     Valid.SetTgl(DTPLahir.getSelectedItem()+""),NmIbu.getText(),
                     Alamat.getText().replaceAll("ALAMAT",""),CMbGd.getSelectedItem().toString(),Pekerjaan.getText(),CmbStts.getSelectedItem().toString(),cmbAgama.getSelectedItem().toString(),
@@ -3452,7 +3877,9 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                     Sequel.cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?",Kelurahan.getText().replaceAll("KELURAHAN","-")),
                     Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?",Kecamatan.getText().replaceAll("KECAMATAN","-")),
                     Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?",Kabupaten.getText().replaceAll("KABUPATEN","-")),
-                    PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText()
+                    PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),KabupatenPj.getText(),
+                    txtNoTelpPj.getText(), kategoriPasien, txtNamaKelDinas.getText(), 
+                    txtPangkat.getText(), txtNrpNip.getText(), txtKesatuan.getText() 
                 })==true){
                     if(ChkRM.isSelected()==true){
                         Sequel.queryu2("delete from set_no_rkm_medis");
@@ -3467,7 +3894,8 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             Valid.editTable(tabMode,"pasien","no_rkm_medis","?","no_rkm_medis=?,nm_pasien=?,no_ktp=?,jk=?,tmp_lahir=?,"+
                     "tgl_lahir=?,alamat=?,gol_darah=?,pekerjaan=?,stts_nikah=?,agama=?,tgl_daftar=?,no_tlp=?,umur=?"+
                     ",pnd=?,keluarga=?,namakeluarga=?,kd_pj=?,no_peserta=?,kd_kel=?,kd_kec=?,kd_kab=?,nm_ibu=?,pekerjaanpj=?,"+
-                    "alamatpj=?,kelurahanpj=?,kecamatanpj=?,kabupatenpj=?",29,
+                    "alamatpj=?,kelurahanpj=?,kecamatanpj=?,kabupatenpj=?" +
+                    "no_telp_pj=?,kategori_pasien=?,nm_keldinas=?,pangkat=?,nrpnip=?,kesatuan=?",35,
                 new String[]{TNo.getText(),TNm.getText(),TKtp.getText(),CmbJk.getSelectedItem().toString().substring(0,1),TTmp.getText(),
                     Valid.SetTgl(DTPLahir.getSelectedItem()+""),
                     Alamat.getText(),CMbGd.getSelectedItem().toString(),Pekerjaan.getText(),CmbStts.getSelectedItem().toString(),cmbAgama.getSelectedItem().toString(),
@@ -3477,7 +3905,14 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                     Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?",Kecamatan.getText()),
                     Sequel.cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?",Kabupaten.getText()), 
                     NmIbu.getText(),PekerjaanPj.getText(),AlamatPj.getText(),KelurahanPj.getText(),KecamatanPj.getText(),
-                    KabupatenPj.getText(),TNo.getText()
+                    KabupatenPj.getText(),
+                    txtNoTelpPj.getText(),
+                    kategoriPasien,
+                    txtNamaKelDinas.getText(),
+                    txtPangkat.getText(),
+                    txtNrpNip.getText(),
+                    txtKesatuan.getText(),
+                    TNo.getText()
             });     
 
             inputRegistrasi();                                

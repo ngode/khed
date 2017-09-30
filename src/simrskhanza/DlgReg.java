@@ -280,7 +280,8 @@ public final class DlgReg extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(var.getform().equals("DlgReg")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        pasien.dispose();
+                        if (pasien.dataCompleted())
+                            pasien.dispose();
                     }
                 }
             }
