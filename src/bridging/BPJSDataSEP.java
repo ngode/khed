@@ -1609,7 +1609,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         "bridging_sep.nmdiagnosaawal,bridging_sep.kdpolitujuan,bridging_sep.nmpolitujuan,"+
                         "if(bridging_sep.klsrawat='1','Kelas 1',if(bridging_sep.klsrawat='2','Kelas 2','Kelas 3')),"+
                         "if(bridging_sep.lakalantas='1','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),bridging_sep.lokasilaka,bridging_sep.user, "+
-                        "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu from bridging_sep where no_sep='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                        "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu," +
+                        "reg_periksa.no_reg, reg_periksa.no_rawat as no_rawat_reg, reg_periksa.no_rkm_medis, dokter.nm_dokter " +
+                        "from bridging_sep " +
+                        "JOIN reg_periksa ON reg_periksa.no_rawat = bridging_sep.no_rawat " +
+                        "JOIN dokter ON dokter.kd_dokter = reg_periksa.kd_dokter " +
+                        "where no_sep='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
             }else{
                 Valid.MyReport("rptBridgingSEP2.jrxml","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
                         "bridging_sep.tglrujukan,bridging_sep.no_rujukan,bridging_sep.kdppkrujukan,"+
@@ -1618,7 +1623,12 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         "bridging_sep.nmdiagnosaawal,bridging_sep.kdpolitujuan,bridging_sep.nmpolitujuan,"+
                         "if(bridging_sep.klsrawat='1','Kelas 1',if(bridging_sep.klsrawat='2','Kelas 2','Kelas 3')),"+
                         "if(bridging_sep.lakalantas='1','Kasus Kecelakaan','Bukan Kasus Kecelakaan'),bridging_sep.lokasilaka,bridging_sep.user, "+
-                        "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu from bridging_sep where no_sep='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                        "bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.no_kartu," +
+                        "reg_periksa.no_reg, reg_periksa.no_rawat as no_rawat_reg, reg_periksa.no_rkm_medis, dokter.nm_dokter " +
+                        "from bridging_sep " +
+                        "JOIN reg_periksa ON reg_periksa.no_rawat = bridging_sep.no_rawat " +
+                        "JOIN dokter ON dokter.kd_dokter = reg_periksa.kd_dokter " +
+                        "where no_sep='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
             }                
             this.setCursor(Cursor.getDefaultCursor());
         }else{
