@@ -604,7 +604,8 @@ public final class DlgReg extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPopupMenu1 = new javax.swing.JPopupMenu();
@@ -806,8 +807,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnKamarInap.setIconTextGap(5);
         MnKamarInap.setName("MnKamarInap"); // NOI18N
         MnKamarInap.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnKamarInap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnKamarInap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnKamarInapActionPerformed(evt);
             }
         });
@@ -823,8 +826,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRawatJalan.setIconTextGap(5);
         MnRawatJalan.setName("MnRawatJalan"); // NOI18N
         MnRawatJalan.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnRawatJalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRawatJalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRawatJalanActionPerformed(evt);
             }
         });
@@ -840,8 +845,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPemberianObat.setIconTextGap(5);
         MnPemberianObat.setName("MnPemberianObat"); // NOI18N
         MnPemberianObat.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPemberianObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPemberianObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPemberianObatActionPerformed(evt);
             }
         });
@@ -857,8 +864,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaLab.setIconTextGap(5);
         MnPeriksaLab.setName("MnPeriksaLab"); // NOI18N
         MnPeriksaLab.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaLab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaLab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaLabActionPerformed(evt);
             }
         });
@@ -874,8 +883,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPeriksaRadiologi.setIconTextGap(5);
         MnPeriksaRadiologi.setName("MnPeriksaRadiologi"); // NOI18N
         MnPeriksaRadiologi.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPeriksaRadiologiActionPerformed(evt);
             }
         });
@@ -891,8 +902,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnOperasi.setIconTextGap(5);
         MnOperasi.setName("MnOperasi"); // NOI18N
         MnOperasi.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnOperasiActionPerformed(evt);
             }
         });
@@ -908,8 +921,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBilling.setIconTextGap(5);
         MnBilling.setName("MnBilling"); // NOI18N
         MnBilling.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnBilling.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBilling.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBillingActionPerformed(evt);
             }
         });
@@ -925,8 +940,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnNoResep.setIconTextGap(5);
         MnNoResep.setName("MnNoResep"); // NOI18N
         MnNoResep.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnNoResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnNoResep.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnNoResepActionPerformed(evt);
             }
         });
@@ -942,8 +959,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRujuk.setIconTextGap(5);
         MnRujuk.setName("MnRujuk"); // NOI18N
         MnRujuk.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnRujuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRujuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRujukActionPerformed(evt);
             }
         });
@@ -959,8 +978,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRujukMasuk.setIconTextGap(5);
         MnRujukMasuk.setName("MnRujukMasuk"); // NOI18N
         MnRujukMasuk.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnRujukMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRujukMasuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRujukMasukActionPerformed(evt);
             }
         });
@@ -976,8 +997,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnDiagnosa.setIconTextGap(5);
         MnDiagnosa.setName("MnDiagnosa"); // NOI18N
         MnDiagnosa.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnDiagnosa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnDiagnosa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnDiagnosaActionPerformed(evt);
             }
         });
@@ -993,8 +1016,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnHemodialisa.setIconTextGap(5);
         MnHemodialisa.setName("MnHemodialisa"); // NOI18N
         MnHemodialisa.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnHemodialisa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnHemodialisa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnHemodialisaActionPerformed(evt);
             }
         });
@@ -1022,8 +1047,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapKunjunganPoli.setIconTextGap(5);
         MnLaporanRekapKunjunganPoli.setName("MnLaporanRekapKunjunganPoli"); // NOI18N
         MnLaporanRekapKunjunganPoli.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapKunjunganPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapKunjunganPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapKunjunganPoliActionPerformed(evt);
             }
         });
@@ -1039,8 +1066,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapKunjunganDokter.setIconTextGap(5);
         MnLaporanRekapKunjunganDokter.setName("MnLaporanRekapKunjunganDokter"); // NOI18N
         MnLaporanRekapKunjunganDokter.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapKunjunganDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapKunjunganDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapKunjunganDokterActionPerformed(evt);
             }
         });
@@ -1056,8 +1085,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapJenisBayar.setIconTextGap(5);
         MnLaporanRekapJenisBayar.setName("MnLaporanRekapJenisBayar"); // NOI18N
         MnLaporanRekapJenisBayar.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapJenisBayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapJenisBayar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapJenisBayarActionPerformed(evt);
             }
         });
@@ -1073,8 +1104,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapRawatDarurat.setIconTextGap(5);
         MnLaporanRekapRawatDarurat.setName("MnLaporanRekapRawatDarurat"); // NOI18N
         MnLaporanRekapRawatDarurat.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapRawatDarurat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapRawatDarurat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapRawatDaruratActionPerformed(evt);
             }
         });
@@ -1090,8 +1123,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapKunjunganBulanan.setIconTextGap(5);
         MnLaporanRekapKunjunganBulanan.setName("MnLaporanRekapKunjunganBulanan"); // NOI18N
         MnLaporanRekapKunjunganBulanan.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapKunjunganBulanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapKunjunganBulanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapKunjunganBulananActionPerformed(evt);
             }
         });
@@ -1107,8 +1142,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapKunjunganBulananPoli.setIconTextGap(5);
         MnLaporanRekapKunjunganBulananPoli.setName("MnLaporanRekapKunjunganBulananPoli"); // NOI18N
         MnLaporanRekapKunjunganBulananPoli.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapKunjunganBulananPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapKunjunganBulananPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapKunjunganBulananPoliActionPerformed(evt);
             }
         });
@@ -1124,8 +1161,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapPenyakitRalan.setIconTextGap(5);
         MnLaporanRekapPenyakitRalan.setName("MnLaporanRekapPenyakitRalan"); // NOI18N
         MnLaporanRekapPenyakitRalan.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapPenyakitRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapPenyakitRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapPenyakitRalanActionPerformed(evt);
             }
         });
@@ -1141,8 +1180,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapPerujuk.setIconTextGap(5);
         MnLaporanRekapPerujuk.setName("MnLaporanRekapPerujuk"); // NOI18N
         MnLaporanRekapPerujuk.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLaporanRekapPerujuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLaporanRekapPerujuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLaporanRekapPerujukActionPerformed(evt);
             }
         });
@@ -1172,8 +1213,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerpoli.setIconTextGap(5);
         ppGrafikPerpoli.setName("ppGrafikPerpoli"); // NOI18N
         ppGrafikPerpoli.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerpoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerpoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerpoliActionPerformed(evt);
             }
         });
@@ -1189,8 +1232,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerpoli1.setIconTextGap(5);
         ppGrafikPerpoli1.setName("ppGrafikPerpoli1"); // NOI18N
         ppGrafikPerpoli1.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerpoli1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerpoli1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerpoli1ActionPerformed(evt);
             }
         });
@@ -1206,8 +1251,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerpoli2.setIconTextGap(5);
         ppGrafikPerpoli2.setName("ppGrafikPerpoli2"); // NOI18N
         ppGrafikPerpoli2.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerpoli2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerpoli2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerpoli2ActionPerformed(evt);
             }
         });
@@ -1223,8 +1270,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerdokter.setIconTextGap(5);
         ppGrafikPerdokter.setName("ppGrafikPerdokter"); // NOI18N
         ppGrafikPerdokter.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerdokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerdokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerdokterActionPerformed(evt);
             }
         });
@@ -1240,8 +1289,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerdokter1.setIconTextGap(5);
         ppGrafikPerdokter1.setName("ppGrafikPerdokter1"); // NOI18N
         ppGrafikPerdokter1.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerdokter1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerdokter1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerdokter1ActionPerformed(evt);
             }
         });
@@ -1257,8 +1308,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerdokter2.setIconTextGap(5);
         ppGrafikPerdokter2.setName("ppGrafikPerdokter2"); // NOI18N
         ppGrafikPerdokter2.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerdokter2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerdokter2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerdokter2ActionPerformed(evt);
             }
         });
@@ -1274,8 +1327,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerJK.setIconTextGap(5);
         ppGrafikPerJK.setName("ppGrafikPerJK"); // NOI18N
         ppGrafikPerJK.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerJK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerJK.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerJKActionPerformed(evt);
             }
         });
@@ -1291,8 +1346,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerPekerjaan.setIconTextGap(5);
         ppGrafikPerPekerjaan.setName("ppGrafikPerPekerjaan"); // NOI18N
         ppGrafikPerPekerjaan.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerPekerjaan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerPekerjaan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerPekerjaanActionPerformed(evt);
             }
         });
@@ -1308,8 +1365,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerAgama.setIconTextGap(5);
         ppGrafikPerAgama.setName("ppGrafikPerAgama"); // NOI18N
         ppGrafikPerAgama.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerAgama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerAgama.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerAgamaActionPerformed(evt);
             }
         });
@@ -1325,8 +1384,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerTahun.setIconTextGap(5);
         ppGrafikPerTahun.setName("ppGrafikPerTahun"); // NOI18N
         ppGrafikPerTahun.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerTahun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerTahun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerTahunActionPerformed(evt);
             }
         });
@@ -1342,8 +1403,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerBulan.setIconTextGap(5);
         ppGrafikPerBulan.setName("ppGrafikPerBulan"); // NOI18N
         ppGrafikPerBulan.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerBulan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerBulan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerBulanActionPerformed(evt);
             }
         });
@@ -1360,8 +1423,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikPerTanggal.setIconTextGap(5);
         ppGrafikPerTanggal.setName("ppGrafikPerTanggal"); // NOI18N
         ppGrafikPerTanggal.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikPerTanggal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikPerTanggal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikPerTanggalActionPerformed(evt);
             }
         });
@@ -1378,8 +1443,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppGrafikDemografi.setIconTextGap(5);
         ppGrafikDemografi.setName("ppGrafikDemografi"); // NOI18N
         ppGrafikDemografi.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppGrafikDemografi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppGrafikDemografi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppGrafikDemografiActionPerformed(evt);
             }
         });
@@ -1409,8 +1476,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSehat.setIconTextGap(5);
         MnCetakSuratSehat.setName("MnCetakSuratSehat"); // NOI18N
         MnCetakSuratSehat.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCetakSuratSehat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSehat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSehatActionPerformed(evt);
             }
         });
@@ -1426,8 +1495,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakBebasNarkoba.setIconTextGap(5);
         MnCetakBebasNarkoba.setName("MnCetakBebasNarkoba"); // NOI18N
         MnCetakBebasNarkoba.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCetakBebasNarkoba.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakBebasNarkoba.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakBebasNarkobaActionPerformed(evt);
             }
         });
@@ -1443,8 +1514,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSakit.setIconTextGap(5);
         MnCetakSuratSakit.setName("MnCetakSuratSakit"); // NOI18N
         MnCetakSuratSakit.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCetakSuratSakit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSakit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSakitActionPerformed(evt);
             }
         });
@@ -1460,8 +1533,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSakit2.setIconTextGap(5);
         MnCetakSuratSakit2.setName("MnCetakSuratSakit2"); // NOI18N
         MnCetakSuratSakit2.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCetakSuratSakit2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSakit2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSakit2ActionPerformed(evt);
             }
         });
@@ -1477,8 +1552,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSakit1.setIconTextGap(5);
         MnCetakSuratSakit1.setName("MnCetakSuratSakit1"); // NOI18N
         MnCetakSuratSakit1.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCetakSuratSakit1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakSuratSakit1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakSuratSakit1ActionPerformed(evt);
             }
         });
@@ -1494,8 +1571,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakRegister.setIconTextGap(5);
         MnCetakRegister.setName("MnCetakRegister"); // NOI18N
         MnCetakRegister.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCetakRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakRegister.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakRegisterActionPerformed(evt);
             }
         });
@@ -1511,8 +1590,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPersetujuanMedis.setIconTextGap(5);
         MnPersetujuanMedis.setName("MnPersetujuanMedis"); // NOI18N
         MnPersetujuanMedis.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnPersetujuanMedis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnPersetujuanMedis.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnPersetujuanMedisActionPerformed(evt);
             }
         });
@@ -1528,8 +1609,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBuktiPelayananRalan.setIconTextGap(5);
         MnBuktiPelayananRalan.setName("MnBuktiPelayananRalan"); // NOI18N
         MnBuktiPelayananRalan.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnBuktiPelayananRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBuktiPelayananRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBuktiPelayananRalanActionPerformed(evt);
             }
         });
@@ -1545,8 +1628,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLembarCasemix.setIconTextGap(5);
         MnLembarCasemix.setName("MnLembarCasemix"); // NOI18N
         MnLembarCasemix.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnLembarCasemix.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLembarCasemix.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLembarCasemixActionPerformed(evt);
             }
         });
@@ -1562,8 +1647,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSPBK.setIconTextGap(5);
         MnSPBK.setName("MnSPBK"); // NOI18N
         MnSPBK.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnSPBK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSPBK.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSPBKActionPerformed(evt);
             }
         });
@@ -1594,8 +1681,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList.setIconTextGap(5);
         MnCheckList.setName("MnCheckList"); // NOI18N
         MnCheckList.setPreferredSize(new java.awt.Dimension(290, 26));
-        MnCheckList.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckListActionPerformed(evt);
             }
         });
@@ -1611,8 +1700,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList1.setIconTextGap(5);
         MnCheckList1.setName("MnCheckList1"); // NOI18N
         MnCheckList1.setPreferredSize(new java.awt.Dimension(290, 26));
-        MnCheckList1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList1ActionPerformed(evt);
             }
         });
@@ -1628,8 +1719,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList2.setIconTextGap(5);
         MnCheckList2.setName("MnCheckList2"); // NOI18N
         MnCheckList2.setPreferredSize(new java.awt.Dimension(290, 26));
-        MnCheckList2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList2ActionPerformed(evt);
             }
         });
@@ -1645,8 +1738,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList3.setLabel("Chekc List Kelengkapan Pendaftaran Kiri+Tracker");
         MnCheckList3.setName("MnCheckList3"); // NOI18N
         MnCheckList3.setPreferredSize(new java.awt.Dimension(290, 26));
-        MnCheckList3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList3ActionPerformed(evt);
             }
         });
@@ -1677,8 +1772,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList4.setIconTextGap(5);
         MnCheckList4.setName("MnCheckList4"); // NOI18N
         MnCheckList4.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList4ActionPerformed(evt);
             }
         });
@@ -1694,8 +1791,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList5.setIconTextGap(5);
         MnCheckList5.setName("MnCheckList5"); // NOI18N
         MnCheckList5.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList5ActionPerformed(evt);
             }
         });
@@ -1712,8 +1811,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList6.setIconTextGap(5);
         MnCheckList6.setName("MnCheckList6"); // NOI18N
         MnCheckList6.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList6.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList6ActionPerformed(evt);
             }
         });
@@ -1729,8 +1830,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCheckList7.setIconTextGap(5);
         MnCheckList7.setName("MnCheckList7"); // NOI18N
         MnCheckList7.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCheckList7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCheckList7.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCheckList7ActionPerformed(evt);
             }
         });
@@ -1760,8 +1863,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLabelTracker.setIconTextGap(5);
         MnLabelTracker.setName("MnLabelTracker"); // NOI18N
         MnLabelTracker.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLabelTracker.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLabelTrackerActionPerformed(evt);
             }
         });
@@ -1777,8 +1882,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLabelTracker1.setIconTextGap(5);
         MnLabelTracker1.setName("MnLabelTracker1"); // NOI18N
         MnLabelTracker1.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLabelTracker1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLabelTracker1ActionPerformed(evt);
             }
         });
@@ -1794,8 +1901,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLabelTracker2.setIconTextGap(5);
         MnLabelTracker2.setName("MnLabelTracker2"); // NOI18N
         MnLabelTracker2.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLabelTracker2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLabelTracker2ActionPerformed(evt);
             }
         });
@@ -1811,8 +1920,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLabelTracker3.setIconTextGap(5);
         MnLabelTracker3.setName("MnLabelTracker3"); // NOI18N
         MnLabelTracker3.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnLabelTracker3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLabelTracker3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnLabelTracker3ActionPerformed(evt);
             }
         });
@@ -1828,8 +1939,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnBarcode.setIconTextGap(5);
         MnBarcode.setName("MnBarcode"); // NOI18N
         MnBarcode.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnBarcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBarcode.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBarcodeActionPerformed(evt);
             }
         });
@@ -1845,8 +1958,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang1.setIconTextGap(5);
         MnGelang1.setName("MnGelang1"); // NOI18N
         MnGelang1.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang1ActionPerformed(evt);
             }
         });
@@ -1862,8 +1977,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang2.setIconTextGap(5);
         MnGelang2.setName("MnGelang2"); // NOI18N
         MnGelang2.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang2ActionPerformed(evt);
             }
         });
@@ -1879,8 +1996,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang3.setIconTextGap(5);
         MnGelang3.setName("MnGelang3"); // NOI18N
         MnGelang3.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang3ActionPerformed(evt);
             }
         });
@@ -1896,8 +2015,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang4.setIconTextGap(5);
         MnGelang4.setName("MnGelang4"); // NOI18N
         MnGelang4.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang4ActionPerformed(evt);
             }
         });
@@ -1913,8 +2034,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang5.setIconTextGap(5);
         MnGelang5.setName("MnGelang5"); // NOI18N
         MnGelang5.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang5ActionPerformed(evt);
             }
         });
@@ -1930,8 +2053,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnGelang6.setIconTextGap(5);
         MnGelang6.setName("MnGelang6"); // NOI18N
         MnGelang6.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnGelang6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGelang6.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGelang6ActionPerformed(evt);
             }
         });
@@ -1960,8 +2085,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnHapusTagihanOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnHapusTagihanOperasi.setName("MnHapusTagihanOperasi"); // NOI18N
         MnHapusTagihanOperasi.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnHapusTagihanOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnHapusTagihanOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnHapusTagihanOperasiActionPerformed(evt);
             }
         });
@@ -1976,8 +2103,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnHapusObatOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnHapusObatOperasi.setName("MnHapusObatOperasi"); // NOI18N
         MnHapusObatOperasi.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnHapusObatOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnHapusObatOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnHapusObatOperasiActionPerformed(evt);
             }
         });
@@ -1995,8 +2124,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSEP.setIconTextGap(5);
         MnSEP.setName("MnSEP"); // NOI18N
         MnSEP.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnSEP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSEP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSEPActionPerformed(evt);
             }
         });
@@ -2012,8 +2143,10 @@ public final class DlgReg extends javax.swing.JDialog {
         MnSJP.setIconTextGap(5);
         MnSJP.setName("MnSJP"); // NOI18N
         MnSJP.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnSJP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSJP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSJPActionPerformed(evt);
             }
         });
@@ -2029,8 +2162,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppRiwayat.setIconTextGap(5);
         ppRiwayat.setName("ppRiwayat"); // NOI18N
         ppRiwayat.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppRiwayat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppRiwayat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppRiwayatBtnPrintActionPerformed(evt);
             }
         });
@@ -2046,8 +2181,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ppCatatanPasien.setIconTextGap(5);
         ppCatatanPasien.setName("ppCatatanPasien"); // NOI18N
         ppCatatanPasien.setPreferredSize(new java.awt.Dimension(240, 26));
-        ppCatatanPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppCatatanPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppCatatanPasienBtnPrintActionPerformed(evt);
             }
         });
@@ -2070,7 +2207,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2017" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -2088,8 +2225,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint2.setToolTipText("Alt+T");
         BtnPrint2.setName("BtnPrint2"); // NOI18N
         BtnPrint2.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrint2ActionPerformed(evt);
             }
         });
@@ -2102,8 +2241,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnKeluar2.setToolTipText("Alt+K");
         BtnKeluar2.setName("BtnKeluar2"); // NOI18N
         BtnKeluar2.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluar2ActionPerformed(evt);
             }
         });
@@ -2118,7 +2259,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2017" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -2158,13 +2299,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint3.setToolTipText("Alt+G");
         BtnPrint3.setName("BtnPrint3"); // NOI18N
         BtnPrint3.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrint3ActionPerformed(evt);
             }
         });
-        BtnPrint3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrint3KeyPressed(evt);
             }
         });
@@ -2177,13 +2322,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnKeluar3.setToolTipText("Alt+K");
         BtnKeluar3.setName("BtnKeluar3"); // NOI18N
         BtnKeluar3.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluar3ActionPerformed(evt);
             }
         });
-        BtnKeluar3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluar3KeyPressed(evt);
             }
         });
@@ -2193,8 +2342,10 @@ public final class DlgReg extends javax.swing.JDialog {
         Kelurahan2.setHighlighter(null);
         Kelurahan2.setName("Kelurahan2"); // NOI18N
         Kelurahan2.setSelectionColor(new java.awt.Color(255, 255, 255));
-        Kelurahan2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kelurahan2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 Kelurahan2KeyPressed(evt);
             }
         });
@@ -2205,8 +2356,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnKel.setMnemonic('1');
         btnKel.setToolTipText("ALt+1");
         btnKel.setName("btnKel"); // NOI18N
-        btnKel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKelActionPerformed(evt);
             }
         });
@@ -2216,8 +2369,10 @@ public final class DlgReg extends javax.swing.JDialog {
         Kecamatan2.setHighlighter(null);
         Kecamatan2.setName("Kecamatan2"); // NOI18N
         Kecamatan2.setSelectionColor(new java.awt.Color(255, 255, 255));
-        Kecamatan2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kecamatan2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 Kecamatan2KeyPressed(evt);
             }
         });
@@ -2228,8 +2383,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnKec.setMnemonic('1');
         btnKec.setToolTipText("ALt+1");
         btnKec.setName("btnKec"); // NOI18N
-        btnKec.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKec.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKecActionPerformed(evt);
             }
         });
@@ -2239,8 +2396,10 @@ public final class DlgReg extends javax.swing.JDialog {
         Kabupaten2.setHighlighter(null);
         Kabupaten2.setName("Kabupaten2"); // NOI18N
         Kabupaten2.setSelectionColor(new java.awt.Color(255, 255, 255));
-        Kabupaten2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kabupaten2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 Kabupaten2KeyPressed(evt);
             }
         });
@@ -2251,8 +2410,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnKab.setMnemonic('1');
         btnKab.setToolTipText("ALt+1");
         btnKab.setName("btnKab"); // NOI18N
-        btnKab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKabActionPerformed(evt);
             }
         });
@@ -2280,13 +2441,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint4.setToolTipText("Alt+T");
         BtnPrint4.setName("BtnPrint4"); // NOI18N
         BtnPrint4.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrint4ActionPerformed(evt);
             }
         });
-        BtnPrint4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint4.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrint4KeyPressed(evt);
             }
         });
@@ -2320,8 +2485,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint5.setToolTipText("Alt+T");
         BtnPrint5.setName("BtnPrint5"); // NOI18N
         BtnPrint5.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrint5ActionPerformed(evt);
             }
         });
@@ -2334,8 +2501,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnKeluar4.setToolTipText("Alt+K");
         BtnKeluar4.setName("BtnKeluar4"); // NOI18N
         BtnKeluar4.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluar4ActionPerformed(evt);
             }
         });
@@ -2353,8 +2522,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnSeek5.setToolTipText("ALt+6");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSeek5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSeek5ActionPerformed(evt);
             }
         });
@@ -2383,8 +2554,10 @@ public final class DlgReg extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -2402,13 +2575,17 @@ public final class DlgReg extends javax.swing.JDialog {
         tbPetugas.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
         tbPetugas.setComponentPopupMenu(jPopupMenu1);
         tbPetugas.setName("tbPetugas"); // NOI18N
-        tbPetugas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbPetugas.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tbPetugasMouseClicked(evt);
             }
         });
-        tbPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbPetugas.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tbPetugasKeyPressed(evt);
             }
         });
@@ -2430,13 +2607,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSimpanActionPerformed(evt);
             }
         });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnSimpanKeyPressed(evt);
             }
         });
@@ -2448,13 +2629,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnBatal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnBatalActionPerformed(evt);
             }
         });
-        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnBatalKeyPressed(evt);
             }
         });
@@ -2466,13 +2651,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
         BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnEdit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnEditActionPerformed(evt);
             }
         });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnEditKeyPressed(evt);
             }
         });
@@ -2484,13 +2673,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnHapus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnHapusActionPerformed(evt);
             }
         });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnHapusKeyPressed(evt);
             }
         });
@@ -2502,13 +2695,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrintActionPerformed(evt);
             }
         });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrintKeyPressed(evt);
             }
         });
@@ -2520,13 +2717,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAll.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnAllKeyPressed(evt);
             }
         });
@@ -2549,13 +2750,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -2574,7 +2779,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2017" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2589,7 +2794,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2017" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2603,8 +2808,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(300, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TCariKeyPressed(evt);
             }
         });
@@ -2615,13 +2822,17 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+7");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -2648,8 +2859,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnSeek3.setToolTipText("ALt+6");
         BtnSeek3.setName("BtnSeek3"); // NOI18N
         BtnSeek3.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSeek3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSeek3ActionPerformed(evt);
             }
         });
@@ -2670,8 +2883,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnSeek4.setToolTipText("ALt+5");
         BtnSeek4.setName("BtnSeek4"); // NOI18N
         BtnSeek4.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSeek4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSeek4ActionPerformed(evt);
             }
         });
@@ -2706,8 +2921,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
-        TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoRw.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoRwKeyPressed(evt);
             }
         });
@@ -2731,17 +2948,21 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPReg.setEditable(false);
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-09-2017" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
-        DTPReg.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        DTPReg.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 DTPRegItemStateChanged(evt);
             }
         });
-        DTPReg.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        DTPReg.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 DTPRegKeyPressed(evt);
             }
         });
@@ -2760,8 +2981,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TPngJwb.setHighlighter(null);
         TPngJwb.setName("TPngJwb"); // NOI18N
-        TPngJwb.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TPngJwb.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TPngJwbKeyPressed(evt);
             }
         });
@@ -2770,8 +2993,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoRM.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoRMKeyPressed(evt);
             }
         });
@@ -2780,8 +3005,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
-        TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoReg.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoRegKeyPressed(evt);
             }
         });
@@ -2791,8 +3018,10 @@ public final class DlgReg extends javax.swing.JDialog {
         CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         CmbJam.setName("CmbJam"); // NOI18N
         CmbJam.setOpaque(false);
-        CmbJam.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbJam.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbJamKeyPressed(evt);
             }
         });
@@ -2802,8 +3031,10 @@ public final class DlgReg extends javax.swing.JDialog {
         CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbMenit.setName("CmbMenit"); // NOI18N
         CmbMenit.setOpaque(false);
-        CmbMenit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbMenit.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbMenitKeyPressed(evt);
             }
         });
@@ -2813,8 +3044,10 @@ public final class DlgReg extends javax.swing.JDialog {
         CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbDetik.setName("CmbDetik"); // NOI18N
         CmbDetik.setOpaque(false);
-        CmbDetik.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbDetik.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbDetikKeyPressed(evt);
             }
         });
@@ -2828,8 +3061,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TAlmt.setHighlighter(null);
         TAlmt.setName("TAlmt"); // NOI18N
-        TAlmt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TAlmt.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TAlmtKeyPressed(evt);
             }
         });
@@ -2840,8 +3075,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnPasien.setMnemonic('1');
         BtnPasien.setToolTipText("ALt+1");
         BtnPasien.setName("BtnPasien"); // NOI18N
-        BtnPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPasienActionPerformed(evt);
             }
         });
@@ -2861,8 +3098,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         THbngn.setHighlighter(null);
         THbngn.setName("THbngn"); // NOI18N
-        THbngn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        THbngn.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 THbngnKeyPressed(evt);
             }
         });
@@ -2893,8 +3132,10 @@ public final class DlgReg extends javax.swing.JDialog {
         TPoli.setBounds(148, 132, 120, 23);
 
         TBiaya.setName("TBiaya"); // NOI18N
-        TBiaya.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TBiaya.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TBiayaKeyPressed(evt);
             }
         });
@@ -2903,8 +3144,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
-        kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kddokter.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kddokterKeyPressed(evt);
             }
         });
@@ -2915,8 +3158,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnDokter.setMnemonic('3');
         BtnDokter.setToolTipText("ALt+3");
         BtnDokter.setName("BtnDokter"); // NOI18N
-        BtnDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnDokterActionPerformed(evt);
             }
         });
@@ -2925,8 +3170,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
-        kdpoli.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdpoli.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdpoliKeyPressed(evt);
             }
         });
@@ -2937,8 +3184,10 @@ public final class DlgReg extends javax.swing.JDialog {
         BtnUnit.setMnemonic('4');
         BtnUnit.setToolTipText("ALt+4");
         BtnUnit.setName("BtnUnit"); // NOI18N
-        BtnUnit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnUnit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnUnitActionPerformed(evt);
             }
         });
@@ -2963,8 +3212,10 @@ public final class DlgReg extends javax.swing.JDialog {
 
         kdpnj.setHighlighter(null);
         kdpnj.setName("kdpnj"); // NOI18N
-        kdpnj.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdpnj.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdpnjKeyPressed(evt);
             }
         });
@@ -2980,8 +3231,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnPenjab.setMnemonic('2');
         btnPenjab.setToolTipText("ALt+2");
         btnPenjab.setName("btnPenjab"); // NOI18N
-        btnPenjab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPenjab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPenjabActionPerformed(evt);
             }
         });
@@ -2994,8 +3247,10 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel23.setBounds(396, 132, 100, 23);
 
         AsalRujukan.setName("AsalRujukan"); // NOI18N
-        AsalRujukan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        AsalRujukan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 AsalRujukanKeyPressed(evt);
             }
         });
@@ -3006,8 +3261,10 @@ public final class DlgReg extends javax.swing.JDialog {
         btnPenjab1.setMnemonic('2');
         btnPenjab1.setToolTipText("ALt+2");
         btnPenjab1.setName("btnPenjab1"); // NOI18N
-        btnPenjab1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPenjab1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPenjab1ActionPerformed(evt);
             }
         });
@@ -3042,8 +3299,10 @@ public final class DlgReg extends javax.swing.JDialog {
         ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ChkInput.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ChkInputActionPerformed(evt);
             }
         });
@@ -4476,7 +4735,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             param.put("emailrs",var.getemailrs());
             param.put("logo",Sequel.cariGambar("select logo from setting"));
             Valid.MyReport("rptLabelTracker.jrxml","report","::[ Label Tracker ]::",
-                   "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                   "select reg_periksa.no_reg,reg_periksa.no_rawat, DATE_FORMAT(reg_periksa.tgl_registrasi,'%d/%m/%Y') as tgl_registrasi,reg_periksa.jam_reg,"+
                    "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
@@ -4691,7 +4950,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
             param.put("emailrs",var.getemailrs());
             param.put("logo",Sequel.cariGambar("select logo from setting"));
             Valid.MyReport("rptLabelTracker2.jrxml","report","::[ Label Tracker ]::",
-                   "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                   "select reg_periksa.no_reg,reg_periksa.no_rawat,DATE_FORMAT(reg_periksa.tgl_registrasi,'%d/%m/%Y') as tgl_registrasi,reg_periksa.jam_reg,"+
                    "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab "+
                    "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+

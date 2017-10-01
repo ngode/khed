@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -229,7 +230,8 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         Kd2 = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
@@ -241,6 +243,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab5 = new javax.swing.JMenuItem();
         MnCetakNota = new javax.swing.JMenuItem();
         MnUbah = new javax.swing.JMenuItem();
+        MnBarcode = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
@@ -281,8 +284,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab.setText("Cetak Hasil Lab Model 1");
         MnCetakHasilLab.setName("MnCetakHasilLab"); // NOI18N
         MnCetakHasilLab.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnCetakHasilLab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakHasilLab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakHasilLabActionPerformed(evt);
             }
         });
@@ -295,8 +300,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab1.setText("Cetak Hasil Lab Model 2");
         MnCetakHasilLab1.setName("MnCetakHasilLab1"); // NOI18N
         MnCetakHasilLab1.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnCetakHasilLab1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakHasilLab1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakHasilLab1ActionPerformed(evt);
             }
         });
@@ -309,8 +316,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab2.setText("Cetak Hasil Lab Model 3");
         MnCetakHasilLab2.setName("MnCetakHasilLab2"); // NOI18N
         MnCetakHasilLab2.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnCetakHasilLab2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakHasilLab2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakHasilLab2ActionPerformed(evt);
             }
         });
@@ -323,8 +332,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab3.setText("Cetak Hasil Lab Model 4");
         MnCetakHasilLab3.setName("MnCetakHasilLab3"); // NOI18N
         MnCetakHasilLab3.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnCetakHasilLab3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakHasilLab3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakHasilLab3ActionPerformed(evt);
             }
         });
@@ -337,8 +348,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab4.setText("Cetak Hasil Lab Model 5");
         MnCetakHasilLab4.setName("MnCetakHasilLab4"); // NOI18N
         MnCetakHasilLab4.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnCetakHasilLab4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakHasilLab4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakHasilLab4ActionPerformed(evt);
             }
         });
@@ -351,8 +364,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab5.setText("Cetak Hasil Lab Model 6");
         MnCetakHasilLab5.setName("MnCetakHasilLab5"); // NOI18N
         MnCetakHasilLab5.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnCetakHasilLab5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakHasilLab5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakHasilLab5ActionPerformed(evt);
             }
         });
@@ -365,8 +380,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakNota.setText("Cetak Nota Lab");
         MnCetakNota.setName("MnCetakNota"); // NOI18N
         MnCetakNota.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnCetakNota.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnCetakNota.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnCetakNotaActionPerformed(evt);
             }
         });
@@ -379,18 +396,42 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnUbah.setText("Ubah Periksa Lab");
         MnUbah.setName("MnUbah"); // NOI18N
         MnUbah.setPreferredSize(new java.awt.Dimension(250, 28));
-        MnUbah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnUbah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnUbahActionPerformed(evt);
             }
         });
         jPopupMenu1.add(MnUbah);
 
+        MnBarcode.setBackground(new java.awt.Color(255, 255, 255));
+        MnBarcode.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnBarcode.setForeground(new java.awt.Color(60, 80, 50));
+        MnBarcode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnBarcode.setText("Label Tabung Lab");
+        MnBarcode.setActionCommand("Label Tabung Lab");
+        MnBarcode.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnBarcode.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnBarcode.setIconTextGap(5);
+        MnBarcode.setName("MnBarcode"); // NOI18N
+        MnBarcode.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnBarcode.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnBarcodeActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnBarcode);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -403,26 +444,32 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         scrollPane1.setOpaque(true);
 
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {},
                 {},
                 {},
                 {}
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
         tbDokter.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDokter.setComponentPopupMenu(jPopupMenu1);
         tbDokter.setName("tbDokter"); // NOI18N
-        tbDokter.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbDokter.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tbDokterMouseClicked(evt);
             }
         });
-        tbDokter.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbDokter.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tbDokterKeyPressed(evt);
             }
         });
@@ -442,8 +489,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
 
         NoRawat.setName("NoRawat"); // NOI18N
         NoRawat.setPreferredSize(new java.awt.Dimension(207, 23));
-        NoRawat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        NoRawat.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 NoRawatKeyPressed(evt);
             }
         });
@@ -459,8 +508,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         Tgl1.setEditable(false);
         Tgl1.setDisplayFormat("dd-MM-yyyy");
         Tgl1.setName("Tgl1"); // NOI18N
-        Tgl1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Tgl1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 Tgl1KeyPressed(evt);
             }
         });
@@ -481,8 +532,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
 
         kdmem.setName("kdmem"); // NOI18N
         kdmem.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdmem.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdmem.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdmemKeyPressed(evt);
             }
         });
@@ -491,8 +544,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
 
         kdptg.setName("kdptg"); // NOI18N
         kdptg.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdptg.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdptg.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdptgKeyPressed(evt);
             }
         });
@@ -516,8 +571,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         btnPasien.setToolTipText("Alt+1");
         btnPasien.setName("btnPasien"); // NOI18N
         btnPasien.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPasienActionPerformed(evt);
             }
         });
@@ -529,8 +586,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         btnPetugas.setToolTipText("Alt+2");
         btnPetugas.setName("btnPetugas"); // NOI18N
         btnPetugas.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPetugas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPetugas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPetugasActionPerformed(evt);
             }
         });
@@ -547,8 +606,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         Tgl2.setEditable(false);
         Tgl2.setDisplayFormat("dd-MM-yyyy");
         Tgl2.setName("Tgl2"); // NOI18N
-        Tgl2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Tgl2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 Tgl2KeyPressed(evt);
             }
         });
@@ -568,8 +629,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(170, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TCariKeyPressed(evt);
             }
         });
@@ -580,13 +643,17 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+5");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -602,13 +669,17 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnHapus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnHapusActionPerformed(evt);
             }
         });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnHapusKeyPressed(evt);
             }
         });
@@ -620,13 +691,17 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAll.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnAllKeyPressed(evt);
             }
         });
@@ -638,13 +713,17 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrintActionPerformed(evt);
             }
         });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrintKeyPressed(evt);
             }
         });
@@ -656,13 +735,17 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -1564,6 +1647,55 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnCetakHasilLab5ActionPerformed
 
+    private void MnBarcodeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_MnBarcodeActionPerformed
+    {//GEN-HEADEREND:event_MnBarcodeActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
+        if (tabMode.getRowCount() == 0)
+        {
+            JOptionPane.showMessageDialog(null, 
+                    "Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        } 
+        else if (Kd2.getText().trim().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, 
+                    "Maaf, Gagal mencteak. Pilih dulu data yang mau dicetak.\nKlik No.Rawat pada table untuk memilih...!!!!");
+        } 
+        else if (!(Kd2.getText().trim().equals("")))
+        {
+            Map<String, Object> param = new HashMap<>();
+            
+            String q = "SELECT reg_periksa.no_rkm_medis as no_rm, pasien.nm_pasien " +
+                    "FROM reg_periksa " +
+                    "JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis " +
+                    "WHERE reg_periksa.no_rawat = '" + Kd2.getText() + "'";
+            
+            List<String[]> res = Sequel.select(q);
+            
+            if (res.isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, 
+                    "Maaf, Gagal mencteak. Data tidak ditemukan!!!");
+            }
+            
+            param.put("nama", res.get(0)[1]);
+            param.put("alamat", Sequel.cariIsi("select date_format(tgl_lahir,'%d/%m/%Y') from pasien where no_rkm_medis=?", res.get(0)[0]));
+            param.put("norm", res.get(0)[0]);
+            param.put("parameter", "%" + TCari.getText().trim() + "%");
+            param.put("namars", var.getnamars());
+            param.put("alamatrs", var.getalamatrs());
+            param.put("kotars", var.getkabupatenrs());
+            param.put("propinsirs", var.getpropinsirs());
+            param.put("kontakrs", var.getkontakrs());
+            param.put("emailrs", var.getemailrs());
+            Valid.MyReport("rptBarcodeRawat.jrxml", "report", "::[ Barcode No.Rawat ]::",
+                    "select reg_periksa.no_rawat from reg_periksa where no_rawat='" + Kd2.getText() + "'", param);
+        }
+        
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_MnBarcodeActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1587,6 +1719,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.TextBox Kd2;
+    private javax.swing.JMenuItem MnBarcode;
     private javax.swing.JMenuItem MnCetakHasilLab;
     private javax.swing.JMenuItem MnCetakHasilLab1;
     private javax.swing.JMenuItem MnCetakHasilLab2;

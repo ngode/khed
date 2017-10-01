@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import util.MultiLineText;
 
 /**
  *
@@ -23,6 +24,13 @@ public class WarnaTable extends DefaultTableCellRenderer {
         }else{
             component.setBackground(new Color(255,255,255));
         } 
+        
+        if (value instanceof MultiLineText) 
+        {
+            MultiLineText mt = (MultiLineText) value;            
+            table.setRowHeight(row, 22 + 18 * (mt.getLength() - 1));
+        }
+        
         return component;
     }
 

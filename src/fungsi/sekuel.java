@@ -1510,4 +1510,52 @@ public final class sekuel {
         return res;
    }
 
+   public String selectScalar(String q)
+   {
+       List<String[]> res = select(q);
+       
+       if (res.size() > 0 && res.get(0).length > 0)
+       {
+           return res.get(0)[0];
+       }
+       else
+       {
+           return "";
+       }
+   }
+   
+   public boolean write(String qry)
+   {
+        boolean res = true;
+       
+        try 
+        {
+            ps=connect.prepareStatement(qry);
+
+            try
+            {
+                ps.executeUpdate();
+            }
+            catch(Exception e)
+            {
+                System.out.println("Notifikasi : "+e);
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+
+                res = false;
+            }
+            finally
+            {
+                if(ps != null)
+                {
+                    ps.close();
+                }
+            }
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Notifikasi : "+e);
+        } 
+        
+        return res;
+    }
 }
