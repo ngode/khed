@@ -15,6 +15,7 @@ import java.awt.event.ComponentListener;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+import util.GColors;
 
 /**
  *
@@ -23,8 +24,8 @@ import javax.swing.JPanel;
 public class PanelWT extends JPanel{
     private static final long serialVersionUID = -1;
     private BufferedImage gradientImage;
-    private Color warnaAtas = new Color(245,255,235);
-    private Color warnaBawah = new Color(0,0,0);
+    private Color warnaAtas = GColors.BiruMuda;// new Color(245,255,235);
+    private Color warnaBawah = GColors.BiruMudaAgakTua;// new Color(0,0,0);
 
     public PanelWT(){
         super();

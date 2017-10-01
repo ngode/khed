@@ -2,6 +2,7 @@ package widget;
 
 import java.awt.Color;
 import javax.swing.JTable;
+import util.GColors;
 
 /**
  *
@@ -27,8 +28,8 @@ public class Table extends JTable {
         setSelectionBackground(new Color(255,255,255));
         setSelectionForeground(new Color(100,100,0));
         getTableHeader().setForeground(new Color(60,80,50));
-        getTableHeader().setBackground(new Color(248,253,243));
-        getTableHeader().setBorder(javax.swing.BorderFactory.createLineBorder(new Color(248,253,243)));
+        getTableHeader().setBackground(GColors.BiruMuda);// new Color(248,253,243));
+        getTableHeader().setBorder(javax.swing.BorderFactory.createLineBorder(GColors.BiruAgakMuda));// new Color(237,242,232)));new Color(248,253,243)));
         getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
     }
 }

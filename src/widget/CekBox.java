@@ -7,6 +7,7 @@ package widget;
 
 import java.awt.Color;
 import javax.swing.JCheckBox;
+import util.GColors;
 
 /**
  *
@@ -21,11 +22,11 @@ public class CekBox extends JCheckBox{
         setFont(new java.awt.Font("Tahoma", 0, 11));
         //setBackground(new Color(209,209,209));
         //setForeground(new Color(90,90,90));
-        setBackground(new Color(248,253,243));
+        setBackground(GColors.BiruMuda);// new Color(248,253,243));
         setForeground(new Color(60,80,50));
         setFocusPainted(false);
         
-        this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(237,242,232)));
+        this.setBorder(javax.swing.BorderFactory.createLineBorder(GColors.BiruAgakMuda));// new Color(237,242,232)));new Color(237,242,232)));
         setOpaque(true);
         setSize(WIDTH,23);
     }

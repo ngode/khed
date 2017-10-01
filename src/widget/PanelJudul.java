@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+import util.GColors;
 
 /**
  *
@@ -23,8 +24,8 @@ public class PanelJudul extends JPanel{
     private BufferedImage ligthImage;
     private final Color light = new Color(1F, 1F, 1F, 0.5F);
     private final Color dark = new Color(1F, 1F, 1F, 0.0F);
-    private final Color black = new Color(30,30, 00);
-    private final Color warna = new Color(100,100, 0);
+    private final Color black = GColors.BiruMudaAgakTua;// new Color(30,30, 00);
+    private final Color warna = GColors.BiruMuda;// new Color(100,100, 0);
 
     public PanelJudul() {
         super();

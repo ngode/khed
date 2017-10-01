@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import util.GColors;
 import util.MultiLineText;
 
 /**
@@ -20,9 +21,9 @@ public class WarnaTable extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (row % 2 == 1){
-            component.setBackground(new Color(248,253,243));
+            component.setBackground(GColors.BiruAgakMuda);// new Color(248,253,243));
         }else{
-            component.setBackground(new Color(255,255,255));
+            component.setBackground(GColors.BiruSangatMuda);// new Color(255,255,255));
         } 
         
         if (value instanceof MultiLineText) 

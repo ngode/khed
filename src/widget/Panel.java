@@ -13,6 +13,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.GeneralPath;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+import util.GColors;
 
 /**
  *
@@ -22,8 +23,8 @@ public class Panel extends JPanel {
 
     private static final long serialVersionUID = -1;
     private BufferedImage gradientImage;
-    private final Color black = new Color(30,30,0);
-    private final Color warna = new Color(80,80,0);
+    private final Color black = GColors.BiruMuda;// new Color(30,30,0);
+    private final Color warna = GColors.BiruMudaAgakTua;// new Color(80,80,0);
 
     public Panel() {
         super();

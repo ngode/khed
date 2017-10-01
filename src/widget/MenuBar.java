@@ -13,6 +13,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
 import javax.swing.JMenuBar;
+import util.GColors;
 
 /**
  *
@@ -26,8 +27,8 @@ public class MenuBar extends JMenuBar {
     private final Color dark = new Color(1F, 1F, 1F, 0.0F);
     //private Color black = Color.black;
     //private Color warna = Color.magenta.darker().darker().darker().darker();
-    private final Color black = new Color(30,30, 00);
-    private final Color warna = new Color(100,100, 0);
+    private final Color black = GColors.BiruTua;
+    private final Color warna = GColors.BiruTuaSekali;
 
     public MenuBar() {
         super();

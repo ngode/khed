@@ -17,6 +17,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+import util.GColors;
 
 /**
  *
@@ -27,15 +28,15 @@ public class panelisi extends JPanel{
     private BufferedImage gradientImage;
     //private Color warnaAtas = new Color(245,200,245) ;
     //private Color warnaBawah = new Color(245,150,245) ;
-    private Color warnaAtas = new Color(250,255,245) ;
-    private Color warnaBawah = new Color(245,250,240) ;
+    private Color warnaAtas = GColors.BiruMuda;// new Color(250,255,245) ;
+    private Color warnaBawah = GColors.BiruMudaAgakTua;// new Color(245,250,240) ;
 
     //private Color warnaAtas = new Color(255,194,255);
     //private Color warnaBawah = new Color(255,194,255);
 
     public panelisi(){
         super();
-        this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(237,242,232)));
+        this.setBorder(javax.swing.BorderFactory.createLineBorder(GColors.BiruAgakMuda));// new Color(237,242,232)));new Color(237,242,232)));
     }
 
     public panelisi(LayoutManager layout) {
@@ -48,7 +49,7 @@ public class panelisi extends JPanel{
     }
 
     public void setWarnaAtas(Color warnaAtas) {
-        this.warnaAtas = warnaAtas;
+        //this.warnaAtas = warnaAtas;
     }
 
     public Color getWarnaBawah() {
@@ -56,7 +57,7 @@ public class panelisi extends JPanel{
     }
 
     public void setWarnaBawah(Color warnaBawah) {
-        this.warnaBawah = warnaBawah;
+        //this.warnaBawah = warnaBawah;
     }
 
     @Override
