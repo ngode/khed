@@ -6,6 +6,7 @@
 package widget;
 
 import java.awt.Color;
+import util.GColors;
 import uz.ncipro.calendar.JDateTimePicker;
 
 /**
@@ -18,10 +19,16 @@ public final class Tanggal extends JDateTimePicker {
         //setBackground(new Color(245,160,245));
         //setForeground(new Color(90,90,90));
         setForeground(new Color(60,80,50));
-        setBackground(new Color(248,253,243));
+        super.setBackground(GColors.BiruAgakMuda);// new Color(248,253,243));
         setFont(new java.awt.Font("Tahoma", 0, 11));
         //setBorder(javax.swing.BorderFactory.createLineBorder(new Color(212,212,152)));
         setSize(WIDTH,23);
+    }
+
+    @Override
+    public void setBackground(Color bg)
+    {
+        //super.setBackground(bg);
     }
 
 }

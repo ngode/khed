@@ -9537,7 +9537,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     
     public void isTampil(){        
         Panelmenu.removeAll();
-        Panelmenu.add(btnPerusahaan);
+        //Panelmenu.add(btnPerusahaan);
         if(ChkInput.isSelected()==true){
             isCombo();  
         }else{

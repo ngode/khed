@@ -7,6 +7,7 @@ package widget;
 
 import java.awt.Color;
 import javax.swing.JComboBox;
+import util.GColors;
 
 /**
  *
@@ -16,8 +17,14 @@ public final class ComboBox extends JComboBox {
 
     public ComboBox(){
         setFont(new java.awt.Font("Tahoma", 0, 11));
-        setBackground(new Color(248,253,243));
+        super.setBackground(GColors.BiruAgakMuda);// new Color(248,253,243));
         setForeground(new Color(60,80,50));
         setSize(WIDTH,23);
     } 
+
+    @Override
+    public void setBackground(Color bg)
+    {
+        //super.setBackground(bg);
+    }
 }

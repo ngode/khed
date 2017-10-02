@@ -1,7 +1,6 @@
 package widget;
 
 import java.awt.Color;
-import usu.widget.glass.ButtonImageReflection;
 
 /**
  *
@@ -18,5 +17,7 @@ public class ButtonBig extends ButtonImageReflection {
         super();
         setForeground(new Color(60,80,50));
         setFont(new java.awt.Font("Tahoma", 0, 11));
+        
+        
     }
 }
