@@ -32,7 +32,7 @@ public class GQuery
         query = q;
     }
     
-    public GQuery append(String q)
+    public GQuery a(String q)
     {
         query += " " + q;
         
@@ -44,14 +44,24 @@ public class GQuery
         if (!query.contains("{" + key + "}"))
             throw new RuntimeException("Kunci '" + key + "' tidak ditemukan untuk query '" + query + "'");
         else
-            query = query.replace("{" + key + "}", val);
+            query = query.replace("{" + key + "}", "'" + val + "'");
         
         return this;
+    }
+    
+    public String compile()
+    {
+        return query;
     }
     
     public List<String[]> select()
     {
         return sql.select(query);
+    }
+    
+    public String[] getRow()
+    {
+        return sql.selectRow(query);
     }
     
     public String getString()

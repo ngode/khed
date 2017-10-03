@@ -210,7 +210,7 @@ public final class sekuel {
                 bool=true;
             } catch (Exception e) {
                 bool=false;
-                System.out.println("Notifikasi : "+e);  
+                System.out.println("Notifikasi : "+e.getMessage());  
             } finally{
                 if(ps != null){
                     ps.close();
@@ -1510,6 +1510,16 @@ public final class sekuel {
         return res;
    }
 
+   public String[] selectRow(String q)
+   {
+       List<String[]> res = select(q);
+       
+       if (res.size() > 0)
+           return res.get(0);
+       else
+           return null;
+   }
+   
    public String selectScalar(String q)
    {
        List<String[]> res = select(q);
@@ -1558,4 +1568,13 @@ public final class sekuel {
         
         return res;
     }
+   
+   public String autoNumber(String table, String column)
+   {
+       String q = "SELECT " + column + " FROM " + table + " ORDER BY " + column + " DESC";
+       String s = selectScalar(q);
+       int i = GConvert.parseInt(s) + 1;
+       
+       return String.valueOf(i);
+   }
 }

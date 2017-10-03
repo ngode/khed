@@ -5,17 +5,24 @@
 package widget;
 
 import java.awt.Color;
+import java.awt.Component;
 import javax.swing.JTabbedPane;
+import util.CustomTabbedPaneUI;
+import util.GColors;
 
 /**
  *
  * @author khanzamedia
  */
-public class TabPane extends JTabbedPane {
-    public TabPane(){
+public class TabPane extends JTabbedPane 
+{
+    public TabPane()
+    {
         super();
-        setBackground(new Color(250,255,245));    
+        setBackground(GColors.BiruMuda);// new Color(250,255,245));    
         setForeground(new Color(60,80,50));    
-        //this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(245,140,245)));       
+        //this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(245,140,245)));     
+        
+        setUI(new CustomTabbedPaneUI());
     }
 }

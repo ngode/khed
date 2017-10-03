@@ -175,7 +175,9 @@ import keuangan.DlgRekeningTahun;
 import bridging.ReklasifikasiRalan;
 import bridging.ReklasifikasiRanap;
 import inventory.DlgRiwayatBarangMedis;
+import java.awt.Frame;
 import java.awt.event.KeyListener;
+import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
 import keuangan.DlgAkunPiutang;
 import keuangan.DlgHutangObatBelumLunas;
@@ -273,6 +275,7 @@ public class frmUtama extends javax.swing.JFrame {
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
         
         this.setSize(screen.width,screen.height);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //desktop.setPreferredSize(new Dimension(800,1000));
         //desktop.setAutoscrolls(true);
         edAdmin.setDocument(new batasInput((byte)100).getKata(edAdmin));
@@ -340,8 +343,8 @@ public class frmUtama extends javax.swing.JFrame {
             
         log();
         
-//        edAdmin.setText("spv");
-//        edPwd.setText("server");
+        edAdmin.setText("spv");
+        edPwd.setText("server");
     }
     
     public static frmUtama getInstance() {
@@ -647,6 +650,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolBcdRanap = new widget.ButtonBig();
         btnToolLab = new widget.ButtonBig();
         btnToolRad = new widget.ButtonBig();
+        btnToolHD = new widget.ButtonBig();
         BtnToolJualObat = new widget.ButtonBig();
         jSeparator9 = new javax.swing.JSeparator();
         BtnToolKamnap = new widget.ButtonBig();
@@ -4558,7 +4562,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02/10/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03/10/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -4822,6 +4826,29 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         internalFrame1.add(btnToolRad);
+
+        btnToolHD.setForeground(new java.awt.Color(80, 100, 80));
+        btnToolHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/hemo.png"))); // NOI18N
+        btnToolHD.setMnemonic('A');
+        btnToolHD.setText("Hemodialisa");
+        btnToolHD.setToolTipText("Alt+A");
+        btnToolHD.setEnabled(false);
+        btnToolHD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnToolHD.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnToolHD.setIconTextGap(3);
+        btnToolHD.setMargin(new java.awt.Insets(1, 2, 1, 0));
+        btnToolHD.setName("btnToolHD"); // NOI18N
+        btnToolHD.setPreferredSize(new java.awt.Dimension(94, 40));
+        btnToolHD.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnToolHD.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnToolHD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnToolHDActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(btnToolHD);
 
         BtnToolJualObat.setForeground(new java.awt.Color(80, 100, 80));
         BtnToolJualObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/shopping-cart-insert24.png"))); // NOI18N
@@ -5668,6 +5695,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolLab.setEnabled(true);   
                     btnToolIGD.setEnabled(true);
                     btnToolRad.setEnabled(true);
+                    btnToolHD.setEnabled(true);
                     btnToolBcdRalan.setEnabled(true);
                     btnToolBcdRanap.setEnabled(true);
                     MnGantiPassword.setEnabled(false);
@@ -5690,6 +5718,7 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnToolKasir.setEnabled(var.getkasir_ralan());                
                     btnToolLab.setEnabled(var.getperiksa_lab());  
                     btnToolRad.setEnabled(var.getperiksa_radiologi());
+                    btnToolHD.setEnabled(var.getHemodialisa());
                     btnToolIGD.setEnabled(var.getigd());                    
                     btnToolBcdRalan.setEnabled(var.getbarcoderalan());
                     btnToolBcdRanap.setEnabled(var.getbarcoderanap());   
@@ -5703,6 +5732,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolLab.setEnabled(false);   
                     btnToolIGD.setEnabled(false);
                     btnToolRad.setEnabled(false);
+                    btnToolHD.setEnabled(false);
                     btnToolBcdRalan.setEnabled(false);
                     btnToolBcdRanap.setEnabled(false);   
                     edAdmin.setText("");
@@ -9189,6 +9219,18 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         perusahaan.setVisible(true);
     }//GEN-LAST:event_btnPerusahaanActionPerformed
 
+    private void btnToolHDActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnToolHDActionPerformed
+    {//GEN-HEADEREND:event_btnToolHDActionPerformed
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
+        DlgHemodialisa form=new DlgHemodialisa(null,false);
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnToolHDActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -9469,6 +9511,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private widget.ButtonBig btnTindakanRanap;
     private widget.ButtonBig btnToolBcdRalan;
     private widget.ButtonBig btnToolBcdRanap;
+    private widget.ButtonBig btnToolHD;
     private widget.ButtonBig btnToolIGD;
     private widget.ButtonBig btnToolLab;
     private widget.ButtonBig btnToolRad;

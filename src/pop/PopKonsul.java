@@ -65,9 +65,9 @@ public class PopKonsul extends javax.swing.JDialog
         
         // Get status pasien ==        
         status = new GQuery()
-                .append("SELECT if(tgl_daftar = CURDATE(), 'Baru', 'Lama') as daftar")
-                .append("FROM pasien")
-                .append("WHERE no_rkm_medis = '{no_rm}'")
+                .a("SELECT if(tgl_daftar = CURDATE(), 'Baru', 'Lama') as daftar")
+                .a("FROM pasien")
+                .a("WHERE no_rkm_medis = '{no_rm}'")
                 .set("no_rm", noRm)
                 .getString();
         
@@ -632,7 +632,7 @@ public class PopKonsul extends javax.swing.JDialog
     private void simpan()
     {
         boolean b = new GQuery()
-                .append("INSERT INTO konsul_poli (no_rawat, kd_dokter, kd_poli) VALUES ('{no_rw}', '{kd_dokter}', '{kd_poli}')")
+                .a("INSERT INTO konsul_poli (no_rawat, kd_dokter, kd_poli) VALUES ('{no_rw}', '{kd_dokter}', '{kd_poli}')")
                 .set("no_rw", noRw)
                 .set("kd_dokter", kddokter.getText())
                 .set("kd_poli", kdpoli.getText())
