@@ -512,7 +512,7 @@ public final class sekuel {
                 ps.executeUpdate();       
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Periksa kembali data...!!!!");
+                JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Periksa kembali data...!!!!" + " " + table + " " + update);
              }finally{
                 if(ps != null){
                     ps.close();

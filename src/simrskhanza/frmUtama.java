@@ -4562,7 +4562,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03/10/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05/10/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -8928,8 +8928,11 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Hybrid.setJudul("::[ Mutasi Berkas Rekam Medis ]::","monitoringberkas/pages");
+        
+        
+        
         try {
-            Hybrid.loadURL("http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"monitoringberkas/login.php?act=login&usere=admin&passwordte=akusayangsamakamu");                    
+            Hybrid.loadURL("http://"+prop.getProperty("HOST") + "/"+prop.getProperty("HYBRIDWEB")+"/"+"monitoringberkas/login.php?act=login&usere=admin&passwordte=akusayangsamakamu");                    
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }

@@ -18,10 +18,13 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -204,6 +207,28 @@ public class DlgHybrid extends javax.swing.JDialog {
     }
  
     public void loadURL(String url) {  
+        
+        Properties prop = new Properties();
+        try
+        {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(DlgHybrid.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String portApache = prop.getProperty("PORTAPACHE");
+        if (portApache == null || portApache.isEmpty())
+            portApache = "";
+        else
+            portApache = ":" + portApache;
+        
+        String host = "http://"+prop.getProperty("HOST") + "/";
+        String hostEd = "http://"+prop.getProperty("HOST") + portApache + "/";
+        
+        final String urlEd = url.replace(host, hostEd);
+        
         try {
             createScene();
         } catch (Exception e) {
@@ -211,9 +236,9 @@ public class DlgHybrid extends javax.swing.JDialog {
         
         Platform.runLater(() -> {
             try {
-                engine.load(url);
+                engine.load(urlEd);
             }catch (Exception exception) {
-                engine.load(url);
+                engine.load(urlEd);
             }
         });        
     }    
