@@ -19,7 +19,7 @@ public class TabPane extends JTabbedPane
     public TabPane()
     {
         super();
-        setBackground(GColors.BiruMuda);// new Color(250,255,245));    
+        setBackground(GColors.Biru40);// new Color(250,255,245));    
         setForeground(new Color(60,80,50));    
         //this.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(245,140,245)));     
         

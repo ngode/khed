@@ -21,9 +21,9 @@ public class WarnaTable3 extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (row % 2 == 1){
-            component.setBackground(GColors.BiruAgakMuda);// new Color(248,253,243));
+            component.setBackground(GColors.Biru15);// new Color(248,253,243));
         }else{
-            component.setBackground(GColors.BiruSangatMuda);// new Color(255,255,255));
+            component.setBackground(GColors.Biru10);// new Color(255,255,255));
         } 
         if (column == kolom){
             component.setBackground(new Color(215,215,255));

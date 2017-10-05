@@ -636,7 +636,7 @@ public class PopKonsul extends javax.swing.JDialog
                 .set("no_rw", noRw)
                 .set("kd_dokter", kddokter.getText())
                 .set("kd_poli", kdpoli.getText())
-                .insert();
+                .write();
         
         if (b)
         {

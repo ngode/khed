@@ -1548,8 +1548,7 @@ public final class sekuel {
             }
             catch(Exception e)
             {
-                System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
+                System.out.println("Notifikasi : " + e.getMessage());
 
                 res = false;
             }
@@ -1563,7 +1562,8 @@ public final class sekuel {
         } 
         catch (Exception e) 
         {
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notifikasi : " + e.getMessage());
+            res = false;
         } 
         
         return res;

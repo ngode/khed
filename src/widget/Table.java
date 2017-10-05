@@ -20,16 +20,17 @@ public class Table extends JTable {
         //setBackground(new Color(255,235,255));
         //setGridColor(new Color(245,170,245));
         //setForeground(new Color(90,90,90));
-        setBackground(new Color(255,255,255));
-        setGridColor(new Color(237,242,232));
-        setForeground(new Color(60,80,50));
-        setFont(new java.awt.Font("Tahoma", 0, 11));
-        setRowHeight(22);
-        setSelectionBackground(new Color(255,255,255));
-        setSelectionForeground(new Color(100,100,0));
-        getTableHeader().setForeground(new Color(60,80,50));
-        getTableHeader().setBackground(GColors.BiruMuda);// new Color(248,253,243));
-        getTableHeader().setBorder(javax.swing.BorderFactory.createLineBorder(GColors.BiruAgakMuda));// new Color(237,242,232)));new Color(248,253,243)));
-        getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
+        super.setBackground(new Color(255,255,255));
+        super.setGridColor(new Color(237,242,232));
+        super.setForeground(new Color(60,80,50));
+        super.setFont(new java.awt.Font("Tahoma", 0, 11));
+        super.setRowHeight(22);
+        super.setSelectionBackground(new Color(255,255,255));
+        super.setSelectionForeground(new Color(100,100,0));
+        super.getTableHeader().setForeground(new Color(60,80,50));
+        super.getTableHeader().setBackground(GColors.Biru40);// new Color(248,253,243));
+        super.getTableHeader().setBorder(javax.swing.BorderFactory.createLineBorder(GColors.Biru15));// new Color(237,242,232)));new Color(248,253,243)));
+        super.getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
+        super.getTableHeader().setReorderingAllowed(false);
     }
 }

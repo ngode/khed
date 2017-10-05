@@ -33,8 +33,8 @@ public class CustomTabbedPaneUI extends BasicTabbedPaneUI {
     @Override
     protected void installDefaults() {
         super.installDefaults();
-        selectColor = GColors.BiruMuda;// new Color(250, 192, 192);
-        deSelectColor = GColors.BiruAgakMuda;// new Color(197, 193, 168);
+        selectColor = GColors.Biru40;// new Color(250, 192, 192);
+        deSelectColor = GColors.Biru15;// new Color(197, 193, 168);
         tabAreaInsets.right = anchoCarpetas;
     }
 
@@ -112,7 +112,7 @@ public class CustomTabbedPaneUI extends BasicTabbedPaneUI {
             default:
                 xp = new int[]{x, x, x + 3, x + w - inclTab - 6, x + w - inclTab - 2, x + w - inclTab, x + w - inclTab, x};
                 yp = new int[]{y + h, y + 3, y, y, y + 1, y + 3, y + h, y + h};
-                gradientShadow = new GradientPaint(0, 0, GColors.BiruAgakMuda, 0, y + h / 2, GColors.BiruSangatMuda);
+                gradientShadow = new GradientPaint(0, 0, GColors.Biru15, 0, y + h / 2, GColors.Biru10);
                 break;
         }
         // ;
@@ -123,10 +123,10 @@ public class CustomTabbedPaneUI extends BasicTabbedPaneUI {
         } else {
             if (tabPane.isEnabled() && tabPane.isEnabledAt(tabIndex)) {
                 g2D.setColor(deSelectColor);
-                GradientPaint gradientShadowTmp = new GradientPaint(0, 0, GColors.BiruMuda, 0, y + h / 2, GColors.BiruMuda);
+                GradientPaint gradientShadowTmp = new GradientPaint(0, 0, GColors.Biru50, 0, y + h / 2, GColors.Biru50);
                 g2D.setPaint(gradientShadowTmp);
             } else {
-                GradientPaint gradientShadowTmp = new GradientPaint(0, 0, GColors.BiruMuda, 0, y + 15 + h / 2, GColors.BiruMuda);
+                GradientPaint gradientShadowTmp = new GradientPaint(0, 0, GColors.Biru50, 0, y + 15 + h / 2, GColors.Biru50);
                 g2D.setPaint(gradientShadowTmp);
             }
         }

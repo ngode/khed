@@ -20,7 +20,7 @@ public class TextBox extends JTextField {
         setSelectionColor(new Color(50,51,0));
         setSelectedTextColor(new Color(255,255,0));
         setForeground(new Color(60,80,50));
-        setBackground(GColors.BiruSangatMuda);// new Color(250,255,245));
+        setBackground(GColors.Biru10);// new Color(250,255,245));
         setHorizontalAlignment(LEFT);
         setSize(WIDTH,23);
     }
@@ -31,9 +31,9 @@ public class TextBox extends JTextField {
         super.setEditable(b);
         
         if (b)
-            setBackground(GColors.BiruSangatMuda);
+            setBackground(GColors.Biru10);
         else
-            setBackground(GColors.BiruAgakMuda);
+            setBackground(GColors.Biru15);
     }
     
     @Override

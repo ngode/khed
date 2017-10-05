@@ -24,8 +24,8 @@ import util.GColors;
 public class PanelWT extends JPanel{
     private static final long serialVersionUID = -1;
     private BufferedImage gradientImage;
-    private Color warnaAtas = GColors.BiruMuda;// new Color(245,255,235);
-    private Color warnaBawah = GColors.BiruMudaAgakTua;// new Color(0,0,0);
+    private Color warnaAtas = GColors.Biru40;// new Color(245,255,235);
+    private Color warnaBawah = GColors.Biru50;// new Color(0,0,0);
 
     public PanelWT(){
         super();
