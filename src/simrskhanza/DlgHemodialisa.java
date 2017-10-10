@@ -10,6 +10,8 @@
  */
 package simrskhanza;
 
+import fungsi.GQuery;
+import fungsi.GStatement;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -30,7 +32,13 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
+import util.GMessage;
 
 /**
  *
@@ -39,13 +47,17 @@ import javax.swing.event.DocumentEvent;
 public class DlgHemodialisa extends javax.swing.JDialog
 {
 
-    private final DefaultTableModel tabModePO;
+    private DefaultTableModel mdlTindakan, mdlTransaksi, mdlOrder;
     private Connection koneksi = koneksiDB.condb();
     private sekuel Sequel = new sekuel();
     private validasi Valid = new validasi();
-    private PreparedStatement ps;
-    private ResultSet rs;
+    private GStatement psTindakan, psTransaksi, psOrder;
+    private ResultSet rsTindakan, rsTransaksi, rsOrder;
 
+    private List<String> selKodes = new ArrayList<>();
+    private String kdPeriksa;
+    private boolean isEdit = false;
+    
     /**
      * Creates new form DlgPemberianObat
      *
@@ -57,12 +69,124 @@ public class DlgHemodialisa extends javax.swing.JDialog
         super(parent, modal);
         initComponents();
 
+        this.setLocation(8, 1);
+        setSize(885, 674);
+
+        initTblTindakan();
+        initTblTransaksi();
+        initTblOrder();
+        
+        tampilTindakan();
+        tampilTransaksi();
+        tampilOrder();
+        
+        txtNoRw.setDocument(new batasInput((byte) 17).getKata(txtNoRw));
+        txtCari.setDocument(new batasInput((byte) 100).getKata(txtCari));
+//        if (koneksiDB.cariCepat().equals("aktif"))
+//        {
+            txtCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener()
+            {
+                @Override
+                public void insertUpdate(DocumentEvent e)
+                {
+                    tampilTindakan();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e)
+                {
+                    tampilTindakan();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e)
+                {
+                    tampilTindakan();
+                }
+            });
+//        }
+        //ChkInput.setSelected(false);
+        isForm();
+        jam();
+    }
+
+    private void initTblTindakan()
+    {
+        // Init jenis pemeriksaan ===========================
         Object[] row =
         {
-            "Tgl.Pemberian", "Jam Pemberian", "No.Rawat", "No.Rekam Medis", "Nama Pasien", "Kode Obat",
-            "Obat Penyakit", "Embalase", "Jumlah", "Biaya Obat", "Total"
+            "P", "Kode Periksa", "Nama Pemeriksaan", "Material", "Bhp", "Dokter", "Perawat", "Kso", "Manajemen", "Tarif"
         };
-        tabModePO = new DefaultTableModel(null, row)
+
+        mdlTindakan = new DefaultTableModel(null, row)
+        {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return colIndex == 0;
+            }
+            
+            Class[] types = new Class[]
+            {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class
+            };
+
+            @Override
+            public Class getColumnClass(int columnIndex)
+            {
+                return types[columnIndex];
+            }
+        };
+        
+        int[] sz = 
+        {
+            20, 80, 200, 0, 0, 0, 0, 0, 0, 75
+        };
+        
+        tblTindakan.setModel(mdlTindakan);
+
+        tblTindakan.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tblTindakan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (int i = 0; i < sz.length; i++)
+        {
+            TableColumn column = tblTindakan.getColumnModel().getColumn(i);
+            
+            if (sz[i] > 0)
+                column.setPreferredWidth(sz[i]);
+            else
+            {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }
+        }
+        
+        tblTindakan.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        psTindakan = new GStatement(koneksi)
+            .a("SELECT kd_jenis_prw, nm_perawatan, material, bhp, tarif_tindakandr, tarif_tindakanpr,")
+            .a("kso, menejemen, total_byrdrpr")
+            .a("FROM jns_perawatan")
+            .a("WHERE kd_kategori = 'hd'")
+            .a("AND nm_perawatan LIKE ?")
+            .a("ORDER BY nm_perawatan");
+    }
+    
+    private void initTblTransaksi()
+    {
+        Object[] row =
+        {
+            "Kd Periksa", "No Rawat", "Pasien", "Tgl Periksa", "Jam Periksa", "Status"
+        };
+        
+        int[] sz = 
+        {
+            80, 120, 300, 100, 90, 90
+        };
+        
+        mdlTransaksi = new DefaultTableModel(null, row)
         {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex)
@@ -70,98 +194,174 @@ public class DlgHemodialisa extends javax.swing.JDialog
                 return false;
             }
         };
-        tbPemberianObat.setModel(tabModePO);
-        //tampilPO("");
+        
+        tblTransaksi.setModel(mdlTransaksi);
 
-        tbPemberianObat.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbPemberianObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblTransaksi.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tblTransaksi.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < sz.length; i++)
         {
-            TableColumn column = tbPemberianObat.getColumnModel().getColumn(i);
-            if (i == 0)
-            {
-                column.setPreferredWidth(120);
-            }
-            else if (i == 1)
-            {
-                column.setPreferredWidth(100);
-            }
-            else if (i == 2)
-            {
-                column.setPreferredWidth(130);
-            }
-            else if (i == 3)
-            {
-                column.setPreferredWidth(110);
-            }
-            else if (i == 4)
-            {
-                column.setPreferredWidth(200);
-            }
-            else if (i == 5)
-            {
-                column.setPreferredWidth(110);
-            }
-            else if (i == 6)
-            {
-                column.setPreferredWidth(200);
-            }
-            else if (i == 7)
-            {
-                column.setPreferredWidth(100);
-            }
-            else if (i == 8)
-            {
-                column.setPreferredWidth(60);
-            }
-            else if (i == 9)
-            {
-                column.setPreferredWidth(130);
-            }
-            else if (i == 10)
-            {
-                column.setPreferredWidth(130);
-            }
+            TableColumn column = tblTransaksi.getColumnModel().getColumn(i);
+            column.setPreferredWidth(sz[i]);
         }
-        tbPemberianObat.setDefaultRenderer(Object.class, new WarnaTable());
-
-        this.setLocation(8, 1);
-        setSize(885, 674);
-
-        TNoRw.setDocument(new batasInput((byte) 17).getKata(TNoRw));
-        TKdOb.setDocument(new batasInput((byte) 15).getKata(TKdOb));
-        TJumlah.setDocument(new batasInput((byte) 25).getKata(TJumlah));
-        TTambahan.setDocument(new batasInput((byte) 15).getOnlyAngka(TTambahan));
-        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
-        if (koneksiDB.cariCepat().equals("aktif"))
-        {
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener()
-            {
-                @Override
-                public void insertUpdate(DocumentEvent e)
-                {
-                    tampilPO();
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e)
-                {
-                    tampilPO();
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e)
-                {
-                    tampilPO();
-                }
-            });
-        }
-        //ChkInput.setSelected(false);
-        isForm();
-        jam();
+        
+        tblTransaksi.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        psTransaksi = new GStatement(koneksi)
+                .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal,")
+                .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status")
+                .a("FROM pemeriksaan_hd")
+                .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
+                .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("JOIN kamar ON kamar.kd_kamar = pemeriksaan_hd.kd_kamar")
+                .a("JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                .a("WHERE pemeriksaan_hd.status = 1")
+                .a("ORDER BY tgl_periksa, jam_mulai");
     }
+    
+    private void initTblOrder()
+    {
+        Object[] row =
+        {
+            "Kd Periksa", "No Rawat", "Pasien", "Tgl Periksa", "Jam Periksa", "Status"
+        };
+        
+        int[] sz = 
+        {
+            80, 120, 300, 100, 90, 90
+        };
+        
+        mdlOrder = new DefaultTableModel(null, row)
+        {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
+        
+        tblOrder.setModel(mdlOrder);
 
+        tblOrder.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tblOrder.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (int i = 0; i < sz.length; i++)
+        {
+            TableColumn column = tblOrder.getColumnModel().getColumn(i);
+            column.setPreferredWidth(sz[i]);
+        }
+        
+        tblOrder.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        psOrder = new GStatement(koneksi)
+                .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal,")
+                .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status")
+                .a("FROM pemeriksaan_hd")
+                .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
+                .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("JOIN kamar ON kamar.kd_kamar = pemeriksaan_hd.kd_kamar")
+                .a("JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                .a("WHERE pemeriksaan_hd.status = 0")
+                .a("ORDER BY tgl_periksa, jam_mulai");
+    }
+    
+    private void tampilTindakan()
+    {
+        try 
+        {
+            Valid.tabelKosong(mdlTindakan);
+            psTindakan.setString(1, "%" + txtCari.getText() + "%");
+            rsTindakan = psTindakan.executeQuery();
+            
+            while (rsTindakan.next())
+            {
+                boolean b = false;
+                
+                if (selKodes.contains(rsTindakan.getString("kd_jenis_prw")))
+                    b = true;
+                
+                Object[] o = new Object[]
+                {
+                    b,
+                    rsTindakan.getString("kd_jenis_prw"),
+                    rsTindakan.getString("nm_perawatan"),
+                    rsTindakan.getDouble("material"),
+                    rsTindakan.getDouble("bhp"),
+                    rsTindakan.getDouble("tarif_tindakandr"),
+                    rsTindakan.getDouble("tarif_tindakanpr"),
+                    rsTindakan.getDouble("kso"),
+                    rsTindakan.getDouble("menejemen"),
+                    rsTindakan.getDouble("total_byrdrpr")
+                };
+                
+                mdlTindakan.addRow(o);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    private void tampilTransaksi()
+    {
+        try 
+        {
+            Valid.tabelKosong(mdlTransaksi);
+            rsTransaksi = psTransaksi.executeQuery();
+            
+            while (rsTransaksi.next())
+            {
+                Object[] o = new Object[]
+                {
+                    rsTransaksi.getString("kd_periksa"),
+                    rsTransaksi.getString("no_rawat"),
+                    rsTransaksi.getString("no_rkm_medis") + " " + rsTransaksi.getString("nm_pasien") + " (Kamar : " + 
+                        rsTransaksi.getString("kd_kamar") + ", " + rsTransaksi.getString("nm_bangsal") + ")",
+                    rsTransaksi.getString("tgl_periksa"),
+                    rsTransaksi.getString("jam_mulai"),
+                    rsTransaksi.getString("status")
+                };
+                
+                mdlTransaksi.addRow(o);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    private void tampilOrder()
+    {
+        try 
+        {
+            Valid.tabelKosong(mdlOrder);
+            rsOrder = psOrder.executeQuery();
+            
+            while (rsOrder.next())
+            {
+                Object[] o = new Object[]
+                {
+                    rsOrder.getString("kd_periksa"),
+                    rsOrder.getString("no_rawat"),
+                    rsOrder.getString("no_rkm_medis") + " " + rsOrder.getString("nm_pasien") + " (Kamar : " + 
+                        rsOrder.getString("kd_kamar") + ", " + rsOrder.getString("nm_bangsal") + ")",
+                    rsOrder.getString("tgl_periksa"),
+                    rsOrder.getString("jam_mulai"),
+                    rsOrder.getString("status")
+                };
+                
+                mdlOrder.addRow(o);
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     //private DlgCariObatPenyakit dlgobtpny=new DlgCariObatPenyakit(null,false);
     /**
      * This method is called from within the constructor to initialize the form.
@@ -170,91 +370,80 @@ public class DlgHemodialisa extends javax.swing.JDialog
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         internalFrame1 = new widget.InternalFrame();
         tabPane = new widget.TabPane();
         panelBiasa1 = new widget.PanelBiasa();
-        Scroll = new widget.ScrollPane();
-        tbPemberianObat = new widget.Table();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
-        BtnSimpan = new widget.Button();
+        btnSimpan = new widget.Button();
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
-        BtnEdit = new widget.Button();
         BtnPrint = new widget.Button();
         BtnAll = new widget.Button();
         BtnKeluar = new widget.Button();
         panelGlass9 = new widget.panelisi();
-        jLabel14 = new widget.Label();
-        DTPCari1 = new widget.Tanggal();
-        jLabel19 = new widget.Label();
-        DTPCari2 = new widget.Tanggal();
         jLabel6 = new widget.Label();
-        TCari = new widget.TextBox();
+        txtCari = new widget.TextBox();
         BtnCari = new widget.Button();
         jLabel10 = new widget.Label();
         LCount = new widget.Label();
         PanelInput = new javax.swing.JPanel();
         FormInput = new widget.PanelBiasa();
         jLabel3 = new widget.Label();
-        TNoRw = new widget.TextBox();
-        TNoRM = new widget.TextBox();
-        TPasien = new widget.TextBox();
+        txtNoRw = new widget.TextBox();
+        txtNoRm = new widget.TextBox();
+        txtNamaPasien = new widget.TextBox();
         jLabel7 = new widget.Label();
-        TJumlah = new widget.TextBox();
-        jLabel9 = new widget.Label();
         DTPBeri = new widget.Tanggal();
-        jLabel13 = new widget.Label();
-        TKdOb = new widget.TextBox();
-        btnObat1 = new widget.Button();
-        TNmOb = new widget.TextBox();
-        TTambahan = new widget.TextBox();
         cmbJam = new widget.ComboBox();
         cmbMnt = new widget.ComboBox();
         cmbDtk = new widget.ComboBox();
-        TBiayaObat = new widget.TextBox();
-        jLabel17 = new widget.Label();
-        TTotal = new widget.TextBox();
         ChkJln = new widget.CekBox();
         jLabel12 = new widget.Label();
-        TJumlah1 = new widget.TextBox();
+        txtUmur = new widget.TextBox();
         jLabel16 = new widget.Label();
-        TJumlah2 = new widget.TextBox();
+        txtJk = new widget.TextBox();
         jLabel4 = new widget.Label();
-        TNoRM1 = new widget.TextBox();
-        jLabel18 = new widget.Label();
-        jLabel20 = new widget.Label();
-        jLabel21 = new widget.Label();
-        jLabel22 = new widget.Label();
-        jLabel23 = new widget.Label();
-        TBiayaObat1 = new widget.TextBox();
-        jLabel24 = new widget.Label();
-        TTambahan1 = new widget.TextBox();
-        jLabel25 = new widget.Label();
-        jLabel26 = new widget.Label();
-        jLabel27 = new widget.Label();
-        jLabel28 = new widget.Label();
-        jLabel29 = new widget.Label();
-        jLabel30 = new widget.Label();
-        TJumlah3 = new widget.TextBox();
-        TJumlah4 = new widget.TextBox();
-        TJumlah5 = new widget.TextBox();
-        TJumlah6 = new widget.TextBox();
-        TJumlah7 = new widget.TextBox();
-        jLabel31 = new widget.Label();
-        jLabel32 = new widget.Label();
-        jLabel5 = new widget.Label();
-        TNoRM2 = new widget.TextBox();
+        txtAlamat = new widget.TextBox();
+        jLabel13 = new widget.Label();
+        txtPreTd = new widget.TextBox();
+        jLabel9 = new widget.Label();
+        jLabel14 = new widget.Label();
+        txtPreBb = new widget.TextBox();
         jLabel15 = new widget.Label();
-        TKdOb1 = new widget.TextBox();
-        TNmOb1 = new widget.TextBox();
-        ChkInput = new widget.CekBox();
+        txtPreNadi = new widget.TextBox();
+        jLabel17 = new widget.Label();
+        txtPreRes = new widget.TextBox();
+        jLabel18 = new widget.Label();
+        jLabel19 = new widget.Label();
+        txtPostTd = new widget.TextBox();
+        jLabel20 = new widget.Label();
+        txtPostBb = new widget.TextBox();
+        jLabel21 = new widget.Label();
+        txtPostNadi = new widget.TextBox();
+        jLabel22 = new widget.Label();
+        txtPostRes = new widget.TextBox();
+        jLabel23 = new widget.Label();
+        txtHdKe = new widget.TextBox();
+        jLabel24 = new widget.Label();
+        txtKdDokter = new widget.TextBox();
+        txtNamaDokter = new widget.TextBox();
+        jLabel25 = new widget.Label();
+        txtKdDokter1 = new widget.TextBox();
+        txtNamaDokter1 = new widget.TextBox();
+        jLabel26 = new widget.Label();
+        txtKdDokter2 = new widget.TextBox();
+        txtNamaDokter2 = new widget.TextBox();
+        jLabel27 = new widget.Label();
+        txtKdDokter3 = new widget.TextBox();
+        txtNamaDokter3 = new widget.TextBox();
+        Scroll3 = new widget.ScrollPane();
+        tblTindakan = new widget.Table();
         panelBiasa2 = new widget.PanelBiasa();
         Scroll1 = new widget.ScrollPane();
-        tbPemberianObat1 = new widget.Table();
+        tblTransaksi = new widget.Table();
         jPanel4 = new javax.swing.JPanel();
         panelGlass11 = new widget.panelisi();
         jLabel33 = new widget.Label();
@@ -267,6 +456,8 @@ public class DlgHemodialisa extends javax.swing.JDialog
         jLabel11 = new widget.Label();
         LCount1 = new widget.Label();
         panelBiasa3 = new widget.PanelBiasa();
+        Scroll2 = new widget.ScrollPane();
+        tblOrder = new widget.Table();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -282,30 +473,6 @@ public class DlgHemodialisa extends javax.swing.JDialog
         panelBiasa1.setName("panelBiasa1"); // NOI18N
         panelBiasa1.setLayout(new java.awt.BorderLayout());
 
-        Scroll.setName("Scroll"); // NOI18N
-        Scroll.setOpaque(true);
-
-        tbPemberianObat.setAutoCreateRowSorter(true);
-        tbPemberianObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbPemberianObat.setName("tbPemberianObat"); // NOI18N
-        tbPemberianObat.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                tbPemberianObatMouseClicked(evt);
-            }
-        });
-        tbPemberianObat.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                tbPemberianObatKeyPressed(evt);
-            }
-        });
-        Scroll.setViewportView(tbPemberianObat);
-
-        panelBiasa1.add(Scroll, java.awt.BorderLayout.CENTER);
-
         jPanel3.setName("jPanel3"); // NOI18N
         jPanel3.setOpaque(false);
         jPanel3.setPreferredSize(new java.awt.Dimension(44, 100));
@@ -315,13 +482,18 @@ public class DlgHemodialisa extends javax.swing.JDialog
         panelGlass8.setPreferredSize(new java.awt.Dimension(44, 44));
         panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
-        BtnSimpan.setText("Simpan");
-        BtnSimpan.setToolTipText("Alt+S");
-        BtnSimpan.setName("BtnSimpan"); // NOI18N
-        BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        panelGlass8.add(BtnSimpan);
+        btnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        btnSimpan.setMnemonic('S');
+        btnSimpan.setText("Simpan");
+        btnSimpan.setToolTipText("Alt+S");
+        btnSimpan.setName("btnSimpan"); // NOI18N
+        btnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
+        panelGlass8.add(btnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
         BtnBatal.setMnemonic('B');
@@ -338,14 +510,6 @@ public class DlgHemodialisa extends javax.swing.JDialog
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
         panelGlass8.add(BtnHapus);
-
-        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
-        BtnEdit.setText("Ganti");
-        BtnEdit.setToolTipText("Alt+G");
-        BtnEdit.setName("BtnEdit"); // NOI18N
-        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        panelGlass8.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         BtnPrint.setMnemonic('T');
@@ -377,66 +541,32 @@ public class DlgHemodialisa extends javax.swing.JDialog
         panelGlass9.setPreferredSize(new java.awt.Dimension(44, 44));
         panelGlass9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 10));
 
-        jLabel14.setText("Tgl.Beri :");
-        jLabel14.setName("jLabel14"); // NOI18N
-        jLabel14.setPreferredSize(new java.awt.Dimension(58, 23));
-        panelGlass9.add(jLabel14);
-
-        DTPCari1.setEditable(false);
-        DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
-        DTPCari1.setDisplayFormat("dd-MM-yyyy");
-        DTPCari1.setName("DTPCari1"); // NOI18N
-        DTPCari1.setOpaque(false);
-        DTPCari1.setPreferredSize(new java.awt.Dimension(100, 23));
-        panelGlass9.add(DTPCari1);
-
-        jLabel19.setText("s.d");
-        jLabel19.setName("jLabel19"); // NOI18N
-        jLabel19.setPreferredSize(new java.awt.Dimension(18, 23));
-        panelGlass9.add(jLabel19);
-
-        DTPCari2.setEditable(false);
-        DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
-        DTPCari2.setDisplayFormat("dd-MM-yyyy");
-        DTPCari2.setName("DTPCari2"); // NOI18N
-        DTPCari2.setOpaque(false);
-        DTPCari2.setPreferredSize(new java.awt.Dimension(100, 23));
-        panelGlass9.add(DTPCari2);
-
         jLabel6.setText("Key Word :");
         jLabel6.setName("jLabel6"); // NOI18N
         jLabel6.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass9.add(jLabel6);
 
-        TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(200, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TCariKeyPressed(evt);
+        txtCari.setName("txtCari"); // NOI18N
+        txtCari.setPreferredSize(new java.awt.Dimension(200, 23));
+        txtCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCariKeyPressed(evt);
             }
         });
-        panelGlass9.add(TCari);
+        panelGlass9.add(txtCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -462,7 +592,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(865, 257));
+        FormInput.setPreferredSize(new java.awt.Dimension(865, 280));
         FormInput.setLayout(null);
 
         jLabel3.setText("No.Rawat :");
@@ -470,132 +600,60 @@ public class DlgHemodialisa extends javax.swing.JDialog
         FormInput.add(jLabel3);
         jLabel3.setBounds(-2, 12, 80, 23);
 
-        TNoRw.setHighlighter(null);
-        TNoRw.setName("TNoRw"); // NOI18N
-        TNoRw.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TNoRwKeyPressed(evt);
+        txtNoRw.setEditable(false);
+        txtNoRw.setHighlighter(null);
+        txtNoRw.setName("txtNoRw"); // NOI18N
+        txtNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoRwKeyPressed(evt);
             }
         });
-        FormInput.add(TNoRw);
-        TNoRw.setBounds(81, 12, 175, 23);
+        FormInput.add(txtNoRw);
+        txtNoRw.setBounds(81, 12, 175, 23);
 
-        TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
-        TNoRM.setName("TNoRM"); // NOI18N
-        FormInput.add(TNoRM);
-        TNoRM.setBounds(258, 12, 143, 23);
+        txtNoRm.setEditable(false);
+        txtNoRm.setHighlighter(null);
+        txtNoRm.setName("txtNoRm"); // NOI18N
+        FormInput.add(txtNoRm);
+        txtNoRm.setBounds(258, 12, 143, 23);
 
-        TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
-        TPasien.setName("TPasien"); // NOI18N
-        TPasien.setPreferredSize(new java.awt.Dimension(25, 28));
-        FormInput.add(TPasien);
-        TPasien.setBounds(403, 12, 325, 23);
+        txtNamaPasien.setEditable(false);
+        txtNamaPasien.setHighlighter(null);
+        txtNamaPasien.setName("txtNamaPasien"); // NOI18N
+        txtNamaPasien.setPreferredSize(new java.awt.Dimension(25, 28));
+        txtNamaPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaPasienActionPerformed(evt);
+            }
+        });
+        FormInput.add(txtNamaPasien);
+        txtNamaPasien.setBounds(403, 12, 320, 23);
 
-        jLabel7.setText("Tanggal :");
+        jLabel7.setText("Pre");
         jLabel7.setName("jLabel7"); // NOI18N
         FormInput.add(jLabel7);
-        jLabel7.setBounds(-2, 72, 80, 23);
-
-        TJumlah.setHighlighter(null);
-        TJumlah.setName("TJumlah"); // NOI18N
-        TJumlah.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                TJumlahActionPerformed(evt);
-            }
-        });
-        TJumlah.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TJumlahKeyPressed(evt);
-            }
-        });
-        FormInput.add(TJumlah);
-        TJumlah.setBounds(208, 192, 120, 23);
-
-        jLabel9.setText("Instruksi Program :");
-        jLabel9.setName("jLabel9"); // NOI18N
-        FormInput.add(jLabel9);
-        jLabel9.setBounds(-2, 102, 110, 23);
+        jLabel7.setBounds(30, 110, 50, 23);
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-10-2017" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
         DTPBeri.setPreferredSize(new java.awt.Dimension(100, 23));
-        DTPBeri.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        DTPBeri.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 DTPBeriKeyPressed(evt);
             }
         });
         FormInput.add(DTPBeri);
         DTPBeri.setBounds(81, 72, 95, 23);
 
-        jLabel13.setText("Diagnosa :");
-        jLabel13.setName("jLabel13"); // NOI18N
-        FormInput.add(jLabel13);
-        jLabel13.setBounds(347, 72, 60, 23);
-
-        TKdOb.setName("TKdOb"); // NOI18N
-        TKdOb.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TKdObKeyPressed(evt);
-            }
-        });
-        FormInput.add(TKdOb);
-        TKdOb.setBounds(410, 72, 60, 23);
-
-        btnObat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnObat1.setMnemonic('4');
-        btnObat1.setToolTipText("Alt+4");
-        btnObat1.setName("btnObat1"); // NOI18N
-        btnObat1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnObat1ActionPerformed(evt);
-            }
-        });
-        FormInput.add(btnObat1);
-        btnObat1.setBounds(700, 72, 28, 23);
-
-        TNmOb.setEditable(false);
-        TNmOb.setName("TNmOb"); // NOI18N
-        FormInput.add(TNmOb);
-        TNmOb.setBounds(472, 72, 225, 23);
-
-        TTambahan.setText("Bicarbonat");
-        TTambahan.setHighlighter(null);
-        TTambahan.setName("TTambahan"); // NOI18N
-        TTambahan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TTambahanKeyPressed(evt);
-            }
-        });
-        FormInput.add(TTambahan);
-        TTambahan.setBounds(373, 102, 100, 23);
-
         cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam.setName("cmbJam"); // NOI18N
         cmbJam.setOpaque(false);
-        cmbJam.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbJam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbJamKeyPressed(evt);
             }
         });
@@ -605,10 +663,8 @@ public class DlgHemodialisa extends javax.swing.JDialog
         cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt.setName("cmbMnt"); // NOI18N
         cmbMnt.setOpaque(false);
-        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbMntKeyPressed(evt);
             }
         });
@@ -618,33 +674,13 @@ public class DlgHemodialisa extends javax.swing.JDialog
         cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk.setName("cmbDtk"); // NOI18N
         cmbDtk.setOpaque(false);
-        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbDtkKeyPressed(evt);
             }
         });
         FormInput.add(cmbDtk);
         cmbDtk.setBounds(270, 72, 45, 23);
-
-        TBiayaObat.setText("0");
-        TBiayaObat.setHighlighter(null);
-        TBiayaObat.setName("TBiayaObat"); // NOI18N
-        FormInput.add(TBiayaObat);
-        TBiayaObat.setBounds(158, 102, 100, 23);
-
-        jLabel17.setText("Penarikan Cairan :");
-        jLabel17.setName("jLabel17"); // NOI18N
-        FormInput.add(jLabel17);
-        jLabel17.setBounds(484, 102, 110, 23);
-
-        TTotal.setEditable(false);
-        TTotal.setText("0");
-        TTotal.setHighlighter(null);
-        TTotal.setName("TTotal"); // NOI18N
-        FormInput.add(TTotal);
-        TTotal.setBounds(597, 102, 100, 23);
 
         ChkJln.setBackground(new java.awt.Color(235, 255, 235));
         ChkJln.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
@@ -664,291 +700,301 @@ public class DlgHemodialisa extends javax.swing.JDialog
         FormInput.add(jLabel12);
         jLabel12.setBounds(507, 42, 50, 23);
 
-        TJumlah1.setHighlighter(null);
-        TJumlah1.setName("TJumlah1"); // NOI18N
-        TJumlah1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TJumlah1KeyPressed(evt);
+        txtUmur.setEditable(false);
+        txtUmur.setHighlighter(null);
+        txtUmur.setName("txtUmur"); // NOI18N
+        txtUmur.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUmurKeyPressed(evt);
             }
         });
-        FormInput.add(TJumlah1);
-        TJumlah1.setBounds(560, 42, 70, 23);
+        FormInput.add(txtUmur);
+        txtUmur.setBounds(560, 42, 130, 23);
 
         jLabel16.setText("J.K. :");
         jLabel16.setName("jLabel16"); // NOI18N
         FormInput.add(jLabel16);
-        jLabel16.setBounds(625, 42, 50, 23);
+        jLabel16.setBounds(700, 40, 50, 23);
 
-        TJumlah2.setHighlighter(null);
-        TJumlah2.setName("TJumlah2"); // NOI18N
-        TJumlah2.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TJumlah2KeyPressed(evt);
+        txtJk.setEditable(false);
+        txtJk.setHighlighter(null);
+        txtJk.setName("txtJk"); // NOI18N
+        txtJk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtJkKeyPressed(evt);
             }
         });
-        FormInput.add(TJumlah2);
-        TJumlah2.setBounds(678, 42, 50, 23);
+        FormInput.add(txtJk);
+        txtJk.setBounds(760, 40, 50, 23);
 
         jLabel4.setText("Alamat :");
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
         jLabel4.setBounds(-2, 42, 80, 23);
 
-        TNoRM1.setEditable(false);
-        TNoRM1.setHighlighter(null);
-        TNoRM1.setName("TNoRM1"); // NOI18N
-        FormInput.add(TNoRM1);
-        TNoRM1.setBounds(81, 42, 426, 23);
+        txtAlamat.setEditable(false);
+        txtAlamat.setHighlighter(null);
+        txtAlamat.setName("txtAlamat"); // NOI18N
+        FormInput.add(txtAlamat);
+        txtAlamat.setBounds(81, 42, 426, 23);
 
-        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel18.setText("Jam");
-        jLabel18.setName("jLabel18"); // NOI18N
-        FormInput.add(jLabel18);
-        jLabel18.setBounds(260, 102, 24, 23);
+        jLabel13.setText("TD :");
+        jLabel13.setName("jLabel13"); // NOI18N
+        FormInput.add(jLabel13);
+        jLabel13.setBounds(30, 140, 50, 23);
 
-        jLabel20.setText("Lama :");
-        jLabel20.setName("jLabel20"); // NOI18N
-        FormInput.add(jLabel20);
-        jLabel20.setBounds(95, 102, 60, 23);
-
-        jLabel21.setText("Dialist :");
-        jLabel21.setName("jLabel21"); // NOI18N
-        FormInput.add(jLabel21);
-        jLabel21.setBounds(290, 102, 80, 23);
-
-        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel22.setText("ml");
-        jLabel22.setName("jLabel22"); // NOI18N
-        FormInput.add(jLabel22);
-        jLabel22.setBounds(700, 102, 20, 23);
-
-        jLabel23.setText("Akses :");
-        jLabel23.setName("jLabel23"); // NOI18N
-        FormInput.add(jLabel23);
-        jLabel23.setBounds(50, 132, 105, 23);
-
-        TBiayaObat1.setText("Femoral / Cimino");
-        TBiayaObat1.setHighlighter(null);
-        TBiayaObat1.setName("TBiayaObat1"); // NOI18N
-        FormInput.add(TBiayaObat1);
-        TBiayaObat1.setBounds(158, 132, 100, 23);
-
-        jLabel24.setText("Transfusi :");
-        jLabel24.setName("jLabel24"); // NOI18N
-        FormInput.add(jLabel24);
-        jLabel24.setBounds(290, 132, 80, 23);
-
-        TTambahan1.setText("0");
-        TTambahan1.setHighlighter(null);
-        TTambahan1.setName("TTambahan1"); // NOI18N
-        TTambahan1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TTambahan1KeyPressed(evt);
+        txtPreTd.setHighlighter(null);
+        txtPreTd.setName("txtPreTd"); // NOI18N
+        txtPreTd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPreTdKeyPressed(evt);
             }
         });
-        FormInput.add(TTambahan1);
-        TTambahan1.setBounds(373, 132, 100, 23);
+        FormInput.add(txtPreTd);
+        txtPreTd.setBounds(90, 140, 160, 23);
 
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel25.setText(" Kalf / Durante HD");
-        jLabel25.setName("jLabel25"); // NOI18N
-        FormInput.add(jLabel25);
-        jLabel25.setBounds(474, 132, 120, 23);
+        jLabel9.setText("Tanggal :");
+        jLabel9.setName("jLabel9"); // NOI18N
+        FormInput.add(jLabel9);
+        jLabel9.setBounds(-2, 72, 80, 23);
 
-        jLabel26.setText("Hasil Laborat :");
-        jLabel26.setName("jLabel26"); // NOI18N
-        FormInput.add(jLabel26);
-        jLabel26.setBounds(50, 162, 105, 23);
+        jLabel14.setText("BB :");
+        jLabel14.setName("jLabel14"); // NOI18N
+        FormInput.add(jLabel14);
+        jLabel14.setBounds(30, 170, 50, 23);
 
-        jLabel27.setText("Ureum :");
-        jLabel27.setName("jLabel27"); // NOI18N
-        FormInput.add(jLabel27);
-        jLabel27.setBounds(160, 162, 45, 23);
-
-        jLabel28.setText("Hb :");
-        jLabel28.setName("jLabel28"); // NOI18N
-        FormInput.add(jLabel28);
-        jLabel28.setBounds(160, 192, 45, 23);
-
-        jLabel29.setText("Creatin :");
-        jLabel29.setName("jLabel29"); // NOI18N
-        FormInput.add(jLabel29);
-        jLabel29.setBounds(330, 192, 60, 23);
-
-        jLabel30.setText("HsbAg :");
-        jLabel30.setName("jLabel30"); // NOI18N
-        FormInput.add(jLabel30);
-        jLabel30.setBounds(330, 162, 60, 23);
-
-        TJumlah3.setHighlighter(null);
-        TJumlah3.setName("TJumlah3"); // NOI18N
-        TJumlah3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                TJumlah3ActionPerformed(evt);
+        txtPreBb.setHighlighter(null);
+        txtPreBb.setName("txtPreBb"); // NOI18N
+        txtPreBb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPreBbKeyPressed(evt);
             }
         });
-        TJumlah3.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TJumlah3KeyPressed(evt);
-            }
-        });
-        FormInput.add(TJumlah3);
-        TJumlah3.setBounds(208, 162, 120, 23);
+        FormInput.add(txtPreBb);
+        txtPreBb.setBounds(90, 170, 160, 23);
 
-        TJumlah4.setHighlighter(null);
-        TJumlah4.setName("TJumlah4"); // NOI18N
-        TJumlah4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                TJumlah4ActionPerformed(evt);
-            }
-        });
-        TJumlah4.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TJumlah4KeyPressed(evt);
-            }
-        });
-        FormInput.add(TJumlah4);
-        TJumlah4.setBounds(400, 162, 120, 23);
-
-        TJumlah5.setHighlighter(null);
-        TJumlah5.setName("TJumlah5"); // NOI18N
-        TJumlah5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                TJumlah5ActionPerformed(evt);
-            }
-        });
-        TJumlah5.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TJumlah5KeyPressed(evt);
-            }
-        });
-        FormInput.add(TJumlah5);
-        TJumlah5.setBounds(400, 192, 120, 23);
-
-        TJumlah6.setHighlighter(null);
-        TJumlah6.setName("TJumlah6"); // NOI18N
-        TJumlah6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                TJumlah6ActionPerformed(evt);
-            }
-        });
-        TJumlah6.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TJumlah6KeyPressed(evt);
-            }
-        });
-        FormInput.add(TJumlah6);
-        TJumlah6.setBounds(608, 162, 120, 23);
-
-        TJumlah7.setHighlighter(null);
-        TJumlah7.setName("TJumlah7"); // NOI18N
-        TJumlah7.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                TJumlah7ActionPerformed(evt);
-            }
-        });
-        TJumlah7.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TJumlah7KeyPressed(evt);
-            }
-        });
-        FormInput.add(TJumlah7);
-        TJumlah7.setBounds(608, 192, 120, 23);
-
-        jLabel31.setText("GDS :");
-        jLabel31.setName("jLabel31"); // NOI18N
-        FormInput.add(jLabel31);
-        jLabel31.setBounds(545, 162, 60, 23);
-
-        jLabel32.setText("CT / BT :");
-        jLabel32.setName("jLabel32"); // NOI18N
-        FormInput.add(jLabel32);
-        jLabel32.setBounds(545, 192, 60, 23);
-
-        jLabel5.setText("Lain-Lain :");
-        jLabel5.setName("jLabel5"); // NOI18N
-        FormInput.add(jLabel5);
-        jLabel5.setBounds(-2, 222, 80, 23);
-
-        TNoRM2.setEditable(false);
-        TNoRM2.setHighlighter(null);
-        TNoRM2.setName("TNoRM2"); // NOI18N
-        FormInput.add(TNoRM2);
-        TNoRM2.setBounds(81, 222, 247, 23);
-
-        jLabel15.setText("Dokter P.J. :");
+        jLabel15.setText("NADI :");
         jLabel15.setName("jLabel15"); // NOI18N
         FormInput.add(jLabel15);
-        jLabel15.setBounds(337, 222, 70, 23);
+        jLabel15.setBounds(30, 200, 50, 23);
 
-        TKdOb1.setName("TKdOb1"); // NOI18N
-        TKdOb1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TKdOb1KeyPressed(evt);
+        txtPreNadi.setHighlighter(null);
+        txtPreNadi.setName("txtPreNadi"); // NOI18N
+        txtPreNadi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPreNadiKeyPressed(evt);
             }
         });
-        FormInput.add(TKdOb1);
-        TKdOb1.setBounds(410, 222, 60, 23);
+        FormInput.add(txtPreNadi);
+        txtPreNadi.setBounds(90, 200, 160, 23);
 
-        TNmOb1.setEditable(false);
-        TNmOb1.setName("TNmOb1"); // NOI18N
-        FormInput.add(TNmOb1);
-        TNmOb1.setBounds(472, 222, 256, 23);
+        jLabel17.setText("RES :");
+        jLabel17.setName("jLabel17"); // NOI18N
+        FormInput.add(jLabel17);
+        jLabel17.setBounds(30, 230, 50, 23);
 
-        PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
-
-        ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setMnemonic('I');
-        ChkInput.setText(".: Input Data");
-        ChkInput.setToolTipText("Alt+I");
-        ChkInput.setBorderPainted(true);
-        ChkInput.setBorderPaintedFlat(true);
-        ChkInput.setFocusable(false);
-        ChkInput.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ChkInput.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ChkInput.setName("ChkInput"); // NOI18N
-        ChkInput.setPreferredSize(new java.awt.Dimension(192, 20));
-        ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ChkInputActionPerformed(evt);
+        txtPreRes.setHighlighter(null);
+        txtPreRes.setName("txtPreRes"); // NOI18N
+        txtPreRes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPreResKeyPressed(evt);
             }
         });
-        PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
+        FormInput.add(txtPreRes);
+        txtPreRes.setBounds(90, 230, 160, 23);
 
-        panelBiasa1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
+        jLabel18.setText("Post");
+        jLabel18.setName("jLabel18"); // NOI18N
+        FormInput.add(jLabel18);
+        jLabel18.setBounds(260, 110, 50, 23);
+
+        jLabel19.setText("TD :");
+        jLabel19.setName("jLabel19"); // NOI18N
+        FormInput.add(jLabel19);
+        jLabel19.setBounds(260, 140, 50, 23);
+
+        txtPostTd.setHighlighter(null);
+        txtPostTd.setName("txtPostTd"); // NOI18N
+        txtPostTd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPostTdKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtPostTd);
+        txtPostTd.setBounds(320, 140, 160, 23);
+
+        jLabel20.setText("BB :");
+        jLabel20.setName("jLabel20"); // NOI18N
+        FormInput.add(jLabel20);
+        jLabel20.setBounds(260, 170, 50, 23);
+
+        txtPostBb.setHighlighter(null);
+        txtPostBb.setName("txtPostBb"); // NOI18N
+        txtPostBb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPostBbKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtPostBb);
+        txtPostBb.setBounds(320, 170, 160, 23);
+
+        jLabel21.setText("NADI :");
+        jLabel21.setName("jLabel21"); // NOI18N
+        FormInput.add(jLabel21);
+        jLabel21.setBounds(260, 200, 50, 23);
+
+        txtPostNadi.setHighlighter(null);
+        txtPostNadi.setName("txtPostNadi"); // NOI18N
+        txtPostNadi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPostNadiKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtPostNadi);
+        txtPostNadi.setBounds(320, 200, 160, 23);
+
+        jLabel22.setText("RES :");
+        jLabel22.setName("jLabel22"); // NOI18N
+        FormInput.add(jLabel22);
+        jLabel22.setBounds(260, 230, 50, 23);
+
+        txtPostRes.setHighlighter(null);
+        txtPostRes.setName("txtPostRes"); // NOI18N
+        txtPostRes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPostResKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtPostRes);
+        txtPostRes.setBounds(320, 230, 160, 23);
+
+        jLabel23.setText("HD ke :");
+        jLabel23.setName("jLabel23"); // NOI18N
+        FormInput.add(jLabel23);
+        jLabel23.setBounds(360, 70, 50, 23);
+
+        txtHdKe.setHighlighter(null);
+        txtHdKe.setName("txtHdKe"); // NOI18N
+        txtHdKe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtHdKeKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtHdKe);
+        txtHdKe.setBounds(420, 70, 70, 23);
+
+        jLabel24.setText("Dokter Perujuk  :");
+        jLabel24.setName("jLabel24"); // NOI18N
+        FormInput.add(jLabel24);
+        jLabel24.setBounds(510, 140, 92, 23);
+
+        txtKdDokter.setEditable(false);
+        txtKdDokter.setName("txtKdDokter"); // NOI18N
+        FormInput.add(txtKdDokter);
+        txtKdDokter.setBounds(610, 140, 80, 23);
+
+        txtNamaDokter.setEditable(false);
+        txtNamaDokter.setHighlighter(null);
+        txtNamaDokter.setName("txtNamaDokter"); // NOI18N
+        txtNamaDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaDokterActionPerformed(evt);
+            }
+        });
+        FormInput.add(txtNamaDokter);
+        txtNamaDokter.setBounds(700, 140, 190, 23);
+
+        jLabel25.setText("Dokter Konsultan :");
+        jLabel25.setName("jLabel25"); // NOI18N
+        FormInput.add(jLabel25);
+        jLabel25.setBounds(510, 170, 92, 23);
+
+        txtKdDokter1.setEditable(false);
+        txtKdDokter1.setName("txtKdDokter1"); // NOI18N
+        FormInput.add(txtKdDokter1);
+        txtKdDokter1.setBounds(610, 170, 80, 23);
+
+        txtNamaDokter1.setEditable(false);
+        txtNamaDokter1.setHighlighter(null);
+        txtNamaDokter1.setName("txtNamaDokter1"); // NOI18N
+        txtNamaDokter1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaDokter1ActionPerformed(evt);
+            }
+        });
+        FormInput.add(txtNamaDokter1);
+        txtNamaDokter1.setBounds(700, 170, 190, 23);
+
+        jLabel26.setText("Dokter PJ  :");
+        jLabel26.setName("jLabel26"); // NOI18N
+        FormInput.add(jLabel26);
+        jLabel26.setBounds(510, 200, 92, 23);
+
+        txtKdDokter2.setEditable(false);
+        txtKdDokter2.setName("txtKdDokter2"); // NOI18N
+        FormInput.add(txtKdDokter2);
+        txtKdDokter2.setBounds(610, 200, 80, 23);
+
+        txtNamaDokter2.setEditable(false);
+        txtNamaDokter2.setHighlighter(null);
+        txtNamaDokter2.setName("txtNamaDokter2"); // NOI18N
+        txtNamaDokter2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaDokter2ActionPerformed(evt);
+            }
+        });
+        FormInput.add(txtNamaDokter2);
+        txtNamaDokter2.setBounds(700, 200, 190, 23);
+
+        jLabel27.setText("Dokter Pelaksana :");
+        jLabel27.setName("jLabel27"); // NOI18N
+        FormInput.add(jLabel27);
+        jLabel27.setBounds(510, 230, 92, 23);
+
+        txtKdDokter3.setEditable(false);
+        txtKdDokter3.setName("txtKdDokter3"); // NOI18N
+        FormInput.add(txtKdDokter3);
+        txtKdDokter3.setBounds(610, 230, 80, 23);
+
+        txtNamaDokter3.setEditable(false);
+        txtNamaDokter3.setHighlighter(null);
+        txtNamaDokter3.setName("txtNamaDokter3"); // NOI18N
+        txtNamaDokter3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaDokter3ActionPerformed(evt);
+            }
+        });
+        FormInput.add(txtNamaDokter3);
+        txtNamaDokter3.setBounds(700, 230, 190, 23);
+
+        PanelInput.add(FormInput, java.awt.BorderLayout.PAGE_START);
+
+        Scroll3.setName("Scroll3"); // NOI18N
+        Scroll3.setOpaque(true);
+
+        tblTindakan.setAutoCreateRowSorter(true);
+        tblTindakan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tblTindakan.setName("tblTindakan"); // NOI18N
+        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTindakanMouseClicked(evt);
+            }
+        });
+        tblTindakan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tblTindakanPropertyChange(evt);
+            }
+        });
+        tblTindakan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblTindakanKeyPressed(evt);
+            }
+        });
+        Scroll3.setViewportView(tblTindakan);
+
+        PanelInput.add(Scroll3, java.awt.BorderLayout.CENTER);
+
+        panelBiasa1.add(PanelInput, java.awt.BorderLayout.CENTER);
 
         tabPane.addTab("Transaksi", panelBiasa1);
 
@@ -959,24 +1005,20 @@ public class DlgHemodialisa extends javax.swing.JDialog
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
-        tbPemberianObat1.setAutoCreateRowSorter(true);
-        tbPemberianObat1.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbPemberianObat1.setName("tbPemberianObat1"); // NOI18N
-        tbPemberianObat1.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                tbPemberianObat1MouseClicked(evt);
+        tblTransaksi.setAutoCreateRowSorter(true);
+        tblTransaksi.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tblTransaksi.setName("tblTransaksi"); // NOI18N
+        tblTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTransaksiMouseClicked(evt);
             }
         });
-        tbPemberianObat1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                tbPemberianObat1KeyPressed(evt);
+        tblTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblTransaksiKeyPressed(evt);
             }
         });
-        Scroll1.setViewportView(tbPemberianObat1);
+        Scroll1.setViewportView(tblTransaksi);
 
         panelBiasa2.add(Scroll1, java.awt.BorderLayout.CENTER);
 
@@ -996,7 +1038,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         DTPCari3.setEditable(false);
         DTPCari3.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-10-2017" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -1010,7 +1052,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         DTPCari4.setEditable(false);
         DTPCari4.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-10-2017" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -1024,10 +1066,8 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         TCari1.setName("TCari1"); // NOI18N
         TCari1.setPreferredSize(new java.awt.Dimension(200, 23));
-        TCari1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCari1KeyPressed(evt);
             }
         });
@@ -1038,17 +1078,13 @@ public class DlgHemodialisa extends javax.swing.JDialog
         BtnCari1.setToolTipText("Alt+6");
         BtnCari1.setName("BtnCari1"); // NOI18N
         BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCari1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCari1ActionPerformed(evt);
             }
         });
-        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCari1KeyPressed(evt);
             }
         });
@@ -1073,6 +1109,27 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         panelBiasa3.setName("panelBiasa3"); // NOI18N
         panelBiasa3.setLayout(new java.awt.BorderLayout());
+
+        Scroll2.setName("Scroll2"); // NOI18N
+        Scroll2.setOpaque(true);
+
+        tblOrder.setAutoCreateRowSorter(true);
+        tblOrder.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tblOrder.setName("tblOrder"); // NOI18N
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOrderMouseClicked(evt);
+            }
+        });
+        tblOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblOrderKeyPressed(evt);
+            }
+        });
+        Scroll2.setViewportView(tblOrder);
+
+        panelBiasa3.add(Scroll2, java.awt.BorderLayout.CENTER);
+
         tabPane.addTab("List Order", panelBiasa3);
 
         internalFrame1.add(tabPane, java.awt.BorderLayout.CENTER);
@@ -1082,7 +1139,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void txtCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
             BtnCariActionPerformed(null);
@@ -1095,10 +1152,10 @@ public class DlgHemodialisa extends javax.swing.JDialog
         {
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+}//GEN-LAST:event_txtCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampilPO();
+        
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -1108,79 +1165,17 @@ public class DlgHemodialisa extends javax.swing.JDialog
         }
         else
         {
-            Valid.pindah(evt, TCari, BtnAll);
+            Valid.pindah(evt, txtCari, BtnAll);
         }
 }//GEN-LAST:event_BtnCariKeyPressed
 
-    private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
-        Valid.pindah(evt, TCari, DTPBeri);
-}//GEN-LAST:event_TNoRwKeyPressed
-
-    private void TJumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlahKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN)
-        {
-            isjml();
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP)
-        {
-            isjml();
-            TKdOb.requestFocus();
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            isjml();
-            TTambahan.requestFocus();
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_UP)
-        {
-        }
-}//GEN-LAST:event_TJumlahKeyPressed
+    private void txtNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoRwKeyPressed
+        Valid.pindah(evt, txtCari, DTPBeri);
+}//GEN-LAST:event_txtNoRwKeyPressed
 
     private void DTPBeriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPBeriKeyPressed
-        Valid.pindah(evt, TNoRw, cmbJam);
+        Valid.pindah(evt, txtNoRw, cmbJam);
 }//GEN-LAST:event_DTPBeriKeyPressed
-
-    private void TKdObKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdObKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN)
-        {
-            isOb();
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_UP)
-        {
-            btnObat1ActionPerformed(null);
-        }
-        else
-        {
-            Valid.pindah(evt, cmbDtk, TJumlah);
-        }
-    }//GEN-LAST:event_TKdObKeyPressed
-
-    private void btnObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObat1ActionPerformed
-        if (TNoRw.getText().trim().equals("") || TPasien.getText().trim().equals(""))
-        {
-            Valid.textKosong(TNoRw, "No.Rawat");
-        }
-        else
-        {
-        }
-    }//GEN-LAST:event_btnObat1ActionPerformed
-
-    private void TTambahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTambahanKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-        {
-            isjml();
-            BtnSimpan.requestFocus();
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP)
-        {
-            isjml();
-            TJumlah.requestFocus();
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN)
-        {
-            isjml();
-        }
-    }//GEN-LAST:event_TTambahanKeyPressed
 
     private void cmbJamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJamKeyPressed
         Valid.pindah(evt, DTPBeri, cmbMnt);
@@ -1191,112 +1186,31 @@ public class DlgHemodialisa extends javax.swing.JDialog
 }//GEN-LAST:event_cmbMntKeyPressed
 
     private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtkKeyPressed
-        Valid.pindah(evt, cmbMnt, TKdOb);
+        
 }//GEN-LAST:event_cmbDtkKeyPressed
 
-    private void tbPemberianObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemberianObatMouseClicked
-        if (tabModePO.getRowCount() != 0)
+    private void txtUmurKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUmurKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUmurKeyPressed
+
+    private void txtJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtJkKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtJkKeyPressed
+
+    private void tblTransaksiMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblTransaksiMouseClicked
+    {//GEN-HEADEREND:event_tblTransaksiMouseClicked
+        if (evt.getClickCount() == 2 && tblTransaksi.getSelectedRow() > -1)
         {
-            try
-            {
-                getData();
-            }
-            catch (java.lang.NullPointerException e)
-            {
-            }
-
+            tabPane.setSelectedIndex(0);
+            
+            tindakanFromTransaksi(tblTransaksi.getValueAt(tblTransaksi.getSelectedRow(), 0).toString());
         }
-}//GEN-LAST:event_tbPemberianObatMouseClicked
+    }//GEN-LAST:event_tblTransaksiMouseClicked
 
-    private void tbPemberianObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemberianObatKeyPressed
-        if (tabModePO.getRowCount() != 0)
-        {
-            if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN))
-            {
-                try
-                {
-                    getData();
-                }
-                catch (java.lang.NullPointerException e)
-                {
-                }
-            }
-        }
-}//GEN-LAST:event_tbPemberianObatKeyPressed
-
-private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-    isForm();
-}//GEN-LAST:event_ChkInputActionPerformed
-
-    private void TJumlah1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlah1KeyPressed
+    private void tblTransaksiKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_tblTransaksiKeyPressed
+    {//GEN-HEADEREND:event_tblTransaksiKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah1KeyPressed
-
-    private void TJumlah2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlah2KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah2KeyPressed
-
-    private void TTambahan1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTambahan1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TTambahan1KeyPressed
-
-    private void TJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TJumlahActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlahActionPerformed
-
-    private void TJumlah3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TJumlah3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah3ActionPerformed
-
-    private void TJumlah3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlah3KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah3KeyPressed
-
-    private void TJumlah4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TJumlah4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah4ActionPerformed
-
-    private void TJumlah4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlah4KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah4KeyPressed
-
-    private void TJumlah5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TJumlah5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah5ActionPerformed
-
-    private void TJumlah5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlah5KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah5KeyPressed
-
-    private void TJumlah6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TJumlah6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah6ActionPerformed
-
-    private void TJumlah6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlah6KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah6KeyPressed
-
-    private void TJumlah7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TJumlah7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah7ActionPerformed
-
-    private void TJumlah7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TJumlah7KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TJumlah7KeyPressed
-
-    private void TKdOb1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdOb1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TKdOb1KeyPressed
-
-    private void tbPemberianObat1MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tbPemberianObat1MouseClicked
-    {//GEN-HEADEREND:event_tbPemberianObat1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbPemberianObat1MouseClicked
-
-    private void tbPemberianObat1KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_tbPemberianObat1KeyPressed
-    {//GEN-HEADEREND:event_tbPemberianObat1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tbPemberianObat1KeyPressed
+    }//GEN-LAST:event_tblTransaksiKeyPressed
 
     private void TCari1KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_TCari1KeyPressed
     {//GEN-HEADEREND:event_TCari1KeyPressed
@@ -1312,6 +1226,102 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     {//GEN-HEADEREND:event_BtnCari1KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnCari1KeyPressed
+
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+        if (evt.getClickCount() == 2 && tblOrder.getSelectedRow() > -1)
+        {
+            tabPane.setSelectedIndex(0);
+            
+            tindakanFromOrder(tblOrder.getValueAt(tblOrder.getSelectedRow(), 0).toString());
+        }
+    }//GEN-LAST:event_tblOrderMouseClicked
+
+    private void tblOrderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblOrderKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblOrderKeyPressed
+
+    private void tblTindakanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTindakanMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblTindakanMouseClicked
+
+    private void tblTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTindakanKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblTindakanKeyPressed
+
+    private void txtPreTdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreTdKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPreTdKeyPressed
+
+    private void txtPreBbKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreBbKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPreBbKeyPressed
+
+    private void txtPreNadiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreNadiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPreNadiKeyPressed
+
+    private void txtPreResKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreResKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPreResKeyPressed
+
+    private void txtPostTdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostTdKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPostTdKeyPressed
+
+    private void txtPostBbKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostBbKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPostBbKeyPressed
+
+    private void txtPostNadiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostNadiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPostNadiKeyPressed
+
+    private void txtPostResKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPostResKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPostResKeyPressed
+
+    private void txtHdKeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHdKeKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHdKeKeyPressed
+
+    private void txtNamaDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaDokterActionPerformed
+
+    private void txtNamaDokter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokter1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaDokter1ActionPerformed
+
+    private void txtNamaDokter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokter2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaDokter2ActionPerformed
+
+    private void txtNamaDokter3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokter3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaDokter3ActionPerformed
+
+    private void tblTindakanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tblTindakanPropertyChange
+        if (evt.getPropertyName().equals("tableCellEditor"))
+        {
+            selKodes.clear();
+            
+            for (int a = 0; a < tblTindakan.getRowCount(); a++)
+            {
+                if (((boolean)tblTindakan.getValueAt(a, 0)))
+                {
+                    selKodes.add(tblTindakan.getValueAt(a, 1).toString());
+                }
+            }
+        }
+    }//GEN-LAST:event_tblTindakanPropertyChange
+
+    private void txtNamaPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaPasienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaPasienActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        simpan();
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1339,49 +1349,22 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnCari1;
-    private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
-    private widget.Button BtnSimpan;
-    private widget.CekBox ChkInput;
     private widget.CekBox ChkJln;
     private widget.Tanggal DTPBeri;
-    private widget.Tanggal DTPCari1;
-    private widget.Tanggal DTPCari2;
     private widget.Tanggal DTPCari3;
     private widget.Tanggal DTPCari4;
     private widget.PanelBiasa FormInput;
     private widget.Label LCount;
     private widget.Label LCount1;
     private javax.swing.JPanel PanelInput;
-    private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
-    private widget.TextBox TBiayaObat;
-    private widget.TextBox TBiayaObat1;
-    private widget.TextBox TCari;
+    private widget.ScrollPane Scroll2;
+    private widget.ScrollPane Scroll3;
     private widget.TextBox TCari1;
-    private widget.TextBox TJumlah;
-    private widget.TextBox TJumlah1;
-    private widget.TextBox TJumlah2;
-    private widget.TextBox TJumlah3;
-    private widget.TextBox TJumlah4;
-    private widget.TextBox TJumlah5;
-    private widget.TextBox TJumlah6;
-    private widget.TextBox TJumlah7;
-    private widget.TextBox TKdOb;
-    private widget.TextBox TKdOb1;
-    private widget.TextBox TNmOb;
-    private widget.TextBox TNmOb1;
-    private widget.TextBox TNoRM;
-    private widget.TextBox TNoRM1;
-    private widget.TextBox TNoRM2;
-    private widget.TextBox TNoRw;
-    private widget.TextBox TPasien;
-    private widget.TextBox TTambahan;
-    private widget.TextBox TTambahan1;
-    private widget.TextBox TTotal;
-    private widget.Button btnObat1;
+    private widget.Button btnSimpan;
     private widget.ComboBox cmbDtk;
     private widget.ComboBox cmbJam;
     private widget.ComboBox cmbMnt;
@@ -1404,16 +1387,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel25;
     private widget.Label jLabel26;
     private widget.Label jLabel27;
-    private widget.Label jLabel28;
-    private widget.Label jLabel29;
     private widget.Label jLabel3;
-    private widget.Label jLabel30;
-    private widget.Label jLabel31;
-    private widget.Label jLabel32;
     private widget.Label jLabel33;
     private widget.Label jLabel34;
     private widget.Label jLabel4;
-    private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -1427,119 +1404,187 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private widget.TabPane tabPane;
-    private widget.Table tbPemberianObat;
-    private widget.Table tbPemberianObat1;
+    private widget.Table tblOrder;
+    private widget.Table tblTindakan;
+    private widget.Table tblTransaksi;
+    private widget.TextBox txtAlamat;
+    private widget.TextBox txtCari;
+    private widget.TextBox txtHdKe;
+    private widget.TextBox txtJk;
+    private widget.TextBox txtKdDokter;
+    private widget.TextBox txtKdDokter1;
+    private widget.TextBox txtKdDokter2;
+    private widget.TextBox txtKdDokter3;
+    private widget.TextBox txtNamaDokter;
+    private widget.TextBox txtNamaDokter1;
+    private widget.TextBox txtNamaDokter2;
+    private widget.TextBox txtNamaDokter3;
+    private widget.TextBox txtNamaPasien;
+    private widget.TextBox txtNoRm;
+    private widget.TextBox txtNoRw;
+    private widget.TextBox txtPostBb;
+    private widget.TextBox txtPostNadi;
+    private widget.TextBox txtPostRes;
+    private widget.TextBox txtPostTd;
+    private widget.TextBox txtPreBb;
+    private widget.TextBox txtPreNadi;
+    private widget.TextBox txtPreRes;
+    private widget.TextBox txtPreTd;
+    private widget.TextBox txtUmur;
     // End of variables declaration//GEN-END:variables
 
-    public void tampilPO()
+    private void tindakanFromOrder(String kdPeriksa)
     {
-        Valid.tabelKosong(tabModePO);
-        try
+        fillData(kdPeriksa);
+        
+        isEdit = false;
+        this.kdPeriksa = kdPeriksa;
+        
+        btnSimpan.setText("Simpan");
+    }
+    
+    private void tindakanFromTransaksi(String kdPeriksa)
+    {
+        fillData(kdPeriksa);
+        
+        isEdit = true;
+        this.kdPeriksa = kdPeriksa;
+        
+        btnSimpan.setText("Ubah");
+    }
+    
+    private void fillData(String kdPeriksa)
+    {
+        ResultSet rs = new GStatement(koneksi)
+                .a("SELECT kd_jenis_prw FROM det_pemeriksaan_hd")
+                .a("WHERE kd_periksa = :kd")
+                .setString("kd", kdPeriksa)
+                .executeQuery();
+        
+        selKodes.clear();
+        
+        try 
         {
-            ps.setString(1, "%" + TCari.getText().trim() + "%");
-            ps.setString(2, "%" + TCari.getText().trim() + "%");
-            ps.setString(3, "%" + TCari.getText().trim() + "%");
-            ps.setString(4, "%" + TCari.getText().trim() + "%");
-            ps.setString(5, "%" + TCari.getText().trim() + "%");
-            ps.setString(6, "%" + TCari.getText().trim() + "%");
-            rs = ps.executeQuery();
             while (rs.next())
             {
-                Object[] data =
-                {
-                    rs.getString(1),
-                    rs.getString(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getString(5),
-                    rs.getString(6),
-                    rs.getString(7),
-                    Valid.SetAngka(rs.getDouble(8)),
-                    rs.getDouble(9),
-                    Valid.SetAngka(rs.getDouble(10)),
-                    Valid.SetAngka3(rs.getDouble(11))
-                };
-                tabModePO.addRow(data);
+                selKodes.add(rs.getString(1));
             }
+        } 
+        catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
-        catch (SQLException e)
+        
+        tampilTindakan();
+        
+        ResultSet rs2 = new GStatement(koneksi)
+                .a("SELECT reg_periksa.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien,")
+                .a("CONCAT(alamat, ' ', nm_kel, ' ', nm_kec, ' ', nm_kab) AS alamat,")
+                .a("umur, jk")
+                .a("FROM pemeriksaan_hd")
+                .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
+                .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("JOIN kelurahan ON kelurahan.kd_kel = pasien.kd_kel")
+                .a("JOIN kecamatan ON kecamatan.kd_kec = pasien.kd_kec")
+                .a("JOIN kabupaten ON kabupaten.kd_kab = pasien.kd_kab")
+                .a("WHERE kd_periksa = :kd")
+                .setString("kd", kdPeriksa)
+                .executeQuery();
+        
+        try
         {
-            System.out.println("Notifikasi : " + e);
-        }
-        LCount.setText("" + tabModePO.getRowCount());
-    }
-
-    private void isRawat()
-    {
-        Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat=? ", TNoRM, TNoRw.getText());
-        Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=? ", TPasien, TNoRM.getText());
-    }
-
-    private void isOb()
-    {
-        Sequel.cariIsi("select nama_brng from databarang where kode_brng=? ", TNmOb, TKdOb.getText());
-        //Sequel.cariIsi("select h_retail from databarang where kode_brng=? ",TBiayaObat,TKdOb.getText());
-    }
-
-    private void getData()
-    {
-        if (tbPemberianObat.getSelectedRow() != -1)
+            if (rs2.next())
+            {
+                txtNoRw.setText(rs2.getString("no_rawat"));
+                txtNoRm.setText(rs2.getString("no_rkm_medis"));
+                txtNamaPasien.setText(rs2.getString("nm_pasien"));
+                txtAlamat.setText(rs2.getString("alamat"));
+                txtUmur.setText(rs2.getString("umur"));
+                txtJk.setText(rs2.getString("jk"));
+            }
+        } 
+        catch (SQLException ex) 
         {
-            cmbJam.setSelectedItem(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 1).toString().substring(0, 2));
-            cmbMnt.setSelectedItem(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 1).toString().substring(3, 5));
-            cmbDtk.setSelectedItem(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 1).toString().substring(6, 8));
-            TNoRw.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString());
-            isRawat();
-            TKdOb.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 5).toString());
-            isOb();
-            TTambahan.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 7).toString().replaceAll("\\.", ""));
-            TJumlah.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 8).toString());
-            Valid.SetTgl(DTPBeri, tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 0).toString());
-            isjml();
+            System.out.println(ex.getMessage());
         }
     }
-
-    public void setNoRm(String norwt, Date tgl1, Date tgl2)
+    
+    private void simpan()
     {
-        TNoRw.setText(norwt);
-        isRawat();
-        TCari.setText(norwt);
-        DTPCari1.setDate(tgl1);
-        DTPCari2.setDate(tgl2);
-        ChkInput.setSelected(true);
-        isForm();
+        if (!valid())
+            return;
+        
+        
+    }
+    
+    private boolean valid()
+    {
+        if (txtNoRw.getText().isEmpty())
+        {
+            GMessage.e("Error", "Pilih pasien dari transaksi atau order dahulu");
+            return false;
+        }
+        else if (txtHdKe.getText().isEmpty())
+        {
+            GMessage.e("Error", "Hd ke tidak boleh kosong");
+            return false;
+        }
+        else if (txtPreTd.getText().isEmpty())
+        {
+            GMessage.e("Error", "Pre TD tidak boleh kosong");
+            return false;
+        }
+        else if (txtPreBb.getText().isEmpty())
+        {
+            GMessage.e("Error", "Pre BB tidak boleh kosong");
+            return false;
+        }
+        else if (txtPreNadi.getText().isEmpty())
+        {
+            GMessage.e("Error", "Pre NADI tidak boleh kosong");
+            return false;
+        }
+        else if (txtPreRes.getText().isEmpty())
+        {
+            GMessage.e("Error", "Pre RES tidak boleh kosong");
+            return false;
+        }
+        else if (txtPostTd.getText().isEmpty())
+        {
+            GMessage.e("Error", "Post TD tidak boleh kosong");
+            return false;
+        }
+        else if (txtPostBb.getText().isEmpty())
+        {
+            GMessage.e("Error", "Post BB tidak boleh kosong");
+            return false;
+        }
+        else if (txtPostNadi.getText().isEmpty())
+        {
+            GMessage.e("Error", "Post NADI tidak boleh kosong");
+            return false;
+        }
+        else if (txtPostRes.getText().isEmpty())
+        {
+            GMessage.e("Error", "Post RES tidak boleh kosong");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     private void isForm()
     {
-        if (ChkInput.isSelected() == true)
-        {
-            ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH, 278));
-            FormInput.setVisible(true);
-            ChkInput.setVisible(true);
-        }
-        else if (ChkInput.isSelected() == false)
-        {
-            ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH, 20));
-            FormInput.setVisible(false);
-            ChkInput.setVisible(true);
-        }
+        
     }
 
     public void isCek()
     {
-        BtnSimpan.setEnabled(var.getberi_obat());
+        btnSimpan.setEnabled(var.getberi_obat());
         BtnHapus.setEnabled(var.getberi_obat());
-        BtnEdit.setEnabled(var.getberi_obat());
         BtnPrint.setEnabled(var.getberi_obat());
 
-    }
-
-    private void isjml()
-    {
-        Sequel.cariIsi("select (" + TBiayaObat.getText() + "*" + TJumlah.getText() + ")+" + TTambahan.getText() + "", TTotal);
     }
 
     private void jam()

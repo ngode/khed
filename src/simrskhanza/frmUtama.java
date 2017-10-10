@@ -10466,7 +10466,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
                 Panelmenu.add(btnSurveilansPD3I);
                 jmlmenu++;
             }
-
+            
             if(var.getsurveilans_ralan()==true){
                 Panelmenu.add(btnSurveilansRalan);
                 jmlmenu++;

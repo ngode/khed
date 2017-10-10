@@ -365,8 +365,7 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         Penjab = new widget.TextBox();
         Jk = new widget.TextBox();
@@ -422,10 +421,8 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         Penjab.setEditable(false);
         Penjab.setFocusTraversalPolicyProvider(true);
         Penjab.setName("Penjab"); // NOI18N
-        Penjab.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Penjab.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 PenjabKeyPressed(evt);
             }
         });
@@ -458,10 +455,8 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         menuUbah.setIconTextGap(5);
         menuUbah.setName("menuUbah"); // NOI18N
         menuUbah.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuUbah.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuUbahActionPerformed(evt);
             }
         });
@@ -477,10 +472,8 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         menuHapus.setIconTextGap(5);
         menuHapus.setName("menuHapus"); // NOI18N
         menuHapus.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuHapus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuHapusActionPerformed(evt);
             }
         });
@@ -489,10 +482,8 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
@@ -516,17 +507,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpanActionPerformed(evt);
             }
         });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnSimpanKeyPressed(evt);
             }
         });
@@ -538,17 +525,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBatalActionPerformed(evt);
             }
         });
-        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnBatalKeyPressed(evt);
             }
         });
@@ -560,17 +543,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
         BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPrintActionPerformed(evt);
             }
         });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnPrintKeyPressed(evt);
             }
         });
@@ -586,17 +565,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -623,10 +598,8 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ChkInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChkInputActionPerformed(evt);
             }
         });
@@ -681,14 +654,12 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-10-2017" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-10-2017" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
-        Tanggal.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        Tanggal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalKeyPressed(evt);
             }
         });
@@ -723,10 +694,8 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkJln.setName("ChkJln"); // NOI18N
-        ChkJln.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ChkJln.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChkJlnActionPerformed(evt);
             }
         });
@@ -746,10 +715,8 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         txtNamaDokter.setEditable(false);
         txtNamaDokter.setHighlighter(null);
         txtNamaDokter.setName("txtNamaDokter"); // NOI18N
-        txtNamaDokter.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNamaDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamaDokterActionPerformed(evt);
             }
         });
@@ -789,17 +756,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         txtCariPeriksa.setToolTipText("Alt+C");
         txtCariPeriksa.setName("txtCariPeriksa"); // NOI18N
         txtCariPeriksa.setPreferredSize(new java.awt.Dimension(160, 23));
-        txtCariPeriksa.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtCariPeriksa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCariPeriksaActionPerformed(evt);
             }
         });
-        txtCariPeriksa.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtCariPeriksa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCariPeriksaKeyPressed(evt);
             }
         });
@@ -810,17 +773,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         btnCariPeriksa.setToolTipText("Alt+1");
         btnCariPeriksa.setName("btnCariPeriksa"); // NOI18N
         btnCariPeriksa.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnCariPeriksa.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnCariPeriksa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariPeriksaActionPerformed(evt);
             }
         });
-        btnCariPeriksa.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnCariPeriksa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnCariPeriksaKeyPressed(evt);
             }
         });
@@ -831,17 +790,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         BtnAllPeriksa.setToolTipText("Alt+2");
         BtnAllPeriksa.setName("BtnAllPeriksa"); // NOI18N
         BtnAllPeriksa.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnAllPeriksa.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnAllPeriksa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAllPeriksaActionPerformed(evt);
             }
         });
-        BtnAllPeriksa.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnAllPeriksa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnAllPeriksaKeyPressed(evt);
             }
         });
@@ -852,17 +807,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         BtnTambahPeriksa.setToolTipText("Alt+3");
         BtnTambahPeriksa.setName("BtnTambahPeriksa"); // NOI18N
         BtnTambahPeriksa.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnTambahPeriksa.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnTambahPeriksa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTambahPeriksaActionPerformed(evt);
             }
         });
-        BtnTambahPeriksa.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnTambahPeriksa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnTambahPeriksaKeyPressed(evt);
             }
         });
@@ -876,17 +827,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
 
         tblPemeriksaan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tblPemeriksaan.setName("tblPemeriksaan"); // NOI18N
-        tblPemeriksaan.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tblPemeriksaan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblPemeriksaanMouseClicked(evt);
             }
         });
-        tblPemeriksaan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tblPemeriksaan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblPemeriksaanKeyPressed(evt);
             }
         });
@@ -917,17 +864,13 @@ public final class DlgPeriksaHemodialisa extends javax.swing.JDialog
         tblListTransaksi.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tblListTransaksi.setComponentPopupMenu(jPopupMenu1);
         tblListTransaksi.setName("tblListTransaksi"); // NOI18N
-        tblListTransaksi.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tblListTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblListTransaksiMouseClicked(evt);
             }
         });
-        tblListTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tblListTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblListTransaksiKeyPressed(evt);
             }
         });
@@ -1536,7 +1479,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
             String q = new GQuery()
                     .a("SELECT kd_jenis_prw, nm_perawatan, material, bhp, tarif_tindakandr, tarif_tindakanpr,")
-                    .a("kso, menejemen, total_byrdr")
+                    .a("kso, menejemen, total_byrdrpr")
                     .a("FROM jns_perawatan")
                     .a("WHERE kd_kategori = 'hd'")
                     .a("ORDER BY nm_perawatan")
