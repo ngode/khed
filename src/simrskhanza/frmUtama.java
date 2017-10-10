@@ -343,8 +343,8 @@ public class frmUtama extends javax.swing.JFrame {
             
         log();
         
-        edAdmin.setText("spv");
-        edPwd.setText("server");
+//        edAdmin.setText("spv");
+//        edPwd.setText("server");
     }
     
     public static frmUtama getInstance() {
