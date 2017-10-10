@@ -4148,7 +4148,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         List<String[]> ls = new GQuery()
                 .a("SELECT nm_poli FROM konsul_poli")
                 .a("JOIN poliklinik ON poliklinik.kd_poli = konsul_poli.kd_poli")
-                .a("WHERE no_rawat = '{no_rw}'")
+                .a("WHERE no_rawat = {no_rw}")
                 .set("no_rw", noRw)
                 .select();
         
@@ -4172,12 +4172,12 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     }
     
     private String[] getListKdDokter(String noRw, String kdDokterAwal)
-    {
+    {    
         String[] res = null;
         
         List<String[]> ls = new GQuery()
                 .a("SELECT kd_dokter FROM konsul_poli")
-                .a("WHERE no_rawat = '{no_rw}'")
+                .a("WHERE no_rawat = {no_rw}")
                 .set("no_rw", noRw)
                 .select();
         
@@ -4207,7 +4207,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         List<String[]> ls = new GQuery()
                 .a("SELECT nm_dokter FROM konsul_poli")
                 .a("JOIN dokter ON dokter.kd_dokter = konsul_poli.kd_dokter")
-                .a("WHERE no_rawat = '{no_rw}'")
+                .a("WHERE no_rawat = {no_rw}")
                 .set("no_rw", noRw)
                 .select();
         
