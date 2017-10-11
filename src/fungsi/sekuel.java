@@ -1548,7 +1548,7 @@ public final class sekuel {
             }
             catch(Exception e)
             {
-                System.out.println("Notifikasi : " + e.getMessage());
+                System.out.println("Notifikasi : " + e.getMessage() + ". Query : " + qry);
 
                 res = false;
             }
@@ -1562,7 +1562,7 @@ public final class sekuel {
         } 
         catch (Exception e) 
         {
-            System.out.println("Notifikasi : " + e.getMessage());
+            System.out.println("Notifikasi : " + e.getMessage() + ". Query : " + qry);
             res = false;
         } 
         
