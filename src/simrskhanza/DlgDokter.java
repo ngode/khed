@@ -51,6 +51,7 @@ public class DlgDokter extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
     private DlgCariSpesialis spesial=new DlgCariSpesialis(null,false);
+    private DlgCariPoli poli = new DlgCariPoli(null, false);
     private PreparedStatement stat;
     private ResultSet rs;
 
@@ -64,7 +65,7 @@ public class DlgDokter extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] row={"Kode Dokter","Nama Dokter","J.K.","Tmp.Lahir","Tgl.Lahir","G.D.","Agama","Alamat Tinggal","No.HP/Telp","Stts.Nikah","Spesialis","Alumni","No.Ijin Praktek"};
+        Object[] row={"Kode Dokter","Nama Dokter","J.K.","Tmp.Lahir","Tgl.Lahir","G.D.","Agama","Alamat Tinggal","No.HP/Telp","Stts.Nikah","Spesialis","Alumni","No.Ijin Praktek", "Poli"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -76,7 +77,7 @@ public class DlgDokter extends javax.swing.JDialog {
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 14; i++) {
             TableColumn column = tbDokter.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -101,15 +102,18 @@ public class DlgDokter extends javax.swing.JDialog {
             }else if(i==10){
                 column.setPreferredWidth(150);
             }else if(i==11){
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(100);
             }else if(i==12){
                 column.setPreferredWidth(100);
+            }else if(i==13){
+                column.setPreferredWidth(120);
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
         KdSps.setDocument(new batasInput((byte)5).getKata(KdSps));
+        txtKdPoli.setDocument(new batasInput((byte)5).getKata(txtKdPoli));
         TNm.setDocument(new batasInput((byte)50).getKata(TNm));
         TTmp.setDocument(new batasInput((byte)20).getKata(TTmp));
         TNoi.setDocument(new batasInput((byte)40).getKata(TNoi));
@@ -181,6 +185,28 @@ public class DlgDokter extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
+        
+        poli.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(poli.getTable().getSelectedRow()!= -1){                    
+                    txtKdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
+                    txtNamaPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
+                }  
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });     
     }
     
 
@@ -191,7 +217,8 @@ public class DlgDokter extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         Popup = new javax.swing.JPopupMenu();
         MnRestore = new javax.swing.JMenuItem();
@@ -250,6 +277,10 @@ public class DlgDokter extends javax.swing.JDialog {
         KdSps = new widget.TextBox();
         btnSpesial = new widget.Button();
         BtnCariPegawai = new widget.Button();
+        jLabel17 = new widget.Label();
+        txtNamaPoli = new widget.TextBox();
+        txtKdPoli = new widget.TextBox();
+        btnPoli = new widget.Button();
         ChkInput = new widget.CekBox();
 
         Popup.setName("Popup"); // NOI18N
@@ -264,8 +295,10 @@ public class DlgDokter extends javax.swing.JDialog {
         MnRestore.setIconTextGap(5);
         MnRestore.setName("MnRestore"); // NOI18N
         MnRestore.setPreferredSize(new java.awt.Dimension(200, 28));
-        MnRestore.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRestore.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRestoreActionPerformed(evt);
             }
         });
@@ -274,14 +307,17 @@ public class DlgDokter extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Dokter ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
+        internalFrame1.setPreferredSize(new java.awt.Dimension(1341, 800));
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll.setComponentPopupMenu(Popup);
@@ -292,13 +328,17 @@ public class DlgDokter extends javax.swing.JDialog {
         tbDokter.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbDokter.setComponentPopupMenu(Popup);
         tbDokter.setName("tbDokter"); // NOI18N
-        tbDokter.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbDokter.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tbDokterMouseClicked(evt);
             }
         });
-        tbDokter.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbDokter.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tbDokterKeyPressed(evt);
             }
         });
@@ -320,13 +360,17 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSimpanActionPerformed(evt);
             }
         });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnSimpanKeyPressed(evt);
             }
         });
@@ -338,13 +382,17 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
-        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnBatal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnBatalActionPerformed(evt);
             }
         });
-        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnBatalKeyPressed(evt);
             }
         });
@@ -356,13 +404,17 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
-        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnHapus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnHapusActionPerformed(evt);
             }
         });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnHapusKeyPressed(evt);
             }
         });
@@ -374,13 +426,17 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnEdit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnEditActionPerformed(evt);
             }
         });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnEditKeyPressed(evt);
             }
         });
@@ -392,13 +448,17 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnPrint.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnPrintActionPerformed(evt);
             }
         });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnPrintKeyPressed(evt);
             }
         });
@@ -410,13 +470,17 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnAll.setText("Semua");
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
-        BtnAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAll.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnAllKeyPressed(evt);
             }
         });
@@ -439,13 +503,17 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -468,13 +536,17 @@ public class DlgDokter extends javax.swing.JDialog {
         cmbCrJk.setName("cmbCrJk"); // NOI18N
         cmbCrJk.setOpaque(false);
         cmbCrJk.setPreferredSize(new java.awt.Dimension(100, 23));
-        cmbCrJk.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        cmbCrJk.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 cmbCrJkItemStateChanged(evt);
             }
         });
-        cmbCrJk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        cmbCrJk.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 cmbCrJkKeyPressed(evt);
             }
         });
@@ -490,13 +562,17 @@ public class DlgDokter extends javax.swing.JDialog {
         CmbCrGd.setName("CmbCrGd"); // NOI18N
         CmbCrGd.setOpaque(false);
         CmbCrGd.setPreferredSize(new java.awt.Dimension(100, 23));
-        CmbCrGd.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        CmbCrGd.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 cmbCrJkItemStateChanged(evt);
             }
         });
-        CmbCrGd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbCrGd.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbCrGdKeyPressed(evt);
             }
         });
@@ -512,13 +588,17 @@ public class DlgDokter extends javax.swing.JDialog {
         CmbCrStts.setName("CmbCrStts"); // NOI18N
         CmbCrStts.setOpaque(false);
         CmbCrStts.setPreferredSize(new java.awt.Dimension(100, 23));
-        CmbCrStts.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        CmbCrStts.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 cmbCrJkItemStateChanged(evt);
             }
         });
-        CmbCrStts.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbCrStts.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbCrSttsKeyPressed(evt);
             }
         });
@@ -539,11 +619,14 @@ public class DlgDokter extends javax.swing.JDialog {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(230, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TCariKeyPressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 TCariKeyTyped(evt);
             }
         });
@@ -554,13 +637,17 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+2");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -575,7 +662,7 @@ public class DlgDokter extends javax.swing.JDialog {
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(1331, 168));
+        FormInput.setPreferredSize(new java.awt.Dimension(1331, 195));
         FormInput.setLayout(null);
 
         jLabel3.setText("Kode Dokter :");
@@ -589,8 +676,10 @@ public class DlgDokter extends javax.swing.JDialog {
         jLabel4.setBounds(2, 42, 105, 23);
 
         TTmp.setName("TTmp"); // NOI18N
-        TTmp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TTmp.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TTmpKeyPressed(evt);
             }
         });
@@ -600,8 +689,10 @@ public class DlgDokter extends javax.swing.JDialog {
         CmbJk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LAKI-LAKI", "PEREMPUAN" }));
         CmbJk.setName("CmbJk"); // NOI18N
         CmbJk.setOpaque(false);
-        CmbJk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbJk.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbJkKeyPressed(evt);
             }
         });
@@ -610,8 +701,10 @@ public class DlgDokter extends javax.swing.JDialog {
 
         TNm.setHighlighter(null);
         TNm.setName("TNm"); // NOI18N
-        TNm.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNm.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNmKeyPressed(evt);
             }
         });
@@ -631,8 +724,10 @@ public class DlgDokter extends javax.swing.JDialog {
         CMbGd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "AB", "O", "-" }));
         CMbGd.setName("CMbGd"); // NOI18N
         CMbGd.setOpaque(false);
-        CMbGd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CMbGd.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CMbGdKeyPressed(evt);
             }
         });
@@ -646,12 +741,14 @@ public class DlgDokter extends javax.swing.JDialog {
 
         DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-04-2017" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
-        DTPLahir.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        DTPLahir.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 DTPLahirKeyPressed(evt);
             }
         });
@@ -667,8 +764,10 @@ public class DlgDokter extends javax.swing.JDialog {
         cmbAgama.setLightWeightPopupEnabled(false);
         cmbAgama.setName("cmbAgama"); // NOI18N
         cmbAgama.setOpaque(false);
-        cmbAgama.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        cmbAgama.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 cmbAgamaKeyPressed(evt);
             }
         });
@@ -684,8 +783,10 @@ public class DlgDokter extends javax.swing.JDialog {
         CmbStts.setLightWeightPopupEnabled(false);
         CmbStts.setName("CmbStts"); // NOI18N
         CmbStts.setOpaque(false);
-        CmbStts.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        CmbStts.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 CmbSttsKeyPressed(evt);
             }
         });
@@ -714,8 +815,10 @@ public class DlgDokter extends javax.swing.JDialog {
 
         TAlmt.setHighlighter(null);
         TAlmt.setName("TAlmt"); // NOI18N
-        TAlmt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TAlmt.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TAlmtKeyPressed(evt);
             }
         });
@@ -724,8 +827,10 @@ public class DlgDokter extends javax.swing.JDialog {
 
         TTlp.setHighlighter(null);
         TTlp.setName("TTlp"); // NOI18N
-        TTlp.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TTlp.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TTlpKeyPressed(evt);
             }
         });
@@ -734,8 +839,10 @@ public class DlgDokter extends javax.swing.JDialog {
 
         TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
-        TKd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TKd.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TKdKeyPressed(evt);
             }
         });
@@ -748,8 +855,10 @@ public class DlgDokter extends javax.swing.JDialog {
         jLabel15.setBounds(2, 132, 105, 23);
 
         TNoi.setName("TNoi"); // NOI18N
-        TNoi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoi.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoiKeyPressed(evt);
             }
         });
@@ -763,8 +872,10 @@ public class DlgDokter extends javax.swing.JDialog {
 
         TAlumni.setHighlighter(null);
         TAlumni.setName("TAlumni"); // NOI18N
-        TAlumni.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TAlumni.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TAlumniKeyPressed(evt);
             }
         });
@@ -773,8 +884,10 @@ public class DlgDokter extends javax.swing.JDialog {
 
         KdSps.setHighlighter(null);
         KdSps.setName("KdSps"); // NOI18N
-        KdSps.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        KdSps.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KdSpsKeyPressed(evt);
             }
         });
@@ -785,8 +898,10 @@ public class DlgDokter extends javax.swing.JDialog {
         btnSpesial.setMnemonic('1');
         btnSpesial.setToolTipText("ALt+1");
         btnSpesial.setName("btnSpesial"); // NOI18N
-        btnSpesial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSpesial.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSpesialActionPerformed(evt);
             }
         });
@@ -797,13 +912,51 @@ public class DlgDokter extends javax.swing.JDialog {
         BtnCariPegawai.setMnemonic('1');
         BtnCariPegawai.setToolTipText("ALt+1");
         BtnCariPegawai.setName("BtnCariPegawai"); // NOI18N
-        BtnCariPegawai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCariPegawai.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCariPegawaiActionPerformed(evt);
             }
         });
         FormInput.add(BtnCariPegawai);
         BtnCariPegawai.setBounds(253, 12, 28, 23);
+
+        jLabel17.setText("Poli :");
+        jLabel17.setName("jLabel17"); // NOI18N
+        FormInput.add(jLabel17);
+        jLabel17.setBounds(390, 160, 90, 23);
+
+        txtNamaPoli.setEditable(false);
+        txtNamaPoli.setName("txtNamaPoli"); // NOI18N
+        FormInput.add(txtNamaPoli);
+        txtNamaPoli.setBounds(570, 160, 266, 23);
+
+        txtKdPoli.setHighlighter(null);
+        txtKdPoli.setName("txtKdPoli"); // NOI18N
+        txtKdPoli.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                txtKdPoliKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtKdPoli);
+        txtKdPoli.setBounds(487, 160, 80, 23);
+
+        btnPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnPoli.setMnemonic('1');
+        btnPoli.setToolTipText("ALt+1");
+        btnPoli.setName("btnPoli"); // NOI18N
+        btnPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnPoliActionPerformed(evt);
+            }
+        });
+        FormInput.add(btnPoli);
+        btnPoli.setBounds(840, 160, 28, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -821,8 +974,10 @@ public class DlgDokter extends javax.swing.JDialog {
         ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ChkInput.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ChkInputActionPerformed(evt);
             }
         });
@@ -894,6 +1049,8 @@ public class DlgDokter extends javax.swing.JDialog {
             Valid.textKosong(TNm,"nama dokter");
         }else if(TSpesialis.getText().trim().equals("")||KdSps.getText().trim().equals("")){
             Valid.textKosong(KdSps,"spesialis");
+        }else if(txtNamaPoli.getText().trim().equals("")||txtKdPoli.getText().trim().equals("")){
+            Valid.textKosong(KdSps,"poli");
         }else{
             try { 
                 koneksi.setAutoCommit(false);
@@ -918,7 +1075,9 @@ public class DlgDokter extends javax.swing.JDialog {
                         CmbStts.getSelectedItem()+"','"+
                         KdSps.getText()+"','"+
                         TAlumni.getText()+"','"+
-                        TNoi.getText()+"','1'","Kode Dokter");
+                        TNoi.getText()+"','1'" +
+                        txtKdPoli.getText(),
+                        "Kode Dokter");
                 koneksi.setAutoCommit(true); 
                 tampil();
                 emptTeks();
@@ -1044,6 +1203,8 @@ public class DlgDokter extends javax.swing.JDialog {
             Valid.textKosong(TNm,"nama dokter");
         }else if(TSpesialis.getText().trim().equals("")||KdSps.getText().trim().equals("")){
             Valid.textKosong(KdSps,"spesialis");
+        }else if(txtNamaPoli.getText().trim().equals("")||txtKdPoli.getText().trim().equals("")){
+            Valid.textKosong(KdSps,"poli");
         }else{
             try { 
                 koneksi.setAutoCommit(false);
@@ -1061,7 +1222,8 @@ public class DlgDokter extends javax.swing.JDialog {
                         "',stts_nikah='"+CmbStts.getSelectedItem()+
                         "',kd_sps='"+KdSps.getText()+
                         "',alumni='"+TAlumni.getText()+
-                        "',no_ijn_praktek='"+TNoi.getText()+"'");
+                        "',no_ijn_praktek='"+TNoi.getText()+
+                        "',kd_poli='" + txtKdPoli.getText() + "'");
                 koneksi.setAutoCommit(true);
                 if(tabMode.getRowCount()!=0){tampil();}
                 emptTeks();
@@ -1188,6 +1350,25 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         restore.setVisible(true);
     }//GEN-LAST:event_MnRestoreActionPerformed
 
+    private void txtKdPoliKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtKdPoliKeyPressed
+    {//GEN-HEADEREND:event_txtKdPoliKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){            
+                Sequel.cariIsi("select nm_poli from poliklinik where kd_poli=?",txtNamaPoli,txtKdPoli.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){  
+            btnPoliActionPerformed(null);
+        }else{            
+            Valid.pindah(evt,TTlp,BtnSimpan);
+        }
+    }//GEN-LAST:event_txtKdPoliKeyPressed
+
+    private void btnPoliActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPoliActionPerformed
+    {//GEN-HEADEREND:event_btnPoliActionPerformed
+        poli.isCek();        
+        poli.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        poli.setLocationRelativeTo(internalFrame1);
+        poli.setVisible(true);
+    }//GEN-LAST:event_btnPoliActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1237,6 +1418,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox TSpesialis;
     private widget.TextBox TTlp;
     private widget.TextBox TTmp;
+    private widget.Button btnPoli;
     private widget.Button btnSpesial;
     private widget.ComboBox cmbAgama;
     private widget.ComboBox cmbCrJk;
@@ -1248,6 +1430,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel14;
     private widget.Label jLabel15;
     private widget.Label jLabel16;
+    private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
     private widget.Label jLabel20;
@@ -1263,6 +1446,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.panelisi panelGlass6;
     private widget.panelisi panelGlass8;
     private widget.Table tbDokter;
+    private widget.TextBox txtKdPoli;
+    private widget.TextBox txtNamaPoli;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
@@ -1271,8 +1456,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             stat=koneksi.prepareStatement(
                    "select dokter.kd_dokter,dokter.nm_dokter,dokter.jk,dokter.tmp_lahir, "+
                    "dokter.tgl_lahir,dokter.gol_drh,dokter.agama,dokter.almt_tgl,dokter.no_telp, "+
-                   "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek "+
+                   "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek, nm_poli "+
                    "from dokter inner join spesialis on dokter.kd_sps=spesialis.kd_sps "+
+                   "LEFT JOIN poliklinik ON poliklinik.kd_poli = dokter.kd_poli " +
                    "where dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.kd_dokter like ? or "+
                    "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.nm_dokter like ? or "+
                    "dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.tmp_lahir like ? or "+
@@ -1345,7 +1531,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                    rs.getString(10),
                                    rs.getString(11),
                                    rs.getString(12),
-                                   rs.getString(13)});
+                                   rs.getString(13),
+                                   rs.getString(14)});
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -1381,11 +1568,17 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         DTPLahir.setDate(new Date());
         TKd.requestFocus();
         Valid.autoNomer(" dokter ","D",7,TKd);
+        
+        txtKdPoli.setText("");
+        txtNamaPoli.setText("");
     }
 
     private void getData() {
         int row=tbDokter.getSelectedRow();
         if(row!= -1){
+            
+            emptTeks();
+            
             TKd.setText(tbDokter.getValueAt(row,0).toString());
             TNm.setText(tbDokter.getValueAt(row,1).toString());
             TTmp.setText(tbDokter.getValueAt(row,3).toString());
@@ -1398,6 +1591,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Sequel.cariIsi("select kd_sps from spesialis where nm_sps='"+tbDokter.getValueAt(row,10).toString()+"'", KdSps);
             TAlumni.setText(tbDokter.getValueAt(row,11).toString());
             TNoi.setText(tbDokter.getValueAt(row,12).toString());
+            
+            txtNamaPoli.setText(tbDokter.getValueAt(row, 13).toString());
+            Sequel.cariIsi("select kd_poli from poliklinik where nm_poli='"+tbDokter.getValueAt(row,13).toString()+"'", txtKdPoli);
             
             switch (tbDokter.getValueAt(row,2).toString()) {
                 case "L":
@@ -1424,7 +1620,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,189));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,215));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           

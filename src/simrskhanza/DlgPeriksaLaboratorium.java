@@ -11,6 +11,7 @@
 
 package simrskhanza;
 
+import fungsi.GQuery;
 import keuangan.DlgJnsPerawatanLab;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
@@ -68,6 +69,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             Utang_Jasa_Medik_Petugas_Laborat_Ranap="", Beban_Kso_Laborat_Ranap="", Utang_Kso_Laborat_Ranap="", 
             HPP_Persediaan_Laborat_Rawat_inap="", Persediaan_BHP_Laborat_Rawat_Inap="";
     
+    // Data Kelas ===
+    private String kelas;
 
     /** Creates new form DlgPerawatan
      * @param parent
@@ -1600,9 +1603,10 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     if(Jk.getText().equals("L")&&(rbDewasa.isSelected()==true)){
                         pstampil=koneksi.prepareStatement("select id_template, Pemeriksaan, satuan, nilai_rujukan_ld,biaya_item, "+
                                 "bagian_rs,bhp,bagian_perujuk,bagian_dokter,bagian_laborat,kso,menejemen "+
-                                "from template_laboratorium where kd_jenis_prw=? order by urut");
+                                "from template_laboratorium where kd_jenis_prw=? AND kelas = ? order by urut");
                         try {
                             pstampil.setString(1,tbTarif.getValueAt(i,1).toString());
+                            pstampil.setString(2, kelas);
                             rstampil=pstampil.executeQuery();
                             while(rstampil.next()){
                                 tabMode.addRow(new Object[]{
@@ -1842,6 +1846,20 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public void setNoRm(String norwt,String posisi) {
         TNoRw.setText(norwt);
         this.status=posisi;
+        
+        if (posisi.equals("Ralan"))
+            kelas = "Kelas 3";
+        else
+        {
+            kelas = new GQuery()
+                    .a("SELECT kelas")
+                    .a("FROM kamar_inap")
+                    .a("JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
+                    .a("WHERE no_rawat = {no_rawat}")
+                    .set("no_rawat", norwt)
+                    .getString();
+        }
+        
         try {
             pssetpj=koneksi.prepareStatement("select * from set_pjlab");
             try {                              

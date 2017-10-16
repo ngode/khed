@@ -457,6 +457,14 @@ public class DlgPasien extends javax.swing.JDialog {
         ((AutoCompleteTextBox)KecamatanPj).init("kecamatan", "kd_kec", "nm_kec");
         ((AutoCompleteTextBox)Kabupaten).init("kabupaten", "kd_kab", "nm_kab");
         ((AutoCompleteTextBox)KabupatenPj).init("kabupaten", "kd_kab", "nm_kab");
+        
+        // Ngehide Cetak kArtu pasien yg gak kepake
+        // Dan ganti teks yg kepake no angka
+        MnKartu4.setText("Kartu Pasien");
+        MnKartu1.setVisible(false);
+        MnKartu2.setVisible(false);
+        MnKartu3.setVisible(false);
+        MnKartu5.setVisible(false);
     }
     
 

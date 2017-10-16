@@ -50,7 +50,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         this.setLocation(10,10);
         setSize(457,249);
 
-        Object[] row={"P.J.Laboratorium","P.J.Radiologi","P.J.Hemodialisa","P.J.Tranfusi Darah"};
+        Object[] row={"P.J.Laboratorium","P.J.Radiologi","P.J.Hemodialisa","P.J.Tranfusi Darah", "Konsultan Hemodialisa", "Pelaksana Hemodialisa"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -59,7 +59,7 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         tbAdmin.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbAdmin.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < 6; i++) {
             TableColumn column = tbAdmin.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(200);
@@ -69,6 +69,10 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
                 column.setPreferredWidth(200);
             }else if(i==3){
                 column.setPreferredWidth(200);
+            }else if(i==4){
+                column.setPreferredWidth(200);
+            }else if(i==5){
+                column.setPreferredWidth(200);
             }
         }
 
@@ -77,6 +81,8 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         kddokter2.setDocument(new batasInput((byte)20).getKata(kddokter2));
         kddokter3.setDocument(new batasInput((byte)20).getKata(kddokter3));
         kddokter4.setDocument(new batasInput((byte)20).getKata(kddokter4));
+        txtKdKonsHd.setDocument(new batasInput((byte)20).getKata(txtKdKonsHd));
+        txtKdPelHd.setDocument(new batasInput((byte)20).getKata(txtKdPelHd));
 
         dokter.addWindowListener(new WindowListener() {
             @Override
@@ -102,6 +108,14 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
                         kddokter4.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                         TDokter4.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         kddokter4.requestFocus();
+                    }else if(pilihan==5){
+                        txtKdKonsHd.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
+                        txtNamaKonsHd.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        txtKdKonsHd.requestFocus();
+                    }else if(pilihan==6){
+                        txtKdPelHd.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
+                        txtNamaPelHd.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        txtKdPelHd.requestFocus();
                     }
                 }                
             }
@@ -124,7 +138,8 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -146,6 +161,14 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         kddokter4 = new widget.TextBox();
         TDokter4 = new widget.TextBox();
         BtnDokter4 = new widget.Button();
+        jLabel17 = new widget.Label();
+        txtKdKonsHd = new widget.TextBox();
+        txtNamaKonsHd = new widget.TextBox();
+        BtnDokter5 = new widget.Button();
+        jLabel18 = new widget.Label();
+        txtKdPelHd = new widget.TextBox();
+        txtNamaPelHd = new widget.TextBox();
+        BtnDokter6 = new widget.Button();
         panelGlass5 = new widget.panelisi();
         BtnSimpan = new widget.Button();
         BtnBatal = new widget.Button();
@@ -156,8 +179,10 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -173,13 +198,17 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         tbAdmin.setAutoCreateRowSorter(true);
         tbAdmin.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbAdmin.setName("tbAdmin"); // NOI18N
-        tbAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbAdmin.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tbAdminMouseClicked(evt);
             }
         });
-        tbAdmin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbAdmin.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tbAdminKeyPressed(evt);
             }
         });
@@ -188,136 +217,287 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
         panelGlass7.setName("panelGlass7"); // NOI18N
-        panelGlass7.setPreferredSize(new java.awt.Dimension(44, 137));
-        panelGlass7.setLayout(null);
+        panelGlass7.setPreferredSize(new java.awt.Dimension(44, 190));
 
         jLabel13.setText("P.J.Laboratorium :");
         jLabel13.setName("jLabel13"); // NOI18N
-        panelGlass7.add(jLabel13);
-        jLabel13.setBounds(0, 12, 115, 23);
 
         kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
-        kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kddokter.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kddokterKeyPressed(evt);
             }
         });
-        panelGlass7.add(kddokter);
-        kddokter.setBounds(117, 12, 95, 23);
 
         TDokter.setEditable(false);
         TDokter.setName("TDokter"); // NOI18N
-        panelGlass7.add(TDokter);
-        TDokter.setBounds(213, 12, 269, 23);
 
         BtnDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter.setMnemonic('3');
         BtnDokter.setToolTipText("ALt+3");
         BtnDokter.setName("BtnDokter"); // NOI18N
-        BtnDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnDokterActionPerformed(evt);
             }
         });
-        panelGlass7.add(BtnDokter);
-        BtnDokter.setBounds(485, 12, 28, 23);
 
         jLabel14.setText("P.J.Radiologi :");
         jLabel14.setName("jLabel14"); // NOI18N
-        panelGlass7.add(jLabel14);
-        jLabel14.setBounds(0, 42, 115, 23);
 
         kddokter2.setHighlighter(null);
         kddokter2.setName("kddokter2"); // NOI18N
-        kddokter2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kddokter2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kddokter2KeyPressed(evt);
             }
         });
-        panelGlass7.add(kddokter2);
-        kddokter2.setBounds(117, 42, 95, 23);
 
         TDokter2.setEditable(false);
         TDokter2.setName("TDokter2"); // NOI18N
-        panelGlass7.add(TDokter2);
-        TDokter2.setBounds(213, 42, 269, 23);
 
         BtnDokter2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter2.setMnemonic('3');
         BtnDokter2.setToolTipText("ALt+3");
         BtnDokter2.setName("BtnDokter2"); // NOI18N
-        BtnDokter2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnDokter2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnDokter2ActionPerformed(evt);
             }
         });
-        panelGlass7.add(BtnDokter2);
-        BtnDokter2.setBounds(485, 42, 28, 23);
 
         jLabel15.setText("P.J.Hemodialisa :");
         jLabel15.setName("jLabel15"); // NOI18N
-        panelGlass7.add(jLabel15);
-        jLabel15.setBounds(0, 72, 115, 23);
 
         kddokter3.setHighlighter(null);
         kddokter3.setName("kddokter3"); // NOI18N
-        kddokter3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kddokter3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kddokter3KeyPressed(evt);
             }
         });
-        panelGlass7.add(kddokter3);
-        kddokter3.setBounds(117, 72, 95, 23);
 
         TDokter3.setEditable(false);
         TDokter3.setName("TDokter3"); // NOI18N
-        panelGlass7.add(TDokter3);
-        TDokter3.setBounds(213, 72, 269, 23);
 
         BtnDokter3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter3.setMnemonic('3');
         BtnDokter3.setToolTipText("ALt+3");
         BtnDokter3.setName("BtnDokter3"); // NOI18N
-        BtnDokter3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnDokter3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnDokter3ActionPerformed(evt);
             }
         });
-        panelGlass7.add(BtnDokter3);
-        BtnDokter3.setBounds(485, 72, 28, 23);
 
         jLabel16.setText("P.J.Tranfusi Darah :");
         jLabel16.setName("jLabel16"); // NOI18N
-        panelGlass7.add(jLabel16);
-        jLabel16.setBounds(0, 102, 115, 23);
 
         kddokter4.setHighlighter(null);
         kddokter4.setName("kddokter4"); // NOI18N
-        kddokter4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kddokter4.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kddokter4KeyPressed(evt);
             }
         });
-        panelGlass7.add(kddokter4);
-        kddokter4.setBounds(117, 102, 95, 23);
 
         TDokter4.setEditable(false);
         TDokter4.setName("TDokter4"); // NOI18N
-        panelGlass7.add(TDokter4);
-        TDokter4.setBounds(213, 102, 269, 23);
 
         BtnDokter4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter4.setMnemonic('3');
         BtnDokter4.setToolTipText("ALt+3");
         BtnDokter4.setName("BtnDokter4"); // NOI18N
-        BtnDokter4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnDokter4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnDokter4ActionPerformed(evt);
             }
         });
-        panelGlass7.add(BtnDokter4);
-        BtnDokter4.setBounds(485, 102, 28, 23);
+
+        jLabel17.setText("Konsultan Hemodialisa :");
+        jLabel17.setName("jLabel17"); // NOI18N
+
+        txtKdKonsHd.setHighlighter(null);
+        txtKdKonsHd.setName("txtKdKonsHd"); // NOI18N
+        txtKdKonsHd.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                txtKdKonsHdKeyPressed(evt);
+            }
+        });
+
+        txtNamaKonsHd.setEditable(false);
+        txtNamaKonsHd.setName("txtNamaKonsHd"); // NOI18N
+
+        BtnDokter5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnDokter5.setMnemonic('3');
+        BtnDokter5.setToolTipText("ALt+3");
+        BtnDokter5.setName("BtnDokter5"); // NOI18N
+        BtnDokter5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                BtnDokter5ActionPerformed(evt);
+            }
+        });
+
+        jLabel18.setText("Pelaksanan Hemodialisa :");
+        jLabel18.setName("jLabel18"); // NOI18N
+
+        txtKdPelHd.setHighlighter(null);
+        txtKdPelHd.setName("txtKdPelHd"); // NOI18N
+        txtKdPelHd.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                txtKdPelHdKeyPressed(evt);
+            }
+        });
+
+        txtNamaPelHd.setEditable(false);
+        txtNamaPelHd.setName("txtNamaPelHd"); // NOI18N
+
+        BtnDokter6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnDokter6.setMnemonic('3');
+        BtnDokter6.setToolTipText("ALt+3");
+        BtnDokter6.setName("BtnDokter6"); // NOI18N
+        BtnDokter6.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                BtnDokter6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelGlass7Layout = new javax.swing.GroupLayout(panelGlass7);
+        panelGlass7.setLayout(panelGlass7Layout);
+        panelGlass7Layout.setHorizontalGroup(
+            panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGlass7Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addComponent(kddokter, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(TDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addComponent(kddokter3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TDokter3, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnDokter3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addComponent(kddokter4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TDokter4, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnDokter4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addComponent(txtKdKonsHd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNamaKonsHd, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnDokter5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addComponent(txtKdPelHd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNamaPelHd, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnDokter6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addComponent(kddokter2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TDokter2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnDokter2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(134, Short.MAX_VALUE))
+        );
+        panelGlass7Layout.setVerticalGroup(
+            panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGlass7Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(kddokter, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TDokter2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(kddokter2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BtnDokter2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TDokter3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(kddokter3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BtnDokter3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TDokter4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(kddokter4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BtnDokter4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelGlass7Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5)
+                .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNamaKonsHd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKdKonsHd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnDokter5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelGlass7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNamaPelHd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKdPelHd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnDokter6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         internalFrame1.add(panelGlass7, java.awt.BorderLayout.PAGE_START);
 
@@ -331,13 +511,17 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSimpanActionPerformed(evt);
             }
         });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnSimpanKeyPressed(evt);
             }
         });
@@ -350,13 +534,17 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         BtnBatal.setIconTextGap(3);
         BtnBatal.setName("BtnBatal"); // NOI18N
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnBatal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnBatalActionPerformed(evt);
             }
         });
-        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnBatalKeyPressed(evt);
             }
         });
@@ -369,13 +557,17 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         BtnHapus.setIconTextGap(3);
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnHapus.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnHapusActionPerformed(evt);
             }
         });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnHapusKeyPressed(evt);
             }
         });
@@ -388,13 +580,17 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         BtnEdit.setIconTextGap(3);
         BtnEdit.setName("BtnEdit"); // NOI18N
         BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnEdit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnEditActionPerformed(evt);
             }
         });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnEditKeyPressed(evt);
             }
         });
@@ -407,13 +603,17 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         BtnKeluar.setIconTextGap(3);
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -435,9 +635,13 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             Valid.textKosong(kddokter3,"Penanggung Jawab Hemodialisa");
         }else if(TDokter4.getText().trim().equals("")||kddokter4.getText().trim().equals("")){
             Valid.textKosong(kddokter4,"Penanggung Jawab Unit Tranfusi Darah");
+        }else if(txtNamaKonsHd.getText().trim().equals("")||txtKdKonsHd.getText().trim().equals("")){
+            Valid.textKosong(txtKdKonsHd,"Konsultan Hemodialisa");
+        }else if(txtNamaPelHd.getText().trim().equals("")||txtKdPelHd.getText().trim().equals("")){
+            Valid.textKosong(txtKdPelHd,"Pelaksana Hemodialisa");
         }else if(tabMode.getRowCount()==0){
-            Sequel.menyimpan("set_pjlab","?,?,?,?","Penanggung Jawab",4,new String[]{
-                kddokter.getText(),kddokter2.getText(),kddokter3.getText(),kddokter4.getText()
+            Sequel.menyimpan("set_pjlab","?,?,?,?,?,?","Penanggung Jawab",4,new String[]{
+                kddokter.getText(),kddokter2.getText(),kddokter3.getText(),kddokter4.getText(), txtKdKonsHd.getText(), txtKdPelHd.getText()
             });
             tampil();
             emptTeks();
@@ -493,10 +697,14 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             Valid.textKosong(kddokter3,"Penanggung Jawab Hemodialisa");
         }else if(TDokter4.getText().trim().equals("")||kddokter4.getText().trim().equals("")){
             Valid.textKosong(kddokter4,"Penanggung Jawab Unit Tranfusi Darah");
+        }else if(txtNamaKonsHd.getText().trim().equals("")||txtKdKonsHd.getText().trim().equals("")){
+            Valid.textKosong(txtKdKonsHd,"Konsultan Hemodialisa");
+        }else if(txtNamaPelHd.getText().trim().equals("")||txtKdPelHd.getText().trim().equals("")){
+            Valid.textKosong(txtKdPelHd,"Pelaksana Hemodialisa");
         }else{
             Sequel.queryu("delete from set_pjlab");
-            Sequel.menyimpan("set_pjlab","?,?,?,?","Penanggung Jawab",4,new String[]{
-                kddokter.getText(),kddokter2.getText(),kddokter3.getText(),kddokter4.getText()
+            Sequel.menyimpan("set_pjlab","?,?,?,?,?,?","Penanggung Jawab",6,new String[]{
+                kddokter.getText(),kddokter2.getText(),kddokter3.getText(),kddokter4.getText(), txtKdKonsHd.getText(), txtKdPelHd.getText()
             });
             tampil();
             emptTeks();
@@ -626,6 +834,48 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         dokter.setVisible(true);
     }//GEN-LAST:event_BtnDokter4ActionPerformed
 
+    private void txtKdKonsHdKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtKdKonsHdKeyPressed
+    {//GEN-HEADEREND:event_txtKdKonsHdKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",txtNamaKonsHd,txtKdKonsHd.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            BtnDokter5ActionPerformed(null);
+        }else{
+            Valid.pindah(evt,kddokter4,txtKdKonsHd);
+        }
+    }//GEN-LAST:event_txtKdKonsHdKeyPressed
+
+    private void BtnDokter5ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnDokter5ActionPerformed
+    {//GEN-HEADEREND:event_BtnDokter5ActionPerformed
+        pilihan=5;
+        dokter.isCek();
+        dokter.TCari.requestFocus();
+        dokter.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        dokter.setLocationRelativeTo(internalFrame1);
+        dokter.setVisible(true);
+    }//GEN-LAST:event_BtnDokter5ActionPerformed
+
+    private void txtKdPelHdKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtKdPelHdKeyPressed
+    {//GEN-HEADEREND:event_txtKdPelHdKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",txtKdPelHd,txtNamaPelHd.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            BtnDokter6ActionPerformed(null);
+        }else{
+            Valid.pindah(evt,txtKdKonsHd,BtnSimpan);
+        }
+    }//GEN-LAST:event_txtKdPelHdKeyPressed
+
+    private void BtnDokter6ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnDokter6ActionPerformed
+    {//GEN-HEADEREND:event_BtnDokter6ActionPerformed
+        pilihan=6;
+        dokter.isCek();
+        dokter.TCari.requestFocus();
+        dokter.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        dokter.setLocationRelativeTo(internalFrame1);
+        dokter.setVisible(true);
+    }//GEN-LAST:event_BtnDokter6ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -648,6 +898,8 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
     private widget.Button BtnDokter2;
     private widget.Button BtnDokter3;
     private widget.Button BtnDokter4;
+    private widget.Button BtnDokter5;
+    private widget.Button BtnDokter6;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
@@ -662,6 +914,8 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
     private widget.Label jLabel14;
     private widget.Label jLabel15;
     private widget.Label jLabel16;
+    private widget.Label jLabel17;
+    private widget.Label jLabel18;
     private widget.TextBox kddokter;
     private widget.TextBox kddokter2;
     private widget.TextBox kddokter3;
@@ -669,6 +923,10 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
     private widget.panelisi panelGlass5;
     private widget.panelisi panelGlass7;
     private widget.Table tbAdmin;
+    private widget.TextBox txtKdKonsHd;
+    private widget.TextBox txtKdPelHd;
+    private widget.TextBox txtNamaKonsHd;
+    private widget.TextBox txtNamaPelHd;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
@@ -680,7 +938,9 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
                     rs.getString(1)+" "+Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",rs.getString(1)),
                     rs.getString(2)+" "+Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",rs.getString(2)),
                     rs.getString(3)+" "+Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",rs.getString(3)),
-                    rs.getString(4)+" "+Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",rs.getString(4))
+                    rs.getString(4)+" "+Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",rs.getString(4)),
+                    rs.getString(5)+" "+Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",rs.getString(5)),
+                    rs.getString(6)+" "+Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",rs.getString(6))
                 });
             }
         }catch(SQLException e){
@@ -695,10 +955,15 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
             kddokter2.setText(Sequel.cariIsi("select kd_dokterrad from set_pjlab"));
             kddokter3.setText(Sequel.cariIsi("select kd_dokterhemodialisa from set_pjlab"));
             kddokter4.setText(Sequel.cariIsi("select kd_dokterutd from set_pjlab"));
+            txtKdKonsHd.setText(Sequel.cariIsi("select kd_kons_hd from set_pjlab"));
+            txtKdPelHd.setText(Sequel.cariIsi("select kd_pel_hd from set_pjlab"));
+            
             TDokter.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",kddokter.getText()));
             TDokter2.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",kddokter2.getText()));
             TDokter3.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",kddokter3.getText()));
             TDokter4.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",kddokter4.getText()));
+            txtNamaKonsHd.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",txtKdKonsHd.getText()));
+            txtNamaPelHd.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",txtKdPelHd.getText()));
         }
     }
 
@@ -711,6 +976,11 @@ public class DlgSetPenjabLab extends javax.swing.JDialog {
         TDokter3.setText("");
         kddokter4.setText("");
         TDokter4.setText("");
+        txtKdKonsHd.setText("");
+        txtNamaKonsHd.setText("");
+        txtKdPelHd.setText("");
+        txtNamaPelHd.setText("");
+        
         kddokter.requestFocus();
     }
 }

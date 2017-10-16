@@ -621,6 +621,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnRujukMasuk = new javax.swing.JMenuItem();
         MnDiagnosa = new javax.swing.JMenuItem();
         MnHemodialisa = new javax.swing.JMenuItem();
+        MnCetakRegister = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         MnLaporanRekapKunjunganPoli = new javax.swing.JMenuItem();
         MnLaporanRekapKunjunganDokter = new javax.swing.JMenuItem();
@@ -650,7 +651,6 @@ public final class DlgReg extends javax.swing.JDialog {
         MnCetakSuratSakit = new javax.swing.JMenuItem();
         MnCetakSuratSakit2 = new javax.swing.JMenuItem();
         MnCetakSuratSakit1 = new javax.swing.JMenuItem();
-        MnCetakRegister = new javax.swing.JMenuItem();
         MnPersetujuanMedis = new javax.swing.JMenuItem();
         MnBuktiPelayananRalan = new javax.swing.JMenuItem();
         MnLembarCasemix = new javax.swing.JMenuItem();
@@ -1024,6 +1024,25 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnHemodialisa);
+
+        MnCetakRegister.setBackground(new java.awt.Color(255, 255, 255));
+        MnCetakRegister.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakRegister.setForeground(new java.awt.Color(60, 80, 50));
+        MnCetakRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakRegister.setText("Bukti Register");
+        MnCetakRegister.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCetakRegister.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCetakRegister.setIconTextGap(5);
+        MnCetakRegister.setName("MnCetakRegister"); // NOI18N
+        MnCetakRegister.setPreferredSize(new java.awt.Dimension(240, 26));
+        MnCetakRegister.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnCetakRegisterActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnCetakRegister);
 
         jMenu1.setBackground(new java.awt.Color(248, 253, 243));
         jMenu1.setForeground(new java.awt.Color(60, 80, 50));
@@ -1560,25 +1579,6 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         jMenu4.add(MnCetakSuratSakit1);
-
-        MnCetakRegister.setBackground(new java.awt.Color(255, 255, 255));
-        MnCetakRegister.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCetakRegister.setForeground(new java.awt.Color(60, 80, 50));
-        MnCetakRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakRegister.setText("Bukti Register");
-        MnCetakRegister.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnCetakRegister.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnCetakRegister.setIconTextGap(5);
-        MnCetakRegister.setName("MnCetakRegister"); // NOI18N
-        MnCetakRegister.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnCetakRegister.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                MnCetakRegisterActionPerformed(evt);
-            }
-        });
-        jMenu4.add(MnCetakRegister);
 
         MnPersetujuanMedis.setBackground(new java.awt.Color(255, 255, 255));
         MnPersetujuanMedis.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2207,7 +2207,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit1.setEditable(false);
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-10-2017" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -2259,7 +2259,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         TglSakit2.setEditable(false);
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-10-2017" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -2779,7 +2779,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-10-2017" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2794,7 +2794,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-10-2017" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2917,7 +2917,7 @@ public final class DlgReg extends javax.swing.JDialog {
         TDokter.setEditable(false);
         TDokter.setName("TDokter"); // NOI18N
         FormInput.add(TDokter);
-        TDokter.setBounds(183, 102, 181, 23);
+        TDokter.setBounds(183, 130, 181, 23);
 
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
@@ -2939,7 +2939,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel13.setText("Dr Dituju :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
-        jLabel13.setBounds(0, 102, 77, 23);
+        jLabel13.setBounds(0, 130, 77, 23);
 
         jLabel9.setText("Jam :");
         jLabel9.setName("jLabel9"); // NOI18N
@@ -2948,7 +2948,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
         DTPReg.setEditable(false);
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-10-2017" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -3124,12 +3124,12 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel19.setText("Unit :");
         jLabel19.setName("jLabel19"); // NOI18N
         FormInput.add(jLabel19);
-        jLabel19.setBounds(0, 132, 77, 23);
+        jLabel19.setBounds(0, 100, 77, 23);
 
         TPoli.setEditable(false);
         TPoli.setName("TPoli"); // NOI18N
         FormInput.add(TPoli);
-        TPoli.setBounds(148, 132, 120, 23);
+        TPoli.setBounds(148, 100, 120, 23);
 
         TBiaya.setName("TBiaya"); // NOI18N
         TBiaya.addKeyListener(new java.awt.event.KeyAdapter()
@@ -3140,7 +3140,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(TBiaya);
-        TBiaya.setBounds(270, 132, 94, 23);
+        TBiaya.setBounds(270, 100, 94, 23);
 
         kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
@@ -3152,7 +3152,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(kddokter);
-        kddokter.setBounds(81, 102, 100, 23);
+        kddokter.setBounds(80, 130, 100, 23);
 
         BtnDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter.setMnemonic('3');
@@ -3166,7 +3166,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnDokter);
-        BtnDokter.setBounds(366, 102, 28, 23);
+        BtnDokter.setBounds(370, 130, 28, 23);
 
         kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
@@ -3178,7 +3178,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(kdpoli);
-        kdpoli.setBounds(80, 132, 66, 23);
+        kdpoli.setBounds(80, 100, 66, 23);
 
         BtnUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnUnit.setMnemonic('4');
@@ -3192,7 +3192,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnUnit);
-        BtnUnit.setBounds(366, 132, 28, 23);
+        BtnUnit.setBounds(370, 100, 28, 23);
 
         jLabel30.setText("Status :");
         jLabel30.setName("jLabel30"); // NOI18N
@@ -3788,7 +3788,11 @@ private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         var.setform("DlgReg");
         if(aktifjadwal.equals("aktif")){
             if(var.getkode().equals("Admin Utama")){
-                dokter.isCek();        
+                dokter.isCek();
+                
+                if (!kdpoli.getText().trim().isEmpty())
+                    dokter.setPoli(kdpoli.getText());
+                
                 dokter.TCari.requestFocus();
                 dokter.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
                 dokter.setLocationRelativeTo(internalFrame1);
@@ -3803,7 +3807,11 @@ private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 dokter2.setVisible(true);
             }                
         }else{
-            dokter.isCek();        
+            dokter.isCek();
+            
+            if (!kdpoli.getText().trim().isEmpty())
+                dokter.setPoli(kdpoli.getText());
+                        
             dokter.TCari.requestFocus();
             dokter.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
             dokter.setLocationRelativeTo(internalFrame1);

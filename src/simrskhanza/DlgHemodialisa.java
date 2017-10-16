@@ -82,6 +82,8 @@ public class DlgHemodialisa extends javax.swing.JDialog
         initTblTransaksi();
         initTblOrder();
         
+        initDokter();
+        
         tampilTindakan();
         tampilTransaksi();
         tampilOrder();
@@ -137,18 +139,18 @@ public class DlgHemodialisa extends javax.swing.JDialog
                 {
                     if (pil == 1)
                     {
-                        txtKdDokter1.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),0).toString());
-                        txtNamaDokter1.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),1).toString());
+                        txtKdDokterKons.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),0).toString());
+                        txtNamaDokterKons.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),1).toString());
                     }
                     else if (pil == 2)
                     {
-                        txtKdDokter2.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),0).toString());
-                        txtNamaDokter2.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),1).toString());
+                        txtKdDokterPj.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),0).toString());
+                        txtNamaDokterPj.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),1).toString());
                     }
                     else if (pil == 3)
                     {
-                        txtKdDokter3.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),0).toString());
-                        txtNamaDokter3.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),1).toString());
+                        txtKdDokterPel.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),0).toString());
+                        txtNamaDokterPel.setText(dlgDokter.getTable().getValueAt(dlgDokter.getTable().getSelectedRow(),1).toString());
                     }
                 }
             }
@@ -179,6 +181,17 @@ public class DlgHemodialisa extends javax.swing.JDialog
         });
     }
 
+    private void initDokter()
+    {
+        txtKdDokterKons.setText(Sequel.cariIsi("select kd_kons_hd from set_pjlab"));
+        txtKdDokterPj.setText(Sequel.cariIsi("select kd_dokterhemodialisa from set_pjlab"));
+        txtKdDokterPel.setText(Sequel.cariIsi("select kd_pel_hd from set_pjlab"));
+        
+        txtNamaDokterKons.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", txtKdDokterKons.getText()));
+        txtNamaDokterPj.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", txtKdDokterPj.getText()));
+        txtNamaDokterPel.setText(Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", txtKdDokterPel.getText()));
+    }
+    
     private void initTblTindakan()
     {
         // Init jenis pemeriksaan ===========================
@@ -461,12 +474,12 @@ public class DlgHemodialisa extends javax.swing.JDialog
         txtPostRes.setText("");
         txtKdDokter.setText("");
         txtNamaDokter.setText("");
-        txtKdDokter1.setText("");
-        txtNamaDokter1.setText("");
-        txtKdDokter2.setText("");
-        txtNamaDokter2.setText("");
-        txtKdDokter3.setText("");
-        txtNamaDokter3.setText("");
+        txtKdDokterKons.setText("");
+        txtNamaDokterKons.setText("");
+        txtKdDokterPj.setText("");
+        txtNamaDokterPj.setText("");
+        txtKdDokterPel.setText("");
+        txtNamaDokterPel.setText("");
         
         selKodes.clear();
         selDatas.clear();
@@ -547,17 +560,14 @@ public class DlgHemodialisa extends javax.swing.JDialog
         txtKdDokter = new widget.TextBox();
         txtNamaDokter = new widget.TextBox();
         jLabel25 = new widget.Label();
-        txtKdDokter1 = new widget.TextBox();
-        txtNamaDokter1 = new widget.TextBox();
+        txtKdDokterKons = new widget.TextBox();
+        txtNamaDokterKons = new widget.TextBox();
         jLabel26 = new widget.Label();
-        txtKdDokter2 = new widget.TextBox();
-        txtNamaDokter2 = new widget.TextBox();
+        txtKdDokterPj = new widget.TextBox();
+        txtNamaDokterPj = new widget.TextBox();
         jLabel27 = new widget.Label();
-        txtKdDokter3 = new widget.TextBox();
-        txtNamaDokter3 = new widget.TextBox();
-        BtnDokter3 = new widget.Button();
-        BtnDokter1 = new widget.Button();
-        BtnDokter2 = new widget.Button();
+        txtKdDokterPel = new widget.TextBox();
+        txtNamaDokterPel = new widget.TextBox();
         Scroll3 = new widget.ScrollPane();
         tblTindakan = new widget.Table();
         panelBiasa2 = new widget.PanelBiasa();
@@ -813,7 +823,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-10-2017" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1118,111 +1128,69 @@ public class DlgHemodialisa extends javax.swing.JDialog
         FormInput.add(jLabel25);
         jLabel25.setBounds(510, 170, 92, 23);
 
-        txtKdDokter1.setEditable(false);
-        txtKdDokter1.setName("txtKdDokter1"); // NOI18N
-        FormInput.add(txtKdDokter1);
-        txtKdDokter1.setBounds(610, 170, 80, 23);
+        txtKdDokterKons.setEditable(false);
+        txtKdDokterKons.setName("txtKdDokterKons"); // NOI18N
+        FormInput.add(txtKdDokterKons);
+        txtKdDokterKons.setBounds(610, 170, 80, 23);
 
-        txtNamaDokter1.setEditable(false);
-        txtNamaDokter1.setHighlighter(null);
-        txtNamaDokter1.setName("txtNamaDokter1"); // NOI18N
-        txtNamaDokter1.addActionListener(new java.awt.event.ActionListener()
+        txtNamaDokterKons.setEditable(false);
+        txtNamaDokterKons.setHighlighter(null);
+        txtNamaDokterKons.setName("txtNamaDokterKons"); // NOI18N
+        txtNamaDokterKons.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                txtNamaDokter1ActionPerformed(evt);
+                txtNamaDokterKonsActionPerformed(evt);
             }
         });
-        FormInput.add(txtNamaDokter1);
-        txtNamaDokter1.setBounds(700, 170, 190, 23);
+        FormInput.add(txtNamaDokterKons);
+        txtNamaDokterKons.setBounds(700, 170, 190, 23);
 
         jLabel26.setText("Dokter PJ  :");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
         jLabel26.setBounds(510, 200, 92, 23);
 
-        txtKdDokter2.setEditable(false);
-        txtKdDokter2.setName("txtKdDokter2"); // NOI18N
-        FormInput.add(txtKdDokter2);
-        txtKdDokter2.setBounds(610, 200, 80, 23);
+        txtKdDokterPj.setEditable(false);
+        txtKdDokterPj.setName("txtKdDokterPj"); // NOI18N
+        FormInput.add(txtKdDokterPj);
+        txtKdDokterPj.setBounds(610, 200, 80, 23);
 
-        txtNamaDokter2.setEditable(false);
-        txtNamaDokter2.setHighlighter(null);
-        txtNamaDokter2.setName("txtNamaDokter2"); // NOI18N
-        txtNamaDokter2.addActionListener(new java.awt.event.ActionListener()
+        txtNamaDokterPj.setEditable(false);
+        txtNamaDokterPj.setHighlighter(null);
+        txtNamaDokterPj.setName("txtNamaDokterPj"); // NOI18N
+        txtNamaDokterPj.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                txtNamaDokter2ActionPerformed(evt);
+                txtNamaDokterPjActionPerformed(evt);
             }
         });
-        FormInput.add(txtNamaDokter2);
-        txtNamaDokter2.setBounds(700, 200, 190, 23);
+        FormInput.add(txtNamaDokterPj);
+        txtNamaDokterPj.setBounds(700, 200, 190, 23);
 
         jLabel27.setText("Dokter Pelaksana :");
         jLabel27.setName("jLabel27"); // NOI18N
         FormInput.add(jLabel27);
         jLabel27.setBounds(510, 230, 92, 23);
 
-        txtKdDokter3.setEditable(false);
-        txtKdDokter3.setName("txtKdDokter3"); // NOI18N
-        FormInput.add(txtKdDokter3);
-        txtKdDokter3.setBounds(610, 230, 80, 23);
+        txtKdDokterPel.setEditable(false);
+        txtKdDokterPel.setName("txtKdDokterPel"); // NOI18N
+        FormInput.add(txtKdDokterPel);
+        txtKdDokterPel.setBounds(610, 230, 80, 23);
 
-        txtNamaDokter3.setEditable(false);
-        txtNamaDokter3.setHighlighter(null);
-        txtNamaDokter3.setName("txtNamaDokter3"); // NOI18N
-        txtNamaDokter3.addActionListener(new java.awt.event.ActionListener()
+        txtNamaDokterPel.setEditable(false);
+        txtNamaDokterPel.setHighlighter(null);
+        txtNamaDokterPel.setName("txtNamaDokterPel"); // NOI18N
+        txtNamaDokterPel.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                txtNamaDokter3ActionPerformed(evt);
+                txtNamaDokterPelActionPerformed(evt);
             }
         });
-        FormInput.add(txtNamaDokter3);
-        txtNamaDokter3.setBounds(700, 230, 190, 23);
-
-        BtnDokter3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnDokter3.setMnemonic('3');
-        BtnDokter3.setToolTipText("ALt+3");
-        BtnDokter3.setName("BtnDokter3"); // NOI18N
-        BtnDokter3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                BtnDokter3ActionPerformed(evt);
-            }
-        });
-        FormInput.add(BtnDokter3);
-        BtnDokter3.setBounds(900, 230, 28, 23);
-
-        BtnDokter1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnDokter1.setMnemonic('3');
-        BtnDokter1.setToolTipText("ALt+3");
-        BtnDokter1.setName("BtnDokter1"); // NOI18N
-        BtnDokter1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                BtnDokter1ActionPerformed(evt);
-            }
-        });
-        FormInput.add(BtnDokter1);
-        BtnDokter1.setBounds(900, 170, 28, 23);
-
-        BtnDokter2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnDokter2.setMnemonic('3');
-        BtnDokter2.setToolTipText("ALt+3");
-        BtnDokter2.setName("BtnDokter2"); // NOI18N
-        BtnDokter2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                BtnDokter2ActionPerformed(evt);
-            }
-        });
-        FormInput.add(BtnDokter2);
-        BtnDokter2.setBounds(900, 200, 28, 23);
+        FormInput.add(txtNamaDokterPel);
+        txtNamaDokterPel.setBounds(700, 230, 190, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1306,7 +1274,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-10-2017" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setName("tglTransaksi1"); // NOI18N
         tglTransaksi1.setOpaque(false);
@@ -1320,7 +1288,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-10-2017" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setName("tglTransaksi2"); // NOI18N
         tglTransaksi2.setOpaque(false);
@@ -1409,7 +1377,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         tglOrder1.setEditable(false);
         tglOrder1.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-10-2017" }));
+        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         tglOrder1.setDisplayFormat("dd-MM-yyyy");
         tglOrder1.setName("tglOrder1"); // NOI18N
         tglOrder1.setOpaque(false);
@@ -1423,7 +1391,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         tglOrder2.setEditable(false);
         tglOrder2.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-10-2017" }));
+        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
         tglOrder2.setDisplayFormat("dd-MM-yyyy");
         tglOrder2.setName("tglOrder2"); // NOI18N
         tglOrder2.setOpaque(false);
@@ -1619,17 +1587,17 @@ public class DlgHemodialisa extends javax.swing.JDialog
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNamaDokterActionPerformed
 
-    private void txtNamaDokter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokter1ActionPerformed
+    private void txtNamaDokterKonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokterKonsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamaDokter1ActionPerformed
+    }//GEN-LAST:event_txtNamaDokterKonsActionPerformed
 
-    private void txtNamaDokter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokter2ActionPerformed
+    private void txtNamaDokterPjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokterPjActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamaDokter2ActionPerformed
+    }//GEN-LAST:event_txtNamaDokterPjActionPerformed
 
-    private void txtNamaDokter3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokter3ActionPerformed
+    private void txtNamaDokterPelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaDokterPelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamaDokter3ActionPerformed
+    }//GEN-LAST:event_txtNamaDokterPelActionPerformed
 
     private void tblTindakanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tblTindakanPropertyChange
         if (evt.getPropertyName().equals("tableCellEditor"))
@@ -1670,39 +1638,6 @@ public class DlgHemodialisa extends javax.swing.JDialog
     {//GEN-HEADEREND:event_ckbCheckedStateChanged
         tampilTindakan();
     }//GEN-LAST:event_ckbCheckedStateChanged
-
-    private void BtnDokter3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnDokter3ActionPerformed
-    {//GEN-HEADEREND:event_BtnDokter3ActionPerformed
-        pil = 3;
-        
-        dlgDokter.isCek();
-        dlgDokter.TCari.requestFocus();
-        dlgDokter.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
-        dlgDokter.setLocationRelativeTo(internalFrame1);
-        dlgDokter.setVisible(true);
-    }//GEN-LAST:event_BtnDokter3ActionPerformed
-
-    private void BtnDokter1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnDokter1ActionPerformed
-    {//GEN-HEADEREND:event_BtnDokter1ActionPerformed
-        pil = 1;
-        
-        dlgDokter.isCek();
-        dlgDokter.TCari.requestFocus();
-        dlgDokter.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
-        dlgDokter.setLocationRelativeTo(internalFrame1);
-        dlgDokter.setVisible(true);
-    }//GEN-LAST:event_BtnDokter1ActionPerformed
-
-    private void BtnDokter2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnDokter2ActionPerformed
-    {//GEN-HEADEREND:event_BtnDokter2ActionPerformed
-        pil = 2;
-        
-        dlgDokter.isCek();
-        dlgDokter.TCari.requestFocus();
-        dlgDokter.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
-        dlgDokter.setLocationRelativeTo(internalFrame1);
-        dlgDokter.setVisible(true);
-    }//GEN-LAST:event_BtnDokter2ActionPerformed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnBatalActionPerformed
     {//GEN-HEADEREND:event_BtnBatalActionPerformed
@@ -1786,9 +1721,6 @@ public class DlgHemodialisa extends javax.swing.JDialog
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
-    private widget.Button BtnDokter1;
-    private widget.Button BtnDokter2;
-    private widget.Button BtnDokter3;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
@@ -1861,13 +1793,13 @@ public class DlgHemodialisa extends javax.swing.JDialog
     private widget.TextBox txtHdKe;
     private widget.TextBox txtJk;
     private widget.TextBox txtKdDokter;
-    private widget.TextBox txtKdDokter1;
-    private widget.TextBox txtKdDokter2;
-    private widget.TextBox txtKdDokter3;
+    private widget.TextBox txtKdDokterKons;
+    private widget.TextBox txtKdDokterPel;
+    private widget.TextBox txtKdDokterPj;
     private widget.TextBox txtNamaDokter;
-    private widget.TextBox txtNamaDokter1;
-    private widget.TextBox txtNamaDokter2;
-    private widget.TextBox txtNamaDokter3;
+    private widget.TextBox txtNamaDokterKons;
+    private widget.TextBox txtNamaDokterPel;
+    private widget.TextBox txtNamaDokterPj;
     private widget.TextBox txtNamaPasien;
     private widget.TextBox txtNoRm;
     private widget.TextBox txtNoRw;
@@ -1971,12 +1903,12 @@ public class DlgHemodialisa extends javax.swing.JDialog
                 
                 if (isEdit)
                 {
-                    txtKdDokter1.setText(rs2.getString("kd_dokter_konsultan"));
-                    txtNamaDokter1.setText(rs2.getString("d_kon"));
-                    txtKdDokter2.setText(rs2.getString("kd_dokter_pj"));
-                    txtNamaDokter2.setText(rs2.getString("d_pj"));
-                    txtKdDokter3.setText(rs2.getString("kd_dokter_pelaksana"));
-                    txtNamaDokter3.setText(rs2.getString("d_pel"));
+                    txtKdDokterKons.setText(rs2.getString("kd_dokter_konsultan"));
+                    txtNamaDokterKons.setText(rs2.getString("d_kon"));
+                    txtKdDokterPj.setText(rs2.getString("kd_dokter_pj"));
+                    txtNamaDokterPj.setText(rs2.getString("d_pj"));
+                    txtKdDokterPel.setText(rs2.getString("kd_dokter_pelaksana"));
+                    txtNamaDokterPel.setText(rs2.getString("d_pel"));
                     txtHdKe.setText(rs2.getString("hd_ke"));
                     txtPreTd.setText(rs2.getString("pre_td"));
                     txtPreBb.setText(rs2.getString("pre_bb"));
@@ -2030,9 +1962,9 @@ public class DlgHemodialisa extends javax.swing.JDialog
                 .set("pos_bb", txtPostBb.getText())
                 .set("pos_nadi", txtPostNadi.getText())
                 .set("pos_res", txtPostRes.getText())
-                .set("konsultan", txtKdDokter1.getText())
-                .set("pj", txtKdDokter2.getText())
-                .set("pel", txtKdDokter3.getText())
+                .set("konsultan", txtKdDokterKons.getText())
+                .set("pj", txtKdDokterPj.getText())
+                .set("pel", txtKdDokterPel.getText())
                 .set("kd_periksa", kdPeriksa)
                 .write();
         
@@ -2078,17 +2010,17 @@ public class DlgHemodialisa extends javax.swing.JDialog
             GMessage.e("Error", "Pilih pasien dari transaksi atau order dahulu");
             return false;
         }
-        else if (txtKdDokter1.getText().isEmpty())
+        else if (txtKdDokterKons.getText().isEmpty())
         {
             GMessage.e("Error", "Pilih dokter konsultan dahulu");
             return false;
         }
-        else if (txtKdDokter2.getText().isEmpty())
+        else if (txtKdDokterPj.getText().isEmpty())
         {
             GMessage.e("Error", "Pilih dokter PJ dahulu");
             return false;
         }
-        else if (txtKdDokter3.getText().isEmpty())
+        else if (txtKdDokterPel.getText().isEmpty())
         {
             GMessage.e("Error", "Pilih dokter pelaksana dahulu");
             return false;
