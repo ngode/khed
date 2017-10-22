@@ -159,6 +159,14 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     "sum(periksa_radiologi.tarif_tindakan_petugas) as totalpetugas,sum(periksa_radiologi.kso) as totalkso,sum(periksa_radiologi.bhp) as totalbhp "+
                     " from periksa_radiologi inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw=periksa_radiologi.kd_jenis_prw where "+
                     " periksa_radiologi.no_rawat=? group by periksa_radiologi.kd_jenis_prw  ",
+            sqlpscarihd = "SELECT jns_perawatan.nm_perawatan, count(det_pemeriksaan_hd.kd_jenis_prw) as jml, det_pemeriksaan_hd.biaya_rawat as biaya, " +
+                    "SUM(det_pemeriksaan_hd.biaya_rawat) as total, jns_perawatan.kd_jenis_prw, SUM(det_pemeriksaan_hd.tarif_tindakandr) as totaldokter, " +
+                    "SUM(det_pemeriksaan_hd.tarif_tindakanpr) AS totalpetugas, SUM(det_pemeriksaan_hd.kso) AS totalkso, SUM(det_pemeriksaan_hd.bhp) AS totalbhp " +
+                    "FROM det_pemeriksaan_hd " +
+                    "JOIN pemeriksaan_hd ON pemeriksaan_hd.kd_periksa = det_pemeriksaan_hd.kd_periksa " +
+                    "JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = det_pemeriksaan_hd.kd_jenis_prw " +
+                    "WHERE pemeriksaan_hd.no_rawat = ? " +
+                    "GROUP BY det_pemeriksaan_hd.kd_jenis_prw",
             sqlpsnota="insert into nota_jalan values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             sqlcarinota="select * from nota_jalan where no_rawat=?",
             sqlpsoperasi="select paket_operasi.nm_perawatan,(operasi.biayaoperator1+operasi.biayaoperator2+"+
@@ -189,11 +197,11 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             
     private PreparedStatement pscekbilling,pscarirm,pscaripasien,psreg,pscaripoli,pscarialamat,psrekening,
             psdokterralan,pscariralandokter,pscariralanperawat,pscariralandrpr,pscarilab,pscariobat,psdetaillab,
-            psobatlangsung,psreturobat,pstambahan,psbiling,pstemporary,pspotongan,psbilling,pscariradiologi,
+            psobatlangsung,psreturobat,pstambahan,psbiling,pstemporary,pspotongan,psbilling,pscariradiologi, pscarihd,
             pstamkur,psnota,psoperasi,psobatoperasi,psceknota,psakunbayar,psakunpiutang;
     private ResultSet rscekbilling,rscarirm,rscaripasien,rsreg,rscaripoli,rscarialamat,rsrekening,rsobatoperasi,
             rsdokterralan,rscariralandokter,rscariralanperawat,rscariralandrpr,rscarilab,rscariobat,rsdetaillab,
-            rsobatlangsung,rsreturobat,rstambahan,rspotongan,rsbilling,rscariradiologi,rstamkur,rsoperasi,rsceknota,
+            rsobatlangsung,rsreturobat,rstambahan,rspotongan,rsbilling,rscariradiologi,rscarihd,rstamkur,rsoperasi,rsceknota,
             rsakunbayar,rsakunpiutang;
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
@@ -3761,6 +3769,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
              if(chkTarifPrm.isSelected()==true){prosesCariRwJlPr();}
              if(chkLaborat.isSelected()==true){prosesCariPeriksaLab();}
              if(chkRadiologi.isSelected()==true){prosesCariRadiologi();}    
+             prosesCariHd();
              prosesCariOperasi();
              if(chkSarpras.isSelected()==true){
                 if(detailjs>0){
@@ -4376,6 +4385,58 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 }
                 if(pscariradiologi!=null){
                     pscariradiologi.close();
+                }
+            }            
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
+    private void prosesCariHd() {
+        try{
+            pscarihd=koneksi.prepareStatement(sqlpscarihd);
+            try {
+                pscarihd.setString(1,TNoRw.getText());
+                rscarihd=pscarihd.executeQuery();
+                subttl=0;
+                while(rscarihd.next()){
+//                    Jasa_Medik_Dokter_Radiologi_Ralan=Jasa_Medik_Dokter_Radiologi_Ralan+rscariradiologi.getDouble("totaldokter");
+//                    Jasa_Medik_Petugas_Radiologi_Ralan=Jasa_Medik_Petugas_Radiologi_Ralan+rscariradiologi.getDouble("totalpetugas");
+//                    Kso_Radiologi_Ralan=Kso_Radiologi_Ralan+rscariradiologi.getDouble("totalkso");
+//                    Persediaan_Radiologi_Rawat_Jalan=Persediaan_Radiologi_Rawat_Jalan+rscariradiologi.getDouble("totalbhp");
+//                    tamkur=0;
+//                    pstamkur=koneksi.prepareStatement(sqlpstamkur);
+//                    try{
+//                        pstamkur.setString(1,TNoRw.getText());
+//                        pstamkur.setString(2,rscariradiologi.getString("nm_perawatan"));
+//                        pstamkur.setString(3,"Radiologi");
+//                        rstamkur=pstamkur.executeQuery();
+//                        if(rstamkur.next()){
+//                            tamkur=rstamkur.getDouble(1);
+//                        }
+//                    }catch (Exception e) {
+//                        System.out.println("Notifikasi : "+e);
+//                    } finally{
+//                        if(rstamkur != null){
+//                            rstamkur.close();
+//                        } 
+//                        if(pstamkur != null){
+//                            pstamkur.close();
+//                        } 
+//                    }
+                        
+                    tabModeRwJlDr.addRow(new Object[]{true,"",rscarihd.getString("nm_perawatan"),":",
+                                   rscarihd.getDouble("biaya"),rscarihd.getDouble("jml"),tamkur,(rscarihd.getDouble("total")+tamkur),"Hd"});
+                    subttl=subttl+rscarihd.getDouble("total")+tamkur;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e); 
+            } finally{
+                if(rscarihd!=null){
+                    rscarihd.close();
+                }
+                if(pscarihd!=null){
+                    pscarihd.close();
                 }
             }            
         }catch(Exception e){

@@ -67,6 +67,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
     // Childs ==========
     private PopKonsul popKonsul = new PopKonsul(null, false);
+    private DlgPeriksaHemodialisa dlgPeriksaHd = new DlgPeriksaHemodialisa(null, false);
     
     /** Creates new form DlgReg
      * @param parent
@@ -298,6 +299,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnKamarInap = new javax.swing.JMenuItem();
         MnPeriksaLab = new javax.swing.JMenuItem();
         MnPeriksaRadiologi = new javax.swing.JMenuItem();
+        MnPeriksaHd = new javax.swing.JMenuItem();
         MnNoResep = new javax.swing.JMenuItem();
         MnObatLangsung = new javax.swing.JMenuItem();
         MnOperasi = new javax.swing.JMenuItem();
@@ -522,6 +524,24 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnPeriksaRadiologi);
+
+        MnPeriksaHd.setBackground(new java.awt.Color(255, 255, 255));
+        MnPeriksaHd.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPeriksaHd.setForeground(new java.awt.Color(60, 80, 50));
+        MnPeriksaHd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPeriksaHd.setText("Periksa HD");
+        MnPeriksaHd.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPeriksaHd.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPeriksaHd.setName("MnPeriksaHd"); // NOI18N
+        MnPeriksaHd.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnPeriksaHd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MnPeriksaHdActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnPeriksaHd);
 
         MnNoResep.setBackground(new java.awt.Color(255, 255, 255));
         MnNoResep.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2299,7 +2319,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass8.add(jLabel15);
 
         DTPCari1.setEditable(false);
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-10-2017" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2320,7 +2340,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass8.add(jLabel17);
 
         DTPCari2.setEditable(false);
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-10-2017" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-10-2017" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3831,6 +3851,25 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }//GEN-LAST:event_MnKonsulActionPerformed
 
+    private void MnPeriksaHdActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_MnPeriksaHdActionPerformed
+    {//GEN-HEADEREND:event_MnPeriksaHdActionPerformed
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            dlgPeriksaHd.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+            dlgPeriksaHd.setLocationRelativeTo(internalFrame1);
+            dlgPeriksaHd.emptTeks();
+            dlgPeriksaHd.setNoRm(TNoRw.getText(), "Ralan");
+            dlgPeriksaHd.tampil();
+            dlgPeriksaHd.isCek();
+            dlgPeriksaHd.setVisible(true);          
+        }
+    }//GEN-LAST:event_MnPeriksaHdActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3924,6 +3963,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenu MnPemeriksaan;
     private javax.swing.JMenuItem MnPenjab;
     private javax.swing.JMenuItem MnPenjualan;
+    private javax.swing.JMenuItem MnPeriksaHd;
     private javax.swing.JMenuItem MnPeriksaLab;
     private javax.swing.JMenuItem MnPeriksaRadiologi;
     private javax.swing.JMenuItem MnPoli;

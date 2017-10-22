@@ -291,13 +291,15 @@ public class DlgHemodialisa extends javax.swing.JDialog
         tblTransaksi.setDefaultRenderer(Object.class, new WarnaTable());
         
         psTransaksi = new GStatement(koneksi)
-                .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal,")
+                .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
                 .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status")
                 .a("FROM pemeriksaan_hd")
                 .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
                 .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
-                .a("JOIN kamar ON kamar.kd_kamar = pemeriksaan_hd.kd_kamar")
-                .a("JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_hd.no_rawat")
+                .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
+                .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                .a("LEFT JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
                 .a("WHERE pemeriksaan_hd.status = 1")
                 .a("AND tgl_periksa BETWEEN :tgl1 AND :tgl2")
                 .a("ORDER BY tgl_periksa, jam_mulai");
@@ -338,13 +340,15 @@ public class DlgHemodialisa extends javax.swing.JDialog
         tblOrder.setDefaultRenderer(Object.class, new WarnaTable());
         
         psOrder = new GStatement(koneksi)
-                .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal,")
+                .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
                 .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status")
                 .a("FROM pemeriksaan_hd")
                 .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
                 .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
-                .a("JOIN kamar ON kamar.kd_kamar = pemeriksaan_hd.kd_kamar")
-                .a("JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_hd.no_rawat")
+                .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
+                .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                .a("LEFT JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
                 .a("WHERE pemeriksaan_hd.status = 0")
                 .a("AND tgl_periksa BETWEEN :tgl1 AND :tgl2")
                 .a("ORDER BY tgl_periksa, jam_mulai");
@@ -402,12 +406,24 @@ public class DlgHemodialisa extends javax.swing.JDialog
             
             while (rsTransaksi.next())
             {
+                String pas;
+                
+                if (rsTransaksi.getString("kd_kamar") != null)
+                {
+                    pas = rsTransaksi.getString("no_rkm_medis") + " " + rsTransaksi.getString("nm_pasien") + " (Kamar : " + 
+                        rsTransaksi.getString("kd_kamar") + ", " + rsTransaksi.getString("nm_bangsal") + ")";
+                }
+                else
+                {
+                    pas = rsTransaksi.getString("no_rkm_medis") + " " + rsTransaksi.getString("nm_pasien") + " (Poli : " + 
+                        rsTransaksi.getString("nm_poli") + ")";
+                }
+                
                 Object[] o = new Object[]
                 {
                     rsTransaksi.getString("kd_periksa"),
                     rsTransaksi.getString("no_rawat"),
-                    rsTransaksi.getString("no_rkm_medis") + " " + rsTransaksi.getString("nm_pasien") + " (Kamar : " + 
-                        rsTransaksi.getString("kd_kamar") + ", " + rsTransaksi.getString("nm_bangsal") + ")",
+                    pas,
                     rsTransaksi.getString("tgl_periksa"),
                     rsTransaksi.getString("jam_mulai"),
                     rsTransaksi.getString("status")
@@ -433,12 +449,24 @@ public class DlgHemodialisa extends javax.swing.JDialog
             
             while (rsOrder.next())
             {
+                String pas;
+                
+                if (rsOrder.getString("kd_kamar") != null)
+                {
+                    pas = rsOrder.getString("no_rkm_medis") + " " + rsOrder.getString("nm_pasien") + " (Kamar : " + 
+                        rsOrder.getString("kd_kamar") + ", " + rsOrder.getString("nm_bangsal") + ")";
+                }
+                else
+                {
+                    pas = rsOrder.getString("no_rkm_medis") + " " + rsOrder.getString("nm_pasien") + " (Poli : " + 
+                        rsOrder.getString("nm_poli") + ")";
+                }
+                
                 Object[] o = new Object[]
                 {
                     rsOrder.getString("kd_periksa"),
                     rsOrder.getString("no_rawat"),
-                    rsOrder.getString("no_rkm_medis") + " " + rsOrder.getString("nm_pasien") + " (Kamar : " + 
-                        rsOrder.getString("kd_kamar") + ", " + rsOrder.getString("nm_bangsal") + ")",
+                    pas,
                     rsOrder.getString("tgl_periksa"),
                     rsOrder.getString("jam_mulai"),
                     rsOrder.getString("status")
@@ -455,6 +483,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
     
     private void clearAll()
     {
+        isEdit = false;
         kdPeriksa = null;
         
         txtNoRw.setText("");
@@ -823,7 +852,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-10-2017" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1274,7 +1303,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-10-2017" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setName("tglTransaksi1"); // NOI18N
         tglTransaksi1.setOpaque(false);
@@ -1288,7 +1317,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-10-2017" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setName("tglTransaksi2"); // NOI18N
         tglTransaksi2.setOpaque(false);
@@ -1377,7 +1406,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         tglOrder1.setEditable(false);
         tglOrder1.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
+        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-10-2017" }));
         tglOrder1.setDisplayFormat("dd-MM-yyyy");
         tglOrder1.setName("tglOrder1"); // NOI18N
         tglOrder1.setOpaque(false);
@@ -1391,7 +1420,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
 
         tglOrder2.setEditable(false);
         tglOrder2.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-10-2017" }));
+        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-10-2017" }));
         tglOrder2.setDisplayFormat("dd-MM-yyyy");
         tglOrder2.setName("tglOrder2"); // NOI18N
         tglOrder2.setOpaque(false);
@@ -1474,6 +1503,12 @@ public class DlgHemodialisa extends javax.swing.JDialog
 }//GEN-LAST:event_BtnCariKeyPressed
 
     private void txtNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoRwKeyPressed
+        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            tindakanBaru();
+        }
+        else
         Valid.pindah(evt, txtCari, DTPBeri);
 }//GEN-LAST:event_txtNoRwKeyPressed
 
@@ -1814,23 +1849,65 @@ public class DlgHemodialisa extends javax.swing.JDialog
     private widget.TextBox txtUmur;
     // End of variables declaration//GEN-END:variables
 
+    private void tindakanBaru()
+    {
+        isEdit = false;
+        
+        ResultSet rs = new GStatement(koneksi)
+                .a("SELECT reg_periksa.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien,")
+                .a("CONCAT(alamat, ' ', nm_kel, ' ', nm_kec, ' ', nm_kab) AS alamat,")
+                .a("umur, pasien.jk, reg_periksa.kd_dokter, dper.nm_dokter AS d_per")
+                .a("FROM reg_periksa")
+                .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("JOIN kelurahan ON kelurahan.kd_kel = pasien.kd_kel")
+                .a("JOIN kecamatan ON kecamatan.kd_kec = pasien.kd_kec")
+                .a("JOIN kabupaten ON kabupaten.kd_kab = pasien.kd_kab")
+                .a("JOIN dokter dper ON dper.kd_dokter = reg_periksa.kd_dokter")
+                .a("WHERE reg_periksa.no_rawat = :no")
+                .setString("no", txtNoRw.getText())
+                .executeQuery();
+        
+        try
+        {
+            if (rs.next())
+            {
+                txtNoRw.setText(rs.getString("no_rawat"));
+                txtNoRm.setText(rs.getString("no_rkm_medis"));
+                txtNamaPasien.setText(rs.getString("nm_pasien"));
+                txtAlamat.setText(rs.getString("alamat"));
+                txtUmur.setText(rs.getString("umur"));
+                txtJk.setText(rs.getString("jk"));
+                txtKdDokter.setText(rs.getString("kd_dokter"));
+                txtNamaDokter.setText(rs.getString("d_per"));
+            }
+            else
+            {
+                GMessage.w("Warning", "No rawat salah");
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
     private void tindakanFromOrder(String kdPeriksa)
     {
+        isEdit = true;
         fillData(kdPeriksa, false);
         
-        isEdit = false;
         this.kdPeriksa = kdPeriksa;
     }
     
     private void tindakanFromTransaksi(String kdPeriksa)
     {
+        isEdit = true;
         fillData(kdPeriksa, true);
         
-        isEdit = true;
         this.kdPeriksa = kdPeriksa;
     }
     
-    private void fillData(String kdPeriksa, boolean isEdit)
+    private void fillData(String kdPeriksa, boolean isTransaksi)
     {
         ResultSet rs = new GStatement(koneksi)
                 .a("SELECT kd_jenis_prw, material, bhp, tarif_tindakandr, tarif_tindakanpr, kso, manajemen, biaya_rawat")
@@ -1838,10 +1915,10 @@ public class DlgHemodialisa extends javax.swing.JDialog
                 .a("WHERE kd_periksa = :kd")
                 .setString("kd", kdPeriksa)
                 .executeQuery();
-        
+
         selKodes.clear();
         selDatas.clear();
-        
+
         try 
         {
             while (rs.next())
@@ -1901,7 +1978,7 @@ public class DlgHemodialisa extends javax.swing.JDialog
                 txtKdDokter.setText(rs2.getString("kd_dokter_perujuk"));
                 txtNamaDokter.setText(rs2.getString("d_per"));
                 
-                if (isEdit)
+                if (isTransaksi)
                 {
                     txtKdDokterKons.setText(rs2.getString("kd_dokter_konsultan"));
                     txtNamaDokterKons.setText(rs2.getString("d_kon"));
@@ -1927,6 +2004,15 @@ public class DlgHemodialisa extends javax.swing.JDialog
         }
     }
     
+    // Status ralan atau ranap
+    private String getStatus()
+    {
+        return new GQuery()
+                .a("SELECT COUNT(*) FROM kamar_inap WHERE no_rawat = {no_rwt}")
+                .set("no_rwt", txtNoRw.getText())
+                .getInt() > 0 ? "Ranap" : "Ralan";
+    }
+    
     private void simpan()
     {
         if (!valid())
@@ -1935,43 +2021,64 @@ public class DlgHemodialisa extends javax.swing.JDialog
         boolean success = true;
         GQuery.setAutoCommit(false);
         
-        success &= new GQuery()
-                .a("UPDATE pemeriksaan_hd SET")
-                .a("jam_selesai = {jam_selesai},")
-                .a("hd_ke = {hd_ke},")
-                .a("pre_td = {pre_td},")
-                .a("pre_bb = {pre_bb},")
-                .a("pre_nadi = {pre_nadi},")
-                .a("pre_res = {pre_res},")
-                .a("pos_td = {pos_td},")
-                .a("pos_bb = {pos_bb},")
-                .a("pos_nadi = {pos_nadi},")
-                .a("pos_res = {pos_res},")
-                .a("kd_dokter_konsultan = {konsultan},")
-                .a("kd_dokter_pj = {pj},")
-                .a("kd_dokter_pelaksana = {pel},")
-                .a("status = '1'")
-                .a("WHERE kd_periksa = {kd_periksa}")
-                .set("jam_selesai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
-                .set("hd_ke", txtHdKe.getText())
-                .set("pre_td", txtPreTd.getText())
-                .set("pre_bb", txtPreBb.getText())
-                .set("pre_nadi", txtPreNadi.getText())
-                .set("pre_res", txtPreRes.getText())
-                .set("pos_td", txtPostTd.getText())
-                .set("pos_bb", txtPostBb.getText())
-                .set("pos_nadi", txtPostNadi.getText())
-                .set("pos_res", txtPostRes.getText())
-                .set("konsultan", txtKdDokterKons.getText())
-                .set("pj", txtKdDokterPj.getText())
-                .set("pel", txtKdDokterPel.getText())
-                .set("kd_periksa", kdPeriksa)
-                .write();
-        
-        success &= new GQuery()
-                .a("DELETE FROM det_pemeriksaan_hd WHERE kd_periksa = {kd}")
-                .set("kd", kdPeriksa)
-                .write();
+        if (isEdit)
+        {
+            success &= new GQuery()
+                    .a("UPDATE pemeriksaan_hd SET")
+                    .a("jam_selesai = {jam_selesai},")
+                    .a("hd_ke = {hd_ke},")
+                    .a("pre_td = {pre_td},")
+                    .a("pre_bb = {pre_bb},")
+                    .a("pre_nadi = {pre_nadi},")
+                    .a("pre_res = {pre_res},")
+                    .a("pos_td = {pos_td},")
+                    .a("pos_bb = {pos_bb},")
+                    .a("pos_nadi = {pos_nadi},")
+                    .a("pos_res = {pos_res},")
+                    .a("kd_dokter_konsultan = {konsultan},")
+                    .a("kd_dokter_pj = {pj},")
+                    .a("kd_dokter_pelaksana = {pel},")
+                    .a("status = '1'")
+                    .a("WHERE kd_periksa = {kd_periksa}")
+                    .set("jam_selesai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                    .set("hd_ke", txtHdKe.getText())
+                    .set("pre_td", txtPreTd.getText())
+                    .set("pre_bb", txtPreBb.getText())
+                    .set("pre_nadi", txtPreNadi.getText())
+                    .set("pre_res", txtPreRes.getText())
+                    .set("pos_td", txtPostTd.getText())
+                    .set("pos_bb", txtPostBb.getText())
+                    .set("pos_nadi", txtPostNadi.getText())
+                    .set("pos_res", txtPostRes.getText())
+                    .set("konsultan", txtKdDokterKons.getText())
+                    .set("pj", txtKdDokterPj.getText())
+                    .set("pel", txtKdDokterPel.getText())
+                    .set("kd_periksa", kdPeriksa)
+                    .write();
+
+            success &= new GQuery()
+                    .a("DELETE FROM det_pemeriksaan_hd WHERE kd_periksa = {kd}")
+                    .set("kd", kdPeriksa)
+                    .write();
+        }
+        else
+        {
+            // Ambil no otomatis
+            String kdPeriksa = Sequel.autoNumber("pemeriksaan_hd", "kd_periksa");
+            
+            // Menyimpan ke table periksa hd (UTAMA)
+            success &= Sequel.menyimpantf2("pemeriksaan_hd", "?,?,?,?,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,?,NULL,NULL,NULL,NULL,?,?", "-", 7, new String[]
+            {
+                kdPeriksa,
+                txtNoRw.getText(),
+                Valid.SetTgl(DTPBeri.getSelectedItem().toString()),
+                cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem(),
+                txtKdDokter.getText(),
+                "0",
+                getStatus()
+            });
+
+        }
         
         for (String[] s : selDatas)
         {

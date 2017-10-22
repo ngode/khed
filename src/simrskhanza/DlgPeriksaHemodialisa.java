@@ -1156,16 +1156,15 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                     boolean success = true;
                     
                     // Menyimpan ke table periksa hd (UTAMA)
-                    success &= Sequel.menyimpantf2("pemeriksaan_hd", "?,?,?,?,?,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,?,NULL,NULL,NULL,NULL,?,?", "-", 8, new String[]
+                    success &= Sequel.menyimpantf2("pemeriksaan_hd", "?,?,?,?,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,?,NULL,NULL,NULL,NULL,?,?", "-", 7, new String[]
                     {
                         kdPeriksa,
                         txtNoRw.getText(),
-                        txtKdKamar.getText(),
                         Valid.SetTgl(Tanggal.getSelectedItem().toString()),
                         CmbJam.getSelectedItem() + ":" + CmbMenit.getSelectedItem() + ":" + CmbDetik.getSelectedItem(),
                         txtKdDokter.getText(),
                         "0",
-                        "Ranap"
+                        status
                     });
 
                     // Perulangan menyimpan ke tabel detail periksa hd
@@ -1527,13 +1526,15 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         try
         {
             String qMain = new GQuery()
-                    .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal,")
+                    .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli")
                     .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status")
                     .a("FROM pemeriksaan_hd")
                     .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
                     .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
-                    .a("JOIN kamar ON kamar.kd_kamar = pemeriksaan_hd.kd_kamar")
-                    .a("JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                    .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_hd.no_rawat")
+                    .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
+                    .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                    .a("LEFT JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
                     .a("WHERE pemeriksaan_hd.no_rawat = {no_rawat}")
                     .set("no_rawat", txtNoRw.getText())
                     .compile();
@@ -1550,12 +1551,24 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             
             while (rsMain.next())
             {
+                String pas;
+                
+                if (rsMain.getString("kd_kamar") != null)
+                {
+                    pas = rsMain.getString("no_rkm_medis") + " " + rsMain.getString("nm_pasien") + " (Kamar : " + 
+                        rsMain.getString("kd_kamar") + ", " + rsMain.getString("nm_bangsal") + ")";
+                }
+                else
+                {
+                    pas = rsMain.getString("no_rkm_medis") + " " + rsMain.getString("nm_pasien") + " (Poli : " + 
+                        rsMain.getString("nm_poli") + ")";
+                }
+                
                 Object[] o = new Object[]
                 {
                     rsMain.getString("kd_periksa"),
                     rsMain.getString("no_rawat"),
-                    rsMain.getString("no_rkm_medis") + " " + rsMain.getString("nm_pasien") + " (Kamar : " + 
-                        rsMain.getString("kd_kamar") + ", " + rsMain.getString("nm_bangsal") + ")",
+                    pas,
                     rsMain.getString("tgl_periksa"),
                     rsMain.getString("jam_mulai"),
                     rsMain.getString("status")
@@ -1712,18 +1725,36 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     {
         txtNoRw.setText(norwt);
         this.status = posisi;
-     
-        String[] sa = new GQuery()
-                .a("SELECT kamar.kd_kamar, nm_bangsal")
-                .a("FROM kamar_inap")
-                .a("JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
-                .a("JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
-                .a("WHERE no_rawat = {no_rw}")
-                .set("no_rw", norwt)
-                .getRow();
-                
-        txtKdKamar.setText(sa[0]);
-        txtNamaKamar.setText(sa[1]);
+        
+        if (posisi.equals("Ranap"))
+        {
+            String[] sa = new GQuery()
+                    .a("SELECT kamar.kd_kamar, nm_bangsal")
+                    .a("FROM kamar_inap")
+                    .a("JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
+                    .a("JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
+                    .a("WHERE no_rawat = {no_rw}")
+                    .set("no_rw", norwt)
+                    .getRow();
+
+            txtKdKamar.setText(sa[0]);
+            txtNamaKamar.setText(sa[1]);
+
+            
+        }
+        else
+        {
+            String[] sa = new GQuery()
+                    .a("SELECT poliklinik.kd_poli, nm_poli")
+                    .a("FROM reg_periksa")
+                    .a("JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
+                    .a("WHERE no_rawat = {no_rw}")
+                    .set("no_rw", norwt)
+                    .getRow();
+
+            txtKdKamar.setText(sa[0]);
+            txtNamaKamar.setText(sa[1]);
+        }
         
         isRawat();
         isPsien();

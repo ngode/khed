@@ -72,12 +72,12 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             pskamarin,psbiayasekali,psbiayaharian,psreseppulang,pstambahanbiaya,pspotonganbiaya,pstemporary,
             psralandokter,psralandrpr,psranapdrpr,psranapdokter,
             psoperasi,psralanperawat,psranapperawat,
-            psperiksalab,pssudahmasuk,pskategori,psubahpenjab,psperiksarad,psanak,psnota,psservice;
+            psperiksalab,pssudahmasuk,pskategori,psubahpenjab,psperiksarad, psperiksahd,psanak,psnota,psservice;
     private ResultSet rscekbilling,rscarirm,rscaripasien,rsreg,rskamar,rscarialamat,rsdetaillab,
             rsdokterranap,rsranapdrpr,rsdokterralan,rscariobat,rsobatlangsung,rsobatoperasi,rsreturobat,rsubahpenjab,
             rskamarin,rsbiayasekali,rsbiayaharian,rsreseppulang,rstambahanbiaya,rspotonganbiaya,
             rsralandokter,rsralandrpr,rsranapdokter,rsoperasi,rsralanperawat,rsranapperawat,rsperiksalab,rskategori,
-            rsperiksarad,rsanak,rstamkur,rsrekening,rsservice,rsakunbayar,rsakunpiutang;
+            rsperiksarad,rsperiksahd,rsanak,rstamkur,rsrekening,rsservice,rsakunbayar,rsakunpiutang;
     private String biaya="",tambahan="",totals="",norawatbayi="",centangdokterranap="",kd_pj="",
             rinciandokterranap="",rincianoperasi="",hariawal="",notaranap="",tampilkan_administrasi_di_billingranap="",
             Tindakan_Ranap="",Laborat_Ranap="",Radiologi_Ranap="",Obat_Ranap="",Registrasi_Ranap="",
@@ -5334,6 +5334,74 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     psperiksarad.close();
                 }
             }                
+            
+            // HD ======
+            subttl=0;
+            psperiksahd=koneksi.prepareStatement(
+                   "select jns_perawatan.nm_perawatan, count(det_pemeriksaan_hd.kd_jenis_prw) as jml, det_pemeriksaan_hd.biaya_rawat as biaya, "+
+                   "SUM(det_pemeriksaan_hd.biaya_rawat) as total, jns_perawatan.kd_jenis_prw "+
+                   "FROM det_pemeriksaan_hd " + 
+                   "JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = det_pemeriksaan_hd.kd_jenis_prw "+
+                   "JOIN pemeriksaan_hd ON pemeriksaan_hd.kd_periksa = det_pemeriksaan_hd.kd_periksa "+
+                   "WHERE pemeriksaan_hd.no_rawat=? AND jns_periksa LIKE ? " + 
+                   "GROUP BY det_pemeriksaan_hd.kd_jenis_prw");            
+            try {
+                psperiksahd.setString(1,norawat);
+                if((chkRalan.isSelected()==true)&&(chkRanap.isSelected()==true)){
+                    psperiksahd.setString(2,"%%");
+                }else if((chkRalan.isSelected()==true)&&(chkRanap.isSelected()==false)){
+                    psperiksahd.setString(2,"%Ralan%");
+                }else if((chkRalan.isSelected()==false)&&(chkRanap.isSelected()==true)){
+                    psperiksahd.setString(2,"%Ranap%");
+                }else if((chkRalan.isSelected()==false)&&(chkRanap.isSelected()==false)){
+                    psperiksahd.setString(2,"%Kosong%");
+                }
+                rsperiksahd=psperiksahd.executeQuery();            
+                if(rsperiksahd.next()){
+                       tabModeRwJlDr.addRow(new Object[]{true,x+". Pemeriksaan Henodialisa",":","",null,null,null,null,"Hemodialisa"}); 
+                       x++;
+                }
+                rsperiksahd.beforeFirst();
+                while(rsperiksahd.next()){
+                    tamkur=0;
+//                    pstamkur=koneksi.prepareStatement(sqlpstamkur);            
+//                    try {
+//                        pstamkur.setString(1,TNoRw.getText());
+//                        pstamkur.setString(2,rsperiksarad.getString("nm_perawatan"));
+//                        pstamkur.setString(3,"Radiologi");
+//                        rstamkur=pstamkur.executeQuery();
+//                        if(rstamkur.next()){
+//                            tamkur=rstamkur.getDouble(1);
+//                        }    
+//                    } catch (Exception e) {
+//                        System.out.println("Notifikasi : "+e);
+//                    } finally{
+//                        if(rstamkur!=null){
+//                            rstamkur.close();
+//                        }
+//                        if(pstamkur!=null){
+//                            pstamkur.close();
+//                        }
+//                    }
+                    tabModeRwJlDr.addRow(new Object[]{true,"                           ",rsperiksahd.getString("nm_perawatan"),":",
+                                  rsperiksahd.getDouble("biaya"),rsperiksahd.getDouble("jml"),tamkur,(tamkur+rsperiksahd.getDouble("total")),"Hemodialisa"});
+                    subttl=subttl+rsperiksahd.getDouble("total")+tamkur;
+                }            
+
+                if(subttl>1){
+                   tabModeRwJlDr.addRow(new Object[]{true,"","Total Periksa Hemodialisa : "+Valid.SetAngka(subttl),"",null,null,null,null,"TtlHemodialisa"});
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi Periksa Radiologi : "+e);
+            } finally{
+                if(rsperiksahd!=null){
+                    rsperiksahd.close();
+                }
+                if(psperiksahd!=null){
+                    psperiksahd.close();
+                }
+            }         
+            // =========
             
             if(detailjs>0){
                 tabModeRwJlDr.addRow(new Object[]{true,x+". Jasa Sarpras",":","",null,null,null,detailjs,"Ralan Dokter"});
