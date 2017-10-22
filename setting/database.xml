@@ -5,7 +5,7 @@
     <entry key="HOST">localhost</entry>
     <entry key="DATABASE">sik1</entry>
     <entry key="PORT">3306</entry>
-    <entry key="PORTAPACHE"></entry>
+    <entry key="PORTAPACHE">8080</entry>
     <entry key="USER">root</entry>
     <entry key="PAS"></entry>
     <entry key="CARICEPAT">nonaktif</entry>

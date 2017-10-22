@@ -159,14 +159,14 @@ public class DlgHybrid extends javax.swing.JDialog {
                         if (newState == State.SUCCEEDED) {
                             try {
                                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
-                                if(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains(halaman)){
+                                if(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST") + (prop.getProperty("PORTAPACHE").isEmpty() ? "" : ":" + prop.getProperty("PORTAPACHE")) +"/"+prop.getProperty("HYBRIDWEB")+"/","").contains(halaman)){
                                     setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                    Valid.panggilUrl(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/",""));
+                                    Valid.panggilUrl(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+ (prop.getProperty("PORTAPACHE").isEmpty() ? "" : ":" + prop.getProperty("PORTAPACHE")) +"/"+prop.getProperty("HYBRIDWEB")+"/",""));
                                     engine.executeScript("history.back()");
                                     setCursor(Cursor.getDefaultCursor());
-                                }else if(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("Keluar")){
+                                }else if(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+ (prop.getProperty("PORTAPACHE").isEmpty() ? "" : ":" + prop.getProperty("PORTAPACHE")) +"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("Keluar")){
                                     dispose();    
-                                }else if(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("CetakBerkasRM")){
+                                }else if(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+ (prop.getProperty("PORTAPACHE").isEmpty() ? "" : ":" + prop.getProperty("PORTAPACHE")) +"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("CetakBerkasRM")){
                                     try {
                                         ps=koneksi.prepareStatement("select * from temporary");
                                         try {
@@ -215,7 +215,7 @@ public class DlgHybrid extends javax.swing.JDialog {
         }
         catch (IOException ex)
         {
-            Logger.getLogger(DlgHybrid.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         
         String portApache = prop.getProperty("PORTAPACHE");
