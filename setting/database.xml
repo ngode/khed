@@ -3,7 +3,7 @@
 <properties>
     <comment>KhanzaHMS</comment>
     <entry key="HOST">localhost</entry>
-    <entry key="DATABASE">sik1</entry>
+    <entry key="DATABASE">sikrspau</entry>
     <entry key="PORT">3306</entry>
     <entry key="PORTAPACHE">8080</entry>
     <entry key="USER">root</entry>
@@ -13,8 +13,8 @@
     <entry key="ANTRIAN">sender</entry>
     <entry key="MENUTRANSPARAN">yes</entry>
     <entry key="URLAPIBPJS">http://dvlp.bpjs-kesehatan.go.id:8081/devWslokalrest</entry>
-    <entry key="SECRETKEYAPIBPJS">0oV195B99F</entry>
-    <entry key="CONSIDAPIBPJS">14178</entry>
+    <entry key="SECRETKEYAPIBPJS">4mO611AC5A</entry>
+    <entry key="CONSIDAPIBPJS">15486</entry>
     <entry key="URLAPIAPLICARE">http://dvlp.bpjs-kesehatan.go.id:8888/aplicaresws</entry>
     <entry key="SECRETKEYAPIAPLICARE">1112</entry>
     <entry key="CONSIDAPIAPLICARE">1000</entry>
