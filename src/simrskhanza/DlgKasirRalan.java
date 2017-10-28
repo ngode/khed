@@ -68,6 +68,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     // Childs ==========
     private PopKonsul popKonsul = new PopKonsul(null, false);
     private DlgPeriksaHemodialisa dlgPeriksaHd = new DlgPeriksaHemodialisa(null, false);
+    private DlgOrderLab dlgOrderLab = new DlgOrderLab(null, false);
     
     /** Creates new form DlgReg
      * @param parent
@@ -3030,25 +3031,40 @@ private void MnPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_MnPenjualanActionPerformed
 
 private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabActionPerformed
-       if(tabModekasir.getRowCount()==0){
+//       if(tabModekasir.getRowCount()==0){
+//            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+//            TCari.requestFocus();
+//        }else if(TNoRw.getText().trim().equals("")){
+//            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+//            tbKasirRalan.requestFocus();
+//        }else{
+//            if(Sequel.cariInteger("select count(no_rawat) from kamar_inap where no_rawat=?",TNoRw.getText())>0){
+//                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+//            }else {
+//                kamarinap.billing.periksalab.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+//                kamarinap.billing.periksalab.setLocationRelativeTo(internalFrame1);
+//                kamarinap.billing.periksalab.emptTeks();
+//                kamarinap.billing.periksalab.setNoRm(TNoRw.getText(),"Ralan"); 
+//                kamarinap.billing.periksalab.tampiltarif();
+//                kamarinap.billing.periksalab.tampil(); 
+//                kamarinap.billing.periksalab.isCek();
+//                kamarinap.billing.periksalab.setVisible(true);
+//            }            
+//        }
+        if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
         }else if(TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             tbKasirRalan.requestFocus();
         }else{
-            if(Sequel.cariInteger("select count(no_rawat) from kamar_inap where no_rawat=?",TNoRw.getText())>0){
-                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else {
-                kamarinap.billing.periksalab.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
-                kamarinap.billing.periksalab.setLocationRelativeTo(internalFrame1);
-                kamarinap.billing.periksalab.emptTeks();
-                kamarinap.billing.periksalab.setNoRm(TNoRw.getText(),"Ralan"); 
-                kamarinap.billing.periksalab.tampiltarif();
-                kamarinap.billing.periksalab.tampil(); 
-                kamarinap.billing.periksalab.isCek();
-                kamarinap.billing.periksalab.setVisible(true);
-            }            
+            dlgOrderLab.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+            dlgOrderLab.setLocationRelativeTo(internalFrame1);
+            dlgOrderLab.emptTeks();
+            dlgOrderLab.setNoRm(TNoRw.getText(), "Ralan");
+            dlgOrderLab.tampil();
+            dlgOrderLab.isCek();
+            dlgOrderLab.setVisible(true);          
         }
 }//GEN-LAST:event_MnPeriksaLabActionPerformed
 

@@ -3,7 +3,7 @@
     $db_hostname    ="localhost";
     $db_username    ="root";
     $db_password    ="";
-    $db_name        ="sik1";
+    $db_name        ="sikrspau";
 
     function host(){
         global $db_hostname;

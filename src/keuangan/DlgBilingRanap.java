@@ -39,6 +39,7 @@ import javax.swing.table.TableColumn;
 import simrskhanza.DlgCariPeriksaLab;
 import simrskhanza.DlgCariPeriksaRadiologi;
 import simrskhanza.DlgDeposit;
+import simrskhanza.DlgOrderRadiologi;
 import simrskhanza.DlgPemberianObat;
 import simrskhanza.DlgPenanggungJawab;
 import simrskhanza.DlgPeriksaLaboratorium;
@@ -59,7 +60,8 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     public DlgPemberianObat beriobat=new DlgPemberianObat(null,false);
     public DlgRawatInap rawatinap=new DlgRawatInap(null,false);
     public DlgPeriksaLaboratorium periksalab=new DlgPeriksaLaboratorium(null,false);
-    public DlgPeriksaRadiologi periksarad=new DlgPeriksaRadiologi(null,false);
+//    public DlgPeriksaRadiologi periksarad=new DlgPeriksaRadiologi(null,false);
+    public DlgOrderRadiologi periksarad=new DlgOrderRadiologi(null,false);
     public DlgPenanggungJawab penjab=new DlgPenanggungJawab(null,false);
     public DlgDeposit deposit=new DlgDeposit(null,false);
     private Connection koneksi=koneksiDB.condb();
