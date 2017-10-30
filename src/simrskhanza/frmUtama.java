@@ -651,6 +651,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolLab = new widget.ButtonBig();
         btnToolRad = new widget.ButtonBig();
         btnToolHD = new widget.ButtonBig();
+        btnToolOperasi = new widget.ButtonBig();
         BtnToolJualObat = new widget.ButtonBig();
         jSeparator9 = new javax.swing.JSeparator();
         BtnToolKamnap = new widget.ButtonBig();
@@ -4562,7 +4563,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05/10/2017" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31/10/2017" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -4614,13 +4615,13 @@ public class frmUtama extends javax.swing.JFrame {
         setIconImages(null);
         addComponentListener(new java.awt.event.ComponentAdapter()
         {
-            public void componentResized(java.awt.event.ComponentEvent evt)
-            {
-                formComponentResized(evt);
-            }
             public void componentMoved(java.awt.event.ComponentEvent evt)
             {
                 formComponentMoved(evt);
+            }
+            public void componentResized(java.awt.event.ComponentEvent evt)
+            {
+                formComponentResized(evt);
             }
         });
         addWindowStateListener(new java.awt.event.WindowStateListener()
@@ -4632,13 +4633,13 @@ public class frmUtama extends javax.swing.JFrame {
         });
         addWindowListener(new java.awt.event.WindowAdapter()
         {
-            public void windowOpened(java.awt.event.WindowEvent evt)
-            {
-                formWindowOpened(evt);
-            }
             public void windowClosed(java.awt.event.WindowEvent evt)
             {
                 formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
+                formWindowOpened(evt);
             }
         });
 
@@ -4849,6 +4850,29 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
         internalFrame1.add(btnToolHD);
+
+        btnToolOperasi.setForeground(new java.awt.Color(80, 100, 80));
+        btnToolOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/scissors.png"))); // NOI18N
+        btnToolOperasi.setMnemonic('A');
+        btnToolOperasi.setText("Operasi");
+        btnToolOperasi.setToolTipText("Alt+A");
+        btnToolOperasi.setEnabled(false);
+        btnToolOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnToolOperasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnToolOperasi.setIconTextGap(3);
+        btnToolOperasi.setMargin(new java.awt.Insets(1, 2, 1, 0));
+        btnToolOperasi.setName("btnToolOperasi"); // NOI18N
+        btnToolOperasi.setPreferredSize(new java.awt.Dimension(84, 40));
+        btnToolOperasi.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnToolOperasi.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnToolOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnToolOperasiActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(btnToolOperasi);
 
         BtnToolJualObat.setForeground(new java.awt.Color(80, 100, 80));
         BtnToolJualObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/shopping-cart-insert24.png"))); // NOI18N
@@ -5642,6 +5666,8 @@ public class frmUtama extends javax.swing.JFrame {
                 btnToolLab.setEnabled(false);
                 btnToolRad.setEnabled(false);
                 btnToolIGD.setEnabled(false);
+                btnToolHD.setEnabled(false);
+                btnToolOperasi.setEnabled(false);
                 MnGantiPassword.setEnabled(false);
                 btnToolBcdRalan.setEnabled(false);
                 btnToolBcdRanap.setEnabled(false);
@@ -5696,6 +5722,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolIGD.setEnabled(true);
                     btnToolRad.setEnabled(true);
                     btnToolHD.setEnabled(true);
+                    btnToolOperasi.setEnabled(true);
                     btnToolBcdRalan.setEnabled(true);
                     btnToolBcdRanap.setEnabled(true);
                     MnGantiPassword.setEnabled(false);
@@ -5719,6 +5746,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolLab.setEnabled(var.getperiksa_lab());  
                     btnToolRad.setEnabled(var.getperiksa_radiologi());
                     btnToolHD.setEnabled(var.getHemodialisa());
+                    btnToolOperasi.setEnabled(var.getoperasi());
                     btnToolIGD.setEnabled(var.getigd());                    
                     btnToolBcdRalan.setEnabled(var.getbarcoderalan());
                     btnToolBcdRanap.setEnabled(var.getbarcoderanap());   
@@ -5733,6 +5761,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnToolIGD.setEnabled(false);
                     btnToolRad.setEnabled(false);
                     btnToolHD.setEnabled(false);
+                    btnToolOperasi.setEnabled(false);
                     btnToolBcdRalan.setEnabled(false);
                     btnToolBcdRanap.setEnabled(false);   
                     edAdmin.setText("");
@@ -9234,6 +9263,19 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnToolHDActionPerformed
 
+    private void btnToolOperasiActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnToolOperasiActionPerformed
+    {//GEN-HEADEREND:event_btnToolOperasiActionPerformed
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
+        //DlgTagihanOperasi form=new DlgTagihanOperasi(null,false);
+        DlgOperasi form=new DlgOperasi(null,false);
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnToolOperasiActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -9517,6 +9559,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private widget.ButtonBig btnToolHD;
     private widget.ButtonBig btnToolIGD;
     private widget.ButtonBig btnToolLab;
+    private widget.ButtonBig btnToolOperasi;
     private widget.ButtonBig btnToolRad;
     private widget.ButtonBig btnTracker;
     private widget.ButtonBig btnUTDCekalDarah;

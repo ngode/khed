@@ -110,6 +110,11 @@ public class GQuery
         return sql.selectRow(compile());
     }
     
+    public HashMap<String, String> getRowWithName()
+    {
+        return sql.selectRowWithName(compile());
+    }
+    
     public String getString()
     {
         return sql.selectScalar(compile());

@@ -50,6 +50,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
+import util.GMessage;
 
 
 /**
@@ -1600,7 +1601,6 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             param.put("kotars",var.getkabupatenrs());
             param.put("propinsirs",var.getpropinsirs());
             param.put("kontakrs",var.getkontakrs());
-            param.put("logo",Sequel.cariGambar("select bpjs from gambar")); 
             if(JenisPelayanan.getSelectedIndex()==0){
                 Valid.MyReport("rptBridgingSEP.jrxml","report","::[ Cetak SEP ]::","select bridging_sep.no_sep, bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tglsep,"+
                         "bridging_sep.tglrujukan,bridging_sep.no_rujukan,bridging_sep.kdppkrujukan,"+

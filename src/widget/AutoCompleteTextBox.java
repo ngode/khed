@@ -35,7 +35,7 @@ public class AutoCompleteTextBox extends TextBox implements DocumentListener, Ac
         String q = "SELECT " + idCol + ", " + dispCol + " FROM " + table + " ORDER BY " + dispCol;
         datas = sql.select(q);        
         
-        addDocumentListener(this);
+        getDocument().addDocumentListener(this);
         addActionListener(this);
         addKeyListener(this);
     }

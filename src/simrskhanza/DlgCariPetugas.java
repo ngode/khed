@@ -1,5 +1,6 @@
 package simrskhanza;
 
+import base.BaseDialog;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -22,7 +23,7 @@ import javax.swing.table.TableColumn;
  *
  * @author dosen
  */
-public final class DlgCariPetugas extends javax.swing.JDialog {
+public final class DlgCariPetugas extends BaseDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();

@@ -4266,11 +4266,11 @@ private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
                     rs2=psanak.executeQuery();
                     if(rs2.next()){
-                        DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
-                        dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                        dlgro.setLocationRelativeTo(internalFrame1);
-                        dlgro.setNoRm(rs2.getString("no_rawat2"),rs2.getString("no_rkm_medis")+", "+rs2.getString("nm_pasien"),"Ranap");  
-                        dlgro.setVisible(true);
+                        DlgOrderOperasi d = new DlgOrderOperasi(null,false);
+                        d.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                        d.setLocationRelativeTo(internalFrame1);
+                        d.setNoRm(rs2.getString("no_rawat2"), "Ranap");  
+                        d.setVisible(true);
                     }else{
                           JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                           tbKamIn.requestFocus();
@@ -4289,11 +4289,11 @@ private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 System.out.println(e);
             } 
         }else{
-            DlgTagihanOperasi dlgro=new DlgTagihanOperasi(null,false);
-            dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            dlgro.setLocationRelativeTo(internalFrame1);
-            dlgro.setNoRm(norawat.getText(),TNoRM.getText()+", "+TPasien.getText(),"Ranap");  
-            dlgro.setVisible(true);
+            DlgOrderOperasi d = new DlgOrderOperasi(null,false);
+            d.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            d.setLocationRelativeTo(internalFrame1);
+            d.setNoRm(norawat.getText(), "Ranap");  
+            d.setVisible(true);
         }
 }//GEN-LAST:event_MnOperasiActionPerformed
 

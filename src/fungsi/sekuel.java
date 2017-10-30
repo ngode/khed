@@ -36,6 +36,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -1463,8 +1464,8 @@ public final class sekuel {
         }
     }
    
-   public List<String[]> select(String q)
-   {
+    public List<String[]> select(String q)
+    {
         List<String[]> res = new ArrayList<>();
        
         PreparedStatement ps = null;
@@ -1509,10 +1510,67 @@ public final class sekuel {
         
         return res;
    }
+    
+    public List<HashMap<String, String>> selectWithName(String q)
+    {
+        List<HashMap<String, String>> res = new ArrayList<>();
+       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+            
+        try
+        {
+            ps = connect.prepareStatement(q);
+            rs = ps.executeQuery();
+            
+            while (rs.next())
+            {
+                HashMap<String, String> map = new HashMap<>();
+                
+                for (int a = 0; a < rs.getMetaData().getColumnCount(); a++)
+                {
+                    map.put(rs.getMetaData().getColumnLabel(a + 1), rs.getString(a + 1));
+                }
+                
+                res.add(map);
+            }
+        } 
+        catch (SQLException ex)
+        {
+            Logger.getLogger(sekuel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            try
+            {
+                if (rs != null)
+                    rs.close();
+                
+                if (ps != null)
+                    ps.close();
+            } 
+            catch (SQLException ex)
+            {
+                Logger.getLogger(sekuel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return res;
+   }
 
    public String[] selectRow(String q)
    {
        List<String[]> res = select(q);
+       
+       if (res.size() > 0)
+           return res.get(0);
+       else
+           return null;
+   }
+   
+   public HashMap<String, String> selectRowWithName(String q)
+   {
+       List<HashMap<String, String>> res = selectWithName(q);
        
        if (res.size() > 0)
            return res.get(0);

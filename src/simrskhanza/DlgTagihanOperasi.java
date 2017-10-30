@@ -379,7 +379,8 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         Kd2 = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
@@ -530,8 +531,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         ppBersihkan.setIconTextGap(8);
         ppBersihkan.setName("ppBersihkan"); // NOI18N
         ppBersihkan.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppBersihkan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ppBersihkan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ppBersihkanActionPerformed(evt);
             }
         });
@@ -540,8 +543,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -574,8 +579,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         TCariPaket.setToolTipText("Alt+C");
         TCariPaket.setName("TCariPaket"); // NOI18N
         TCariPaket.setPreferredSize(new java.awt.Dimension(215, 23));
-        TCariPaket.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TCariPaket.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TCariPaketKeyPressed(evt);
             }
         });
@@ -586,13 +593,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnCari2.setToolTipText("Alt+1");
         BtnCari2.setName("BtnCari2"); // NOI18N
         BtnCari2.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCari2ActionPerformed(evt);
             }
         });
-        BtnCari2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCari2KeyPressed(evt);
             }
         });
@@ -603,13 +614,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnAll1.setToolTipText("Alt+2");
         BtnAll1.setName("BtnAll1"); // NOI18N
         BtnAll1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnAll1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAll1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAll1ActionPerformed(evt);
             }
         });
-        BtnAll1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnAll1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnAll1KeyPressed(evt);
             }
         });
@@ -620,8 +635,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnTambahOperasi.setToolTipText("Alt+3");
         BtnTambahOperasi.setName("BtnTambahOperasi"); // NOI18N
         BtnTambahOperasi.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnTambahOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnTambahOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnTambahOperasiActionPerformed(evt);
             }
         });
@@ -635,13 +652,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         tbtindakan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbtindakan.setName("tbtindakan"); // NOI18N
-        tbtindakan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbtindakan.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tbtindakanMouseClicked(evt);
             }
         });
-        tbtindakan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbtindakan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tbtindakanKeyPressed(evt);
             }
         });
@@ -670,8 +691,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         TCari.setToolTipText("Alt+C");
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(215, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TCariKeyPressed(evt);
             }
         });
@@ -682,13 +705,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnCari1.setToolTipText("Alt+1");
         BtnCari1.setName("BtnCari1"); // NOI18N
         BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCari1ActionPerformed(evt);
             }
         });
-        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCari1KeyPressed(evt);
             }
         });
@@ -699,13 +726,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnAll.setToolTipText("Alt+2");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAll.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAllActionPerformed(evt);
             }
         });
-        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnAllKeyPressed(evt);
             }
         });
@@ -716,8 +747,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnTambah.setToolTipText("Alt+3");
         BtnTambah.setName("BtnTambah"); // NOI18N
         BtnTambah.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnTambah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnTambahActionPerformed(evt);
             }
         });
@@ -731,13 +764,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setName("tbObat"); // NOI18N
-        tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbObat.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tbObatMouseClicked(evt);
             }
         });
-        tbObat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbObat.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tbObatKeyPressed(evt);
             }
         });
@@ -759,13 +796,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSimpanActionPerformed(evt);
             }
         });
-        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnSimpanKeyPressed(evt);
             }
         });
@@ -783,13 +824,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnCari.setToolTipText("Alt+E");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -801,13 +846,17 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnKeluarActionPerformed(evt);
             }
         });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnKeluarKeyPressed(evt);
             }
         });
@@ -834,8 +883,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ChkInput.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ChkInputActionPerformed(evt);
             }
         });
@@ -856,8 +907,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdoperator1.setName("kdoperator1"); // NOI18N
         kdoperator1.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdoperator1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdoperator1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdoperator1KeyPressed(evt);
             }
         });
@@ -875,8 +928,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnOperator1.setToolTipText("Alt+2");
         BtnOperator1.setName("BtnOperator1"); // NOI18N
         BtnOperator1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnOperator1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnOperator1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnOperator1ActionPerformed(evt);
             }
         });
@@ -891,8 +946,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         tgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         tgl.setName("tgl"); // NOI18N
-        tgl.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        tgl.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 tglKeyPressed(evt);
             }
         });
@@ -906,8 +963,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
-        TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TNoRw.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TNoRwKeyPressed(evt);
             }
         });
@@ -927,8 +986,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         jenis.setHighlighter(null);
         jenis.setName("jenis"); // NOI18N
-        jenis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        jenis.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 jenisKeyPressed(evt);
             }
         });
@@ -943,8 +1004,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdasistoperator1.setName("kdasistoperator1"); // NOI18N
         kdasistoperator1.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdasistoperator1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdasistoperator1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdasistoperator1KeyPressed(evt);
             }
         });
@@ -962,8 +1025,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnAsis1.setToolTipText("Alt+2");
         btnAsis1.setName("btnAsis1"); // NOI18N
         btnAsis1.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsis1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAsis1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAsis1ActionPerformed(evt);
             }
         });
@@ -978,8 +1043,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdoperator2.setName("kdoperator2"); // NOI18N
         kdoperator2.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdoperator2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdoperator2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdoperator2KeyPressed(evt);
             }
         });
@@ -997,8 +1064,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnOperator2.setToolTipText("Alt+2");
         BtnOperator2.setName("BtnOperator2"); // NOI18N
         BtnOperator2.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnOperator2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnOperator2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnOperator2ActionPerformed(evt);
             }
         });
@@ -1013,8 +1082,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdoperator3.setName("kdoperator3"); // NOI18N
         kdoperator3.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdoperator3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdoperator3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdoperator3KeyPressed(evt);
             }
         });
@@ -1032,8 +1103,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnInstrumen.setToolTipText("Alt+2");
         btnInstrumen.setName("btnInstrumen"); // NOI18N
         btnInstrumen.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnInstrumen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnInstrumen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnInstrumenActionPerformed(evt);
             }
         });
@@ -1048,8 +1121,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdanestesi.setName("kdanestesi"); // NOI18N
         kdanestesi.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdanestesi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdanestesi.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdanestesiKeyPressed(evt);
             }
         });
@@ -1067,8 +1142,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnAnastesi.setToolTipText("Alt+2");
         BtnAnastesi.setName("BtnAnastesi"); // NOI18N
         BtnAnastesi.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnAnastesi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAnastesi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAnastesiActionPerformed(evt);
             }
         });
@@ -1083,8 +1160,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kddranak.setName("kddranak"); // NOI18N
         kddranak.setPreferredSize(new java.awt.Dimension(80, 23));
-        kddranak.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kddranak.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kddranakKeyPressed(evt);
             }
         });
@@ -1102,8 +1181,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnAnak.setToolTipText("Alt+2");
         btnAnak.setName("btnAnak"); // NOI18N
         btnAnak.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAnak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAnak.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAnakActionPerformed(evt);
             }
         });
@@ -1115,8 +1196,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnAsis2.setToolTipText("Alt+2");
         btnAsis2.setName("btnAsis2"); // NOI18N
         btnAsis2.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsis2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAsis2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAsis2ActionPerformed(evt);
             }
         });
@@ -1131,8 +1214,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdasistoperator2.setName("kdasistoperator2"); // NOI18N
         kdasistoperator2.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdasistoperator2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdasistoperator2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdasistoperator2KeyPressed(evt);
             }
         });
@@ -1150,8 +1235,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnAsis3.setToolTipText("Alt+2");
         btnAsis3.setName("btnAsis3"); // NOI18N
         btnAsis3.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsis3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAsis3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAsis3ActionPerformed(evt);
             }
         });
@@ -1166,8 +1253,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdInstrumen.setName("kdInstrumen"); // NOI18N
         kdInstrumen.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdInstrumen.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdInstrumen.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdInstrumenKeyPressed(evt);
             }
         });
@@ -1185,8 +1274,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnPrwRes.setToolTipText("Alt+2");
         btnPrwRes.setName("btnPrwRes"); // NOI18N
         btnPrwRes.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPrwRes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPrwRes.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPrwResActionPerformed(evt);
             }
         });
@@ -1201,8 +1292,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdprwresust.setName("kdprwresust"); // NOI18N
         kdprwresust.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdprwresust.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdprwresust.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdprwresustKeyPressed(evt);
             }
         });
@@ -1223,8 +1316,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdasistanestesi.setName("kdasistanestesi"); // NOI18N
         kdasistanestesi.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdasistanestesi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdasistanestesi.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdasistanestesiKeyPressed(evt);
             }
         });
@@ -1242,8 +1337,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnAsnes.setToolTipText("Alt+2");
         BtnAsnes.setName("BtnAsnes"); // NOI18N
         BtnAsnes.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnAsnes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAsnes.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAsnesActionPerformed(evt);
             }
         });
@@ -1258,8 +1355,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdbidan.setName("kdbidan"); // NOI18N
         kdbidan.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdbidan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdbidan.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdbidanKeyPressed(evt);
             }
         });
@@ -1277,8 +1376,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnBidan.setToolTipText("Alt+2");
         btnBidan.setName("btnBidan"); // NOI18N
         btnBidan.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnBidan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBidan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBidanActionPerformed(evt);
             }
         });
@@ -1293,8 +1394,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdprwluar.setName("kdprwluar"); // NOI18N
         kdprwluar.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdprwluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdprwluar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdprwluarKeyPressed(evt);
             }
         });
@@ -1312,8 +1415,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnPrwLuar.setToolTipText("Alt+2");
         btnPrwLuar.setName("btnPrwLuar"); // NOI18N
         btnPrwLuar.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPrwLuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPrwLuar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPrwLuarActionPerformed(evt);
             }
         });
@@ -1329,8 +1434,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         Kategori.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Khusus", "Besar", "Sedang", "Kecil" }));
         Kategori.setName("Kategori"); // NOI18N
         Kategori.setOpaque(false);
-        Kategori.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        Kategori.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 KategoriKeyPressed(evt);
             }
         });
@@ -1342,8 +1449,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnBidan2.setToolTipText("Alt+2");
         btnBidan2.setName("btnBidan2"); // NOI18N
         btnBidan2.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnBidan2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBidan2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBidan2ActionPerformed(evt);
             }
         });
@@ -1358,8 +1467,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdbidan2.setName("kdbidan2"); // NOI18N
         kdbidan2.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdbidan2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdbidan2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdbidan2KeyPressed(evt);
             }
         });
@@ -1380,8 +1491,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdbidan3.setName("kdbidan3"); // NOI18N
         kdbidan3.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdbidan3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdbidan3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdbidan3KeyPressed(evt);
             }
         });
@@ -1399,8 +1512,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnBidan3.setToolTipText("Alt+2");
         btnBidan3.setName("btnBidan3"); // NOI18N
         btnBidan3.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnBidan3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBidan3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBidan3ActionPerformed(evt);
             }
         });
@@ -1415,8 +1530,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdonloop1.setName("kdonloop1"); // NOI18N
         kdonloop1.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdonloop1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdonloop1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdonloop1KeyPressed(evt);
             }
         });
@@ -1434,8 +1551,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnOnloop1.setToolTipText("Alt+2");
         btnOnloop1.setName("btnOnloop1"); // NOI18N
         btnOnloop1.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOnloop1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOnloop1ActionPerformed(evt);
             }
         });
@@ -1447,8 +1566,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnOnloop2.setToolTipText("Alt+2");
         btnOnloop2.setName("btnOnloop2"); // NOI18N
         btnOnloop2.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOnloop2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOnloop2ActionPerformed(evt);
             }
         });
@@ -1463,8 +1584,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdonloop2.setName("kdonloop2"); // NOI18N
         kdonloop2.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdonloop2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdonloop2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdonloop2KeyPressed(evt);
             }
         });
@@ -1488,8 +1611,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnOnloop3.setToolTipText("Alt+2");
         btnOnloop3.setName("btnOnloop3"); // NOI18N
         btnOnloop3.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOnloop3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOnloop3ActionPerformed(evt);
             }
         });
@@ -1504,8 +1629,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdonloop3.setName("kdonloop3"); // NOI18N
         kdonloop3.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdonloop3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdonloop3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdonloop3KeyPressed(evt);
             }
         });
@@ -1520,8 +1647,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdpjanak.setName("kdpjanak"); // NOI18N
         kdpjanak.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdpjanak.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdpjanak.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdpjanakKeyPressed(evt);
             }
         });
@@ -1539,8 +1668,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btndrpjanak.setToolTipText("Alt+2");
         btndrpjanak.setName("btndrpjanak"); // NOI18N
         btndrpjanak.setPreferredSize(new java.awt.Dimension(28, 23));
-        btndrpjanak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btndrpjanak.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btndrpjanakActionPerformed(evt);
             }
         });
@@ -1555,8 +1686,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kddrumum.setName("kddrumum"); // NOI18N
         kddrumum.setPreferredSize(new java.awt.Dimension(80, 23));
-        kddrumum.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kddrumum.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kddrumumKeyPressed(evt);
             }
         });
@@ -1574,8 +1707,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btndrumum.setToolTipText("Alt+2");
         btndrumum.setName("btndrumum"); // NOI18N
         btndrumum.setPreferredSize(new java.awt.Dimension(28, 23));
-        btndrumum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btndrumum.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btndrumumActionPerformed(evt);
             }
         });
@@ -1590,8 +1725,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdasistoperator3.setName("kdasistoperator3"); // NOI18N
         kdasistoperator3.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdasistoperator3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdasistoperator3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdasistoperator3KeyPressed(evt);
             }
         });
@@ -1609,8 +1746,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnAsis4.setToolTipText("Alt+2");
         btnAsis4.setName("btnAsis4"); // NOI18N
         btnAsis4.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsis4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAsis4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAsis4ActionPerformed(evt);
             }
         });
@@ -1625,8 +1764,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdasistanestesi2.setName("kdasistanestesi2"); // NOI18N
         kdasistanestesi2.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdasistanestesi2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdasistanestesi2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdasistanestesi2KeyPressed(evt);
             }
         });
@@ -1644,8 +1785,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         BtnAsnes1.setToolTipText("Alt+2");
         BtnAsnes1.setName("BtnAsnes1"); // NOI18N
         BtnAsnes1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnAsnes1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnAsnes1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnAsnes1ActionPerformed(evt);
             }
         });
@@ -1660,8 +1803,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdonloop4.setName("kdonloop4"); // NOI18N
         kdonloop4.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdonloop4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdonloop4.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdonloop4KeyPressed(evt);
             }
         });
@@ -1679,8 +1824,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnOnloop4.setToolTipText("Alt+2");
         btnOnloop4.setName("btnOnloop4"); // NOI18N
         btnOnloop4.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOnloop4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOnloop4ActionPerformed(evt);
             }
         });
@@ -1692,8 +1839,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
         btnOnloop5.setToolTipText("Alt+2");
         btnOnloop5.setName("btnOnloop5"); // NOI18N
         btnOnloop5.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOnloop5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOnloop5ActionPerformed(evt);
             }
         });
@@ -1708,8 +1857,10 @@ public class DlgTagihanOperasi extends javax.swing.JDialog {
 
         kdonloop5.setName("kdonloop5"); // NOI18N
         kdonloop5.setPreferredSize(new java.awt.Dimension(80, 23));
-        kdonloop5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        kdonloop5.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 kdonloop5KeyPressed(evt);
             }
         });
