@@ -632,7 +632,7 @@ public class PopKonsul extends javax.swing.JDialog
     private void simpan()
     {
         boolean b = new GQuery()
-                .a("INSERT INTO konsul_poli (no_rawat, kd_dokter, kd_poli) VALUES ('{no_rw}', '{kd_dokter}', '{kd_poli}')")
+                .a("INSERT INTO konsul_poli (no_rawat, kd_dokter, kd_poli) VALUES ({no_rw}, {kd_dokter}, {kd_poli})")
                 .set("no_rw", noRw)
                 .set("kd_dokter", kddokter.getText())
                 .set("kd_poli", kdpoli.getText())
