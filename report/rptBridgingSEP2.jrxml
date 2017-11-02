@@ -117,7 +117,7 @@ bridging_sep.tanggal_lahir,bridging_sep.peserta,bridging_sep.jkel,bridging_sep.n
 			</textField>
 			<image>
 				<reportElement x="0" y="0" width="188" height="42"/>
-				<imageExpression class="java.lang.String"><![CDATA["D:\\AppProject\\NetBeans\\KhanzaEd\\src\\picture\\bpjs-amiz.png"]]></imageExpression>
+				<imageExpression class="java.lang.String"><![CDATA["src\\picture\\bpjs-amiz.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
