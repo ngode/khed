@@ -5274,7 +5274,6 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         billing.periksarad.setLocationRelativeTo(internalFrame1);
                         billing.periksarad.emptTeks();
                         billing.periksarad.setNoRm(rs2.getString("no_rawat2"),"Ranap");
-                        billing.periksarad.tampil();
                         billing.periksarad.isCek();
                         billing.periksarad.setVisible(true);
                     }else{
@@ -5299,7 +5298,6 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             billing.periksarad.setLocationRelativeTo(internalFrame1);
             billing.periksarad.emptTeks();
             billing.periksarad.setNoRm(norawat.getText(),"Ranap");
-            billing.periksarad.tampil();
             billing.periksarad.isCek();
             billing.periksarad.setVisible(true);
         }

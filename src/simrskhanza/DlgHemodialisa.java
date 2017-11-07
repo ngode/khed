@@ -40,6 +40,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import util.GMessage;
 
 /**

@@ -3222,7 +3222,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 kamarinap.billing.periksarad.setLocationRelativeTo(internalFrame1);
                 kamarinap.billing.periksarad.emptTeks();
                 kamarinap.billing.periksarad.setNoRm(TNoRw.getText(),"Ralan"); 
-                kamarinap.billing.periksarad.tampil(); 
                 kamarinap.billing.periksarad.isCek();
                 kamarinap.billing.periksarad.setVisible(true);
             }            

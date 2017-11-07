@@ -1075,8 +1075,8 @@ public class DlgDokter extends javax.swing.JDialog {
                         CmbStts.getSelectedItem()+"','"+
                         KdSps.getText()+"','"+
                         TAlumni.getText()+"','"+
-                        TNoi.getText()+"','1'" +
-                        txtKdPoli.getText(),
+                        TNoi.getText()+"','1'," +
+                        "'" + txtKdPoli.getText() + "'",
                         "Kode Dokter");
                 koneksi.setAutoCommit(true); 
                 tampil();
