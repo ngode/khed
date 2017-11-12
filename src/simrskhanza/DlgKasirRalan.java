@@ -68,7 +68,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     // Childs ==========
     private PopKonsul popKonsul = new PopKonsul(null, false);
     private DlgPeriksaHemodialisa dlgPeriksaHd = new DlgPeriksaHemodialisa(null, false);
-    private DlgOrderLab dlgOrderLab = new DlgOrderLab(null, false);
+    private DlgPeriksaLaboratorium dlgOrderLab = new DlgPeriksaLaboratorium(null, false);
     
     /** Creates new form DlgReg
      * @param parent
