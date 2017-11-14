@@ -1646,7 +1646,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelGlass1.add(jLabel4);
 
         DTPTgl.setForeground(new java.awt.Color(100, 100, 100));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2017 15:26:49" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2017 06:25:13" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1663,7 +1663,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         TabRawat.setBackground(new java.awt.Color(250, 255, 245));
         TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)));
         TabRawat.setForeground(new java.awt.Color(50, 70, 40));
-        TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
 
         Scroll.setComponentPopupMenu(jPopupMenu1);
@@ -1685,7 +1684,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         });
         Scroll.setViewportView(tbBilling);
 
-        TabRawat.addTab(".: Data Tagihan ", Scroll);
+        TabRawat.addTab(".: Data Tagihan", Scroll);
 
         panelBayar.setForeground(new java.awt.Color(153, 0, 51));
         panelBayar.setPreferredSize(new java.awt.Dimension(100, 137));

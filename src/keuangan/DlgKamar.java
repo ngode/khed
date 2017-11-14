@@ -647,9 +647,15 @@ public final class DlgKamar extends javax.swing.JDialog {
         jLabel5.setBounds(440, 42, 90, 23);
 
         Kelas.setForeground(new java.awt.Color(153, 0, 51));
-        Kelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelas 1", "Kelas 2", "Kelas 3", "Kelas Utama", "Kelas VIP", "Kelas VVIP" }));
+        Kelas.setMaximumRowCount(12);
+        Kelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kelas 1", "Kelas 2", "Kelas 3", "Kelas Utama", "Kelas VIP", "Kelas VVIP", "Isolasi", "Psikiatri", "Perinatologi", "ICU", "IMC", "-" }));
         Kelas.setName("Kelas"); // NOI18N
         Kelas.setOpaque(false);
+        Kelas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KelasActionPerformed(evt);
+            }
+        });
         Kelas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 KelasKeyPressed(evt);
@@ -996,6 +1002,10 @@ private void CmbCrIsiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST
         restore.setLocationRelativeTo(internalFrame1);
         restore.setVisible(true);
     }//GEN-LAST:event_MnRestoreActionPerformed
+
+    private void KelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KelasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KelasActionPerformed
 
     /**
     * @param args the command line arguments

@@ -83,7 +83,6 @@
                   <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
                 </LineBorder>
               </Border>
-              <Font PropertyName="font" name="Tahoma" size="11" style="0"/>
               <Color PropertyName="color" blue="28" green="46" red="32" type="rgb"/>
             </TitledBorder>
           </Border>
@@ -715,20 +714,28 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="0" red="99" type="rgb"/>
                 </Property>
+                <Property name="maximumRowCount" type="int" value="12"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="6">
+                  <StringArray count="12">
                     <StringItem index="0" value="Kelas 1"/>
                     <StringItem index="1" value="Kelas 2"/>
                     <StringItem index="2" value="Kelas 3"/>
                     <StringItem index="3" value="Kelas Utama"/>
                     <StringItem index="4" value="Kelas VIP"/>
                     <StringItem index="5" value="Kelas VVIP"/>
+                    <StringItem index="6" value="Isolasi"/>
+                    <StringItem index="7" value="Psikiatri"/>
+                    <StringItem index="8" value="Perinatologi"/>
+                    <StringItem index="9" value="ICU"/>
+                    <StringItem index="10" value="IMC"/>
+                    <StringItem index="11" value="-"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="Kelas" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KelasActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KelasKeyPressed"/>
               </Events>
               <Constraints>
