@@ -925,7 +925,7 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2017" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);

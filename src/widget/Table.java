@@ -23,8 +23,8 @@ public class Table extends JTable {
         super.setBackground(new Color(255,255,255));
         super.setGridColor(new Color(237,242,232));
         super.setForeground(new Color(60,80,50));
-        super.setFont(new java.awt.Font("Tahoma", 0, 11));
-        super.setRowHeight(22);
+        super.setFont(new java.awt.Font("Tahoma", 0, 13));
+        super.setRowHeight(25);
         super.setSelectionBackground(new Color(255,255,255));
         super.setSelectionForeground(new Color(100,100,0));
         super.getTableHeader().setForeground(new Color(60,80,50));

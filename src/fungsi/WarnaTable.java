@@ -20,16 +20,28 @@ public class WarnaTable extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        if (row % 2 == 1){
+        if (isSelected)
+        {
+            component.setForeground(new Color(219, 100, 13));
+        }
+        else
+        {
+            component.setForeground(new Color(60,80,50));
+        }
+        
+        if (row % 2 == 1)
+        {
             component.setBackground(GColors.Biru15);// new Color(248,253,243));
-        }else{
+        }
+        else
+        {
             component.setBackground(GColors.Biru10);// new Color(255,255,255));
         } 
         
         if (value instanceof MultiLineText) 
         {
             MultiLineText mt = (MultiLineText) value;            
-            table.setRowHeight(row, 22 + 18 * (mt.getLength() - 1));
+            table.setRowHeight(row, 25 + 18 * (mt.getLength() - 1));
         }
         
         return component;

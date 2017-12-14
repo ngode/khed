@@ -28,15 +28,19 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.Jurnal;
@@ -47,19 +51,19 @@ import util.GMessage;
  *
  * @author dosen
  */
-public final class DlgOrderLaboratorium extends javax.swing.JDialog
+public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 {
 
-    private DefaultTableModel tabMode, tabMode2, mdlTransaksi;
+    private DefaultTableModel mdlPemeriksaan, mdlTarif, mdlOrder, mdlTransaksi, mdlDetail;
     private sekuel Sequel = new sekuel();
     private validasi Valid = new validasi();
     private Connection koneksi = koneksiDB.condb();
     private Jurnal jur = new Jurnal();
     private DlgCariPetugas petugas = new DlgCariPetugas(null, false);
     private DlgCariDokter dokter = new DlgCariDokter(null, false);
-    private PreparedStatement pstindakan, pstindakan2, pstampil, pstampil2, pstampil3, pstampil4, psTraksaksi, psTransaksiD1, psTransaksiD2,
-            pssimpanperiksa, psdetailpriksa, psDetailPeriksa2, psset_tarif, pssetpj;
-    private ResultSet rstindakan, rstampil, rscari, rsset_tarif, rssetpj, rsTransksi, rsTransaksiD1, rsTransaksiD2;
+    private PreparedStatement pstindakan, pstindakan2, pstampil, pstampil2, pstampil3, pstampil4, psDetail, psTraksaksi, psTransaksiD1, psTransaksiD2,
+            pssimpanperiksa, psdetailpriksa, psDetailPeriksa2, psDetailPeriksa3, psset_tarif, pssetpj;
+    private ResultSet rstindakan, rstampil, rsDetail, rscari, rsset_tarif, rssetpj, rsTransksi, rsTransaksiD1, rsTransaksiD2;
     private boolean[] pilih;
     private String[] kode, nama;
     private double[] total, bagian_rs, bhp, tarif_perujuk, tarif_tindakan_dokter, tarif_tindakan_petugas, kso, menejemen;
@@ -72,13 +76,21 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     private String kelas;
     private JTextField NoRawat;
 
+    // Vars =====
+    private List<String> kdJnsPrws = new ArrayList<>();
+    private List<String> idTemplates = new ArrayList<>();
+    private List<String> idDetTemplates = new ArrayList<>();
+    private HashMap<String, String> mapHasil = new HashMap<>();
+    private HashMap<String, String> mapKet = new HashMap<>();
+    private String _idPeriksa;
+    
     /**
      * Creates new form DlgPerawatan
      *
      * @param parent
      * @param modal
      */
-    public DlgOrderLaboratorium(java.awt.Frame parent, boolean modal)
+    public DlgPemeriksaanLaboratorium(java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
         initComponents();
@@ -88,26 +100,20 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
 
         Object[] row =
         {
-            "P", "Pemeriksaan", "Hasil", "Satuan", "Nilai Rujukan",
-            "Keterangan", "", ""
+            "P", "Pemeriksaan", "", ""
         };
         
-        tabMode = new DefaultTableModel(null, row)
+        mdlPemeriksaan = new DefaultTableModel(null, row)
         {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex)
             {
-                boolean a = false;
-                if ((colIndex == 0) || (colIndex == 2) || (colIndex == 4) || (colIndex == 5) || (colIndex == 7))
-                {
-                    a = true;
-                }
-                return a;
+                return colIndex == 0;
             }
+            
             Class[] types = new Class[]
             {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             @Override
@@ -117,18 +123,117 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
             }
         };
 
-        tbPemeriksaan.setModel(tabMode);
+        tbPemeriksaan.setModel(mdlPemeriksaan);
         //tampilPr();
 
         tbPemeriksaan.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbPemeriksaan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < 4; i++)
         {
             TableColumn column = tbPemeriksaan.getColumnModel().getColumn(i);
             if (i == 0)
             {
                 column.setPreferredWidth(20);
+            }
+            else if (i == 1)
+            {
+                column.setPreferredWidth(192);
+            }
+            else if (i == 2)
+            {
+                column.setPreferredWidth(192);
+//                column.setMinWidth(0);
+//                column.setMaxWidth(0);
+            }
+            else if (i == 3)
+            {
+                column.setPreferredWidth(192);
+//                column.setMinWidth(0);
+//                column.setMaxWidth(0);
+            }
+        }
+
+        tbPemeriksaan.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        // Detail ====
+        Object[] r =
+        {
+            "P", "Pemeriksaan", "Hasil", "Satuan", "Nilai Rujukan",
+            "Keterangan", "", "", "Jns"
+        };
+        
+        mdlDetail = new DefaultTableModel(null, r)
+        {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                boolean a = false;
+                if ((colIndex == 2) || (colIndex == 5))
+                {
+                    a = true;
+                }
+                return a;
+            }
+            Class[] types = new Class[]
+            {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            @Override
+            public Class getColumnClass(int columnIndex)
+            {
+                return types[columnIndex];
+            }
+        };
+
+        tblDetail.setModel(mdlDetail);
+
+        tblDetail.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tblDetail.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
+        tblDetail.getModel().addTableModelListener(new TableModelListener()
+        {
+            @Override
+            public void tableChanged(TableModelEvent e)
+            {
+                if (e.getColumn() == 2)
+                {
+                    String jns = tblDetail.getValueAt(e.getFirstRow(), 8).toString();
+                    String idDet = jns + tblDetail.getValueAt(e.getFirstRow(), 6).toString();
+                    String val = tblDetail.getValueAt(e.getFirstRow(), 2).toString();
+                    
+                    if (mapHasil.containsKey(idDet))
+                    {
+                        mapHasil.remove(idDet);
+                    }
+                    
+                    mapHasil.put(idDet, val);
+                }
+                else if (e.getColumn() == 5)
+                {
+                    String jns = tblDetail.getValueAt(e.getFirstRow(), 8).toString();
+                    String idDet = jns + tblDetail.getValueAt(e.getFirstRow(), 6).toString();
+                    String val = tblDetail.getValueAt(e.getFirstRow(), 5).toString();
+                    
+                    if (mapKet.containsKey(idDet))
+                    {
+                        mapKet.remove(idDet);
+                    }
+                    
+                    mapKet.put(idDet, val);
+                }
+            }
+        });
+
+        for (i = 0; i < 9; i++)
+        {
+            TableColumn column = tblDetail.getColumnModel().getColumn(i);
+            if (i == 0)
+            {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }
             else if (i == 1)
             {
@@ -160,15 +265,22 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }
+            else if (i == 8)
+            {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }
         }
 
-        tbPemeriksaan.setDefaultRenderer(Object.class, new WarnaTable());
+        tblDetail.setDefaultRenderer(Object.class, new WarnaTable());
+        // ===========
 
         Object[] row2 =
         {
             "P", "Kode Periksa", "Nama Pemeriksaan"
         };
-        tabMode2 = new DefaultTableModel(null, row2)
+        
+        mdlTarif = new DefaultTableModel(null, row2)
         {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex)
@@ -191,7 +303,8 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                 return types[columnIndex];
             }
         };
-        tbTarif.setModel(tabMode2);
+        
+        tbTarif.setModel(mdlTarif);
 
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbTarif.setPreferredScrollableViewportSize(new Dimension(500, 500));
@@ -215,6 +328,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         }
         tbTarif.setDefaultRenderer(Object.class, new WarnaTable());
 
+        initTblOrder();
         initTblTransaksi();
         
         TNoRw.setDocument(new batasInput((byte) 17).getKata(TNoRw));
@@ -223,29 +337,14 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         KdPtg.setDocument(new batasInput((byte) 20).getKata(KdPtg));
         KodePerujuk.setDocument(new batasInput((byte) 20).getKata(KodePerujuk));
         Pemeriksaan.setDocument(new batasInput((byte) 100).getKata(Pemeriksaan));
+        
         if (koneksiDB.cariCepat().equals("aktif"))
         {
-            Pemeriksaan.getDocument().addDocumentListener(new javax.swing.event.DocumentListener()
-            {
-                @Override
-                public void insertUpdate(DocumentEvent e)
-                {
-                    tampiltarif();
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e)
-                {
-                    tampiltarif();
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e)
-                {
-                    tampiltarif();
-                }
-            });
+            Pemeriksaan.addTextChangedListener((t) -> tampilTarif(true));
+            TCari.addTextChangedListener((t) -> tampilOrder());
+            TCari1.addTextChangedListener((t) -> tampilTransksi());
         }
+        
         ChkJln.setSelected(true);
         jam();
 
@@ -351,6 +450,88 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
             {
             }
         });
+        
+        tampilOrder();
+        tampilTransksi();
+    }
+
+    private void initTblOrder()
+    {
+        Object[] row =
+        {
+            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Proses", "Id"
+        };
+        
+        mdlOrder = new DefaultTableModel(null, row)
+        {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+            Class[] types = new Class[]
+            {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, 
+            };
+
+            @Override
+            public Class getColumnClass(int columnIndex)
+            {
+                return types[columnIndex];
+            }
+        };
+
+        tblOrder.setModel(mdlOrder);
+        //tampilPr();
+
+        tblOrder.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tblOrder.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (i = 0; i < 9; i++)
+        {
+            TableColumn column = tblOrder.getColumnModel().getColumn(i);
+            if (i == 0)
+            {
+                column.setPreferredWidth(140);
+            }
+            else if (i == 1)
+            {
+                column.setPreferredWidth(192);
+            }
+            else if (i == 2)
+            {
+                column.setPreferredWidth(160);
+            }
+            else if (i == 3)
+            {
+                column.setPreferredWidth(120);
+            }
+            else if (i == 4)
+            {
+                column.setPreferredWidth(130);
+            }
+            else if (i == 5)
+            {
+                column.setPreferredWidth(150);
+            }
+            else if (i == 6)
+            {
+                column.setPreferredWidth(150);
+            }
+            else if (i == 7)
+            {
+                column.setPreferredWidth(120);
+            }
+            else if (i == 8)
+            {
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }
+        }
+
+        tblOrder.setDefaultRenderer(Object.class, new WarnaTable());
     }
 
     private void initTblTransaksi()
@@ -367,6 +548,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
             {
                 return false;
             }
+            
             Class[] types = new Class[]
             {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
@@ -432,6 +614,222 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         tblTransaksi.setDefaultRenderer(Object.class, new WarnaTable());
     }
     
+    private void clearSemua()
+    {
+        _idPeriksa = null;
+        
+        TNoRw.setText("");
+        TNoRM.setText("");
+        TPasien.setText("");
+        KodePj.setText("");
+        NmDokterPj.setText("");
+        KdPtg.setText("");
+        NmPtg.setText("");
+        KodePerujuk.setText("");
+        NmPerujuk.setText("");
+        
+        mapHasil.clear();
+        mapKet.clear();
+        
+        kdJnsPrws.clear();
+        idTemplates.clear();
+        idDetTemplates.clear();
+        
+        Valid.tabelKosong(mdlTarif);
+        Valid.tabelKosong(mdlPemeriksaan);
+        Valid.tabelKosong(mdlDetail);
+        
+        tampilOrder();
+        tampilTransksi();
+    }
+    
+    private void dariOrder(String idPeriksa)
+    {
+        _idPeriksa = idPeriksa;
+        tabPane.setSelectedIndex(0);
+        
+        // NGambil daat Pemeriksaan LAB
+        String[] periksa = new GQuery()
+                .a("SELECT no_rawat, nip, dokter_perujuk, kd_dokter, status FROM periksa_lab")
+                .a("WHERE id_periksa = {id_periksa}")
+                .set("id_periksa", idPeriksa)
+                .getRow();
+        
+        // Dimasukkken ke textbox
+        TNoRw.setText(periksa[0]);
+        KodePj.setText(periksa[3]);
+        Sequel.cariIsi("select nm_dokter from dokter where kd_dokter = ?", NmDokterPj, KodePj.getText());
+        KdPtg.setText(periksa[1]);
+        Sequel.cariIsi("select nama from petugas where nip = ?", NmPtg, KdPtg.getText());
+        
+        // Ngeset dewasa/anak OTO
+        int umur = new GQuery()
+                .a("SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(tgl_lahir)), '%Y')+0 AS age")
+                .a("FROM reg_periksa")
+                .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("WHERE no_rawat = {no_rwt}")
+                .set("no_rwt", TNoRw.getText())
+                .getInt();
+        
+        if (umur >= GConst.DEWASA)
+        {
+            rbDewasa.setSelected(true);
+        }
+        else
+        {
+            rbAnak.setSelected(true);
+        }
+        
+        this.status = periksa[4];
+
+        if (status.equals("Ralan"))
+        {
+            kelas = "Kelas 3";
+        }
+        else
+        {
+            kelas = new GQuery()
+                    .a("SELECT kelas")
+                    .a("FROM kamar_inap")
+                    .a("JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
+                    .a("WHERE no_rawat = {no_rawat}")
+                    .set("no_rawat", TNoRw.getText())
+                    .getString();
+        }
+
+        isRawat();
+        isPsien();
+        
+        selectPeriksa(idPeriksa);
+        isReset(false);
+    }
+    
+    private void dariTransaksi(String idPeriksa)
+    {
+        _idPeriksa = idPeriksa;
+        tabPane.setSelectedIndex(0);
+        
+        // NGambil daat Pemeriksaan LAB
+        String[] periksa = new GQuery()
+                .a("SELECT no_rawat, nip, dokter_perujuk, kd_dokter, status FROM periksa_lab")
+                .a("WHERE id_periksa = {id_periksa}")
+                .set("id_periksa", idPeriksa)
+                .getRow();
+        
+        // Dimasukkken ke textbox
+        TNoRw.setText(periksa[0]);
+        KodePj.setText(periksa[3]);
+        Sequel.cariIsi("select nm_dokter from dokter where kd_dokter = ?", NmDokterPj, KodePj.getText());
+        KdPtg.setText(periksa[1]);
+        Sequel.cariIsi("select nama from petugas where nip = ?", NmPtg, KdPtg.getText());
+        
+        // Ngeset dewasa/anak OTO
+        int umur = new GQuery()
+                .a("SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(tgl_lahir)), '%Y')+0 AS age")
+                .a("FROM reg_periksa")
+                .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("WHERE no_rawat = {no_rwt}")
+                .set("no_rwt", TNoRw.getText())
+                .getInt();
+        
+        if (umur >= GConst.DEWASA)
+        {
+            rbDewasa.setSelected(true);
+        }
+        else
+        {
+            rbAnak.setSelected(true);
+        }
+        
+        this.status = periksa[4];
+
+        if (status.equals("Ralan"))
+        {
+            kelas = "Kelas 3";
+        }
+        else
+        {
+            kelas = new GQuery()
+                    .a("SELECT kelas")
+                    .a("FROM kamar_inap")
+                    .a("JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
+                    .a("WHERE no_rawat = {no_rawat}")
+                    .set("no_rawat", TNoRw.getText())
+                    .getString();
+        }
+
+        isRawat();
+        isPsien();
+        
+        selectPeriksa(idPeriksa);
+        selectHasil(idPeriksa);
+        isReset(false);
+    }
+    
+    // Ngelist yg kecentang
+    private void selectPeriksa(String idPeriksa)
+    {
+        kdJnsPrws.clear();
+        idTemplates.clear();
+        idDetTemplates.clear();
+        
+        List<String[]> lKdPrw = new GQuery()
+                .a("SELECT id_detail, kd_jenis_prw FROM detail_periksa_lab WHERE id_periksa = {id_periksa}")
+                .set("id_periksa", idPeriksa)
+                .select();
+        
+        for (String[] sKdPrw : lKdPrw)
+        {
+            kdJnsPrws.add(sKdPrw[1]);
+            
+            List<String[]> lIdTemp = new GQuery()
+                    .a("SELECT id_detail, id_template FROM detail_periksa_lab_2 WHERE id_detail_1 = {id_detail}")
+                    .set("id_detail", sKdPrw[0])
+                    .select();
+            
+            for (String[] sIdTemp : lIdTemp)
+            {
+                idTemplates.add(sIdTemp[1]);
+            }
+        }
+    }
+    
+    // Ngelist hasil dan keterangan
+    private void selectHasil(String idPeriksa)
+    {
+        mapHasil.clear();
+        mapKet.clear();
+        
+        List<String[]> lDet2 = new GQuery()
+                .a("SELECT detail_periksa_lab_2.id_template, detail_periksa_lab_2.nilai, detail_periksa_lab_2.keterangan")
+                .a("FROM detail_periksa_lab_2")
+                .a("JOIN detail_periksa_lab ON detail_periksa_lab.id_detail = detail_periksa_lab_2.id_detail_1")
+                .a("WHERE id_periksa = {id_periksa}")
+                .set("id_periksa", idPeriksa)
+                .select();
+        
+        for (String[] sa : lDet2)
+        {
+            mapHasil.put("Atas" + sa[0], sa[1]);
+            mapKet.put("Atas" + sa[0], sa[2]);
+        }
+        
+        List<String[]> lDet3 = new GQuery()
+                .a("SELECT detail_periksa_lab_3.id_det_template, detail_periksa_lab_3.nilai, detail_periksa_lab_3.keterangan")
+                .a("FROM detail_periksa_lab_3")
+                .a("JOIN detail_periksa_lab_2 ON detail_periksa_lab_2.id_detail = detail_periksa_lab_3.id_detail_2")
+                .a("JOIN detail_periksa_lab ON detail_periksa_lab.id_detail = detail_periksa_lab_2.id_detail_1")
+                .a("WHERE id_periksa = {id_periksa}")
+                .set("id_periksa", idPeriksa)
+                .select();
+        
+        for (String[] sa : lDet3)
+        {
+            mapHasil.put("Bawah" + sa[0], sa[1]);
+            mapKet.put("Bawah" + sa[0], sa[2]);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -453,8 +851,11 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         internalFrame1 = new widget.InternalFrame();
         tabPane = new widget.TabPane();
         panelisi1 = new widget.panelisi();
+        jPanel1 = new javax.swing.JPanel();
         Scroll = new widget.ScrollPane();
         tbPemeriksaan = new widget.Table();
+        Scroll2 = new widget.ScrollPane();
+        tblDetail = new widget.Table();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
         BtnBatal = new widget.Button();
@@ -502,8 +903,12 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         panelisi2 = new widget.panelisi();
         internalFrame2 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
-        tblTransaksi = new widget.Table();
+        tblOrder = new widget.Table();
         panelisi4 = new widget.panelisi();
+        jLabel33 = new widget.Label();
+        tglTransaksi1 = new widget.Tanggal();
+        jLabel34 = new widget.Label();
+        tglTransaksi2 = new widget.Tanggal();
         label10 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari2 = new widget.Button();
@@ -512,6 +917,23 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         BtnAll = new widget.Button();
         BtnPrint1 = new widget.Button();
         BtnKeluar1 = new widget.Button();
+        panelisi3 = new widget.panelisi();
+        internalFrame3 = new widget.InternalFrame();
+        scrollPane2 = new widget.ScrollPane();
+        tblTransaksi = new widget.Table();
+        panelisi5 = new widget.panelisi();
+        jLabel35 = new widget.Label();
+        tglTransaksi3 = new widget.Tanggal();
+        jLabel36 = new widget.Label();
+        tglTransaksi4 = new widget.Tanggal();
+        label11 = new widget.Label();
+        TCari1 = new widget.TextBox();
+        BtnCari3 = new widget.Button();
+        label12 = new widget.Label();
+        BtnHapus2 = new widget.Button();
+        BtnAll1 = new widget.Button();
+        BtnPrint2 = new widget.Button();
+        BtnKeluar2 = new widget.Button();
 
         Penjab.setEditable(false);
         Penjab.setFocusTraversalPolicyProvider(true);
@@ -587,7 +1009,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Order Periksa Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pemeriksaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -597,14 +1019,35 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         panelisi1.setName("panelisi1"); // NOI18N
         panelisi1.setLayout(new java.awt.BorderLayout());
 
+        jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
         tbPemeriksaan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPemeriksaan.setName("tbPemeriksaan"); // NOI18N
+        tbPemeriksaan.addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {
+            public void propertyChange(java.beans.PropertyChangeEvent evt)
+            {
+                tbPemeriksaanPropertyChange(evt);
+            }
+        });
         Scroll.setViewportView(tbPemeriksaan);
 
-        panelisi1.add(Scroll, java.awt.BorderLayout.CENTER);
+        jPanel1.add(Scroll);
+
+        Scroll2.setName("Scroll2"); // NOI18N
+        Scroll2.setOpaque(true);
+
+        tblDetail.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tblDetail.setName("tblDetail"); // NOI18N
+        Scroll2.setViewportView(tblDetail);
+
+        jPanel1.add(Scroll2);
+
+        panelisi1.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         panelGlass8.setName("panelGlass8"); // NOI18N
         panelGlass8.setPreferredSize(new java.awt.Dimension(55, 55));
@@ -889,7 +1332,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2017" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1027,7 +1470,6 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         rbAnak.setBounds(165, 102, 80, 23);
 
         buttonGroup1.add(rbDewasa);
-        rbDewasa.setSelected(true);
         rbDewasa.setText("Dewasa");
         rbDewasa.setEnabled(false);
         rbDewasa.setIconTextGap(1);
@@ -1106,14 +1548,14 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         panelisi2.setName("panelisi2"); // NOI18N
         panelisi2.setLayout(new java.awt.BorderLayout());
 
-        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pemeriksaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Order Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setLayout(new java.awt.BorderLayout(1, 1));
 
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
-        tblTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+        tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {},
@@ -1126,29 +1568,57 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
 
             }
         ));
-        tblTransaksi.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tblTransaksi.setName("tblTransaksi"); // NOI18N
-        tblTransaksi.addMouseListener(new java.awt.event.MouseAdapter()
+        tblOrder.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tblOrder.setName("tblOrder"); // NOI18N
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                tblTransaksiMouseClicked(evt);
+                tblOrderMouseClicked(evt);
             }
         });
-        tblTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
+        tblOrder.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyPressed(java.awt.event.KeyEvent evt)
             {
-                tblTransaksiKeyPressed(evt);
+                tblOrderKeyPressed(evt);
             }
         });
-        scrollPane1.setViewportView(tblTransaksi);
+        scrollPane1.setViewportView(tblOrder);
 
         internalFrame2.add(scrollPane1, java.awt.BorderLayout.CENTER);
 
         panelisi4.setName("panelisi4"); // NOI18N
         panelisi4.setPreferredSize(new java.awt.Dimension(100, 56));
         panelisi4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        jLabel33.setText("Tgl :");
+        jLabel33.setName("jLabel33"); // NOI18N
+        jLabel33.setPreferredSize(new java.awt.Dimension(58, 23));
+        panelisi4.add(jLabel33);
+
+        tglTransaksi1.setEditable(false);
+        tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
+        tglTransaksi1.setName("tglTransaksi1"); // NOI18N
+        tglTransaksi1.setOpaque(false);
+        tglTransaksi1.setPreferredSize(new java.awt.Dimension(100, 23));
+        panelisi4.add(tglTransaksi1);
+
+        jLabel34.setText("s.d");
+        jLabel34.setName("jLabel34"); // NOI18N
+        jLabel34.setPreferredSize(new java.awt.Dimension(18, 23));
+        panelisi4.add(jLabel34);
+
+        tglTransaksi2.setEditable(false);
+        tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
+        tglTransaksi2.setName("tglTransaksi2"); // NOI18N
+        tglTransaksi2.setOpaque(false);
+        tglTransaksi2.setPreferredSize(new java.awt.Dimension(100, 23));
+        panelisi4.add(tglTransaksi2);
 
         label10.setText("Key Word :");
         label10.setName("label10"); // NOI18N
@@ -1283,7 +1753,217 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
 
         panelisi2.add(internalFrame2, java.awt.BorderLayout.CENTER);
 
-        tabPane.addTab("List Transaksi", panelisi2);
+        tabPane.addTab("List Order", panelisi2);
+
+        panelisi3.setName("panelisi3"); // NOI18N
+        panelisi3.setLayout(new java.awt.BorderLayout());
+
+        internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pemeriksaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame3.setName("internalFrame3"); // NOI18N
+        internalFrame3.setLayout(new java.awt.BorderLayout(1, 1));
+
+        scrollPane2.setName("scrollPane2"); // NOI18N
+        scrollPane2.setOpaque(true);
+
+        tblTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String []
+            {
+
+            }
+        ));
+        tblTransaksi.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tblTransaksi.setName("tblTransaksi"); // NOI18N
+        tblTransaksi.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                tblTransaksiMouseClicked(evt);
+            }
+        });
+        tblTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                tblTransaksiKeyPressed(evt);
+            }
+        });
+        scrollPane2.setViewportView(tblTransaksi);
+
+        internalFrame3.add(scrollPane2, java.awt.BorderLayout.CENTER);
+
+        panelisi5.setName("panelisi5"); // NOI18N
+        panelisi5.setPreferredSize(new java.awt.Dimension(100, 56));
+        panelisi5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        jLabel35.setText("Tgl :");
+        jLabel35.setName("jLabel35"); // NOI18N
+        jLabel35.setPreferredSize(new java.awt.Dimension(58, 23));
+        panelisi5.add(jLabel35);
+
+        tglTransaksi3.setEditable(false);
+        tglTransaksi3.setForeground(new java.awt.Color(50, 70, 50));
+        tglTransaksi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        tglTransaksi3.setDisplayFormat("dd-MM-yyyy");
+        tglTransaksi3.setName("tglTransaksi3"); // NOI18N
+        tglTransaksi3.setOpaque(false);
+        tglTransaksi3.setPreferredSize(new java.awt.Dimension(100, 23));
+        panelisi5.add(tglTransaksi3);
+
+        jLabel36.setText("s.d");
+        jLabel36.setName("jLabel36"); // NOI18N
+        jLabel36.setPreferredSize(new java.awt.Dimension(18, 23));
+        panelisi5.add(jLabel36);
+
+        tglTransaksi4.setEditable(false);
+        tglTransaksi4.setForeground(new java.awt.Color(50, 70, 50));
+        tglTransaksi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        tglTransaksi4.setDisplayFormat("dd-MM-yyyy");
+        tglTransaksi4.setName("tglTransaksi4"); // NOI18N
+        tglTransaksi4.setOpaque(false);
+        tglTransaksi4.setPreferredSize(new java.awt.Dimension(100, 23));
+        panelisi5.add(tglTransaksi4);
+
+        label11.setText("Key Word :");
+        label11.setName("label11"); // NOI18N
+        label11.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelisi5.add(label11);
+
+        TCari1.setName("TCari1"); // NOI18N
+        TCari1.setPreferredSize(new java.awt.Dimension(170, 23));
+        TCari1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                TCari1KeyPressed(evt);
+            }
+        });
+        panelisi5.add(TCari1);
+
+        BtnCari3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari3.setMnemonic('5');
+        BtnCari3.setToolTipText("Alt+5");
+        BtnCari3.setName("BtnCari3"); // NOI18N
+        BtnCari3.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                BtnCari3ActionPerformed(evt);
+            }
+        });
+        BtnCari3.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                BtnCari3KeyPressed(evt);
+            }
+        });
+        panelisi5.add(BtnCari3);
+
+        label12.setName("label12"); // NOI18N
+        label12.setPreferredSize(new java.awt.Dimension(100, 30));
+        panelisi5.add(label12);
+
+        BtnHapus2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapus2.setMnemonic('H');
+        BtnHapus2.setText("Hapus");
+        BtnHapus2.setToolTipText("Alt+H");
+        BtnHapus2.setName("BtnHapus2"); // NOI18N
+        BtnHapus2.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnHapus2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                BtnHapus2ActionPerformed(evt);
+            }
+        });
+        BtnHapus2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                BtnHapus2KeyPressed(evt);
+            }
+        });
+        panelisi5.add(BtnHapus2);
+
+        BtnAll1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll1.setMnemonic('M');
+        BtnAll1.setText("Semua");
+        BtnAll1.setToolTipText("Alt+M");
+        BtnAll1.setName("BtnAll1"); // NOI18N
+        BtnAll1.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnAll1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                BtnAll1ActionPerformed(evt);
+            }
+        });
+        BtnAll1.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                BtnAll1KeyPressed(evt);
+            }
+        });
+        panelisi5.add(BtnAll1);
+
+        BtnPrint2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint2.setMnemonic('T');
+        BtnPrint2.setText("Cetak");
+        BtnPrint2.setToolTipText("Alt+T");
+        BtnPrint2.setName("BtnPrint2"); // NOI18N
+        BtnPrint2.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                BtnPrint2ActionPerformed(evt);
+            }
+        });
+        BtnPrint2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                BtnPrint2KeyPressed(evt);
+            }
+        });
+        panelisi5.add(BtnPrint2);
+
+        BtnKeluar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar2.setMnemonic('K');
+        BtnKeluar2.setText("Keluar");
+        BtnKeluar2.setToolTipText("Alt+K");
+        BtnKeluar2.setName("BtnKeluar2"); // NOI18N
+        BtnKeluar2.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnKeluar2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                BtnKeluar2ActionPerformed(evt);
+            }
+        });
+        BtnKeluar2.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                BtnKeluar2KeyPressed(evt);
+            }
+        });
+        panelisi5.add(BtnKeluar2);
+
+        internalFrame3.add(panelisi5, java.awt.BorderLayout.PAGE_END);
+
+        panelisi3.add(internalFrame3, java.awt.BorderLayout.CENTER);
+
+        tabPane.addTab("List Transaksi", panelisi3);
 
         internalFrame1.add(tabPane, java.awt.BorderLayout.CENTER);
 
@@ -1297,8 +1977,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     }//GEN-LAST:event_PenjabKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampiltarif();
-        tampil();
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
@@ -1350,7 +2029,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         {
             Valid.textKosong(KodePj, "Dokter Penanggung Jawab");
         }
-        else if (tabMode.getRowCount() == 0)
+        else if (mdlPemeriksaan.getRowCount() == 0)
         {
             Valid.textKosong(Pemeriksaan, "Data Pemeriksaan");
         }
@@ -1375,20 +2054,24 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                 {
                     koneksi.setAutoCommit(false);
 
-                    String idPeriksa = Sequel.autoNumber("periksa_lab", "id_periksa");
-                    pssimpanperiksa = koneksi.prepareStatement("insert into periksa_lab values(?,?,?,?,?,?,?,?,?)");
+                    pssimpanperiksa = koneksi.prepareStatement("UPDATE periksa_lab SET nip = ?, tgl_periksa = ?, jam = ?, dokter_perujuk = ?, kd_dokter = ?, proses = ?" + 
+                            " WHERE id_periksa = ?");
 
-                    pssimpanperiksa.setString(1, idPeriksa);
-                    pssimpanperiksa.setString(2, TNoRw.getText());
-                    pssimpanperiksa.setString(3, KdPtg.getText());
-                    pssimpanperiksa.setString(4, Valid.SetTgl(Tanggal.getSelectedItem() + ""));
-                    pssimpanperiksa.setString(5, CmbJam.getSelectedItem() + ":" + CmbMenit.getSelectedItem() + ":" + CmbDetik.getSelectedItem());
-                    pssimpanperiksa.setString(6, KodePerujuk.getText());
-                    pssimpanperiksa.setString(7, KodePj.getText());
-                    pssimpanperiksa.setString(8, status);
-                    pssimpanperiksa.setString(9, "Belum");
+                    pssimpanperiksa.setString(1, KdPtg.getText());
+                    pssimpanperiksa.setString(2, Valid.SetTgl(Tanggal.getSelectedItem() + ""));
+                    pssimpanperiksa.setString(3, CmbJam.getSelectedItem() + ":" + CmbMenit.getSelectedItem() + ":" + CmbDetik.getSelectedItem());
+                    pssimpanperiksa.setString(4, KodePerujuk.getText());
+                    pssimpanperiksa.setString(5, KodePj.getText());
+                    pssimpanperiksa.setString(6, "Sudah");
+                    pssimpanperiksa.setString(7, _idPeriksa);
                     pssimpanperiksa.executeUpdate();
 
+                    // Hapus dulu semua detailnya
+                    new GQuery()
+                            .a("DELETE FROM detail_periksa_lab WHERE id_periksa = {id_periksa}")
+                            .set("id_periksa", _idPeriksa)
+                            .write();
+                    
                     // Simpan detail 1
                     for (int a = 0; a < tbTarif.getRowCount(); a++)
                     {
@@ -1400,19 +2083,18 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                             psdetailpriksa = koneksi.prepareStatement("insert into detail_periksa_lab values(?,?,?)");
 
                             psdetailpriksa.setString(1, idDetail);
-                            psdetailpriksa.setString(2, idPeriksa);
+                            psdetailpriksa.setString(2, _idPeriksa);
                             psdetailpriksa.setString(3, kdJenisPrw);
                             psdetailpriksa.executeUpdate();
 
                             // Simpan Detail 2
-                            for (int b = 0; b < tbPemeriksaan.getRowCount(); b++)
+                            for (int b = 0; b < tblDetail.getRowCount(); b++)
                             {
-                                if (tbPemeriksaan.getValueAt(b, 7).toString().equals(kdJenisPrw) &&
-                                    !tbPemeriksaan.getValueAt(b, 6).toString().equals("") &&
-                                    tbPemeriksaan.getValueAt(b, 0).toString().equals("true"))
+                                if (tblDetail.getValueAt(b, 7).toString().equals(kdJenisPrw) &&
+                                    tblDetail.getValueAt(b, 8).toString().equals("Atas"))
                                 {
                                     String idDetail2 = Sequel.autoNumber("detail_periksa_lab_2", "id_detail");
-                                    String idTemplate = tbPemeriksaan.getValueAt(b, 6).toString();
+                                    String idTemplate = tblDetail.getValueAt(b, 6).toString();
 
                                     // Ambil tarif sesuai kelas
                                     String[] tarifs = new GQuery()
@@ -1434,9 +2116,9 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                                     psDetailPeriksa2.setString(1, idDetail2);
                                     psDetailPeriksa2.setString(2, idDetail);
                                     psDetailPeriksa2.setString(3, idTemplate);
-                                    psDetailPeriksa2.setString(4, tbPemeriksaan.getValueAt(b, 2).toString());
-                                    psDetailPeriksa2.setString(5, tbPemeriksaan.getValueAt(b, 4).toString());
-                                    psDetailPeriksa2.setString(6, tbPemeriksaan.getValueAt(b, 5).toString());
+                                    psDetailPeriksa2.setString(4, tblDetail.getValueAt(b, 2).toString());
+                                    psDetailPeriksa2.setString(5, tblDetail.getValueAt(b, 4).toString());
+                                    psDetailPeriksa2.setString(6, tblDetail.getValueAt(b, 5).toString());
                                     psDetailPeriksa2.setString(7, tarifs[0]);
                                     psDetailPeriksa2.setString(8, tarifs[1]);
                                     psDetailPeriksa2.setString(9, tarifs[2]);
@@ -1446,6 +2128,30 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                                     psDetailPeriksa2.setString(13, tarifs[6]);
                                     psDetailPeriksa2.setString(14, tarifs[7]);
                                     psDetailPeriksa2.executeUpdate();
+                                    
+                                    // Detail 3
+                                    for (int c = 0; c < tblDetail.getRowCount(); c++)
+                                    {
+                                        if (tblDetail.getValueAt(c, 7).toString().equals(idTemplate) &&
+                                            tblDetail.getValueAt(c, 8).toString().equals("Bawah"))
+                                        {
+                                            String idDetail3 = Sequel.autoNumber("detail_periksa_lab_3", "id_detail");
+                                            String idDetTemplate = tblDetail.getValueAt(c, 6).toString();
+                                            String hasil = tblDetail.getValueAt(c, 2).toString();
+                                            String ruj = tblDetail.getValueAt(c, 4).toString();
+                                            String ket = tblDetail.getValueAt(c, 5).toString();
+
+                                            psDetailPeriksa3 = koneksi.prepareStatement("INSERT INTO detail_periksa_lab_3 VALUES(?,?,?,?,?,?)");
+
+                                            psDetailPeriksa3.setString(1, idDetail3);
+                                            psDetailPeriksa3.setString(2, idDetail2);
+                                            psDetailPeriksa3.setString(3, idDetTemplate);
+                                            psDetailPeriksa3.setString(4, hasil);
+                                            psDetailPeriksa3.setString(5, ruj);
+                                            psDetailPeriksa3.setString(6, ket);
+                                            psDetailPeriksa3.executeUpdate();
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1456,12 +2162,13 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                 catch (Exception e)
                 {
                     System.out.println(e);
+                    sukses = false;
                 }
 
                 if (sukses)
                 {
                     JOptionPane.showMessageDialog(null, "Proses simpan selesai...!");
-                    isReset();
+                    clearSemua();
                 }
                 else
                 {
@@ -1483,7 +2190,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
-        emptTeks();
+        clearSemua();
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
@@ -1504,7 +2211,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
             {
                 if (tbPemeriksaan.getValueAt(i, 0).toString().equals("true"))
                 {
-                    tabMode.removeRow(i);
+                    mdlPemeriksaan.removeRow(i);
                 }
             }
         }
@@ -1557,7 +2264,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         {
             Valid.textKosong(KodePj, "Dokter Penanggung Jawab");
         }
-        else if (tabMode.getRowCount() == 0)
+        else if (mdlPemeriksaan.getRowCount() == 0)
         {
             Valid.textKosong(Pemeriksaan, "Data Pemeriksaan");
         }
@@ -1657,7 +2364,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
 
     private void BtnNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotaActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if (tabMode.getRowCount() == 0)
+        if (mdlPemeriksaan.getRowCount() == 0)
         {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
             Pemeriksaan.requestFocus();
@@ -1751,7 +2458,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     private void PemeriksaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PemeriksaanKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
-            tampiltarif();
+            tampilTarif(true);
         }
         else if (evt.getKeyCode() == KeyEvent.VK_UP)
         {
@@ -1803,7 +2510,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     }//GEN-LAST:event_ChkJlnActionPerformed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-        tampiltarif();
+        isReset(true);
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterActionPerformed
@@ -1817,11 +2524,12 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     }//GEN-LAST:event_btnDokterActionPerformed
 
     private void tbTarifMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTarifMouseClicked
-        if (tabMode2.getRowCount() != 0)
+        if (mdlTarif.getRowCount() != 0)
         {
             try
             {
-                tampil();
+                tampilTindakan(true);
+                tampilDetail();
             }
             catch (java.lang.NullPointerException e)
             {
@@ -1877,17 +2585,25 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         dokter.setVisible(true);
     }//GEN-LAST:event_btnDokterPjActionPerformed
 
-    private void tblTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTransaksiMouseClicked
-        if(tabMode.getRowCount()!=0){
-            try {
-                getData();
-            } catch (java.lang.NullPointerException e) {
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+        
+        if (evt.getClickCount() == 2 && tblOrder.getSelectedRow() != -1)
+        {
+            int r = tblOrder.getSelectedRow();
+            
+            for (int a = r; a >= 0; a--)
+            {
+                if (tblOrder.getValueAt(a, 8) != null)
+                {
+                    dariOrder(tblOrder.getValueAt(a, 8).toString());
+                    break;
+                }
             }
         }
-    }//GEN-LAST:event_tblTransaksiMouseClicked
+    }//GEN-LAST:event_tblOrderMouseClicked
 
-    private void tblTransaksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblTransaksiKeyPressed
-        if(tabMode.getRowCount()!=0){
+    private void tblOrderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblOrderKeyPressed
+        if(mdlPemeriksaan.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
                 try {
                     getData();
@@ -1895,7 +2611,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                 }
             }
         }
-    }//GEN-LAST:event_tblTransaksiKeyPressed
+    }//GEN-LAST:event_tblOrderKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1908,7 +2624,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
-        tampil();
+        tampilOrder();
     }//GEN-LAST:event_BtnCari2ActionPerformed
 
     private void BtnCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari2KeyPressed
@@ -1920,13 +2636,13 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     }//GEN-LAST:event_BtnCari2KeyPressed
 
     private void BtnHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapus1ActionPerformed
-        if (tblTransaksi.getSelectedRow() != -1)
+        if (tblOrder.getSelectedRow() != -1)
         {
-            int r = tblTransaksi.getSelectedRow();
+            int r = tblOrder.getSelectedRow();
             
             for (int a = r; a >= 0; a--)
             {
-                Object p = tblTransaksi.getValueAt(a, 7);
+                Object p = tblOrder.getValueAt(a, 7);
                 
                 if (p == null || p.toString().isEmpty())
                 {
@@ -1938,7 +2654,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                     {
                         boolean b = new GQuery()
                                 .a("DELETE FROM periksa_lab WHERE id_periksa = {id_periksa}")
-                                .set("id_periksa", tblTransaksi.getValueAt(a, 8).toString())
+                                .set("id_periksa", tblOrder.getValueAt(a, 8).toString())
                                 .write();
                         
                         if (b)
@@ -1985,22 +2701,22 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     private void BtnPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint1ActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         BtnCariActionPerformed(evt);
-        if(tabMode.getRowCount()==0){
+        if(mdlPemeriksaan.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else if(mdlPemeriksaan.getRowCount()!=0){
             Sequel.AutoComitFalse();
             Sequel.queryu("delete from temporary");
-            int row=tabMode.getRowCount();
+            int row=mdlPemeriksaan.getRowCount();
             for(i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'0','"+
-                    tabMode.getValueAt(i,0).toString()+"','"+
-                    tabMode.getValueAt(i,1).toString()+"','"+
-                    tabMode.getValueAt(i,2).toString()+"','"+
-                    tabMode.getValueAt(i,3).toString()+"','"+
-                    tabMode.getValueAt(i,4).toString()+"','"+
-                    tabMode.getValueAt(i,5).toString()+"','"+
-                    tabMode.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
+                    mdlPemeriksaan.getValueAt(i,0).toString()+"','"+
+                    mdlPemeriksaan.getValueAt(i,1).toString()+"','"+
+                    mdlPemeriksaan.getValueAt(i,2).toString()+"','"+
+                    mdlPemeriksaan.getValueAt(i,3).toString()+"','"+
+                    mdlPemeriksaan.getValueAt(i,4).toString()+"','"+
+                    mdlPemeriksaan.getValueAt(i,5).toString()+"','"+
+                    mdlPemeriksaan.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab");
             }
             Sequel.AutoComitTrue();
             Map<String, Object> param = new HashMap<>();
@@ -2035,6 +2751,91 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         }else{Valid.pindah(evt,BtnPrint,NoRawat);}
     }//GEN-LAST:event_BtnKeluar1KeyPressed
 
+    private void tblTransaksiMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblTransaksiMouseClicked
+    {//GEN-HEADEREND:event_tblTransaksiMouseClicked
+        if (evt.getClickCount() == 2 && tblTransaksi.getSelectedRow() != -1)
+        {
+            int r = tblTransaksi.getSelectedRow();
+            
+            for (int a = r; a >= 0; a--)
+            {
+                if (tblTransaksi.getValueAt(a, 8) != null)
+                {
+                    dariTransaksi(tblTransaksi.getValueAt(a, 8).toString());
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_tblTransaksiMouseClicked
+
+    private void tblTransaksiKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_tblTransaksiKeyPressed
+    {//GEN-HEADEREND:event_tblTransaksiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblTransaksiKeyPressed
+
+    private void TCari1KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_TCari1KeyPressed
+    {//GEN-HEADEREND:event_TCari1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TCari1KeyPressed
+
+    private void BtnCari3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnCari3ActionPerformed
+    {//GEN-HEADEREND:event_BtnCari3ActionPerformed
+        tampilTransksi();
+    }//GEN-LAST:event_BtnCari3ActionPerformed
+
+    private void BtnCari3KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_BtnCari3KeyPressed
+    {//GEN-HEADEREND:event_BtnCari3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnCari3KeyPressed
+
+    private void BtnHapus2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnHapus2ActionPerformed
+    {//GEN-HEADEREND:event_BtnHapus2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnHapus2ActionPerformed
+
+    private void BtnHapus2KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_BtnHapus2KeyPressed
+    {//GEN-HEADEREND:event_BtnHapus2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnHapus2KeyPressed
+
+    private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnAll1ActionPerformed
+    {//GEN-HEADEREND:event_BtnAll1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAll1ActionPerformed
+
+    private void BtnAll1KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_BtnAll1KeyPressed
+    {//GEN-HEADEREND:event_BtnAll1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAll1KeyPressed
+
+    private void BtnPrint2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnPrint2ActionPerformed
+    {//GEN-HEADEREND:event_BtnPrint2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnPrint2ActionPerformed
+
+    private void BtnPrint2KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_BtnPrint2KeyPressed
+    {//GEN-HEADEREND:event_BtnPrint2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnPrint2KeyPressed
+
+    private void BtnKeluar2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnKeluar2ActionPerformed
+    {//GEN-HEADEREND:event_BtnKeluar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnKeluar2ActionPerformed
+
+    private void BtnKeluar2KeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_BtnKeluar2KeyPressed
+    {//GEN-HEADEREND:event_BtnKeluar2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnKeluar2KeyPressed
+
+    private void tbPemeriksaanPropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_tbPemeriksaanPropertyChange
+    {//GEN-HEADEREND:event_tbPemeriksaanPropertyChange
+        if (evt.getPropertyName().equals("tableCellEditor"))
+        {
+            tampilDetail();
+        }
+    }//GEN-LAST:event_tbPemeriksaanPropertyChange
+
     /**
      * @param args the command line arguments
      */
@@ -2042,7 +2843,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     {
         java.awt.EventQueue.invokeLater(() -> 
                 {
-                    DlgOrderLaboratorium dialog = new DlgOrderLaboratorium(new javax.swing.JFrame(), true);
+                    DlgPemeriksaanLaboratorium dialog = new DlgPemeriksaanLaboratorium(new javax.swing.JFrame(), true);
                     dialog.addWindowListener(new java.awt.event.WindowAdapter()
                     {
                         @Override
@@ -2058,17 +2859,22 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.TextBox Alamat;
     private widget.Button BtnAll;
+    private widget.Button BtnAll1;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnCari1;
     private widget.Button BtnCari2;
+    private widget.Button BtnCari3;
     private widget.Button BtnHapus;
     private widget.Button BtnHapus1;
+    private widget.Button BtnHapus2;
     private widget.Button BtnKeluar;
     private widget.Button BtnKeluar1;
+    private widget.Button BtnKeluar2;
     private widget.Button BtnNota;
     private widget.Button BtnPrint;
     private widget.Button BtnPrint1;
+    private widget.Button BtnPrint2;
     private widget.Button BtnSimpan;
     private widget.CekBox ChkInput;
     private widget.CekBox ChkJln;
@@ -2089,7 +2895,9 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
+    private widget.ScrollPane Scroll2;
     private widget.TextBox TCari;
+    private widget.TextBox TCari1;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
@@ -2103,185 +2911,125 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     private javax.swing.ButtonGroup buttonGroup1;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
+    private widget.InternalFrame internalFrame3;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
     private widget.Label jLabel12;
     private widget.Label jLabel15;
     private widget.Label jLabel16;
     private widget.Label jLabel3;
+    private widget.Label jLabel33;
+    private widget.Label jLabel34;
+    private widget.Label jLabel35;
+    private widget.Label jLabel36;
     private widget.Label jLabel7;
     private widget.Label jLabel9;
+    private javax.swing.JPanel jPanel1;
     private widget.Label label10;
+    private widget.Label label11;
+    private widget.Label label12;
     private widget.Label label9;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi2;
+    private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
+    private widget.panelisi panelisi5;
     private javax.swing.JMenuItem ppBersihkan;
     private javax.swing.JMenuItem ppSemua;
     private widget.RadioButton rbAnak;
     private widget.RadioButton rbDewasa;
     private widget.ScrollPane scrollPane1;
+    private widget.ScrollPane scrollPane2;
     private widget.TabPane tabPane;
     private widget.Table tbPemeriksaan;
     private widget.Table tbTarif;
+    private widget.Table tblDetail;
+    private widget.Table tblOrder;
     private widget.Table tblTransaksi;
+    private widget.Tanggal tglTransaksi1;
+    private widget.Tanggal tglTransaksi2;
+    private widget.Tanggal tglTransaksi3;
+    private widget.Tanggal tglTransaksi4;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil()
+    public void tampilTindakan(boolean isAll)
     {
-        Valid.tabelKosong(tabMode);
+        Valid.tabelKosong(mdlPemeriksaan);
+        
         try
         {
             for (i = 0; i < tbTarif.getRowCount(); i++)
             {
                 if (tbTarif.getValueAt(i, 0).toString().equals("true"))
                 {
-                    tabMode.addRow(new Object[]
+                    mdlPemeriksaan.addRow(new Object[]
                     {
-                        false, tbTarif.getValueAt(i, 2).toString(), "", "", "", "", "", ""
+                        true, tbTarif.getValueAt(i, 2).toString(), "", "", "", "", "", ""
                     });
-                    if (Jk.getText().equals("L") && (rbDewasa.isSelected() == true))
+                    
+                    pstampil = koneksi.prepareStatement("select id_template, kd_jenis_prw, Pemeriksaan "
+                            + "from template_laboratorium where kd_jenis_prw=? order by urut");
+
+                    pstampil.setString(1, tbTarif.getValueAt(i, 1).toString());
+                    rstampil = pstampil.executeQuery();
+
+                    // Ngitung jumlah pemeriksaan yg dicentang
+                    int jums = 0;
+                    
+                    while (rstampil.next())
                     {
-                        pstampil = koneksi.prepareStatement("select id_template, kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_ld "
-                                + "from template_laboratorium where kd_jenis_prw=? order by urut");
-                        try
+                        if (idTemplates.contains(rstampil.getString("id_template")))
                         {
-                            pstampil.setString(1, tbTarif.getValueAt(i, 1).toString());
-                            rstampil = pstampil.executeQuery();
-                            while (rstampil.next())
+                            jums++;
+                            
+                            mdlPemeriksaan.addRow(new Object[]
                             {
-                                tabMode.addRow(new Object[]
-                                {
-                                    false, "   " + rstampil.getString("Pemeriksaan"), "",
-                                    rstampil.getString("satuan"),
-                                    rstampil.getString("nilai_rujukan_ld"), "",
-                                    rstampil.getString("id_template"),
-                                    rstampil.getString("kd_jenis_prw")
-                                });
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            System.out.println("Notifikasi : " + e);
-                        }
-                        finally
-                        {
-                            if (rstampil != null)
-                            {
-                                rstampil.close();
-                            }
-                            if (pstampil != null)
-                            {
-                                pstampil.close();
-                            }
+                                true, 
+                                "   + " + rstampil.getString("Pemeriksaan"),
+                                rstampil.getString("id_template"),
+                                rstampil.getString("kd_jenis_prw")
+                            });
                         }
                     }
-                    else if (Jk.getText().equals("L") && (rbAnak.isSelected() == true))
+                    
+                    // Kalo jumlah yg dicentang gak ada hapus aja kategorinya
+                    if (jums == 0)
                     {
-                        pstampil2 = koneksi.prepareStatement("select id_template, kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_la "
-                                + "from template_laboratorium where kd_jenis_prw=? order by urut");
-                        try
-                        {
-                            pstampil2.setString(1, tbTarif.getValueAt(i, 1).toString());
-                            rstampil = pstampil2.executeQuery();
-                            while (rstampil.next())
-                            {
-                                tabMode.addRow(new Object[]
-                                {
-                                    false, "   " + rstampil.getString("Pemeriksaan"), "",
-                                    rstampil.getString("satuan"),
-                                    rstampil.getString("nilai_rujukan_la"), "",
-                                    rstampil.getString("id_template"),
-                                    rstampil.getString("kd_jenis_prw")
-                                });
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            System.out.println("Notifikasi : " + e);
-                        }
-                        finally
-                        {
-                            if (rstampil != null)
-                            {
-                                rstampil.close();
-                            }
-                            if (pstampil2 != null)
-                            {
-                                pstampil2.close();
-                            }
-                        }
+                        mdlPemeriksaan.removeRow(mdlPemeriksaan.getRowCount() - 1);
                     }
-                    else if (Jk.getText().equals("P") && (rbDewasa.isSelected() == true))
+                }
+            }
+            
+            // Buta nanpilin semuaw
+            if (isAll)
+            {
+                for (i = 0; i < tbTarif.getRowCount(); i++)
+                {
+                    if (tbTarif.getValueAt(i, 0).toString().equals("true"))
                     {
-                        pstampil3 = koneksi.prepareStatement("select id_template, kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_pd "
-                                + "from template_laboratorium where kd_jenis_prw=? order by urut");
-                        try
+                        mdlPemeriksaan.addRow(new Object[]
                         {
-                            pstampil3.setString(1, tbTarif.getValueAt(i, 1).toString());
-                            rstampil = pstampil3.executeQuery();
-                            while (rstampil.next())
+                            false, tbTarif.getValueAt(i, 2).toString(), "", "", "", "", "", ""
+                        });
+
+                        pstampil = koneksi.prepareStatement("select id_template, kd_jenis_prw, Pemeriksaan "
+                                + "from template_laboratorium where kd_jenis_prw=? order by urut");
+
+                        pstampil.setString(1, tbTarif.getValueAt(i, 1).toString());
+                        rstampil = pstampil.executeQuery();
+
+                        while (rstampil.next())
+                        {
+                            if (!idTemplates.contains(rstampil.getString("id_template")))
                             {
-                                tabMode.addRow(new Object[]
+                                mdlPemeriksaan.addRow(new Object[]
                                 {
-                                    false, "   " + rstampil.getString("Pemeriksaan"), "",
-                                    rstampil.getString("satuan"),
-                                    rstampil.getString("nilai_rujukan_pd"), "",
+                                    false, 
+                                    "   + " + rstampil.getString("Pemeriksaan"),
                                     rstampil.getString("id_template"),
                                     rstampil.getString("kd_jenis_prw")
                                 });
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            System.out.println("Notifikasi : " + e);
-                        }
-                        finally
-                        {
-                            if (rstampil != null)
-                            {
-                                rstampil.close();
-                            }
-                            if (pstampil3 != null)
-                            {
-                                pstampil3.close();
-                            }
-                        }
-                    }
-                    else if (Jk.getText().equals("P") && (rbAnak.isSelected() == true))
-                    {
-                        pstampil4 = koneksi.prepareStatement("select id_template, kd_jenis_prw, Pemeriksaan, satuan, nilai_rujukan_pa "
-                                + "from template_laboratorium where kd_jenis_prw=? order by urut");
-                        try
-                        {
-                            pstampil4.setString(1, tbTarif.getValueAt(i, 1).toString());
-                            rstampil = pstampil4.executeQuery();
-                            while (rstampil.next())
-                            {
-                                tabMode.addRow(new Object[]
-                                {
-                                    false, "   " + rstampil.getString("Pemeriksaan"), "",
-                                    rstampil.getString("satuan"),
-                                    rstampil.getString("nilai_rujukan_pa"), "",
-                                    rstampil.getString("id_template"),
-                                    rstampil.getString("kd_jenis_prw")
-                                });
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            System.out.println("Notifikasi : " + e);
-                        }
-                        finally
-                        {
-                            if (rstampil != null)
-                            {
-                                rstampil.close();
-                            }
-                            if (pstampil4 != null)
-                            {
-                                pstampil4.close();
                             }
                         }
                     }
@@ -2294,7 +3042,97 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         }
 
     }
+    
+    public void tampilDetail()
+    {
+        Valid.tabelKosong(mdlDetail);
+        
+        try
+        {
+            for (i = 0; i < tbPemeriksaan.getRowCount(); i++)
+            {
+                if (tbPemeriksaan.getValueAt(i, 0).toString().equals("true") &&
+                        !tbPemeriksaan.getValueAt(i, 2).toString().isEmpty())
+                {
+                    String idTemplate = tbPemeriksaan.getValueAt(i, 2).toString();
+                    String key0 = "Atas" + idTemplate;
+                    String hasil0 = mapHasil.containsKey(key0) ? mapHasil.get(key0) : "";
+                    String ket0 = mapKet.containsKey(key0) ? mapKet.get(key0) : "";
+                    String jnsRuj;
+                    
+                    if (Jk.getText().equals("L") && (rbDewasa.isSelected() == true))
+                    {
+                        jnsRuj = "nilai_rujukan_ld";
+                    }
+                    else if (Jk.getText().equals("L") && (rbAnak.isSelected() == true))
+                    {
+                        jnsRuj = "nilai_rujukan_la";
+                    }
+                    else if (Jk.getText().equals("P") && (rbDewasa.isSelected() == true))
+                    {
+                        jnsRuj = "nilai_rujukan_pd";
+                    }
+                    else
+                    {
+                        jnsRuj = "nilai_rujukan_pa";
+                    }
+                    
+                    pstampil = koneksi.prepareStatement("select id_template, kd_jenis_prw, Pemeriksaan, satuan, " + jnsRuj
+                            + " from template_laboratorium where id_template=?");
+                    pstampil.setString(1, idTemplate);
+                    rstampil = pstampil.executeQuery();
 
+                    if (rstampil.next())
+                    {
+                        mdlDetail.addRow(new Object[]
+                        {
+                            true, 
+                            "   + " + rstampil.getString("Pemeriksaan"), 
+                            hasil0,
+                            rstampil.getString("satuan"),
+                            rstampil.getString(jnsRuj), 
+                            ket0,
+                            rstampil.getString("id_template"),
+                            rstampil.getString("kd_jenis_prw"),
+                            "Atas"
+                        });
+                    }
+                    
+                    psDetail = koneksi.prepareStatement("SELECT id_det_template, id_template, pemeriksaan, satuan, nilai_rujukan_ld " +
+                            "FROM template_laboratorium_det WHERE id_template = ? ORDER BY id_det_template");
+                    psDetail.setString(1, idTemplate);
+                    rsDetail = psDetail.executeQuery();
+
+                    while (rsDetail.next())
+                    {
+                        String idDet = rsDetail.getString("id_det_template");
+                        String key = "Bawah" + idDet;
+                        String hasil = mapHasil.containsKey(key) ? mapHasil.get(key) : "";
+                        String ket = mapKet.containsKey(key) ? mapKet.get(key) : "";
+                        
+                        mdlDetail.addRow(new Object[]
+                        {
+                            true, 
+                            "      - " + rsDetail.getString("pemeriksaan"), 
+                            hasil,
+                            rsDetail.getString("satuan"),
+                            rsDetail.getString("nilai_rujukan_ld"), 
+                            ket,
+                            rsDetail.getString("id_det_template"),
+                            rsDetail.getString("id_template"),
+                            "Bawah"
+                        });
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
+    
     public void emptTeks()
     {
         KodePerujuk.setText("");
@@ -2305,7 +3143,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         NmPtg.setText("");
         Pemeriksaan.setText("");
         KodePj.requestFocus();
-        isReset();
+        isReset(true);
     }
 
     public void onCari()
@@ -2343,16 +3181,48 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         Sequel.cariIsi("select alamat from pasien where no_rkm_medis=? ", Alamat, TNoRM.getText());
     }
 
-    public void isReset()
+    public void isReset(boolean isAll)
     {
-        jml = tbTarif.getRowCount();
-        for (i = 0; i < jml; i++)
+        try
         {
-            tbTarif.setValueAt(false, i, 0);
+            psset_tarif = koneksi.prepareStatement("select * from set_tarif");
+            try
+            {
+                rsset_tarif = psset_tarif.executeQuery();
+                if (rsset_tarif.next())
+                {
+                    cara_bayar_lab = rsset_tarif.getString("cara_bayar_lab");
+                }
+                else
+                {
+                    cara_bayar_lab = "Yes";
+                }
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+            finally
+            {
+                if (rsset_tarif != null)
+                {
+                    rsset_tarif.close();
+                }
+                if (psset_tarif != null)
+                {
+                    psset_tarif.close();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
         }
         
-        tampil();
-        tampilTransksi();
+        
+        tampilTarif(isAll);
+        tampilTindakan(isAll);
+        tampilDetail();
     }
 
     private void jam()
@@ -2422,24 +3292,6 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
 
     public void setNoRm(String norwt, String posisi)
     {
-        // Ngeset dewasa/anak OTO
-        int umur = new GQuery()
-                .a("SELECT DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW()) - TO_DAYS(tgl_lahir)), '%Y')+0 AS age")
-                .a("FROM reg_periksa")
-                .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
-                .a("WHERE no_rawat = {no_rwt}")
-                .set("no_rwt", norwt)
-                .getInt();
-        
-        if (umur >= GConst.DEWASA)
-        {
-            rbDewasa.setSelected(true);
-        }
-        else
-        {
-            rbAnak.setSelected(true);
-        }
-        
         TNoRw.setText(norwt);
         this.status = posisi;
 
@@ -2529,7 +3381,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
             System.out.println(e);
         }
 
-        isReset();
+        isReset(true);
     }
 
     public void isCek()
@@ -2569,74 +3421,74 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
     }
     private void getData() {
         Kd2.setText("");
-        if(tblTransaksi.getSelectedRow()!= -1){
-            Kd2.setText(tblTransaksi.getValueAt(tblTransaksi.getSelectedRow(),0).toString());
+        if(tblOrder.getSelectedRow()!= -1){
+            Kd2.setText(tblOrder.getValueAt(tblOrder.getSelectedRow(),0).toString());
         }
     }
-    public void tampiltarif()
+    public void tampilTarif(boolean isAll)
     {
         try
         {
-            jml = 0;
-            for (i = 0; i < tbTarif.getRowCount(); i++)
-            {
-                if (tbTarif.getValueAt(i, 0).toString().equals("true"))
-                {
-                    jml++;
-                }
-            }
-
-            pilih = null;
-            pilih = new boolean[jml];
-            kode = null;
-            kode = new String[jml];
-            nama = null;
-            nama = new String[jml];
-            total = null;
-            total = new double[jml];
-            bagian_rs = null;
-            bagian_rs = new double[jml];
-            bhp = null;
-            bhp = new double[jml];
-            tarif_perujuk = null;
-            tarif_perujuk = new double[jml];
-            tarif_tindakan_dokter = null;
-            tarif_tindakan_dokter = new double[jml];
-            tarif_tindakan_petugas = null;
-            tarif_tindakan_petugas = new double[jml];
-            kso = null;
-            kso = new double[jml];
-            menejemen = null;
-            menejemen = new double[jml];
-
-            index = 0;
-            for (i = 0; i < tbTarif.getRowCount(); i++)
-            {
-                if (tbTarif.getValueAt(i, 0).toString().equals("true"))
-                {
-                    pilih[index] = true;
-                    kode[index] = tbTarif.getValueAt(i, 1).toString();
-                    nama[index] = tbTarif.getValueAt(i, 2).toString();
-                    total[index] = Double.parseDouble(tbTarif.getValueAt(i, 3).toString());
-                    bagian_rs[index] = Double.parseDouble(tbTarif.getValueAt(i, 4).toString());
-                    bhp[index] = Double.parseDouble(tbTarif.getValueAt(i, 5).toString());
-                    tarif_perujuk[index] = Double.parseDouble(tbTarif.getValueAt(i, 6).toString());
-                    tarif_tindakan_dokter[index] = Double.parseDouble(tbTarif.getValueAt(i, 7).toString());
-                    tarif_tindakan_petugas[index] = Double.parseDouble(tbTarif.getValueAt(i, 8).toString());
-                    kso[index] = Double.parseDouble(tbTarif.getValueAt(i, 9).toString());
-                    menejemen[index] = Double.parseDouble(tbTarif.getValueAt(i, 10).toString());
-                    index++;
-                }
-            }
-
-            Valid.tabelKosong(tabMode2);
-            for (i = 0; i < jml; i++)
-            {
-                tabMode2.addRow(new Object[]
-                {
-                    pilih[i], kode[i], nama[i], total[i], bagian_rs[i], bhp[i], tarif_perujuk[i], tarif_tindakan_dokter[i], tarif_tindakan_petugas[i], kso[i], menejemen[i]
-                });
-            }
+//            jml = 0;
+//            for (i = 0; i < tbTarif.getRowCount(); i++)
+//            {
+//                if (tbTarif.getValueAt(i, 0).toString().equals("true"))
+//                {
+//                    jml++;
+//                }
+//            }
+//
+//            pilih = null;
+//            pilih = new boolean[jml];
+//            kode = null;
+//            kode = new String[jml];
+//            nama = null;
+//            nama = new String[jml];
+//            total = null;
+//            total = new double[jml];
+//            bagian_rs = null;
+//            bagian_rs = new double[jml];
+//            bhp = null;
+//            bhp = new double[jml];
+//            tarif_perujuk = null;
+//            tarif_perujuk = new double[jml];
+//            tarif_tindakan_dokter = null;
+//            tarif_tindakan_dokter = new double[jml];
+//            tarif_tindakan_petugas = null;
+//            tarif_tindakan_petugas = new double[jml];
+//            kso = null;
+//            kso = new double[jml];
+//            menejemen = null;
+//            menejemen = new double[jml];
+//
+//            index = 0;
+//            for (i = 0; i < tbTarif.getRowCount(); i++)
+//            {
+//                if (tbTarif.getValueAt(i, 0).toString().equals("true"))
+//                {
+//                    pilih[index] = true;
+//                    kode[index] = tbTarif.getValueAt(i, 1).toString();
+//                    nama[index] = tbTarif.getValueAt(i, 2).toString();
+//                    total[index] = Double.parseDouble(tbTarif.getValueAt(i, 3).toString());
+//                    bagian_rs[index] = Double.parseDouble(tbTarif.getValueAt(i, 4).toString());
+//                    bhp[index] = Double.parseDouble(tbTarif.getValueAt(i, 5).toString());
+//                    tarif_perujuk[index] = Double.parseDouble(tbTarif.getValueAt(i, 6).toString());
+//                    tarif_tindakan_dokter[index] = Double.parseDouble(tbTarif.getValueAt(i, 7).toString());
+//                    tarif_tindakan_petugas[index] = Double.parseDouble(tbTarif.getValueAt(i, 8).toString());
+//                    kso[index] = Double.parseDouble(tbTarif.getValueAt(i, 9).toString());
+//                    menejemen[index] = Double.parseDouble(tbTarif.getValueAt(i, 10).toString());
+//                    index++;
+//                }
+//            }
+//
+            Valid.tabelKosong(mdlTarif);
+//            for (i = 0; i < jml; i++)
+//            {
+//                tabMode2.addRow(new Object[]
+//                {
+//                    pilih[i], kode[i], nama[i], total[i], bagian_rs[i], bhp[i], tarif_perujuk[i], tarif_tindakan_dokter[i], tarif_tindakan_petugas[i], kso[i], menejemen[i]
+//                });
+//            }
 
             pstindakan = koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan "
@@ -2667,12 +3519,32 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                         rstindakan = pstindakan2.executeQuery();
                         break;
                 }
+                
                 while (rstindakan.next())
                 {
-                    tabMode2.addRow(new Object[]
+                    if (kdJnsPrws.contains(rstindakan.getString(1)))
                     {
-                        false, rstindakan.getString(1), rstindakan.getString(2)
-                    });
+                        mdlTarif.addRow(new Object[]
+                        {
+                            true, rstindakan.getString(1), rstindakan.getString(2)
+                        });
+                    }
+                }
+                
+                if (isAll)
+                {
+                    rstindakan.beforeFirst();
+                
+                    while (rstindakan.next())
+                    {
+                        if (!kdJnsPrws.contains(rstindakan.getString(1)))
+                        {
+                            mdlTarif.addRow(new Object[]
+                            {
+                                false, rstindakan.getString(1), rstindakan.getString(2)
+                            });
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -2701,6 +3573,116 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
         }
     }
     
+    private void tampilOrder()
+    {
+        Valid.tabelKosong(mdlOrder);
+        
+        try
+        {
+            String s = new GQuery()
+                    .a("SELECT id_periksa, reg_periksa.no_rawat AS no_rawat, CONCAT(pasien.no_rkm_medis, ' ', pasien.nm_pasien) AS pasien,")
+                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, proses")
+                    .a("FROM periksa_lab")
+                    .a("JOIN reg_periksa ON reg_periksa.no_rawat = periksa_lab.no_rawat")
+                    .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                    .a("JOIN petugas ON petugas.nip = periksa_lab.nip")
+                    .a("JOIN dokter dp ON dp.kd_dokter = dokter_perujuk")
+                    .a("JOIN dokter dj ON dj.kd_dokter = periksa_lab.kd_dokter")
+                    .a("WHERE proses = 'Belum'")
+                    .a("AND tgl_periksa BETWEEN {tgl1} AND {tgl2}")
+                    .a("AND (pasien.no_rkm_medis LIKE {rkm_medis} OR pasien.nm_pasien LIKE {nama})")
+                    .a("ORDER BY tgl_periksa, jam")
+                    .set("tgl1", Valid.SetTgl(tglTransaksi1.getSelectedItem().toString()))
+                    .set("tgl2", Valid.SetTgl(tglTransaksi2.getSelectedItem().toString()))
+                    .set("rkm_medis", "%" + TCari.getText() + "%")
+                    .set("nama", "%" + TCari.getText() + "%")
+                    .compile();
+            
+            psTraksaksi = koneksi.prepareStatement(s);
+            rsTransksi = psTraksaksi.executeQuery();
+            
+            while (rsTransksi.next())
+            {
+                mdlOrder.addRow(new Object[] 
+                {
+                    rsTransksi.getString("no_rawat"),
+                    rsTransksi.getString("pasien"),
+                    rsTransksi.getString("petugas"),
+                    rsTransksi.getString("tgl_periksa"),
+                    rsTransksi.getString("jam"),
+                    rsTransksi.getString("dokter_perujuk"),
+                    rsTransksi.getString("dokter_pj"),
+                    rsTransksi.getString("proses"),
+                    rsTransksi.getString("id_periksa"),
+                });
+                
+                String s2 = new GQuery()
+                        .a("SELECT * FROM detail_periksa_lab")
+                        .a("JOIN jns_perawatan_lab ON jns_perawatan_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw")
+                        .a("WHERE id_periksa = {id_periksa}")
+                        .set("id_periksa", rsTransksi.getString("id_periksa"))
+                        .compile();
+                
+                psTransaksiD1 = koneksi.prepareStatement(s2);
+                rsTransaksiD1 = psTransaksiD1.executeQuery();
+                
+                mdlOrder.addRow(new Object[] 
+                {
+                    "",
+                    "",
+                    "Pemeriksaan",
+                    "Hasil",
+                    "Satuan",
+                    "Nilai Rujukan",
+                    "Keterangan"
+                });
+                
+                while (rsTransaksiD1.next())
+                {
+                    mdlOrder.addRow(new Object[] 
+                    {
+                        "",
+                        "",
+                        rsTransaksiD1.getString("nm_perawatan"),
+                        "",
+                        "",
+                        "",
+                        ""
+                    });
+                    
+                    String s3 = new GQuery()
+                            .a("SELECT pemeriksaan, nilai, satuan, nilai_rujukan, keterangan")
+                            .a("FROM detail_periksa_lab_2")
+                            .a("JOIN template_laboratorium ON template_laboratorium.id_template = detail_periksa_lab_2.id_template")
+                            .a("WHERE id_detail_1 = {id_detail}")
+                            .set("id_detail", rsTransaksiD1.getString("id_detail"))
+                            .compile();
+                    
+                    psTransaksiD2 = koneksi.prepareStatement(s3);
+                    rsTransaksiD2 = psTransaksiD2.executeQuery();
+                    
+                    while (rsTransaksiD2.next())
+                    {
+                        mdlOrder.addRow(new Object[] 
+                        {
+                            "",
+                            "",
+                            "  - " + rsTransaksiD2.getString("pemeriksaan"),
+                            rsTransaksiD2.getString("nilai"),
+                            rsTransaksiD2.getString("satuan"),
+                            rsTransaksiD2.getString("nilai_rujukan"),
+                            rsTransaksiD2.getString("keterangan")
+                        });
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     private void tampilTransksi()
     {
         Valid.tabelKosong(mdlTransaksi);
@@ -2716,9 +3698,14 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                     .a("JOIN petugas ON petugas.nip = periksa_lab.nip")
                     .a("JOIN dokter dp ON dp.kd_dokter = dokter_perujuk")
                     .a("JOIN dokter dj ON dj.kd_dokter = periksa_lab.kd_dokter")
-                    .a("WHERE reg_periksa.no_rawat = {no_rawat}")
+                    .a("WHERE proses = 'Sudah'")
+                    .a("AND tgl_periksa BETWEEN {tgl1} AND {tgl2}")
+                    .a("AND (pasien.no_rkm_medis LIKE {rkm_medis} OR pasien.nm_pasien LIKE {nama})")
+                    .set("tgl1", Valid.SetTgl(tglTransaksi3.getSelectedItem().toString()))
+                    .set("tgl2", Valid.SetTgl(tglTransaksi4.getSelectedItem().toString()))
+                    .set("rkm_medis", "%" + TCari1.getText() + "%")
+                    .set("nama", "%" + TCari1.getText() + "%")
                     .a("ORDER BY tgl_periksa, jam")
-                    .set("no_rawat", TNoRw.getText())
                     .compile();
             
             psTraksaksi = koneksi.prepareStatement(s);

@@ -17,7 +17,7 @@ import java.util.Map;
 public class GQuery
 {
     private static sekuel sql;
-    private String query;
+    private StringBuilder query;
     
     private HashMap<String, String> map;
     
@@ -26,7 +26,7 @@ public class GQuery
         if (sql == null)
             sql = new sekuel();
         
-        query = "";
+        query = new StringBuilder();
         map = new HashMap<>();
     }
     
@@ -35,7 +35,7 @@ public class GQuery
         if (sql == null)
             sql = new sekuel();
         
-        query = q;
+        query = new StringBuilder(q);
         map = new HashMap<>();
     }
     
@@ -52,7 +52,7 @@ public class GQuery
     
     public GQuery a(String q)
     {
-        query += " " + q;
+        query.append(" " + q);
         
         return this;
     }
@@ -69,7 +69,7 @@ public class GQuery
     
     private GQuery set(String key, String val, boolean withQuote)
     {
-        if (!query.contains("{" + key + "}"))
+        if (!query.toString().contains("{" + key + "}"))
             throw new RuntimeException("Kunci '" + key + "' tidak ditemukan untuk query '" + query + "'");
         else
         {
@@ -88,7 +88,7 @@ public class GQuery
     public String compile()
     {
         Iterator it = map.entrySet().iterator();
-        String qCom = query;
+        String qCom = query.toString();
         
         while (it.hasNext())
         {
