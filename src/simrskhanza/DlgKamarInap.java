@@ -67,6 +67,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     public  DlgBilingRanap billing=new DlgBilingRanap( null,false);
     public  DlgRujukMasuk rujukmasuk=new DlgRujukMasuk(null,false);
     public  DlgDiagnosaPenyakit diagnosa=new DlgDiagnosaPenyakit(null,false);
+    private DlgOrderLaboratorium dlgOrderLab = new DlgOrderLaboratorium(null, false);
     
     private DlgPeriksaHemodialisa dlgPeriksaHd = new DlgPeriksaHemodialisa(null, false);
     
@@ -4194,57 +4195,78 @@ private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_cmbStatusKeyPressed
 
 private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaLabActionPerformed
-        if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
-            TCari.requestFocus();
-        }else if(TPasien.getText().trim().equals("")){
-            try {
-                psanak=koneksi.prepareStatement(
-                    "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
-                    "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamat "+
-                    "from reg_periksa inner join pasien inner join ranap_gabung on "+
-                    "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");            
-                try {
-                    psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
-                    rs2=psanak.executeQuery();
-                    if(rs2.next()){
-                        var.setform("DlgKamarInap");
-                        billing.periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                        billing.periksalab.setLocationRelativeTo(internalFrame1);
-                        billing.periksalab.emptTeks();
-                        billing.periksalab.setNoRm(rs2.getString("no_rawat2"),"Ranap");  
-                        billing.periksalab.tampiltarif();
-                        billing.periksalab.tampil();
-                        billing.periksalab.isCek();
-                        billing.periksalab.setVisible(true);
-                    }else{
-                          JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-                          tbKamIn.requestFocus();
-                    }
-                } catch(Exception ex){
-                    System.out.println("Notifikasi : "+ex);
-                }finally{
-                      if(rs2 != null){
-                          rs2.close();
-                      }
-                      if(psanak != null){
-                          psanak.close();
-                      }
-                }                    
-            } catch (Exception e) {
-                System.out.println(e);
-            } 
-        }else{
-            var.setform("DlgKamarInap");
-            billing.periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            billing.periksalab.setLocationRelativeTo(internalFrame1);
-            billing.periksalab.emptTeks();
-            billing.periksalab.setNoRm(norawat.getText(),"Ranap");  
-            billing.periksalab.tampiltarif();
-            billing.periksalab.tampil();
-            billing.periksalab.isCek();
-            billing.periksalab.setVisible(true);
-        }
+//        if(tabMode.getRowCount()==0){
+//            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+//            TCari.requestFocus();
+//        }else if(TPasien.getText().trim().equals("")){
+//            try {
+//                psanak=koneksi.prepareStatement(
+//                    "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
+//                    "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamat "+
+//                    "from reg_periksa inner join pasien inner join ranap_gabung on "+
+//                    "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");            
+//                try {
+//                    psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+//                    rs2=psanak.executeQuery();
+//                    if(rs2.next()){
+//                        var.setform("DlgKamarInap");
+//                        billing.periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+//                        billing.periksalab.setLocationRelativeTo(internalFrame1);
+//                        billing.periksalab.emptTeks();
+//                        billing.periksalab.setNoRm(rs2.getString("no_rawat2"),"Ranap");  
+//                        billing.periksalab.tampiltarif();
+//                        billing.periksalab.tampil();
+//                        billing.periksalab.isCek();
+//                        billing.periksalab.setVisible(true);
+//                    }else{
+//                          JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+//                          tbKamIn.requestFocus();
+//                    }
+//                } catch(Exception ex){
+//                    System.out.println("Notifikasi : "+ex);
+//                }finally{
+//                      if(rs2 != null){
+//                          rs2.close();
+//                      }
+//                      if(psanak != null){
+//                          psanak.close();
+//                      }
+//                }                    
+//            } catch (Exception e) {
+//                System.out.println(e);
+//            } 
+//        }else{
+//            var.setform("DlgKamarInap");
+//            billing.periksalab.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+//            billing.periksalab.setLocationRelativeTo(internalFrame1);
+//            billing.periksalab.emptTeks();
+//            billing.periksalab.setNoRm(norawat.getText(),"Ranap");  
+//            billing.periksalab.tampiltarif();
+//            billing.periksalab.tampil();
+//            billing.periksalab.isCek();
+//            billing.periksalab.setVisible(true);
+//        }
+
+    if (tabMode.getRowCount() == 0)
+    {
+        JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
+        TCari.requestFocus();
+    }
+    else if (norawat.getText().trim().equals(""))
+    {
+        JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        tbKamIn.requestFocus();
+    }
+    else
+    {
+        dlgOrderLab.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        dlgOrderLab.setLocationRelativeTo(internalFrame1);
+        dlgOrderLab.emptTeks();
+        dlgOrderLab.setNoRm(norawat.getText(), "Ranap");
+        dlgOrderLab.tampil();
+        dlgOrderLab.isCek();
+        dlgOrderLab.setVisible(true);
+    }
 }//GEN-LAST:event_MnPeriksaLabActionPerformed
 
 private void JamMasukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamMasukKeyPressed

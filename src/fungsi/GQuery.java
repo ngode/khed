@@ -5,6 +5,7 @@
  */
 package fungsi;
 
+import com.google.gson.internal.StringMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -103,6 +104,11 @@ public class GQuery
     public List<String[]> select()
     {
         return sql.select(compile());
+    }
+    
+    public List<HashMap<String, String>> selectWithName()
+    {
+        return sql.selectWithName(compile());
     }
     
     public String[] getRow()

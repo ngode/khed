@@ -28,6 +28,7 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -846,6 +847,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         buttonGroup1 = new javax.swing.ButtonGroup();
         Alamat = new widget.TextBox();
         Popup = new javax.swing.JPopupMenu();
+        ppCetakHasil = new javax.swing.JMenuItem();
         ppBersihkan = new javax.swing.JMenuItem();
         ppSemua = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
@@ -959,6 +961,25 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         Alamat.setName("Alamat"); // NOI18N
 
         Popup.setName("Popup"); // NOI18N
+
+        ppCetakHasil.setBackground(new java.awt.Color(255, 255, 255));
+        ppCetakHasil.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppCetakHasil.setForeground(new java.awt.Color(102, 51, 0));
+        ppCetakHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppCetakHasil.setText("Cetak Hasil");
+        ppCetakHasil.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppCetakHasil.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppCetakHasil.setIconTextGap(8);
+        ppCetakHasil.setName("ppCetakHasil"); // NOI18N
+        ppCetakHasil.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppCetakHasil.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                ppCetakHasilActionPerformed(evt);
+            }
+        });
+        Popup.add(ppCetakHasil);
 
         ppBersihkan.setBackground(new java.awt.Color(255, 255, 255));
         ppBersihkan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1332,7 +1353,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-12-2017" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1599,7 +1620,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-12-2017" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setName("tglTransaksi1"); // NOI18N
         tglTransaksi1.setOpaque(false);
@@ -1613,7 +1634,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-12-2017" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setName("tglTransaksi2"); // NOI18N
         tglTransaksi2.setOpaque(false);
@@ -1779,6 +1800,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
             }
         ));
         tblTransaksi.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tblTransaksi.setComponentPopupMenu(Popup);
         tblTransaksi.setName("tblTransaksi"); // NOI18N
         tblTransaksi.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -1809,7 +1831,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         tglTransaksi3.setEditable(false);
         tglTransaksi3.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        tglTransaksi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-12-2017" }));
         tglTransaksi3.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi3.setName("tglTransaksi3"); // NOI18N
         tglTransaksi3.setOpaque(false);
@@ -1823,7 +1845,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         tglTransaksi4.setEditable(false);
         tglTransaksi4.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2017" }));
+        tglTransaksi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-12-2017" }));
         tglTransaksi4.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi4.setName("tglTransaksi4"); // NOI18N
         tglTransaksi4.setOpaque(false);
@@ -2836,6 +2858,157 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         }
     }//GEN-LAST:event_tbPemeriksaanPropertyChange
 
+    private void ppCetakHasilActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ppCetakHasilActionPerformed
+    {//GEN-HEADEREND:event_ppCetakHasilActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        
+        if (mdlTransaksi.getRowCount() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }
+        else if (tblTransaksi.getSelectedRow() == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Maaf, Gagal mencteak. Pilih dulu data yang mau dicetak.");
+        }
+        else
+        {
+            int r = tblTransaksi.getSelectedRow();
+            String idPeriksa = null;
+            
+            // Mencari row utama di tiap transaksi
+            for (int a = r; a >= 0; a--)
+            {
+                if (!tblTransaksi.getValueAt(a, 8).toString().isEmpty())
+                {
+                    idPeriksa = tblTransaksi.getValueAt(a, 8).toString();
+                    break;
+                }
+            }
+            
+            // Kalo gak nemu id periksa
+            if (idPeriksa == null)
+            {
+                JOptionPane.showMessageDialog(null, "Pemeriksaan tidak ditemukan");
+                return;
+            }
+            
+            HashMap<String, String> mMain = new GQuery()
+                    .a("SELECT periksa_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.umur, petugas.nama,")
+                    .a("    DATE_FORMAT(periksa_lab.tgl_periksa,'%d-%m-%Y') as tgl_periksa, periksa_lab.jam,")
+                    .a("    dokter_perujuk.nm_dokter AS nm_dokter_perujuk, dokter_pj.nm_dokter AS nm_dokter_pj, pasien.alamat, DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir")
+                    .a("FROM periksa_lab")
+                    .a("JOIN reg_periksa ON reg_periksa.no_rawat = periksa_lab.no_rawat")
+                    .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                    .a("JOIN petugas ON petugas.nip = periksa_lab.nip")
+                    .a("JOIN dokter dokter_perujuk ON dokter_perujuk.kd_dokter = periksa_lab.dokter_perujuk")
+                    .a("JOIN dokter dokter_pj ON dokter_pj.kd_dokter = periksa_lab.kd_dokter")
+                    .a("WHERE id_periksa = {id_periksa}")
+                    .set("id_periksa", idPeriksa)
+                    .getRowWithName();
+            
+            if (mMain != null)
+            {
+                kamar = Sequel.cariIsi("select ifnull(kd_kamar,'') from kamar_inap where no_rawat='" + mMain.get("no_rawat") + "' order by tgl_masuk desc limit 1");
+                
+                if (!kamar.equals(""))
+                {
+                    namakamar = kamar + ", " + Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar on bangsal.kd_bangsal=kamar.kd_bangsal "
+                            + " where kamar.kd_kamar='" + kamar + "' ");
+                    
+                    kamar = "Kamar";
+                }
+                else if (kamar.equals(""))
+                {
+                    kamar = "Poli";
+                    namakamar = Sequel.cariIsi("select nm_poli from poliklinik inner join reg_periksa on poliklinik.kd_poli=reg_periksa.kd_poli "
+                            + "where reg_periksa.no_rawat='" + mMain.get("no_rawat") + "'");
+                }
+                
+                // Mengisi RAPOT atas
+                Map<String, Object> param = new HashMap<>();
+                param.put("noperiksa", mMain.get("no_rawat"));
+                param.put("norm", mMain.get("no_rkm_medis"));
+                param.put("namapasien", mMain.get("nm_pasien"));
+                param.put("jkel", mMain.get("jk"));
+                param.put("umur", mMain.get("umur"));
+                param.put("pengirim", mMain.get("nm_dokter_perujuk"));
+                param.put("tanggal", mMain.get("tgl_periksa"));
+                param.put("penjab", mMain.get("nm_dokter_pj"));
+                param.put("petugas", mMain.get("nama"));
+                param.put("jam", mMain.get("jam"));
+                param.put("alamat", mMain.get("Alamat"));
+                param.put("kamar", kamar);
+                param.put("namakamar", namakamar);
+                
+                // Dari GLOBAL setting
+                param.put("namars", var.getnamars());
+                param.put("alamatrs", var.getalamatrs());
+                param.put("kotars", var.getkabupatenrs());
+                param.put("propinsirs", var.getpropinsirs());
+                param.put("kontakrs", var.getkontakrs());
+                param.put("emailrs", var.getemailrs());
+                param.put("logo", Sequel.cariGambar("select logo from setting"));
+
+                Sequel.AutoComitFalse();
+                Sequel.queryu("delete from temporary");
+                
+                // Ngambil detail 1
+                List<HashMap<String, String>> mDetail1 = new GQuery()
+                        .a("SELECT id_detail, nm_perawatan FROM detail_periksa_lab")
+                        .a("JOIN jns_perawatan_lab ON jns_perawatan_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw")
+                        .a("WHERE id_periksa = {id_periksa}")
+                        .set("id_periksa", idPeriksa)
+                        .selectWithName();
+                
+                for (HashMap<String, String> m1 : mDetail1)
+                {
+                    Sequel.menyimpan("temporary", "'0','" + m1.get("nm_perawatan") + "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''", "Data User");
+                    
+                    // Ngambil detail 2
+                    List<HashMap<String, String>> mDetail2 = new GQuery()
+                            .a("SELECT id_detail, pemeriksaan, nilai, satuan, nilai_rujukan, keterangan")
+                            .a("FROM detail_periksa_lab_2")
+                            .a("JOIN template_laboratorium ON template_laboratorium.id_template = detail_periksa_lab_2.id_template")
+                            .a("WHERE id_detail_1 = {id_detail}")
+                            .set("id_detail", m1.get("id_detail"))
+                            .selectWithName();
+                    
+                    for (HashMap<String, String> m2 : mDetail2)
+                    {
+                        Sequel.menyimpan("temporary", "'0','  + " + m2.get("pemeriksaan") + "','" + m2.get("nilai") + "','" + m2.get("satuan")
+                                + "','" + m2.get("nilai_rujukan") + "','" + m2.get("keterangan") 
+                                + "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''", "Data User");
+                        
+                        // Ngambil detail 3
+                        List<HashMap<String, String>> mDetail3 = new GQuery()
+                                .a("SELECT pemeriksaan, nilai, satuan, nilai_rujukan, keterangan")
+                                .a("FROM detail_periksa_lab_3")
+                                .a("JOIN template_laboratorium_det ON template_laboratorium_det.id_det_template = detail_periksa_lab_3.id_det_template")
+                                .a("WHERE id_detail_2 = {id_detail}")
+                                .set("id_detail", m2.get("id_detail"))
+                                .selectWithName();
+                        
+                        for (HashMap<String, String> m3 : mDetail3)
+                        {
+                            Sequel.menyimpan("temporary", "'0','     - " + m3.get("pemeriksaan") + "','" + m3.get("nilai") + "','" + m3.get("satuan")
+                                    + "','" + m3.get("nilai_rujukan") + "','" + m3.get("keterangan") 
+                                    + "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',''", "Data User");
+                        }
+                    }
+                }
+                
+                Sequel.AutoComitTrue();
+                
+                
+                Valid.MyReport("rptPeriksaLab.jrxml", "report", "::[ Pemeriksaan Laboratorium ]::",
+                        "select no, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14, temp14, temp15, temp16 from temporary order by no asc", param);
+
+            }
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_ppCetakHasilActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2936,6 +3109,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
     private widget.panelisi panelisi4;
     private widget.panelisi panelisi5;
     private javax.swing.JMenuItem ppBersihkan;
+    private javax.swing.JMenuItem ppCetakHasil;
     private javax.swing.JMenuItem ppSemua;
     private widget.RadioButton rbAnak;
     private widget.RadioButton rbDewasa;
@@ -3744,7 +3918,9 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                     "Hasil",
                     "Satuan",
                     "Nilai Rujukan",
-                    "Keterangan"
+                    "Keterangan",
+                    "",
+                    ""
                 });
                 
                 while (rsTransaksiD1.next())
@@ -3754,6 +3930,8 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                         "",
                         "",
                         rsTransaksiD1.getString("nm_perawatan"),
+                        "",
+                        "",
                         "",
                         "",
                         "",
@@ -3781,7 +3959,9 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                             rsTransaksiD2.getString("nilai"),
                             rsTransaksiD2.getString("satuan"),
                             rsTransaksiD2.getString("nilai_rujukan"),
-                            rsTransaksiD2.getString("keterangan")
+                            rsTransaksiD2.getString("keterangan"),
+                            "",
+                            ""
                         });
                     }
                 }
