@@ -57,6 +57,7 @@
                    $z++;                                   
                 }  
                 
+				// DOKTER ===
                 $_sql = "select temp2 from temporary_bayar_ralan where temp8='Dokter' group by temp2 order by no asc";   
                 $hasil=bukaquery($_sql);
                 echo "<tr class='isi12' padding='0'>
@@ -68,6 +69,7 @@
                   echo "</td>              
                       </tr>";   
                    
+				// REGISTRASI ==========
                 $hasil2=bukaquery("select temp1,temp2,temp3,temp7 from temporary_bayar_ralan where temp8='Registrasi' order by no asc");
                 while($inapdrpasien = mysql_fetch_array($hasil2)) {
                     echo "<tr class='isi12' padding='0'>
@@ -78,7 +80,8 @@
                       </tr>"; 			                    
                 } 
                 
-                $hasil3=bukaquery("select temp1,temp2,temp3,temp7,temp5 from temporary_bayar_ralan where temp8='Ralan Dokter' or temp8='Ralan Dokter Paramedis' or temp8='Ralan Paramedis' or temp8='Laborat' or temp8='Radiologi' order by no asc");
+				// RALAN DOKTER =============
+                $hasil3=bukaquery("select temp1,temp2,temp3,temp7,temp5 from temporary_bayar_ralan where temp8='Ralan Dokter' or temp8='Ralan Dokter Paramedis' or temp8='Ralan Paramedis' order by no asc");
                 echo "<tr class='isi12' padding='0'>
                        <td padding='0' width='30%' valign='top'><font color='000000' size='1'  face='Tahoma'>Tindakan</td> 
                        <td padding='0' width='40%' colspan='6'>
@@ -96,7 +99,68 @@
                    echo"</table>
                         </td>               
                       </tr>"; 
+					  
+				// LAB =============
+                $hasil3=bukaquery("select temp1,temp2,temp3,temp7,temp5 from temporary_bayar_ralan where temp8='Laborat' order by no asc");
+                echo "<tr class='isi12' padding='0'>
+                       <td padding='0' width='30%' valign='top'><font color='000000' size='1'  face='Tahoma'>Laboratorium</td> 
+                       <td padding='0' width='40%' colspan='6'>
+                       <table border='0' width='100%' padding='0' cellspacing='0' cellpadding='0'>
+                             ";                      
+                       while($inapdrpasien = mysql_fetch_array($hasil3)) {
+                           if(!empty($inapdrpasien[3])){
+                                echo "<tr class='isi12' padding='0'> 
+                                         <td padding='0' width='80%'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[1]</font></td>   
+                                         <td padding='0' width='1%'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[4]</font></td>   
+                                         <td padding='0' width='19%' align='right'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[3]</font></td>              
+                                     </tr>";                            
+                           }
+                       }
+                   echo"</table>
+                        </td>               
+                      </tr>"; 
+					  
+				// RAD =============
+                $hasil3=bukaquery("select temp1,temp2,temp3,temp7,temp5 from temporary_bayar_ralan where temp8='Radiologi' order by no asc");
+                echo "<tr class='isi12' padding='0'>
+                       <td padding='0' width='30%' valign='top'><font color='000000' size='1'  face='Tahoma'>Radiologi</td> 
+                       <td padding='0' width='40%' colspan='6'>
+                       <table border='0' width='100%' padding='0' cellspacing='0' cellpadding='0'>
+                             ";                      
+                       while($inapdrpasien = mysql_fetch_array($hasil3)) {
+                           if(!empty($inapdrpasien[3])){
+                                echo "<tr class='isi12' padding='0'> 
+                                         <td padding='0' width='80%'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[1]</font></td>   
+                                         <td padding='0' width='1%'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[4]</font></td>   
+                                         <td padding='0' width='19%' align='right'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[3]</font></td>              
+                                     </tr>";                            
+                           }
+                       }
+                   echo"</table>
+                        </td>               
+                      </tr>"; 
+					  
+				// HD =============
+                $hasil3=bukaquery("select temp1,temp2,temp3,temp7,temp5 from temporary_bayar_ralan where temp8='Hd' order by no asc");
+                echo "<tr class='isi12' padding='0'>
+                       <td padding='0' width='30%' valign='top'><font color='000000' size='1'  face='Tahoma'>Hemodialisa</td> 
+                       <td padding='0' width='40%' colspan='6'>
+                       <table border='0' width='100%' padding='0' cellspacing='0' cellpadding='0'>
+                             ";                      
+                       while($inapdrpasien = mysql_fetch_array($hasil3)) {
+                           if(!empty($inapdrpasien[3])){
+                                echo "<tr class='isi12' padding='0'> 
+                                         <td padding='0' width='80%'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[1]</font></td>   
+                                         <td padding='0' width='1%'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[4]</font></td>   
+                                         <td padding='0' width='19%' align='right'><font color='000000' size='1'  face='Tahoma'>$inapdrpasien[3]</font></td>              
+                                     </tr>";                            
+                           }
+                       }
+                   echo"</table>
+                        </td>               
+                      </tr>"; 
                 
+				// OPERASI ===============
                 $hasil3=bukaquery("select temp1,temp2,temp3,temp7,temp5 from temporary_bayar_ralan where temp8='Operasi' order by no asc");
                 if(mysql_num_rows($hasil3)!=0) { 
                     echo "<tr class='isi12' padding='0'>
@@ -117,7 +181,8 @@
                             </td>               
                           </tr>"; 
                 }  
-                   
+                
+				// OBAT =============
                 $hasil4=bukaquery("select temp1,temp2,temp3,temp7,temp8,temp5 from temporary_bayar_ralan where temp8='Obat' or temp8='TtlObat' group by temp2 order by no asc");
                 $inapdrpasien = mysql_fetch_array($hasil4);
                 if(!empty($inapdrpasien[1])){
@@ -145,6 +210,7 @@
                            </tr>"; 
                 } 
                 
+				// POTONGAN ==========
                 $hasil5=bukaquery("select temp1,temp2,temp3,temp7,temp5 from temporary_bayar_ralan where temp8='Potongan'  order by no asc");
                 while($inapdrpasien = mysql_fetch_array($hasil5)) {
                     echo "<tr class='isi12' padding='0'>
@@ -155,6 +221,7 @@
                       </tr>"; 			                    
                 } 
                 
+				// TAMBAHAN ==========
                 $hasil6=bukaquery("select temp1,temp2,temp3,temp7,temp5 from temporary_bayar_ralan where temp8='Tambahan'  order by no asc");
                 while($inapdrpasien = mysql_fetch_array($hasil6)) {
                     echo "<tr class='isi12' padding='0'>
