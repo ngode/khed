@@ -26,4 +26,20 @@ public class GConvert
         
         return res;
     }
+    
+    public static double parseDouble(String s)
+    {
+        double res = 0;
+        
+        try
+        {
+            res = Double.parseDouble(s);
+        }
+        catch (NumberFormatException e)
+        {
+        
+        }
+        
+        return res;
+    }
 }

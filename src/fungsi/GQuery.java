@@ -40,6 +40,16 @@ public class GQuery
         map = new HashMap<>();
     }
     
+    public static GQuery n()
+    {
+        return new GQuery();
+    }
+    
+    public static GQuery n(String q)
+    {
+        return new GQuery(q);
+    }
+    
     public static void setAutoCommit(boolean b)
     {
         if (sql == null)
@@ -111,6 +121,11 @@ public class GQuery
         return sql.selectWithName(compile());
     }
     
+    public GResult selectComplete()
+    {
+        return sql.selectComplete(compile());
+    }
+    
     public String[] getRow()
     {
         return sql.selectRow(compile());
@@ -119,6 +134,11 @@ public class GQuery
     public HashMap<String, String> getRowWithName()
     {
         return sql.selectRowWithName(compile());
+    }
+    
+    public GRow getRowComplete()
+    {
+        return sql.selectRowComplete(compile());
     }
     
     public String getString()

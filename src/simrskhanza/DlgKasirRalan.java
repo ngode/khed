@@ -67,7 +67,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
     // Childs ==========
     private PopKonsul popKonsul = new PopKonsul(null, false);
-    private DlgPeriksaHemodialisa dlgPeriksaHd = new DlgPeriksaHemodialisa(null, false);
+    private DlgOrderHemodialisa dlgPeriksaHd = new DlgOrderHemodialisa(null, false);
     private DlgOrderLaboratorium dlgOrderLab = new DlgOrderLaboratorium(null, false);
     
     /** Creates new form DlgReg
@@ -3220,7 +3220,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }else {
                 kamarinap.billing.periksarad.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
                 kamarinap.billing.periksarad.setLocationRelativeTo(internalFrame1);
-                kamarinap.billing.periksarad.emptTeks();
                 kamarinap.billing.periksarad.setNoRm(TNoRw.getText(),"Ralan"); 
                 kamarinap.billing.periksarad.isCek();
                 kamarinap.billing.periksarad.setVisible(true);

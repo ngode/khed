@@ -9,7 +9,7 @@
     <entry key="USER">root</entry>
     <entry key="PAS"></entry>
     <entry key="CARICEPAT">aktif</entry>
-    <entry key="HYBRIDWEB">webapps1</entry>
+    <entry key="HYBRIDWEB">webapps</entry>
     <entry key="ANTRIAN">sender</entry>
     <entry key="MENUTRANSPARAN">yes</entry>
     <entry key="URLAPIBPJS">http://dvlp.bpjs-kesehatan.go.id:8081/devWslokalrest</entry>

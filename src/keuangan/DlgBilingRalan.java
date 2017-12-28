@@ -5357,12 +5357,28 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     {
         try
         {
-            pscariradiologi = koneksi.prepareStatement(sqlpscariradiologi);
+            String sql = new GQuery()
+                    .a("SELECT nm_perawatan, COUNT(*) AS jml, total_byr AS biaya, SUM(total_byr) AS total, jns_perawatan_radiologi.kd_jenis_prw,")
+                    .a("    SUM(det_pemeriksaan_radiologi.tarif_perujuk + det_pemeriksaan_radiologi.tarif_tindakan_dokter) AS totaldokter,")
+                    .a("    SUM(det_pemeriksaan_radiologi.tarif_tindakan_petugas) AS totalpetugas, SUM(det_pemeriksaan_radiologi.kso) AS totalkso,")
+                    .a("    SUM(det_pemeriksaan_radiologi.bhp) AS totalbhp")
+                    .a("FROM det_pemeriksaan_radiologi")
+                    .a("JOIN jns_perawatan_radiologi ON jns_perawatan_radiologi.kd_jenis_prw = det_pemeriksaan_radiologi.kd_jenis_prw")
+                    .a("JOIN pemeriksaan_radiologi ON pemeriksaan_radiologi.kd_periksa = det_pemeriksaan_radiologi.kd_periksa")
+                    .a("WHERE no_rawat = {no_rawat}")
+                    .a("GROUP BY det_pemeriksaan_radiologi.kd_jenis_prw")
+                    .set("no_rawat", TNoRw.getText())
+                    .compile();
+            
+            pscariradiologi = koneksi.prepareStatement(sql);
+            
             try
             {
-                pscariradiologi.setString(1, TNoRw.getText());
                 rscariradiologi = pscariradiologi.executeQuery();
+                
                 subttl = 0;
+                boolean first = true;
+                
                 while (rscariradiologi.next())
                 {
                     Jasa_Medik_Dokter_Radiologi_Ralan = Jasa_Medik_Dokter_Radiologi_Ralan + rscariradiologi.getDouble("totaldokter");
@@ -5371,12 +5387,14 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     Persediaan_Radiologi_Rawat_Jalan = Persediaan_Radiologi_Rawat_Jalan + rscariradiologi.getDouble("totalbhp");
                     tamkur = 0;
                     pstamkur = koneksi.prepareStatement(sqlpstamkur);
+                    
                     try
                     {
                         pstamkur.setString(1, TNoRw.getText());
                         pstamkur.setString(2, rscariradiologi.getString("nm_perawatan"));
                         pstamkur.setString(3, "Radiologi");
                         rstamkur = pstamkur.executeQuery();
+                        
                         if (rstamkur.next())
                         {
                             tamkur = rstamkur.getDouble(1);
@@ -5398,11 +5416,30 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         }
                     }
 
+                    if (first)
+                    {
+                        tabModeRwJlDr.addRow(new Object[]
+                        {
+                            true, 
+                            "Radiologi", 
+                            ":", 
+                            "",
+                            null,
+                            null,
+                            null,
+                            null,
+                            ""
+                        });
+                        
+                        first = false;
+                    }
+                    
                     tabModeRwJlDr.addRow(new Object[]
                     {
                         true, "", rscariradiologi.getString("nm_perawatan"), ":",
                         rscariradiologi.getDouble("biaya"), rscariradiologi.getDouble("jml"), tamkur, (rscariradiologi.getDouble("total") + tamkur), "Radiologi"
                     });
+                    
                     subttl = subttl + rscariradiologi.getDouble("total") + tamkur;
                 }
             }
@@ -5438,6 +5475,8 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 pscarihd.setString(1, TNoRw.getText());
                 rscarihd = pscarihd.executeQuery();
                 subttl = 0;
+                boolean first = true;
+                
                 while (rscarihd.next())
                 {
 //                    Jasa_Medik_Dokter_Radiologi_Ralan=Jasa_Medik_Dokter_Radiologi_Ralan+rscariradiologi.getDouble("totaldokter");
@@ -5465,6 +5504,24 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 //                        } 
 //                    }
 
+                    if (first)
+                    {
+                        tabModeRwJlDr.addRow(new Object[]
+                        {
+                            true, 
+                            "Hemodialisa", 
+                            ":", 
+                            "",
+                            null,
+                            null,
+                            null,
+                            null,
+                            ""
+                        });
+                        
+                        first = false;
+                    }
+                    
                     tabModeRwJlDr.addRow(new Object[]
                     {
                         true, "", rscarihd.getString("nm_perawatan"), ":",

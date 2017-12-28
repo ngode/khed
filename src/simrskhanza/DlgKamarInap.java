@@ -69,7 +69,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     public  DlgDiagnosaPenyakit diagnosa=new DlgDiagnosaPenyakit(null,false);
     private DlgOrderLaboratorium dlgOrderLab = new DlgOrderLaboratorium(null, false);
     
-    private DlgPeriksaHemodialisa dlgPeriksaHd = new DlgPeriksaHemodialisa(null, false);
+    private DlgOrderHemodialisa dlgPeriksaHd = new DlgOrderHemodialisa(null, false);
     
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     
@@ -5294,7 +5294,6 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     if(rs2.next()){
                         billing.periksarad.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
                         billing.periksarad.setLocationRelativeTo(internalFrame1);
-                        billing.periksarad.emptTeks();
                         billing.periksarad.setNoRm(rs2.getString("no_rawat2"),"Ranap");
                         billing.periksarad.isCek();
                         billing.periksarad.setVisible(true);
@@ -5318,7 +5317,6 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }else{
             billing.periksarad.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             billing.periksarad.setLocationRelativeTo(internalFrame1);
-            billing.periksarad.emptTeks();
             billing.periksarad.setNoRm(norawat.getText(),"Ranap");
             billing.periksarad.isCek();
             billing.periksarad.setVisible(true);

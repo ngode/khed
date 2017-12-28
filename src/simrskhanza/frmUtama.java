@@ -7428,12 +7428,12 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private void btnPeriksaRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPeriksaRadiologiActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
-        DlgCariPeriksaRadiologi produsen=new DlgCariPeriksaRadiologi(this,false);
+        DlgPemeriksaanRadiologi dlg=new DlgPemeriksaanRadiologi(this,false);
         //produsen.emptTeks();
-        produsen.isCek();
-        produsen.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-        produsen.setLocationRelativeTo(PanelUtama);
-        produsen.setVisible(true);
+        dlg.isCek();
+        dlg.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        dlg.setLocationRelativeTo(PanelUtama);
+        dlg.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnPeriksaRadiologiActionPerformed
@@ -9257,7 +9257,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
-        DlgHemodialisa form=new DlgHemodialisa(null,false);
+        DlgPemeriksaanHemodialisa form=new DlgPemeriksaanHemodialisa(null,false);
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);

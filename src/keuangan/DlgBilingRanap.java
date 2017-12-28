@@ -13,6 +13,7 @@
 
 package keuangan;
 
+import fungsi.GQuery;
 import fungsi.WarnaTable;
 import fungsi.WarnaTable2;
 import fungsi.batasInput;
@@ -3252,7 +3253,6 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             var.setform("DLgBilingRanap");
             periksarad.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             periksarad.setLocationRelativeTo(internalFrame1);
-            periksarad.emptTeks();
             periksarad.setNoRm(TNoRw.getText(),"Ranap");
             //periksarad.tampil();
             periksarad.isCek();
@@ -3957,7 +3957,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     MnBayi.setVisible(false);
                 }        
                 
-                prosesCariTindakan(TNoRw.getText());
+                prosesCariTindakan(TNoRw.getText()); 
                 prosesCariOperasi(TNoRw.getText());
                 prosesCariObat(TNoRw.getText());                   
                 prosesResepPulang(TNoRw.getText());
@@ -5206,13 +5206,21 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
             }  
             
+            // LABORAT ============================================
             subttl=0;
-            psperiksalab=koneksi.prepareStatement(
-                   "select jns_perawatan_lab.nm_perawatan, count(periksa_lab.kd_jenis_prw) as jml,periksa_lab.biaya as biaya, "+
-                   " sum(periksa_lab.biaya) as total,jns_perawatan_lab.kd_jenis_prw "+
-                   " from periksa_lab inner join jns_perawatan_lab "+
-                   " on jns_perawatan_lab.kd_jenis_prw=periksa_lab.kd_jenis_prw where "+
-                   " periksa_lab.no_rawat=? and periksa_lab.status like ? group by periksa_lab.kd_jenis_prw  ");
+            
+            String sCariLab = new GQuery()
+                    .a("SELECT nm_perawatan, COUNT(*) AS jml, 0 AS biaya, SUM(biaya_item) AS total")
+                    .a("FROM detail_periksa_lab_2")
+                    .a("JOIN detail_periksa_lab ON detail_periksa_lab.id_detail = detail_periksa_lab_2.id_detail_1")
+                    .a("JOIN jns_perawatan_lab ON jns_perawatan_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw")
+                    .a("JOIN periksa_lab ON periksa_lab.id_periksa = detail_periksa_lab.id_periksa")
+                    .a("WHERE periksa_lab.no_rawat = ?")
+                    .a("AND periksa_lab.status LIKE ?")
+                    .a("GROUP BY detail_periksa_lab.kd_jenis_prw")
+                    .compile();
+            
+            psperiksalab=koneksi.prepareStatement(sCariLab);
             try {
                 psperiksalab.setString(1,norawat);
                 if((chkRalan.isSelected()==true)&&(chkRanap.isSelected()==true)){
@@ -5226,35 +5234,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
                 rsperiksalab=psperiksalab.executeQuery();
                 if(rsperiksalab.next()){
-                       tabModeRwJlDr.addRow(new Object[]{true,x+". Pemeriksaan Lab",":","",null,null,null,null,"Laborat"}); 
+                       tabModeRwJlDr.addRow(new Object[]{true,x+". Laboratorium",":","",null,null,null,null,"Laborat"}); 
                        x++;
                 }
                 rsperiksalab.beforeFirst();
+                lab = 0;
+                
                 while(rsperiksalab.next()){
-                    psdetaillab=koneksi.prepareStatement(
-                            "select sum(detail_periksa_lab.biaya_item) as total from detail_periksa_lab where detail_periksa_lab.no_rawat=? "+
-                            "and detail_periksa_lab.kd_jenis_prw=? ");
-                    try {
-                        psdetaillab.setString(1,norawat);
-                        psdetaillab.setString(2,rsperiksalab.getString("kd_jenis_prw"));
-                        rsdetaillab=psdetaillab.executeQuery();
-                        lab=0;
-                        while(rsdetaillab.next()){  
-                            lab=rsdetaillab.getDouble("total");               
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Notif Detail Lab : "+e);
-                    } finally{
-                        if(rsdetaillab!=null){
-                            rsdetaillab.close();
-                        }
-                        if(psdetaillab!=null){
-                            psdetaillab.close();
-                        }
-                    }
                         
                     tabModeRwJlDr.addRow(new Object[]{true,"                           ",rsperiksalab.getString("nm_perawatan"),":",
-                                  rsperiksalab.getDouble("biaya"),rsperiksalab.getDouble("jml"),lab,(rsperiksalab.getDouble("total")+lab),"Laborat"});
+                                  null, null, null,(rsperiksalab.getDouble("total")+lab),"Laborat"});
                     subttl=subttl+rsperiksalab.getDouble("total")+lab;
                 }
 
@@ -5272,14 +5261,24 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
             }
                 
-            
+            // RADIOLOGI =======================================================
             subttl=0;
-            psperiksarad=koneksi.prepareStatement(
-                   "select jns_perawatan_radiologi.nm_perawatan, count(periksa_radiologi.kd_jenis_prw) as jml,periksa_radiologi.biaya as biaya, "+
-                   " sum(periksa_radiologi.biaya) as total,jns_perawatan_radiologi.kd_jenis_prw "+
-                   " from periksa_radiologi inner join jns_perawatan_radiologi "+
-                   " on jns_perawatan_radiologi.kd_jenis_prw=periksa_radiologi.kd_jenis_prw where "+
-                   " periksa_radiologi.no_rawat=? and periksa_radiologi.status like ? group by periksa_radiologi.kd_jenis_prw  ");            
+            
+            String sCariRad = new GQuery()
+                    .a("SELECT nm_perawatan, COUNT(*) AS jml, total_byr AS biaya, SUM(total_byr) AS total, jns_perawatan_radiologi.kd_jenis_prw,")
+                    .a("    SUM(det_pemeriksaan_radiologi.tarif_perujuk + det_pemeriksaan_radiologi.tarif_tindakan_dokter) AS totaldokter,")
+                    .a("    SUM(det_pemeriksaan_radiologi.tarif_tindakan_petugas) AS totalpetugas, SUM(det_pemeriksaan_radiologi.kso) AS totalkso,")
+                    .a("    SUM(det_pemeriksaan_radiologi.bhp) AS totalbhp")
+                    .a("FROM det_pemeriksaan_radiologi")
+                    .a("JOIN jns_perawatan_radiologi ON jns_perawatan_radiologi.kd_jenis_prw = det_pemeriksaan_radiologi.kd_jenis_prw")
+                    .a("JOIN pemeriksaan_radiologi ON pemeriksaan_radiologi.kd_periksa = det_pemeriksaan_radiologi.kd_periksa")
+                    .a("WHERE pemeriksaan_radiologi.no_rawat = ?")
+                    .a("AND pemeriksaan_radiologi.status LIKE ?")
+                    .a("GROUP BY det_pemeriksaan_radiologi.kd_jenis_prw")
+                    .compile();
+            
+            psperiksarad=koneksi.prepareStatement(sCariRad);   
+            
             try {
                 psperiksarad.setString(1,norawat);
                 if((chkRalan.isSelected()==true)&&(chkRanap.isSelected()==true)){
@@ -5293,7 +5292,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
                 rsperiksarad=psperiksarad.executeQuery();            
                 if(rsperiksarad.next()){
-                       tabModeRwJlDr.addRow(new Object[]{true,x+". Pemeriksaan Radiologi",":","",null,null,null,null,"Radiologi"}); 
+                       tabModeRwJlDr.addRow(new Object[]{true,x+". Radiologi",":","",null,null,null,null,"Radiologi"}); 
                        x++;
                 }
                 rsperiksarad.beforeFirst();
@@ -5360,7 +5359,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
                 rsperiksahd=psperiksahd.executeQuery();            
                 if(rsperiksahd.next()){
-                       tabModeRwJlDr.addRow(new Object[]{true,x+". Pemeriksaan Henodialisa",":","",null,null,null,null,"Hemodialisa"}); 
+                       tabModeRwJlDr.addRow(new Object[]{true,x+". Hemodialisa",":","",null,null,null,null,"Hemodialisa"}); 
                        x++;
                 }
                 rsperiksahd.beforeFirst();

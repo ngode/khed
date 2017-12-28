@@ -597,7 +597,6 @@ public final class validasi {
         String[] subRptDir = fullPath.split(reportName);
         String reportDir = subRptDir[0];
 
-
         try {
             try {
                 String namafile="./"+reportDirName+"/"+reportName;

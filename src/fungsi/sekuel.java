@@ -37,7 +37,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -1557,43 +1559,101 @@ public final class sekuel {
         
         return res;
    }
+    
+    public GResult selectComplete(String q)
+    {
+        GResult res = new GResult();
+       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+            
+        try
+        {
+            ps = connect.prepareStatement(q);
+            rs = ps.executeQuery();
+            
+            while (rs.next())
+            {
+                GRow row = new GRow();
+                
+                for (int a = 0; a < rs.getMetaData().getColumnCount(); a++)
+                {
+                    row.add(rs.getMetaData().getColumnLabel(a + 1), rs.getString(a + 1));
+                    row.add(rs.getString(a + 1));
+                }
+                
+                res.add(row);
+            }
+        } 
+        catch (SQLException ex)
+        {
+            Logger.getLogger(sekuel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            try
+            {
+                if (rs != null)
+                    rs.close();
+                
+                if (ps != null)
+                    ps.close();
+            } 
+            catch (SQLException ex)
+            {
+                Logger.getLogger(sekuel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return res;
+    }
 
-   public String[] selectRow(String q)
-   {
-       List<String[]> res = select(q);
-       
-       if (res.size() > 0)
-           return res.get(0);
-       else
-           return null;
-   }
+    public String[] selectRow(String q)
+    {
+        List<String[]> res = select(q);
+
+        if (res.size() > 0)
+            return res.get(0);
+        else
+            return null;
+    }
    
-   public HashMap<String, String> selectRowWithName(String q)
-   {
-       List<HashMap<String, String>> res = selectWithName(q);
-       
-       if (res.size() > 0)
-           return res.get(0);
-       else
-           return null;
-   }
-   
-   public String selectScalar(String q)
-   {
-       List<String[]> res = select(q);
-       
-       if (res.size() > 0 && res.get(0).length > 0)
-       {
-           return res.get(0)[0];
-       }
-       else
-       {
-           return "";
-       }
-   }
-   
-   public boolean write(String qry)
-   {
+    public HashMap<String, String> selectRowWithName(String q)
+    {
+        List<HashMap<String, String>> res = selectWithName(q);
+
+        if (res.size() > 0)
+            return res.get(0);
+        else
+            return null;
+    }
+
+    public GRow selectRowComplete(String q)
+    {
+        GResult res = selectComplete(q);
+        
+        if (res.size() > 0)
+            return res.get(0);
+        else
+            return null;
+    }
+
+    public String selectScalar(String q)
+    {
+        List<String[]> res = select(q);
+
+        if (res.size() > 0 && res.get(0).length > 0)
+        {
+            return res.get(0)[0];
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public boolean write(String qry)
+    {
         boolean res = true;
        
         try 
@@ -1627,12 +1687,12 @@ public final class sekuel {
         return res;
     }
    
-   public String autoNumber(String table, String column)
-   {
-       String q = "SELECT " + column + " FROM " + table + " ORDER BY " + column + " DESC";
-       String s = selectScalar(q);
-       int i = GConvert.parseInt(s) + 1;
-       
-       return String.valueOf(i);
-   }
+    public String autoNumber(String table, String column)
+    {
+        String q = "SELECT " + column + " FROM " + table + " ORDER BY " + column + " DESC";
+        String s = selectScalar(q);
+        int i = GConvert.parseInt(s) + 1;
+
+        return String.valueOf(i);
+    }
 }
