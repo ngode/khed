@@ -1376,7 +1376,7 @@ public final class DlgOrderLaboratorium extends javax.swing.JDialog
                     koneksi.setAutoCommit(false);
 
                     String idPeriksa = Sequel.autoNumber("periksa_lab", "id_periksa");
-                    pssimpanperiksa = koneksi.prepareStatement("insert into periksa_lab values(?,?,?,?,?,?,?,?,?)");
+                    pssimpanperiksa = koneksi.prepareStatement("insert into periksa_lab (id_periksa, no_rawat, nip, tgl_periksa, jam, dokter_perujuk, kd_dokter, status, proses) values(?,?,?,?,?,?,?,?,?)");
 
                     pssimpanperiksa.setString(1, idPeriksa);
                     pssimpanperiksa.setString(2, TNoRw.getText());

@@ -1821,7 +1821,7 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
                     boolean success = true;
 
                     // Menyimpan ke table periksa hd (UTAMA)
-                    success &= Sequel.menyimpantf2("pemeriksaan_radiologi", "?,?,?,?,?,?,?,?,?", "-", 9, new String[]
+                    success &= Sequel.menyimpantf2("pemeriksaan_radiologi", "?,?,?,?,?,NULL,NULL,?,?,?,?", "-", 9, new String[]
                     {
                         kdPeriksa,
                         txtNoRw.getText(),

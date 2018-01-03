@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -32,7 +33,7 @@ import util.GMessage;
  *
  * @author GrT
  */
-public class DlgOperasi extends BaseDialog
+public class DlgPemeriksaanOperasi extends BaseDialog
 {
     // Const =========
     private static final int OPERATOR_1 = 0;
@@ -77,14 +78,14 @@ public class DlgOperasi extends BaseDialog
 
     // Vars ==========
     private int pil;
-    private boolean isEdit = false;
     private String kelas;
     private String status;
+    private String kdOperasi;
 
     /**
      * Creates new form DlgOperasi
      */
-    public DlgOperasi(java.awt.Frame parent, boolean modal)
+    public DlgPemeriksaanOperasi(java.awt.Frame parent, boolean modal)
     {
         super(parent, modal);
         initComponents();
@@ -331,7 +332,7 @@ public class DlgOperasi extends BaseDialog
         
         int[] sz = 
         {
-            80, 0, 0, 0, 120, 300, 200, 200, 200, 120
+            80, 0, 0, 0, 120, 300, 200, 200, 200, 150
         };
         
         mdlOrder = new DefaultTableModel(null, row)
@@ -366,19 +367,19 @@ public class DlgOperasi extends BaseDialog
         tblOrder.setDefaultRenderer(Object.class, new WarnaTable());
         
         psOrder = new GStatement(koneksi)
-                .a("SELECT kd_order, operasi_order.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
-                .a("    operasi_group.kd_group, operasi_kategori.kd_kategori, operasi_detail.kd_detail, nm_group, nm_kategori, nm_detail, tgl_operasi")
-                .a("FROM operasi_order")
-                .a("JOIN operasi_detail ON operasi_detail.kd_detail = operasi_order.kd_detail")
+                .a("SELECT kd_operasi, operasi.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
+                .a("    operasi_group.kd_group, operasi_kategori.kd_kategori, operasi_detail.kd_detail, nm_group, nm_kategori, nm_detail, tgl_operasi, jam_operasi")
+                .a("FROM operasi")
+                .a("JOIN operasi_detail ON operasi_detail.kd_detail = operasi.kd_detail")
                 .a("JOIN operasi_kategori ON operasi_kategori.kd_kategori = operasi_detail.kd_kategori")
                 .a("JOIN operasi_group ON operasi_group.kd_group = operasi_kategori.kd_group")
-                .a("JOIN reg_periksa ON reg_periksa.no_rawat = operasi_order.no_rawat")
+                .a("JOIN reg_periksa ON reg_periksa.no_rawat = operasi.no_rawat")
                 .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
-                .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = operasi_order.no_rawat")
+                .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = operasi.no_rawat")
                 .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
                 .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
                 .a("LEFT JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
-                .a("WHERE DATE(tgl_operasi) BETWEEN :tgl1 AND :tgl2")
+                .a("WHERE DATE(tgl_operasi) BETWEEN :tgl1 AND :tgl2 AND proses = 'Belum'")
                 .a("ORDER BY tgl_operasi");
     }
     
@@ -386,12 +387,12 @@ public class DlgOperasi extends BaseDialog
     {
         Object[] row =
         {
-            "Kd Operasi", "Kd Group", "Kd Kategori", "Kd Detail", "No Rawat", "Pasien", "Group", "Kategori", "Detail", "Tgl Operasi"
+            "Kd Operasi", "Kd Group", "Kd Kategori", "Kd Detail", "No Rawat", "Pasien", "Group", "Kategori", "Detail", "Tgl Operasi", "Tgl Selesai"
         };
         
         int[] sz = 
         {
-            80, 0, 0, 0, 120, 300, 200, 200, 200, 120
+            80, 0, 0, 0, 120, 300, 200, 200, 200, 150, 150
         };
         
         mdlTransaksi = new DefaultTableModel(null, row)
@@ -427,7 +428,7 @@ public class DlgOperasi extends BaseDialog
         
         psTransaksi = new GStatement(koneksi)
                 .a("SELECT kd_operasi, operasi.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
-                .a("    operasi_group.kd_group, operasi_kategori.kd_kategori, operasi_detail.kd_detail, nm_group, nm_kategori, nm_detail, tgl_operasi")
+                .a("    operasi_group.kd_group, operasi_kategori.kd_kategori, operasi_detail.kd_detail, nm_group, nm_kategori, nm_detail, tgl_operasi, jam_operasi, tgl_selesai, jam_selesai")
                 .a("FROM operasi")
                 .a("JOIN operasi_detail ON operasi_detail.kd_detail = operasi.kd_detail")
                 .a("JOIN operasi_kategori ON operasi_kategori.kd_kategori = operasi_detail.kd_kategori")
@@ -438,7 +439,7 @@ public class DlgOperasi extends BaseDialog
                 .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
                 .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
                 .a("LEFT JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
-                .a("WHERE DATE(tgl_operasi) BETWEEN :tgl1 AND :tgl2")
+                .a("WHERE DATE(tgl_operasi) BETWEEN :tgl1 AND :tgl2 AND proses = 'Sudah'")
                 .a("ORDER BY tgl_operasi");
     }
     
@@ -493,7 +494,7 @@ public class DlgOperasi extends BaseDialog
     
     private void tindakanFromOrder(String s)
     {
-        isEdit = false;
+        kdOperasi = s;
         
         txtNoRawat.setText(tblOrder.getValueAt(tblOrder.getSelectedRow(), 4).toString());
         Sequel.cariIsi("SELECT no_rkm_medis FROM reg_periksa WHERE no_rawat = ?", txtNoRm, txtNoRawat.getText());
@@ -511,7 +512,7 @@ public class DlgOperasi extends BaseDialog
     
     private void tindakanFromTransaksi(String s)
     {
-        isEdit = true;
+        kdOperasi = s;
         btnSimpan.setText("Ubah");
         
         txtNoRawat.setText(tblTransaksi.getValueAt(tblTransaksi.getSelectedRow(), 4).toString());
@@ -588,208 +589,135 @@ public class DlgOperasi extends BaseDialog
         if (!valid())
             return;
         
+        int reply = JOptionPane.showConfirmDialog(rootPane, "Eeiiiiiits, udah bener belum data yang mau disimpan..??", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        
+        if (reply != JOptionPane.YES_OPTION)
+            return;
+        
         HashMap<String, String> paket = getPaket();
         
         boolean success;
         
-        if (isEdit)
-        {
-            success = new GQuery()
-                    .a("UPDATE operasi SET")
-                    .a("kd_detail = {kd_detail},")
-                    .a("kode_paket = {kode_paket},")
-                    .a("jenis_anasthesi = {jenis_anasthesi},")
-                    .a("operator1 = {operator1},")
-                    .a("operator2 = {operator2},")
-                    .a("operator3 = {operator3},")
-                    .a("asisten_operator1 = {asisten_operator1},")
-                    .a("asisten_operator2 = {asisten_operator2},")
-                    .a("asisten_operator3 = {asisten_operator3},")
-                    .a("instrumen = {instrumen},")
-                    .a("dokter_anak = {dokter_anak},")
-                    .a("perawaat_resusitas = {perawaat_resusitas},")
-                    .a("dokter_anestesi = {dokter_anestesi},")
-                    .a("asisten_anestesi = {asisten_anestesi},")
-                    .a("asisten_anestesi2 = {asisten_anestesi2},")
-                    .a("bidan = {bidan},")
-                    .a("bidan2 = {bidan2},")
-                    .a("bidan3 = {bidan3},")
-                    .a("perawat_luar = {perawat_luar},")
-                    .a("omloop = {omloop},")
-                    .a("omloop2 = {omloop2},")
-                    .a("omloop3 = {omloop3},")
-                    .a("omloop4 = {omloop4},")
-                    .a("omloop5 = {omloop5},")
-                    .a("dokter_pjanak = {dokter_pjanak},")
-                    .a("dokter_umum = {dokter_umum},")
-                    .a("biayaoperator1 = {biayaoperator1},")
-                    .a("biayaoperator2 = {biayaoperator2},")
-                    .a("biayaoperator3 = {biayaoperator3},")
-                    .a("biayaasisten_operator1 = {biayaasisten_operator1},")
-                    .a("biayaasisten_operator2 = {biayaasisten_operator2},")
-                    .a("biayaasisten_operator3 = {biayaasisten_operator3},")
-                    .a("biayainstrumen = {biayainstrumen},")
-                    .a("biayadokter_anak = {biayadokter_anak},")
-                    .a("biayaperawaat_resusitas = {biayaperawaat_resusitas},")
-                    .a("biayadokter_anestesi = {biayadokter_anestesi},")
-                    .a("biayaasisten_anestesi = {biayaasisten_anestesi},")
-                    .a("biayaasisten_anestesi2 = {biayaasisten_anestesi2},")
-                    .a("biayabidan = {biayabidan},")
-                    .a("biayabidan2 = {biayabidan2},")
-                    .a("biayabidan3 = {biayabidan3},")
-                    .a("biayaperawat_luar = {biayaperawat_luar},")
-                    .a("biayaalat = {biayaalat},")
-                    .a("biayasewaok = {biayasewaok},")
-                    .a("akomodasi = {akomodasi},")
-                    .a("bagian_rs = {bagian_rs},")
-                    .a("biaya_omloop = {biaya_omloop},")
-                    .a("biaya_omloop2 = {biaya_omloop2},")
-                    .a("biaya_omloop3 = {biaya_omloop3},")
-                    .a("biaya_omloop4 = {biaya_omloop4},")
-                    .a("biaya_omloop5 = {biaya_omloop5},")
-                    .a("biayasarpras = {biayasarpras},")
-                    .a("biaya_dokter_pjanak = {biaya_dokter_pjanak},")
-                    .a("biaya_dokter_umum = {biaya_dokter_umum}")
-                    .a("WHERE kd_operasi = {kd_operasi}")
-                    .set("kd_operasi", tblTransaksi.getValueAt(tblTransaksi.getSelectedRow(), 0).toString())
-                    .set("kd_detail", txtKdDetail.getText())
-                    .set("kode_paket", paket.get("kode_paket"))
-                    .set("jenis_anasthesi", txtJenisAnasthesia.getText())
-                    .set("operator1", txtKdOperator1.getText())
-                    .setNoQuote("operator2", txtKdOperator2.getText().isEmpty() ? "NULL" : "'" + txtKdOperator2.getText() + "'")
-                    .setNoQuote("operator3", txtKdOperator3.getText().isEmpty() ? "NULL" : "'" + txtKdOperator3.getText() + "'")
-                    .setNoQuote("asisten_operator1", txtKdAsistenOperator1.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator1.getText() + "'")
-                    .setNoQuote("asisten_operator2", txtKdAsistenOperator2.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator2.getText() + "'")
-                    .setNoQuote("asisten_operator3", txtKdAsistenOperator3.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator3.getText() + "'")
-                    .setNoQuote("instrumen", txtKdInstrumen.getText().isEmpty() ? "NULL" : "'" + txtKdInstrumen.getText() + "'")
-                    .setNoQuote("dokter_anak", txtKdDrAnak.getText().isEmpty() ? "NULL" : "'" + txtKdDrAnak.getText() + "'")
-                    .setNoQuote("perawaat_resusitas", txtKdPrResus.getText().isEmpty() ? "NULL" : "'" + txtKdPrResus.getText() + "'")
-                    .setNoQuote("dokter_anestesi", txtKdAnestesia.getText().isEmpty() ? "NULL" : "'" + txtKdAnestesia.getText() + "'")
-                    .setNoQuote("asisten_anestesi", txtKdAsistenAnestesia1.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenAnestesia1.getText() + "'")
-                    .setNoQuote("asisten_anestesi2", txtKdAsistenAnestesia2.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenAnestesia2.getText() + "'")
-                    .setNoQuote("bidan", txtKdBidan1.getText().isEmpty() ? "NULL" : "'" + txtKdBidan1.getText() + "'")
-                    .setNoQuote("bidan2", txtKdBidan2.getText().isEmpty() ? "NULL" : "'" + txtKdBidan2.getText() + "'")
-                    .setNoQuote("bidan3", txtKdBidan3.getText().isEmpty() ? "NULL" : "'" + txtKdBidan3.getText() + "'")
-                    .setNoQuote("perawat_luar", txtKdPerawatLuar.getText().isEmpty() ? "NULL" : "'" + txtKdPerawatLuar.getText() + "'")
-                    .setNoQuote("omloop", txtKdOnloop1.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop1.getText() + "'")
-                    .setNoQuote("omloop2", txtKdOnloop2.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop2.getText() + "'")
-                    .setNoQuote("omloop3", txtKdOnloop3.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop3.getText() + "'")
-                    .setNoQuote("omloop4", txtKdOnloop4.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop4.getText() + "'")
-                    .setNoQuote("omloop5", txtKdOnloop5.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop5.getText() + "'")
-                    .setNoQuote("dokter_pjanak", txtKdPjAnak.getText().isEmpty() ? "NULL" : "'" + txtKdPjAnak.getText() + "'")
-                    .setNoQuote("dokter_umum", txtKdDrUmum.getText().isEmpty() ? "NULL" : "'" + txtKdDrUmum.getText() + "'")
-                    .set("biayaoperator1", paket.get("operator1"))
-                    .set("biayaoperator2", paket.get("operator2"))
-                    .set("biayaoperator3", paket.get("operator3"))
-                    .set("biayaasisten_operator1", paket.get("asisten_operator1"))
-                    .set("biayaasisten_operator2", paket.get("asisten_operator2"))
-                    .set("biayaasisten_operator3", paket.get("asisten_operator3"))
-                    .set("biayainstrumen", paket.get("instrumen"))
-                    .set("biayadokter_anak", paket.get("dokter_anak"))
-                    .set("biayaperawaat_resusitas", paket.get("perawaat_resusitas"))
-                    .set("biayadokter_anestesi", paket.get("dokter_anestesi"))
-                    .set("biayaasisten_anestesi", paket.get("asisten_anestesi"))
-                    .set("biayaasisten_anestesi2", paket.get("asisten_anestesi2"))
-                    .set("biayabidan", paket.get("bidan"))
-                    .set("biayabidan2", paket.get("bidan2"))
-                    .set("biayabidan3", paket.get("bidan3"))
-                    .set("biayaperawat_luar", paket.get("perawat_luar"))
-                    .set("biayaalat", paket.get("sewa_ok"))
-                    .set("biayasewaok", paket.get("alat"))
-                    .set("akomodasi", paket.get("akomodasi"))
-                    .set("bagian_rs", paket.get("bagian_rs"))
-                    .set("biaya_omloop", paket.get("omloop"))
-                    .set("biaya_omloop2", paket.get("omloop2"))
-                    .set("biaya_omloop3", paket.get("omloop3"))
-                    .set("biaya_omloop4", paket.get("omloop4"))
-                    .set("biaya_omloop5", paket.get("omloop5"))
-                    .set("biayasarpras", paket.get("sarpras"))
-                    .set("biaya_dokter_pjanak", paket.get("dokter_pjanak"))
-                    .set("biaya_dokter_umum", paket.get("dokter_umum"))
-                    .write();
-        }
-        else
-        {
-            success = new GQuery()
-                    .a("INSERT INTO operasi")
-                    .a("(no_rawat, kd_detail, kode_paket, tgl_operasi, jenis_anasthesi, operator1, operator2, operator3,")
-                    .a("asisten_operator1, asisten_operator2, asisten_operator3, instrumen, dokter_anak, perawaat_resusitas,")
-                    .a("dokter_anestesi, asisten_anestesi, asisten_anestesi2, bidan, bidan2, bidan3, perawat_luar,")
-                    .a("omloop, omloop2, omloop3, omloop4, omloop5, dokter_pjanak, dokter_umum,")
-                    .a("biayaoperator1, biayaoperator2, biayaoperator3, biayaasisten_operator1, biayaasisten_operator2, biayaasisten_operator3,")
-                    .a("biayainstrumen, biayadokter_anak, biayaperawaat_resusitas, biayadokter_anestesi, biayaasisten_anestesi, biayaasisten_anestesi2,")
-                    .a("biayabidan, biayabidan2, biayabidan3, biayaperawat_luar, biayaalat, biayasewaok, akomodasi, bagian_rs,")
-                    .a("biaya_omloop, biaya_omloop2, biaya_omloop3, biaya_omloop4, biaya_omloop5, biayasarpras, biaya_dokter_pjanak, biaya_dokter_umum,")
-                    .a("status) VALUES")
-                    .a("({no_rawat}, {kd_detail}, {kode_paket}, {tgl_operasi}, {jenis_anasthesi}, {operator1}, {operator2}, {operator3},")
-                    .a("{asisten_operator1}, {asisten_operator2}, {asisten_operator3}, {instrumen}, {dokter_anak}, {perawaat_resusitas},")
-                    .a("{dokter_anestesi}, {asisten_anestesi}, {asisten_anestesi2}, {bidan}, {bidan2}, {bidan3}, {perawat_luar},")
-                    .a("{omloop}, {omloop2}, {omloop3}, {omloop4}, {omloop5}, {dokter_pjanak}, {dokter_umum},")
-                    .a("{biayaoperator1}, {biayaoperator2}, {biayaoperator3}, {biayaasisten_operator1}, {biayaasisten_operator2}, {biayaasisten_operator3},")
-                    .a("{biayainstrumen}, {biayadokter_anak}, {biayaperawaat_resusitas}, {biayadokter_anestesi}, {biayaasisten_anestesi}, {biayaasisten_anestesi2},")
-                    .a("{biayabidan}, {biayabidan2}, {biayabidan3}, {biayaperawat_luar}, {biayaalat}, {biayasewaok}, {akomodasi}, {bagian_rs},")
-                    .a("{biaya_omloop}, {biaya_omloop2}, {biaya_omloop3}, {biaya_omloop4}, {biaya_omloop5}, {biayasarpras}, {biaya_dokter_pjanak}, {biaya_dokter_umum},")
-                    .a("{status})")
-                    .set("no_rawat", txtNoRawat.getText())
-                    .set("kd_detail", txtKdDetail.getText())
-                    .set("kode_paket", paket.get("kode_paket"))
-                    .set("tgl_operasi", Valid.SetTgl(DTPBeri.getSelectedItem().toString()) + " " 
-                            + cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
-                    .set("jenis_anasthesi", txtJenisAnasthesia.getText())
-                    .set("operator1", txtKdOperator1.getText())
-                    .setNoQuote("operator2", txtKdOperator2.getText().isEmpty() ? "NULL" : "'" + txtKdOperator2.getText() + "'")
-                    .setNoQuote("operator3", txtKdOperator3.getText().isEmpty() ? "NULL" : "'" + txtKdOperator3.getText() + "'")
-                    .setNoQuote("asisten_operator1", txtKdAsistenOperator1.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator1.getText() + "'")
-                    .setNoQuote("asisten_operator2", txtKdAsistenOperator2.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator2.getText() + "'")
-                    .setNoQuote("asisten_operator3", txtKdAsistenOperator3.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator3.getText() + "'")
-                    .setNoQuote("instrumen", txtKdInstrumen.getText().isEmpty() ? "NULL" : "'" + txtKdInstrumen.getText() + "'")
-                    .setNoQuote("dokter_anak", txtKdDrAnak.getText().isEmpty() ? "NULL" : "'" + txtKdDrAnak.getText() + "'")
-                    .setNoQuote("perawaat_resusitas", txtKdPrResus.getText().isEmpty() ? "NULL" : "'" + txtKdPrResus.getText() + "'")
-                    .setNoQuote("dokter_anestesi", txtKdAnestesia.getText().isEmpty() ? "NULL" : "'" + txtKdAnestesia.getText() + "'")
-                    .setNoQuote("asisten_anestesi", txtKdAsistenAnestesia1.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenAnestesia1.getText() + "'")
-                    .setNoQuote("asisten_anestesi2", txtKdAsistenAnestesia2.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenAnestesia2.getText() + "'")
-                    .setNoQuote("bidan", txtKdBidan1.getText().isEmpty() ? "NULL" : "'" + txtKdBidan1.getText() + "'")
-                    .setNoQuote("bidan2", txtKdBidan2.getText().isEmpty() ? "NULL" : "'" + txtKdBidan2.getText() + "'")
-                    .setNoQuote("bidan3", txtKdBidan3.getText().isEmpty() ? "NULL" : "'" + txtKdBidan3.getText() + "'")
-                    .setNoQuote("perawat_luar", txtKdPerawatLuar.getText().isEmpty() ? "NULL" : "'" + txtKdPerawatLuar.getText() + "'")
-                    .setNoQuote("omloop", txtKdOnloop1.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop1.getText() + "'")
-                    .setNoQuote("omloop2", txtKdOnloop2.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop2.getText() + "'")
-                    .setNoQuote("omloop3", txtKdOnloop3.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop3.getText() + "'")
-                    .setNoQuote("omloop4", txtKdOnloop4.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop4.getText() + "'")
-                    .setNoQuote("omloop5", txtKdOnloop5.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop5.getText() + "'")
-                    .setNoQuote("dokter_pjanak", txtKdPjAnak.getText().isEmpty() ? "NULL" : "'" + txtKdPjAnak.getText() + "'")
-                    .setNoQuote("dokter_umum", txtKdDrUmum.getText().isEmpty() ? "NULL" : "'" + txtKdDrUmum.getText() + "'")
-                    .set("biayaoperator1", paket.get("operator1"))
-                    .set("biayaoperator2", paket.get("operator2"))
-                    .set("biayaoperator3", paket.get("operator3"))
-                    .set("biayaasisten_operator1", paket.get("asisten_operator1"))
-                    .set("biayaasisten_operator2", paket.get("asisten_operator2"))
-                    .set("biayaasisten_operator3", paket.get("asisten_operator3"))
-                    .set("biayainstrumen", paket.get("instrumen"))
-                    .set("biayadokter_anak", paket.get("dokter_anak"))
-                    .set("biayaperawaat_resusitas", paket.get("perawaat_resusitas"))
-                    .set("biayadokter_anestesi", paket.get("dokter_anestesi"))
-                    .set("biayaasisten_anestesi", paket.get("asisten_anestesi"))
-                    .set("biayaasisten_anestesi2", paket.get("asisten_anestesi2"))
-                    .set("biayabidan", paket.get("bidan"))
-                    .set("biayabidan2", paket.get("bidan2"))
-                    .set("biayabidan3", paket.get("bidan3"))
-                    .set("biayaperawat_luar", paket.get("perawat_luar"))
-                    .set("biayaalat", paket.get("sewa_ok"))
-                    .set("biayasewaok", paket.get("alat"))
-                    .set("akomodasi", paket.get("akomodasi"))
-                    .set("bagian_rs", paket.get("bagian_rs"))
-                    .set("biaya_omloop", paket.get("omloop"))
-                    .set("biaya_omloop2", paket.get("omloop2"))
-                    .set("biaya_omloop3", paket.get("omloop3"))
-                    .set("biaya_omloop4", paket.get("omloop4"))
-                    .set("biaya_omloop5", paket.get("omloop5"))
-                    .set("biayasarpras", paket.get("sarpras"))
-                    .set("biaya_dokter_pjanak", paket.get("dokter_pjanak"))
-                    .set("biaya_dokter_umum", paket.get("dokter_umum"))
-                    .set("status", status)
-                    .write();
-        }
+        success = new GQuery()
+                .a("UPDATE operasi SET")
+                .a("kd_detail = {kd_detail},")
+                .a("kode_paket = {kode_paket},")
+                .a("jenis_anasthesi = {jenis_anasthesi},")
+                .a("operator1 = {operator1},")
+                .a("operator2 = {operator2},")
+                .a("operator3 = {operator3},")
+                .a("asisten_operator1 = {asisten_operator1},")
+                .a("asisten_operator2 = {asisten_operator2},")
+                .a("asisten_operator3 = {asisten_operator3},")
+                .a("instrumen = {instrumen},")
+                .a("dokter_anak = {dokter_anak},")
+                .a("perawaat_resusitas = {perawaat_resusitas},")
+                .a("dokter_anestesi = {dokter_anestesi},")
+                .a("asisten_anestesi = {asisten_anestesi},")
+                .a("asisten_anestesi2 = {asisten_anestesi2},")
+                .a("bidan = {bidan},")
+                .a("bidan2 = {bidan2},")
+                .a("bidan3 = {bidan3},")
+                .a("perawat_luar = {perawat_luar},")
+                .a("omloop = {omloop},")
+                .a("omloop2 = {omloop2},")
+                .a("omloop3 = {omloop3},")
+                .a("omloop4 = {omloop4},")
+                .a("omloop5 = {omloop5},")
+                .a("dokter_pjanak = {dokter_pjanak},")
+                .a("dokter_umum = {dokter_umum},")
+                .a("biayaoperator1 = {biayaoperator1},")
+                .a("biayaoperator2 = {biayaoperator2},")
+                .a("biayaoperator3 = {biayaoperator3},")
+                .a("biayaasisten_operator1 = {biayaasisten_operator1},")
+                .a("biayaasisten_operator2 = {biayaasisten_operator2},")
+                .a("biayaasisten_operator3 = {biayaasisten_operator3},")
+                .a("biayainstrumen = {biayainstrumen},")
+                .a("biayadokter_anak = {biayadokter_anak},")
+                .a("biayaperawaat_resusitas = {biayaperawaat_resusitas},")
+                .a("biayadokter_anestesi = {biayadokter_anestesi},")
+                .a("biayaasisten_anestesi = {biayaasisten_anestesi},")
+                .a("biayaasisten_anestesi2 = {biayaasisten_anestesi2},")
+                .a("biayabidan = {biayabidan},")
+                .a("biayabidan2 = {biayabidan2},")
+                .a("biayabidan3 = {biayabidan3},")
+                .a("biayaperawat_luar = {biayaperawat_luar},")
+                .a("biayaalat = {biayaalat},")
+                .a("biayasewaok = {biayasewaok},")
+                .a("akomodasi = {akomodasi},")
+                .a("bagian_rs = {bagian_rs},")
+                .a("biaya_omloop = {biaya_omloop},")
+                .a("biaya_omloop2 = {biaya_omloop2},")
+                .a("biaya_omloop3 = {biaya_omloop3},")
+                .a("biaya_omloop4 = {biaya_omloop4},")
+                .a("biaya_omloop5 = {biaya_omloop5},")
+                .a("biayasarpras = {biayasarpras},")
+                .a("biaya_dokter_pjanak = {biaya_dokter_pjanak},")
+                .a("biaya_dokter_umum = {biaya_dokter_umum},")
+                .a("status = {status},")
+                .a("tgl_selesai = {tgl_selesai},")
+                .a("jam_selesai = {jam_selesai},")
+                .a("proses = 'Sudah'")
+                .a("WHERE kd_operasi = {kd_operasi}")
+                .set("kd_operasi", kdOperasi)
+                .set("kd_detail", txtKdDetail.getText())
+                .set("kode_paket", paket.get("kode_paket"))
+                .set("jenis_anasthesi", txtJenisAnasthesia.getText())
+                .set("operator1", txtKdOperator1.getText())
+                .setNoQuote("operator2", txtKdOperator2.getText().isEmpty() ? "NULL" : "'" + txtKdOperator2.getText() + "'")
+                .setNoQuote("operator3", txtKdOperator3.getText().isEmpty() ? "NULL" : "'" + txtKdOperator3.getText() + "'")
+                .setNoQuote("asisten_operator1", txtKdAsistenOperator1.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator1.getText() + "'")
+                .setNoQuote("asisten_operator2", txtKdAsistenOperator2.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator2.getText() + "'")
+                .setNoQuote("asisten_operator3", txtKdAsistenOperator3.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenOperator3.getText() + "'")
+                .setNoQuote("instrumen", txtKdInstrumen.getText().isEmpty() ? "NULL" : "'" + txtKdInstrumen.getText() + "'")
+                .setNoQuote("dokter_anak", txtKdDrAnak.getText().isEmpty() ? "NULL" : "'" + txtKdDrAnak.getText() + "'")
+                .setNoQuote("perawaat_resusitas", txtKdPrResus.getText().isEmpty() ? "NULL" : "'" + txtKdPrResus.getText() + "'")
+                .setNoQuote("dokter_anestesi", txtKdAnestesia.getText().isEmpty() ? "NULL" : "'" + txtKdAnestesia.getText() + "'")
+                .setNoQuote("asisten_anestesi", txtKdAsistenAnestesia1.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenAnestesia1.getText() + "'")
+                .setNoQuote("asisten_anestesi2", txtKdAsistenAnestesia2.getText().isEmpty() ? "NULL" : "'" + txtKdAsistenAnestesia2.getText() + "'")
+                .setNoQuote("bidan", txtKdBidan1.getText().isEmpty() ? "NULL" : "'" + txtKdBidan1.getText() + "'")
+                .setNoQuote("bidan2", txtKdBidan2.getText().isEmpty() ? "NULL" : "'" + txtKdBidan2.getText() + "'")
+                .setNoQuote("bidan3", txtKdBidan3.getText().isEmpty() ? "NULL" : "'" + txtKdBidan3.getText() + "'")
+                .setNoQuote("perawat_luar", txtKdPerawatLuar.getText().isEmpty() ? "NULL" : "'" + txtKdPerawatLuar.getText() + "'")
+                .setNoQuote("omloop", txtKdOnloop1.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop1.getText() + "'")
+                .setNoQuote("omloop2", txtKdOnloop2.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop2.getText() + "'")
+                .setNoQuote("omloop3", txtKdOnloop3.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop3.getText() + "'")
+                .setNoQuote("omloop4", txtKdOnloop4.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop4.getText() + "'")
+                .setNoQuote("omloop5", txtKdOnloop5.getText().isEmpty() ? "NULL" : "'" + txtKdOnloop5.getText() + "'")
+                .setNoQuote("dokter_pjanak", txtKdPjAnak.getText().isEmpty() ? "NULL" : "'" + txtKdPjAnak.getText() + "'")
+                .setNoQuote("dokter_umum", txtKdDrUmum.getText().isEmpty() ? "NULL" : "'" + txtKdDrUmum.getText() + "'")
+                .set("biayaoperator1", paket.get("operator1"))
+                .set("biayaoperator2", paket.get("operator2"))
+                .set("biayaoperator3", paket.get("operator3"))
+                .set("biayaasisten_operator1", paket.get("asisten_operator1"))
+                .set("biayaasisten_operator2", paket.get("asisten_operator2"))
+                .set("biayaasisten_operator3", paket.get("asisten_operator3"))
+                .set("biayainstrumen", paket.get("instrumen"))
+                .set("biayadokter_anak", paket.get("dokter_anak"))
+                .set("biayaperawaat_resusitas", paket.get("perawaat_resusitas"))
+                .set("biayadokter_anestesi", paket.get("dokter_anestesi"))
+                .set("biayaasisten_anestesi", paket.get("asisten_anestesi"))
+                .set("biayaasisten_anestesi2", paket.get("asisten_anestesi2"))
+                .set("biayabidan", paket.get("bidan"))
+                .set("biayabidan2", paket.get("bidan2"))
+                .set("biayabidan3", paket.get("bidan3"))
+                .set("biayaperawat_luar", paket.get("perawat_luar"))
+                .set("biayaalat", paket.get("sewa_ok"))
+                .set("biayasewaok", paket.get("alat"))
+                .set("akomodasi", paket.get("akomodasi"))
+                .set("bagian_rs", paket.get("bagian_rs"))
+                .set("biaya_omloop", paket.get("omloop"))
+                .set("biaya_omloop2", paket.get("omloop2"))
+                .set("biaya_omloop3", paket.get("omloop3"))
+                .set("biaya_omloop4", paket.get("omloop4"))
+                .set("biaya_omloop5", paket.get("omloop5"))
+                .set("biayasarpras", paket.get("sarpras"))
+                .set("biaya_dokter_pjanak", paket.get("dokter_pjanak"))
+                .set("biaya_dokter_umum", paket.get("dokter_umum"))
+                .set("status", status)
+                .set("tgl_selesai", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
+                .set("jam_selesai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                .write();
         
         if (success)
         {
@@ -807,7 +735,6 @@ public class DlgOperasi extends BaseDialog
     
     private void baru()
     {
-        isEdit = false;
         btnSimpan.setText("Simpan");
         
         txtNoRawat.setText("");
@@ -869,11 +796,6 @@ public class DlgOperasi extends BaseDialog
         txtNamaOnloop5.setText("");
     }
     
-    private void hapus()
-    {
-        
-    }
-    
     private void tampilOrder()
     {
         try 
@@ -900,7 +822,7 @@ public class DlgOperasi extends BaseDialog
                 
                 Object[] o = new Object[]
                 {
-                    rsOrder.getString("kd_order"),
+                    rsOrder.getString("kd_operasi"),
                     rsOrder.getString("kd_group"),
                     rsOrder.getString("kd_kategori"),
                     rsOrder.getString("kd_detail"),
@@ -909,7 +831,7 @@ public class DlgOperasi extends BaseDialog
                     rsOrder.getString("nm_group"),
                     rsOrder.getString("nm_kategori"),
                     rsOrder.getString("nm_detail"),
-                    rsOrder.getString("tgl_operasi")
+                    rsOrder.getString("tgl_operasi") + " " + rsOrder.getString("jam_operasi")
                 };
                 
                 mdlOrder.addRow(o);
@@ -956,7 +878,8 @@ public class DlgOperasi extends BaseDialog
                     rsTransaksi.getString("nm_group"),
                     rsTransaksi.getString("nm_kategori"),
                     rsTransaksi.getString("nm_detail"),
-                    rsTransaksi.getString("tgl_operasi")
+                    rsTransaksi.getString("tgl_operasi") + " " + rsTransaksi.getString("jam_operasi"),
+                    rsTransaksi.getString("tgl_selesai") + " " + rsTransaksi.getString("jam_selesai")
                 };
                 
                 mdlTransaksi.addRow(o);
@@ -1350,7 +1273,6 @@ public class DlgOperasi extends BaseDialog
         pnlAction = new widget.panelisi();
         btnSimpan = new widget.Button();
         btnBaru = new widget.Button();
-        btnHapus = new widget.Button();
         btnCetak = new widget.Button();
         jLabel10 = new widget.Label();
         btnKeluar = new widget.Button();
@@ -1366,6 +1288,7 @@ public class DlgOperasi extends BaseDialog
         btnCariOrder = new widget.Button();
         jLabel28 = new widget.Label();
         lblCountOrder = new widget.Label();
+        btnHapusOrder = new widget.Button();
         panelBiasa3 = new widget.PanelBiasa();
         Scroll2 = new widget.ScrollPane();
         tblTransaksi = new widget.Table();
@@ -1378,6 +1301,7 @@ public class DlgOperasi extends BaseDialog
         btnCariTransaksi = new widget.Button();
         jLabel12 = new widget.Label();
         lblCountTransaksi = new widget.Label();
+        btnHapusTransaksi = new widget.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -2087,7 +2011,7 @@ public class DlgOperasi extends BaseDialog
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-10-2017" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setOpaque(false);
         DTPBeri.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2571,20 +2495,6 @@ public class DlgOperasi extends BaseDialog
         });
         pnlAction.add(btnBaru);
 
-        btnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        btnHapus.setMnemonic('H');
-        btnHapus.setText("Hapus");
-        btnHapus.setToolTipText("Alt+H");
-        btnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnHapus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnHapusActionPerformed(evt);
-            }
-        });
-        pnlAction.add(btnHapus);
-
         btnCetak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         btnCetak.setMnemonic('T');
         btnCetak.setText("Cetak");
@@ -2651,7 +2561,7 @@ public class DlgOperasi extends BaseDialog
 
         tglOrder1.setEditable(false);
         tglOrder1.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-10-2017" }));
+        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
         tglOrder1.setDisplayFormat("dd-MM-yyyy");
         tglOrder1.setOpaque(false);
         tglOrder1.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2663,7 +2573,7 @@ public class DlgOperasi extends BaseDialog
 
         tglOrder2.setEditable(false);
         tglOrder2.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-10-2017" }));
+        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
         tglOrder2.setDisplayFormat("dd-MM-yyyy");
         tglOrder2.setOpaque(false);
         tglOrder2.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2697,6 +2607,20 @@ public class DlgOperasi extends BaseDialog
         lblCountOrder.setText("0");
         lblCountOrder.setPreferredSize(new java.awt.Dimension(45, 23));
         panelGlass13.add(lblCountOrder);
+
+        btnHapusOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        btnHapusOrder.setMnemonic('H');
+        btnHapusOrder.setText("Hapus");
+        btnHapusOrder.setToolTipText("Alt+H");
+        btnHapusOrder.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnHapusOrder.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnHapusOrderActionPerformed(evt);
+            }
+        });
+        panelGlass13.add(btnHapusOrder);
 
         jPanel6.add(panelGlass13, java.awt.BorderLayout.PAGE_START);
 
@@ -2742,7 +2666,7 @@ public class DlgOperasi extends BaseDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-10-2017" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setOpaque(false);
         tglTransaksi1.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2754,7 +2678,7 @@ public class DlgOperasi extends BaseDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-10-2017" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setOpaque(false);
         tglTransaksi2.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2788,6 +2712,20 @@ public class DlgOperasi extends BaseDialog
         lblCountTransaksi.setText("0");
         lblCountTransaksi.setPreferredSize(new java.awt.Dimension(45, 23));
         panelGlass12.add(lblCountTransaksi);
+
+        btnHapusTransaksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        btnHapusTransaksi.setMnemonic('H');
+        btnHapusTransaksi.setText("Hapus");
+        btnHapusTransaksi.setToolTipText("Alt+H");
+        btnHapusTransaksi.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnHapusTransaksi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnHapusTransaksiActionPerformed(evt);
+            }
+        });
+        panelGlass12.add(btnHapusTransaksi);
 
         jPanel5.add(panelGlass12, java.awt.BorderLayout.PAGE_START);
 
@@ -3385,11 +3323,6 @@ public class DlgOperasi extends BaseDialog
         baru();
     }//GEN-LAST:event_btnBaruActionPerformed
 
-    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnHapusActionPerformed
-    {//GEN-HEADEREND:event_btnHapusActionPerformed
-        hapus();
-    }//GEN-LAST:event_btnHapusActionPerformed
-
     private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnKeluarActionPerformed
     {//GEN-HEADEREND:event_btnKeluarActionPerformed
         dispose();
@@ -3465,6 +3398,34 @@ public class DlgOperasi extends BaseDialog
 
     }//GEN-LAST:event_cmbDtkKeyPressed
 
+    private void btnHapusOrderActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnHapusOrderActionPerformed
+    {//GEN-HEADEREND:event_btnHapusOrderActionPerformed
+        if (tblOrder.getSelectedRow() == -1)
+        {
+            GMessage.i("Pilih", "Pilih dulu data yg mau dihapus");
+            return;
+        }
+        
+        if (GMessage.q("Hapus", "Yakin mau hapus?"))
+        {
+            hapus(tblOrder.getValueAt(tblOrder.getSelectedRow(), 0).toString());
+        }
+    }//GEN-LAST:event_btnHapusOrderActionPerformed
+
+    private void btnHapusTransaksiActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnHapusTransaksiActionPerformed
+    {//GEN-HEADEREND:event_btnHapusTransaksiActionPerformed
+        if (tblTransaksi.getSelectedRow() == -1)
+        {
+            GMessage.i("Pilih", "Pilih dulu data yg mau dihapus");
+            return;
+        }
+        
+        if (GMessage.q("Hapus", "Yakin mau hapus?"))
+        {
+            hapus(tblTransaksi.getValueAt(tblTransaksi.getSelectedRow(), 0).toString());
+        }
+    }//GEN-LAST:event_btnHapusTransaksiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3488,20 +3449,21 @@ public class DlgOperasi extends BaseDialog
         }
         catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(DlgOperasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgPemeriksaanOperasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(DlgOperasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgPemeriksaanOperasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(DlgOperasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgPemeriksaanOperasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(DlgOperasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DlgPemeriksaanOperasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
@@ -3509,7 +3471,7 @@ public class DlgOperasi extends BaseDialog
         {
             public void run()
             {
-                DlgOperasi dialog = new DlgOperasi(new javax.swing.JFrame(), true);
+                DlgPemeriksaanOperasi dialog = new DlgPemeriksaanOperasi(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter()
                 {
                     @Override
@@ -3546,7 +3508,8 @@ public class DlgOperasi extends BaseDialog
     private widget.Button btnCetak;
     private widget.Button btnDrAnak;
     private widget.Button btnDrUmum;
-    private widget.Button btnHapus;
+    private widget.Button btnHapusOrder;
+    private widget.Button btnHapusTransaksi;
     private widget.Button btnInstrumen;
     private widget.Button btnKeluar;
     private widget.Button btnOnloop1;
@@ -3678,5 +3641,26 @@ public class DlgOperasi extends BaseDialog
     // End of variables declaration//GEN-END:variables
 
     // </editor-fold>
+    
+    private void hapus(String id)
+    {
+        boolean success = new GQuery()
+                .a("DELETE FROM operasi WHERE kd_operasi = {kd_operasi}")
+                .set("kd_operasi", id)
+                .write();
+        
+        if (success)
+        {
+            GMessage.i("Sukses", "Hapus data berhasil");
+            
+            baru();
+            tampilOrder();
+            tampilTransaksi();
+        }
+        else
+        {
+            GMessage.e("Error", "Error saat menghapus data");
+        }
+    }
 }
 

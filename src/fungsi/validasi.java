@@ -39,6 +39,7 @@ import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -683,7 +684,9 @@ public final class validasi {
     
     public void MyReport(String reportName,Map parameters,String title){
         try {
-                JasperViewer jasperViewer =new JasperViewer(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect), false);
+                JasperPrint print = JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect);
+                
+                JasperViewer jasperViewer =new JasperViewer(print, false);
                 jasperViewer.setTitle(title);
                 jasperViewer.setLocationRelativeTo(null);
                 jasperViewer.setVisible(true);
@@ -693,6 +696,34 @@ public final class validasi {
         } 
     }
 
+    public void MyReport(String reportName, String title, Map parameters, JRDataSource dataSource){
+        try {
+                JasperPrint print = JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName), parameters, dataSource);
+                
+                JasperViewer jasperViewer =new JasperViewer(print, false);
+                jasperViewer.setTitle(title);
+                jasperViewer.setLocationRelativeTo(null);
+                jasperViewer.setVisible(true);
+                //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
+        } catch (Exception ex) {
+           System.out.println("Notifikasi : "+ex);
+        } 
+    }
+
+    public void MyReport(String reportName, String title, Map parameters, JRDataSource dataSource, int pageHeight){
+        try {
+                JasperPrint print = JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName), parameters, dataSource);
+                print.setPageHeight(pageHeight * print.getPageHeight());
+                
+                JasperViewer jasperViewer =new JasperViewer(print, false);
+                jasperViewer.setTitle(title);
+                jasperViewer.setLocationRelativeTo(null);
+                jasperViewer.setVisible(true);
+                //JasperViewer.viewReport(JasperFillManager.fillReport(JasperCompileManager.compileReport("./report/"+reportName),parameters,connect),false);
+        } catch (Exception ex) {
+           System.out.println("Notifikasi : "+ex);
+        } 
+    }
 
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){

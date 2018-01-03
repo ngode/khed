@@ -1092,7 +1092,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         cmbMnt.setSelectedItem(menit);
         cmbDtk.setSelectedItem(detik); 
         Sequel.cariIsi("SELECT  kd_dokter FROM reg_periksa WHERE no_rawat =?", KdDokter, TNoRw.getText());
-        Sequel.cariIsi("SELECT  nm_dokter FROM reg_periksa WHERE no_rawat =?", NmDokter, KdDokter.getText());
+        Sequel.cariIsi("SELECT  nm_dokter FROM dokter WHERE kd_dokter =?", NmDokter, KdDokter.getText());
         KdPj.setText(Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=?",norwt));
         kenaikan=Sequel.cariIsiAngka("select (hargajual/100) from set_harga_obat_ralan where kd_pj=?",KdPj.getText());
         TCari.requestFocus();

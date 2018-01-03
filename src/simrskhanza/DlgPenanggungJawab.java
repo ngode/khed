@@ -684,6 +684,11 @@ public final class DlgPenanggungJawab extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
+        
+        if (evt.getClickCount() == 2)
+        {
+            dispose();
+        }
 }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed

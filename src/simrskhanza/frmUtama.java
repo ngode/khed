@@ -8709,7 +8709,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
         //DlgTagihanOperasi form=new DlgTagihanOperasi(null,false);
-        DlgOperasi form=new DlgOperasi(null,false);
+        DlgPemeriksaanOperasi form=new DlgPemeriksaanOperasi(null,false);
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);

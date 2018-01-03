@@ -69,7 +69,6 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     private List<String> selKodes = new ArrayList<>();
     private List<String[]> selDatas = new ArrayList<>();
     private String kdPeriksa;
-    private boolean isEdit = false;
     
     private int pil = -1;
     
@@ -603,7 +602,6 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     
     private void clearAll()
     {
-        isEdit = false;
         kdPeriksa = null;
         
         txtNoRw.setText("");
@@ -2837,8 +2835,6 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
     private void tindakanBaru()
     {
-        isEdit = false;
-        
         ResultSet rs = new GStatement(koneksi)
                 .a("SELECT reg_periksa.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien,")
                 .a("CONCAT(alamat, ' ', nm_kel, ' ', nm_kec, ' ', nm_kab) AS alamat,")
@@ -2879,7 +2875,6 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     
     private void tindakanFromOrder(String kdPeriksa)
     {
-        isEdit = true;
         fillData(kdPeriksa, false);
         
         this.kdPeriksa = kdPeriksa;
@@ -2887,7 +2882,6 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     
     private void tindakanFromTransaksi(String kdPeriksa)
     {
-        isEdit = true;
         fillData(kdPeriksa, true);
         
         this.kdPeriksa = kdPeriksa;
@@ -3011,64 +3005,45 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         boolean success = true;
         GQuery.setAutoCommit(false);
         
-        if (isEdit)
-        {
-            success &= new GQuery()
-                    .a("UPDATE pemeriksaan_hd SET")
-                    .a("jam_selesai = {jam_selesai},")
-                    .a("hd_ke = {hd_ke},")
-                    .a("pre_td = {pre_td},")
-                    .a("pre_bb = {pre_bb},")
-                    .a("pre_nadi = {pre_nadi},")
-                    .a("pre_res = {pre_res},")
-                    .a("pos_td = {pos_td},")
-                    .a("pos_bb = {pos_bb},")
-                    .a("pos_nadi = {pos_nadi},")
-                    .a("pos_res = {pos_res},")
-                    .a("kd_dokter_konsultan = {konsultan},")
-                    .a("kd_dokter_pj = {pj},")
-                    .a("kd_dokter_pelaksana = {pel},")
-                    .a("status = '1'")
-                    .a("WHERE kd_periksa = {kd_periksa}")
-                    .set("jam_selesai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
-                    .set("hd_ke", txtHdKe.getText())
-                    .set("pre_td", txtPreTd.getText())
-                    .set("pre_bb", txtPreBb.getText())
-                    .set("pre_nadi", txtPreNadi.getText())
-                    .set("pre_res", txtPreRes.getText())
-                    .set("pos_td", txtPostTd.getText())
-                    .set("pos_bb", txtPostBb.getText())
-                    .set("pos_nadi", txtPostNadi.getText())
-                    .set("pos_res", txtPostRes.getText())
-                    .set("konsultan", txtKdDokterKons.getText())
-                    .set("pj", txtKdDokterPj.getText())
-                    .set("pel", txtKdDokterPel.getText())
-                    .set("kd_periksa", kdPeriksa)
-                    .write();
+        success &= new GQuery()
+                .a("UPDATE pemeriksaan_hd SET")
+                .a("tgl_selesai = {tgl_selesai},")
+                .a("jam_selesai = {jam_selesai},")
+                .a("hd_ke = {hd_ke},")
+                .a("pre_td = {pre_td},")
+                .a("pre_bb = {pre_bb},")
+                .a("pre_nadi = {pre_nadi},")
+                .a("pre_res = {pre_res},")
+                .a("pos_td = {pos_td},")
+                .a("pos_bb = {pos_bb},")
+                .a("pos_nadi = {pos_nadi},")
+                .a("pos_res = {pos_res},")
+                .a("kd_dokter_konsultan = {konsultan},")
+                .a("kd_dokter_pj = {pj},")
+                .a("kd_dokter_pelaksana = {pel},")
+                .a("status = '1'")
+                .a("WHERE kd_periksa = {kd_periksa}")
+                .set("tgl_selesai", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
+                .set("jam_selesai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                .set("hd_ke", txtHdKe.getText())
+                .set("pre_td", txtPreTd.getText())
+                .set("pre_bb", txtPreBb.getText())
+                .set("pre_nadi", txtPreNadi.getText())
+                .set("pre_res", txtPreRes.getText())
+                .set("pos_td", txtPostTd.getText())
+                .set("pos_bb", txtPostBb.getText())
+                .set("pos_nadi", txtPostNadi.getText())
+                .set("pos_res", txtPostRes.getText())
+                .set("konsultan", txtKdDokterKons.getText())
+                .set("pj", txtKdDokterPj.getText())
+                .set("pel", txtKdDokterPel.getText())
+                .set("kd_periksa", kdPeriksa)
+                .write();
 
-            success &= new GQuery()
-                    .a("DELETE FROM det_pemeriksaan_hd WHERE kd_periksa = {kd}")
-                    .set("kd", kdPeriksa)
-                    .write();
-        }
-        else
-        {
-            // Ambil no otomatis
-            String kdPeriksa = Sequel.autoNumber("pemeriksaan_hd", "kd_periksa");
-            
-            // Menyimpan ke table periksa hd (UTAMA)
-            success &= Sequel.menyimpantf2("pemeriksaan_hd", "?,?,?,?,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,?,NULL,NULL,NULL,NULL,?,?", "-", 7, new String[]
-            {
-                kdPeriksa,
-                txtNoRw.getText(),
-                Valid.SetTgl(DTPBeri.getSelectedItem().toString()),
-                cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem(),
-                txtKdDokter.getText(),
-                "0",
-                getStatus()
-            });
-
-        }
+        success &= new GQuery()
+                .a("DELETE FROM det_pemeriksaan_hd WHERE kd_periksa = {kd}")
+                .set("kd", kdPeriksa)
+                .write();
         
         for (String[] s : selDatas)
         {

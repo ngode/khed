@@ -2280,8 +2280,8 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                 success &= new GQuery()
                         .a("UPDATE pemeriksaan_radiologi SET")
                         .a("nip = {nip},")
-                        .a("tgl_periksa = {tgl_periksa},")
-                        .a("jam = {jam},")
+                        .a("tgl_selesai = {tgl_periksa},")
+                        .a("jam_selesai = {jam},")
                         .a("kd_dokter_perujuk = {kd_dokter_perujuk},")
                         .a("kd_dokter_pj = {kd_dokter_pj},")
                         .a("proses = 'Sudah'")
@@ -2664,9 +2664,6 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                 param.put("kontakrs", var.getkontakrs());
                 param.put("emailrs", var.getemailrs());
                 param.put("logo", Sequel.cariGambar("select logo from setting"));
-
-                GQuery.setAutoCommit(false);
-                Sequel.queryu("delete from temporary");
                 
                 // Ngambil detail 1
                 List<HashMap<String, String>> mDetail1 = new GQuery()
@@ -2678,19 +2675,12 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                 
                 for (HashMap<String, String> m1 : mDetail1)
                 {
-                    new GQuery()
-                            .a("INSERT INTO temporary (temp1, temp2) VALUES ({temp1}, {temp2})")
-                            .set("temp1", m1.get("nm_perawatan"))
-                            .set("temp2", m1.get("hasil"))
-                            .write();
-                }
-                
-                GQuery.setAutoCommit(true);
-                
-                
-                Valid.MyReport("rptPeriksaRadiologiFix.jrxml", "report", "::[ Hasil Pemeriksaan Radiologi ]::",
+                    param.put("pemeriksaan", m1.get("nm_perawatan"));
+                    param.put("hasil", m1.get("hasil"));
+                    
+                    Valid.MyReport("rptPeriksaRadiologiFix.jrxml", "report", "::[ Hasil Pemeriksaan Radiologi ]::",
                         "select no, temp1, temp2 from temporary order by no asc", param);
-
+                }
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -3633,6 +3623,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         
         tampilGroup();
         tampilPemeriksaan();
+        tampilOrder();
         tampilTransaksi();
     }
 

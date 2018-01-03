@@ -36,14 +36,19 @@ public class GRow
     }
     
     // Get
-    public String getString(String key)
+    public Object get(String key)
     {
         if (!map.containsKey(key))
         {
             throw new RuntimeException("Tak ada kunci " + key + " di GRow");
         }
         
-        return map.get(key).toString();
+        return map.get(key);
+    }
+    
+    public String getString(String key)
+    {
+        return get(key).toString();
     }
     
     public int getInt(String key)

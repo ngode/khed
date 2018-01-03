@@ -1307,7 +1307,7 @@ public final class DlgOrderHemodialisa extends javax.swing.JDialog
                     boolean success = true;
                     
                     // Menyimpan ke table periksa hd (UTAMA)
-                    success &= Sequel.menyimpantf2("pemeriksaan_hd", "?,?,?,?,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,?,NULL,NULL,NULL,?,?,?", "-", 8, new String[]
+                    success &= Sequel.menyimpantf2("pemeriksaan_hd", "?,?,?,?,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,?,NULL,NULL,NULL,?,?,?", "-", 8, new String[]
                     {
                         kdPeriksa,
                         txtNoRw.getText(),

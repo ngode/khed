@@ -12,11 +12,16 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JTable;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import util.GMessage;
@@ -44,7 +49,7 @@ public class DlgOrderOperasi extends javax.swing.JDialog
     // Vars =====
     String status;
     boolean isEdit = false;
-    String kdOrder;
+    String kdOperasi;
 
     /**
      * Creates new form DlgOrderOperasi
@@ -55,6 +60,8 @@ public class DlgOrderOperasi extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
+        
+        jam();
         
         initTable();
         addWIndowListener();
@@ -217,7 +224,7 @@ public class DlgOrderOperasi extends javax.swing.JDialog
         txtNamaDetail.setText(tblOrder.getValueAt(r, 6).toString());
         
         isEdit = true;
-        kdOrder = tblOrder.getValueAt(r, 0).toString();
+        kdOperasi = tblOrder.getValueAt(r, 0).toString();
         btnSimpan.setText("Ubah");
     }
     
@@ -251,19 +258,26 @@ public class DlgOrderOperasi extends javax.swing.JDialog
             if (isEdit)
             {
                 b = new GQuery()
-                    .a("UPDATE operasi_order SET")
-                    .a("kd_detail = {kd_detail}")
-                    .a("WHERE kd_order = {kd_order}")
+                    .a("UPDATE operasi SET")
+                    .a("kd_detail = {kd_detail},")
+                    .a("tgl_operasi = {tgl_operasi},")
+                    .a("jam_operasi = {jam_operasi}")
+                    .a("WHERE kd_operasi = {kd_operasi}")
                     .set("kd_detail", txtKdDetail.getText())
-                    .set("kd_order", kdOrder)
+                    .set("tgl_operasi", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
+                    .set("jam_operasi", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                    .set("kd_operasi", kdOperasi)
                     .write();
             }
             else
             {
                 b = new GQuery()
-                    .a("INSERT INTO operasi_order (no_rawat, kd_detail, tgl_operasi) VALUES ({no_rw}, {kd_detail}, NOW())")
+                    .a("INSERT INTO operasi (no_rawat, kd_detail, tgl_operasi, jam_operasi, status, proses) VALUES ({no_rw}, {kd_detail}, {tgl_operasi}, {jam_operasi}, {status}, 'Belum')")
                     .set("no_rw", txtNoRawat.getText())
                     .set("kd_detail", txtKdDetail.getText())
+                    .set("tgl_operasi", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
+                    .set("jam_operasi", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                    .set("status", status)
                     .write();
             }
 
@@ -289,9 +303,9 @@ public class DlgOrderOperasi extends javax.swing.JDialog
         if (GMessage.q("Konfirmasi", "Ingin menghapus?"))
         {
             boolean b = new GQuery()
-                    .a("DELETE FROM operasi_order")
-                    .a("WHERE kd_order = {kd_order}")
-                    .set("kd_order", kdOrder)
+                    .a("DELETE FROM operasi")
+                    .a("WHERE kd_operasi = {kd_operasi}")
+                    .set("kd_operasi", kdOperasi)
                     .write();
             
             if (b)
@@ -315,12 +329,12 @@ public class DlgOrderOperasi extends javax.swing.JDialog
         try
         {
             ps = new GStatement(koneksi)
-            .a("SELECT * FROM operasi_order")
-            .a("JOIN operasi_detail ON operasi_detail.kd_detail = operasi_order.kd_detail")
+            .a("SELECT * FROM operasi")
+            .a("JOIN operasi_detail ON operasi_detail.kd_detail = operasi.kd_detail")
             .a("JOIN operasi_kategori ON operasi_detail.kd_kategori = operasi_kategori.kd_kategori")
             .a("JOIN operasi_group ON operasi_group.kd_group = operasi_kategori.kd_group")
-            .a("WHERE no_rawat = :no_rawat")
-            .a("ORDER BY tgl_operasi")
+            .a("WHERE no_rawat = :no_rawat AND proses = 'Belum'")
+            .a("ORDER BY tgl_operasi, jam_operasi")
             .setString("no_rawat", txtNoRawat.getText())
             .getStatement();
             
@@ -332,14 +346,14 @@ public class DlgOrderOperasi extends javax.swing.JDialog
                 {
                     mdlOrder.addRow(new Object[]
                     {
-                        rs.getString("kd_order"), 
+                        rs.getString("kd_operasi"), 
                         rs.getString("kd_group"), 
                         rs.getString("kd_kategori"),
                         rs.getString("kd_detail"),
                         rs.getString("nm_group"), 
                         rs.getString("nm_kategori"),
                         rs.getString("nm_detail"),
-                        rs.getString("tgl_operasi")
+                        rs.getString("tgl_operasi") + " " + rs.getString("jam_operasi")
                     });
                 }
             }
@@ -385,6 +399,12 @@ public class DlgOrderOperasi extends javax.swing.JDialog
         txtNamaDetail = new widget.TextBox();
         txtKdDetail = new widget.TextBox();
         label4 = new widget.Label();
+        jLabel9 = new widget.Label();
+        DTPBeri = new widget.Tanggal();
+        cmbJam = new widget.ComboBox();
+        cmbMnt = new widget.ComboBox();
+        cmbDtk = new widget.ComboBox();
+        ChkJln = new widget.CekBox();
         pnlAction = new widget.panelisi();
         btnSimpan = new widget.Button();
         btnBaru = new widget.Button();
@@ -405,7 +425,7 @@ public class DlgOrderOperasi extends javax.swing.JDialog
 
         panelisi1.setLayout(new java.awt.BorderLayout());
 
-        pnlInput.setPreferredSize(new java.awt.Dimension(779, 146));
+        pnlInput.setPreferredSize(new java.awt.Dimension(779, 176));
 
         label1.setText("No Rawat :");
 
@@ -469,6 +489,62 @@ public class DlgOrderOperasi extends javax.swing.JDialog
 
         label4.setText("Detail :");
 
+        jLabel9.setText("Tanggal :");
+
+        DTPBeri.setEditable(false);
+        DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
+        DTPBeri.setDisplayFormat("dd-MM-yyyy");
+        DTPBeri.setOpaque(false);
+        DTPBeri.setPreferredSize(new java.awt.Dimension(100, 23));
+        DTPBeri.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                DTPBeriKeyPressed(evt);
+            }
+        });
+
+        cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        cmbJam.setOpaque(false);
+        cmbJam.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                cmbJamKeyPressed(evt);
+            }
+        });
+
+        cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbMnt.setOpaque(false);
+        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                cmbMntKeyPressed(evt);
+            }
+        });
+
+        cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbDtk.setOpaque(false);
+        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                cmbDtkKeyPressed(evt);
+            }
+        });
+
+        ChkJln.setBackground(new java.awt.Color(235, 255, 235));
+        ChkJln.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
+        ChkJln.setForeground(new java.awt.Color(153, 0, 51));
+        ChkJln.setSelected(true);
+        ChkJln.setBorderPainted(true);
+        ChkJln.setBorderPaintedFlat(true);
+        ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout pnlInputLayout = new javax.swing.GroupLayout(pnlInput);
         pnlInput.setLayout(pnlInputLayout);
         pnlInputLayout.setHorizontalGroup(
@@ -496,7 +572,19 @@ public class DlgOrderOperasi extends javax.swing.JDialog
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtKdGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNamaGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtNamaGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlInputLayout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(DTPBeri, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)
+                                .addComponent(cmbJam, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(cmbMnt, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(cmbDtk, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(ChkJln, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnCariDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -543,7 +631,16 @@ public class DlgOrderOperasi extends javax.swing.JDialog
                         .addComponent(txtKdDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtNamaDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnCariDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(DTPBeri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbJam, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbMnt, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDtk, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ChkJln, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelisi1.add(pnlInput, java.awt.BorderLayout.PAGE_START);
@@ -710,7 +807,29 @@ public class DlgOrderOperasi extends javax.swing.JDialog
         hapus();
     }//GEN-LAST:event_btnHapusActionPerformed
 
+    private void DTPBeriKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_DTPBeriKeyPressed
+    {//GEN-HEADEREND:event_DTPBeriKeyPressed
+
+    }//GEN-LAST:event_DTPBeriKeyPressed
+
+    private void cmbJamKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_cmbJamKeyPressed
+    {//GEN-HEADEREND:event_cmbJamKeyPressed
+        Valid.pindah(evt, DTPBeri, cmbMnt);
+    }//GEN-LAST:event_cmbJamKeyPressed
+
+    private void cmbMntKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_cmbMntKeyPressed
+    {//GEN-HEADEREND:event_cmbMntKeyPressed
+        Valid.pindah(evt, cmbJam, cmbDtk);
+    }//GEN-LAST:event_cmbMntKeyPressed
+
+    private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_cmbDtkKeyPressed
+    {//GEN-HEADEREND:event_cmbDtkKeyPressed
+
+    }//GEN-LAST:event_cmbDtkKeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.CekBox ChkJln;
+    private widget.Tanggal DTPBeri;
     private widget.Button btnBaru;
     private widget.Button btnCariDetail;
     private widget.Button btnCariGroup;
@@ -719,8 +838,12 @@ public class DlgOrderOperasi extends javax.swing.JDialog
     private widget.Button btnHapus;
     private widget.Button btnKeluar;
     private widget.Button btnSimpan;
+    private widget.ComboBox cmbDtk;
+    private widget.ComboBox cmbJam;
+    private widget.ComboBox cmbMnt;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
+    private widget.Label jLabel9;
     private javax.swing.JPanel jPanel2;
     private widget.Label label1;
     private widget.Label label2;
@@ -742,5 +865,68 @@ public class DlgOrderOperasi extends javax.swing.JDialog
     private widget.TextBox txtNoRm;
     // End of variables declaration//GEN-END:variables
 
-    
+    private void jam()
+    {
+        ActionListener taskPerformer = new ActionListener()
+        {
+            private int nilai_jam;
+            private int nilai_menit;
+            private int nilai_detik;
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String nol_jam = "";
+                String nol_menit = "";
+                String nol_detik = "";
+                // Membuat Date
+                //Date dt = new Date();
+                Date now = Calendar.getInstance().getTime();
+
+                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
+                if (ChkJln.isSelected() == true)
+                {
+                    nilai_jam = now.getHours();
+                    nilai_menit = now.getMinutes();
+                    nilai_detik = now.getSeconds();
+                }
+                else if (ChkJln.isSelected() == false)
+                {
+                    nilai_jam = cmbJam.getSelectedIndex();
+                    nilai_menit = cmbMnt.getSelectedIndex();
+                    nilai_detik = cmbDtk.getSelectedIndex();
+                }
+
+                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_jam <= 9)
+                {
+                    // Tambahkan "0" didepannya
+                    nol_jam = "0";
+                }
+                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_menit <= 9)
+                {
+                    // Tambahkan "0" didepannya
+                    nol_menit = "0";
+                }
+                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_detik <= 9)
+                {
+                    // Tambahkan "0" didepannya
+                    nol_detik = "0";
+                }
+                // Membuat String JAM, MENIT, DETIK
+                String jam = nol_jam + Integer.toString(nilai_jam);
+                String menit = nol_menit + Integer.toString(nilai_menit);
+                String detik = nol_detik + Integer.toString(nilai_detik);
+                // Menampilkan pada Layar
+                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
+                cmbJam.setSelectedItem(jam);
+                cmbMnt.setSelectedItem(menit);
+                cmbDtk.setSelectedItem(detik);
+            }
+        };
+        // Timer
+        new Timer(1000, taskPerformer).start();
+    }
 }
