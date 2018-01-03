@@ -41,7 +41,7 @@ import simrskhanza.DlgCariPeriksaLab;
 import simrskhanza.DlgCariPeriksaRadiologi;
 import simrskhanza.DlgDeposit;
 import simrskhanza.DlgOrderRadiologi;
-import simrskhanza.DlgPemberianObat;
+import inventory.DlgPemberianObat;
 import simrskhanza.DlgPenanggungJawab;
 import simrskhanza.DlgPeriksaLaboratorium;
 import simrskhanza.DlgPeriksaRadiologi;

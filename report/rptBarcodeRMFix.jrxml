@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="700" pageHeight="190" columnWidth="694" leftMargin="3" rightMargin="3" topMargin="3" bottomMargin="3" >
-	<property name="ireport.zoom" value="0.75"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="325"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>
@@ -96,14 +96,14 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="3" y="32" width="199" height="15" />
+				<reportElement mode="Opaque" x="3" y="31" width="199" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nm_pasien} + " (" + $F{jk} + ")"]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Transparent" x="3" y="49" width="199" height="15" />
+				<reportElement mode="Transparent" x="3" y="44" width="199" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
@@ -117,14 +117,14 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="239" y="34" width="222" height="15" />
+				<reportElement mode="Opaque" x="239" y="31" width="222" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nm_pasien} + " (" + $F{jk} + ")"]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Transparent" x="239" y="49" width="222" height="15" />
+				<reportElement mode="Transparent" x="239" y="44" width="222" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
@@ -138,14 +138,14 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="494" y="32" width="182" height="15" />
+				<reportElement mode="Opaque" x="494" y="29" width="182" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nm_pasien} + " (" + $F{jk} + ")"]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Transparent" x="494" y="45" width="182" height="15" />
+				<reportElement mode="Transparent" x="494" y="40" width="182" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
@@ -159,14 +159,14 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="3" y="126" width="199" height="15" />
+				<reportElement mode="Opaque" x="3" y="123" width="199" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nm_pasien} + " (" + $F{jk} + ")"]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="239" y="126" width="222" height="16" />
+				<reportElement mode="Opaque" x="239" y="123" width="222" height="16" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
@@ -180,21 +180,21 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Transparent" x="3" y="142" width="199" height="15" />
+				<reportElement mode="Transparent" x="3" y="136" width="199" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tgl_lahir}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Opaque" x="494" y="126" width="182" height="15" />
+				<reportElement mode="Opaque" x="494" y="123" width="182" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nm_pasien} + " (" + $F{jk} + ")"]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Transparent" x="494" y="140" width="182" height="15" />
+				<reportElement mode="Transparent" x="494" y="134" width="182" height="15" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>
@@ -208,7 +208,7 @@ and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab]]>
 				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement mode="Transparent" x="239" y="140" width="222" height="16" />
+				<reportElement mode="Transparent" x="239" y="134" width="222" height="16" />
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="false"/>
 				</textElement>

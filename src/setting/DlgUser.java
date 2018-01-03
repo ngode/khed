@@ -91,7 +91,7 @@ public class DlgUser extends javax.swing.JDialog {
                     "[K]Klaim Baru Otomatis INACBG","[K]Klaim Baru Manual INACBG","[K]Coder NIK INACBG","[L]Mutasi Berkas RM","[J]Akun Piutang","[H]Harian KSO","[H]Bulanan KSO",
                     "[H]Harian Menejemen","[H]Bulanan Menejemen","[K]Cek Eligibilitas Inhealth","[K]Referensi Ruang Rawat Inhealth","[K]Referensi Poli Inhealth","[K]Referensi Faskes Inhealth",
                     "[K]Data Bridging SJP Inhealth","[H]Piutang Ralan","[H]Piutang Ranap","[J]Piutang Per Cara Bayar","[I]Lama Pelayanan Ralan","[L]Catatan Pasien","[I]RL 4B Sebab Morbiditas Ralan",
-                    "[I]RL 4A Morbiditas Ralan","[I]RL 4B Morbiditas Ralan","[L]Data HAIs","[I]Harian HAIs","[I]Bulanan HAIs","[I]Hitung BOR", "[?]Hemodialisa"
+                    "[I]RL 4A Morbiditas Ralan","[I]RL 4B Morbiditas Ralan","[L]Data HAIs","[I]Harian HAIs","[I]Bulanan HAIs","[I]Hitung BOR", "[?]Hemodialisa", "[D]Resep Dokter", "[D]Lama Pelayanan Apotik"
         };
         
         tabMode=new DefaultTableModel(null,row){
@@ -168,7 +168,7 @@ public class DlgUser extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
                 java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
-                java.lang.Boolean.class
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -293,8 +293,12 @@ public class DlgUser extends javax.swing.JDialog {
                 column.setPreferredWidth(88);
             }else if(i==237){
                 column.setPreferredWidth(80);
-            }else{
+            }else if(i==238){
                 column.setPreferredWidth(120);
+            }else if(i==239){
+                column.setPreferredWidth(130);
+            }else{
+                column.setPreferredWidth(160);
             }
         }
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
@@ -447,14 +451,16 @@ public class DlgUser extends javax.swing.JDialog {
         panelGlass5.setLayout(null);
 
         jLabel3.setText("Dokter/Petugas :");
+        jLabel3.setMaximumSize(new java.awt.Dimension(103, 16));
+        jLabel3.setMinimumSize(new java.awt.Dimension(103, 16));
         jLabel3.setName("jLabel3"); // NOI18N
         panelGlass5.add(jLabel3);
-        jLabel3.setBounds(10, 12, 94, 23);
+        jLabel3.setBounds(10, 12, 100, 23);
 
         jLabel4.setText("Password :");
         jLabel4.setName("jLabel4"); // NOI18N
         panelGlass5.add(jLabel4);
-        jLabel4.setBounds(449, 12, 60, 23);
+        jLabel4.setBounds(460, 10, 80, 23);
 
         TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
@@ -464,7 +470,7 @@ public class DlgUser extends javax.swing.JDialog {
             }
         });
         panelGlass5.add(TKd);
-        TKd.setBounds(107, 12, 107, 23);
+        TKd.setBounds(120, 10, 107, 23);
 
         TPass.setName("TPass"); // NOI18N
         TPass.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -473,7 +479,7 @@ public class DlgUser extends javax.swing.JDialog {
             }
         });
         panelGlass5.add(TPass);
-        TPass.setBounds(511, 12, 180, 23);
+        TPass.setBounds(550, 10, 180, 23);
 
         BtnSeek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnSeek.setMnemonic('1');
@@ -490,7 +496,7 @@ public class DlgUser extends javax.swing.JDialog {
             }
         });
         panelGlass5.add(BtnSeek);
-        BtnSeek.setBounds(216, 12, 28, 23);
+        BtnSeek.setBounds(230, 10, 28, 23);
 
         BtnSeek1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnSeek1.setMnemonic('2');
@@ -507,7 +513,7 @@ public class DlgUser extends javax.swing.JDialog {
             }
         });
         panelGlass5.add(BtnSeek1);
-        BtnSeek1.setBounds(245, 12, 28, 23);
+        BtnSeek1.setBounds(260, 10, 28, 23);
 
         TNmUser.setEditable(false);
         TNmUser.setName("TNmUser"); // NOI18N
@@ -517,7 +523,7 @@ public class DlgUser extends javax.swing.JDialog {
             }
         });
         panelGlass5.add(TNmUser);
-        TNmUser.setBounds(275, 12, 160, 23);
+        TNmUser.setBounds(290, 10, 160, 23);
 
         internalFrame1.add(panelGlass5, java.awt.BorderLayout.PAGE_START);
 
@@ -727,7 +733,7 @@ public class DlgUser extends javax.swing.JDialog {
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
                     "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false',"+
-                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
+                    "'false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false','false'","User")==true){
                 tampil();
                 emptTeks();
             }            
@@ -1009,7 +1015,9 @@ public class DlgUser extends javax.swing.JDialog {
                     "harian_HAIs='"+tbUser.getValueAt(i,235).toString()+"',"+
                     "bulanan_HAIs='"+tbUser.getValueAt(i,236).toString()+"',"+
                     "hitung_bor='"+tbUser.getValueAt(i,237).toString()+"'," + 
-                    "hemodialisa='"+tbUser.getValueAt(i,238).toString()+"'");
+                    "hemodialisa='"+tbUser.getValueAt(i,238).toString()+"'," +
+                    "resep_dokter='"+tbUser.getValueAt(i,239).toString()+"'," +
+                    "lama_pelayanan_apotek='"+tbUser.getValueAt(i,240).toString()+"'" );
             }            
             tampil();
             emptTeks();
@@ -1261,7 +1269,7 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         "aplicare_ketersediaan_kamar,inacbg_klaim_baru_otomatis,inacbg_klaim_baru_manual,inacbg_coder_nik,mutasi_berkas, "+
                         "akun_piutang,harian_kso,bulanan_kso,harian_menejemen,bulanan_menejemen,inhealth_cek_eligibilitas,inhealth_referensi_jenpel_ruang_rawat, "+
                         "inhealth_referensi_poli,inhealth_referensi_faskes,inhealth_sjp,piutang_ralan,piutang_ranap,detail_piutang_penjab, "+
-                        "lama_pelayanan_ralan,catatan_pasien,rl4b,rl4asebab,rl4bsebab,data_HAIs,harian_HAIs,bulanan_HAIs,hitung_bor, hemodialisa from user order by AES_DECRYPT(id_user,'nur')");
+                        "lama_pelayanan_ralan,catatan_pasien,rl4b,rl4asebab,rl4bsebab,data_HAIs,harian_HAIs,bulanan_HAIs,hitung_bor, hemodialisa, resep_dokter, lama_pelayanan_apotek from user order by AES_DECRYPT(id_user,'nur')");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -1510,7 +1518,9 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                            rs.getBoolean("harian_HAIs"),
                                            rs.getBoolean("bulanan_HAIs"),
                                            rs.getBoolean("hitung_bor"),
-                                           rs.getBoolean("hemodialisa")
+                                           rs.getBoolean("hemodialisa"),
+                                           rs.getBoolean("resep_dokter"),
+                                           rs.getBoolean("lama_pelayanan_apotek")
                             });
                         }   
                     } catch (Exception e) {
@@ -1751,7 +1761,9 @@ private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                            rs.getBoolean("harian_HAIs"),
                                            rs.getBoolean("bulanan_HAIs"),
                                            rs.getBoolean("hitung_bor"),
-                                           rs.getBoolean("hemodialisa") 
+                                           rs.getBoolean("hemodialisa"),
+                                           rs.getBoolean("resep_dokter"),
+                                           rs.getBoolean("lama_pelayanan_apotek")
                             });
                     }                                             
                  }

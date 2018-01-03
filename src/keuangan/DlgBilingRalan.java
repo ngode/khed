@@ -29,7 +29,7 @@ import simrskhanza.DlgCariDokter;
 import simrskhanza.DlgCariPeriksaLab;
 import simrskhanza.DlgCariPeriksaRadiologi;
 import simrskhanza.DlgCariPoli;
-import simrskhanza.DlgPemberianObat;
+import inventory.DlgPemberianObat;
 import simrskhanza.DlgPenanggungJawab;
 import simrskhanza.DlgPeriksaLaboratorium;
 import simrskhanza.DlgPeriksaRadiologi;
@@ -2707,8 +2707,11 @@ private void tbBillingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
                             {
                                 dlgobt.emptTeksobat();
                                 //dlgobt.setModal(true);
-                                dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
-                                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+//                                dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
+//                                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+                                dlgobt.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?",TNoRw.getText()),
+                                            Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
+                                     
                                 dlgobt.isCek();
                                 dlgobt.tampilobat();
                                 dlgobt.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
@@ -2757,8 +2760,11 @@ private void tbBillingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
                             {
                                 dlgobt.emptTeksobat();
                                 //dlgobt.setModal(true);
-                                dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
-                                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+//                                dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
+//                                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+                                dlgobt.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?",TNoRw.getText()),
+                                            Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
+                                    
                                 dlgobt.isCek();
                                 dlgobt.tampilobat();
                                 dlgobt.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
@@ -2883,8 +2889,10 @@ private void tbBillingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             {
                                 dlgobt.emptTeksobat();
                                 //dlgobt.setModal(true);
-                                dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
-                                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+//                                dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
+//                                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+                                dlgobt.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?",TNoRw.getText()),
+                                            Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
                                 dlgobt.isCek();
                                 dlgobt.tampilobat();
                                 dlgobt.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
@@ -2933,8 +2941,10 @@ private void tbBillingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             {
                                 dlgobt.emptTeksobat();
                                 //dlgobt.setModal(true);
-                                dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
-                                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+//                                dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
+//                                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+                                dlgobt.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?",TNoRw.getText()),
+                                            Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
                                 dlgobt.isCek();
                                 dlgobt.tampilobat();
                                 dlgobt.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
@@ -3817,8 +3827,8 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         else if (var.getkode().equals("Admin Utama"))
         {
             dlgobt.emptTeksobat();
-            dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
-                    Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+            dlgobt.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?",TNoRw.getText()),
+                        Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
             dlgobt.isCek();
             dlgobt.tampilobat();
             dlgobt.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
@@ -3833,8 +3843,8 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         else
         {
             dlgobt.emptTeksobat();
-            dlgobt.setNoRm(TNoRw.getText(), Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?", TNoRw.getText()),
-                    Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?", TNoRw.getText()));
+            dlgobt.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat=?",TNoRw.getText()),
+                            Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat=?",TNoRw.getText()));
             dlgobt.isCek();
             dlgobt.tampilobat();
             dlgobt.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());

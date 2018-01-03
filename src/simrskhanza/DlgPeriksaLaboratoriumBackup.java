@@ -11,7 +11,7 @@
 package simrskhanza;
 
 import fungsi.GQuery;
-import keuangan.DlgJnsPerawatanLab;
+import keuangan.DlgJnsPerawatanLabAseli;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -1721,7 +1721,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void btnTarifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarifActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgJnsPerawatanLab tariflab = new DlgJnsPerawatanLab(null, false);
+        DlgJnsPerawatanLabAseli tariflab = new DlgJnsPerawatanLabAseli(null, false);
         tariflab.emptTeks();
         tariflab.isCek();
         tariflab.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);

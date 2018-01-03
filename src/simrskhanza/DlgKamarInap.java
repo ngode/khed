@@ -4007,12 +4007,12 @@ private void MnPemberianObatActionPerformed(java.awt.event.ActionEvent evt) {//G
                             var.setkdbangsal(bangsal);
                         }
 
-                        billing.beriobat.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                        billing.beriobat.setLocationRelativeTo(internalFrame1);
-                        billing.beriobat.setNoRm(rs2.getString("no_rawat2"),DTPCari1.getDate(),DTPCari2.getDate(),"ranap");
-                        billing.beriobat.isCek();
-                        billing.beriobat.tampilPO();
-                        billing.beriobat.setVisible(true);
+                                        billing.beriobat.dlgobt.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                                        billing.beriobat.dlgobt.setLocationRelativeTo(internalFrame1);
+                                        billing.beriobat.dlgobt.setNoRm(rs2.getString("no_rawat2"),DTPCari1.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),false);
+                                        billing.beriobat.dlgobt.isCek();
+                                        billing.beriobat.dlgobt.tampil();
+                                        billing.beriobat.dlgobt.setVisible(true);
                     }else{
                         JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
                         tbKamIn.requestFocus();
