@@ -23,6 +23,7 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.var;
 import inventory.DlgInputStokPasien;
+import inventory.DlgResepObat;
 import inventory.DlgReturJual;
 import java.awt.Cursor;
 import java.awt.Dimension;

@@ -50,7 +50,7 @@ import javax.swing.event.DocumentEvent;
 import keuangan.Jurnal;
 import simrskhanza.DlgCariObatPenyakit;
 import simrskhanza.DlgPasien;
-import simrskhanza.DlgResepObat;
+import inventory.DlgResepObat;
 
 /**
  *

@@ -175,6 +175,7 @@ import keuangan.DlgRekeningTahun;
 import bridging.ReklasifikasiRalan;
 import bridging.ReklasifikasiRanap;
 import inventory.DlgDaftarPermintaanResep;
+import inventory.DlgResepObat;
 import inventory.DlgRiwayatBarangMedis;
 import java.awt.Frame;
 import java.awt.event.KeyListener;
@@ -5539,7 +5540,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private void btnResepObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResepObatActionPerformed
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgResepObat resep=new DlgResepObat(this,false);
+        DlgResepObat resep=new DlgResepObat(null,false);
         resep.tampil();
         resep.emptTeks();
         resep.isCek();
