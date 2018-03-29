@@ -53,6 +53,7 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.Jurnal;
+import pop.PopHasilRad;
 import util.GColors;
 import util.GConst;
 import widget.TextBox;
@@ -487,6 +488,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         txtHasil.setForeground(new Color(60, 80, 50));
         txtHasil.setBackground(GColors.Biru10);
         txtHasil.setVisible(false);
+        btnEditHasil.setEnabled(false);
 
         txtHasil.getDocument().addDocumentListener(new DocumentListener()
         {
@@ -669,8 +671,11 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         btnCariPemeriksaan = new widget.Button();
         btnAllPemeriksaan = new widget.Button();
         btnTambahPemeriksaan = new widget.Button();
-        Scroll5 = new widget.ScrollPane();
+        jPanel7 = new javax.swing.JPanel();
+        Scroll7 = new widget.ScrollPane();
         txtHasil = new javax.swing.JTextArea();
+        panelisi9 = new widget.panelisi();
+        btnEditHasil = new widget.Button();
         panelisi3 = new widget.panelisi();
         jPanel6 = new javax.swing.JPanel();
         Scroll6 = new widget.ScrollPane();
@@ -1070,7 +1075,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2018" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1223,7 +1228,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(816, 102));
-        jPanel1.setLayout(new java.awt.GridLayout(1, 2));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 3));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 242, 232)), ".: Pemeriksaan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         jPanel3.setName("jPanel3"); // NOI18N
@@ -1492,17 +1497,54 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         jPanel1.add(jPanel5);
 
-        Scroll5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 242, 232)), ".: Hasil Pemeriksaan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
-        Scroll5.setName("Scroll5"); // NOI18N
-        Scroll5.setOpaque(true);
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 242, 232)), ".: Hasil Pemeriksaan", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        jPanel7.setName("jPanel7"); // NOI18N
+        jPanel7.setOpaque(false);
+        jPanel7.setPreferredSize(new java.awt.Dimension(300, 102));
+        jPanel7.setLayout(new java.awt.BorderLayout(1, 1));
 
+        Scroll7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 255, 235)));
+        Scroll7.setName("Scroll7"); // NOI18N
+        Scroll7.setOpaque(true);
+
+        txtHasil.setEditable(false);
         txtHasil.setColumns(20);
         txtHasil.setRows(5);
         txtHasil.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         txtHasil.setName("txtHasil"); // NOI18N
-        Scroll5.setViewportView(txtHasil);
+        Scroll7.setViewportView(txtHasil);
 
-        jPanel1.add(Scroll5);
+        jPanel7.add(Scroll7, java.awt.BorderLayout.CENTER);
+
+        panelisi9.setBorder(null);
+        panelisi9.setName("panelisi9"); // NOI18N
+        panelisi9.setPreferredSize(new java.awt.Dimension(100, 43));
+        panelisi9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 9));
+
+        btnEditHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/011.png"))); // NOI18N
+        btnEditHasil.setMnemonic('3');
+        btnEditHasil.setToolTipText("Alt+3");
+        btnEditHasil.setName("btnEditHasil"); // NOI18N
+        btnEditHasil.setPreferredSize(new java.awt.Dimension(28, 23));
+        btnEditHasil.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnEditHasilActionPerformed(evt);
+            }
+        });
+        btnEditHasil.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                btnEditHasilKeyPressed(evt);
+            }
+        });
+        panelisi9.add(btnEditHasil);
+
+        jPanel7.add(panelisi9, java.awt.BorderLayout.PAGE_END);
+
+        jPanel1.add(jPanel7);
 
         panelisi1.add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -1554,7 +1596,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglOrder1.setEditable(false);
         tglOrder1.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2018" }));
         tglOrder1.setDisplayFormat("dd-MM-yyyy");
         tglOrder1.setName("tglOrder1"); // NOI18N
         tglOrder1.setOpaque(false);
@@ -1568,7 +1610,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglOrder2.setEditable(false);
         tglOrder2.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2018" }));
         tglOrder2.setDisplayFormat("dd-MM-yyyy");
         tglOrder2.setName("tglOrder2"); // NOI18N
         tglOrder2.setOpaque(false);
@@ -1756,7 +1798,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2018" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setName("tglTransaksi1"); // NOI18N
         tglTransaksi1.setOpaque(false);
@@ -1770,7 +1812,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2018" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setName("tglTransaksi2"); // NOI18N
         tglTransaksi2.setOpaque(false);
@@ -1993,10 +2035,12 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                 txtHasil.setVisible(true);
                 curPemeriksaan = tblPemeriksaan.getValueAt(tblPemeriksaan.getSelectedRow(), 1).toString();
                 txtHasil.setText(pemeriksaanMap.get(curPemeriksaan));
+                btnEditHasil.setEnabled(true);
             }
             else
             {
                 txtHasil.setVisible(false);
+                btnEditHasil.setEnabled(false);
             }
         }
     }//GEN-LAST:event_tblPemeriksaanMouseClicked
@@ -2860,6 +2904,28 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_menuCetakBilling1ActionPerformed
 
+    private void btnEditHasilActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEditHasilActionPerformed
+    {//GEN-HEADEREND:event_btnEditHasilActionPerformed
+        if (tblPemeriksaan.getSelectedRow() == -1)
+            return;
+        
+        PopHasilRad p = new PopHasilRad(null, true);
+        p.setData(txtHasil.getText());
+        p.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
+        p.setLocationRelativeTo(internalFrame1);
+        p.setVisible(true);
+        
+        if (p.isSaved)
+        {
+            txtHasil.setText(p.result);
+        }
+    }//GEN-LAST:event_btnEditHasilActionPerformed
+
+    private void btnEditHasilKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_btnEditHasilKeyPressed
+    {//GEN-HEADEREND:event_btnEditHasilKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditHasilKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -2901,8 +2967,8 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
     private widget.ScrollPane Scroll2;
     private widget.ScrollPane Scroll3;
     private widget.ScrollPane Scroll4;
-    private widget.ScrollPane Scroll5;
     private widget.ScrollPane Scroll6;
+    private widget.ScrollPane Scroll7;
     private widget.Tanggal Tanggal;
     private widget.TextBox Umur;
     private widget.Button btnAllGroup;
@@ -2914,6 +2980,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
     private widget.Button btnCariPemeriksaan;
     private widget.Button btnCariTransaksi;
     private widget.Button btnDokterPj;
+    private widget.Button btnEditHasil;
     private widget.Button btnHapusOrder;
     private widget.Button btnHapusTransaksi;
     private widget.Button btnKeluarOrder;
@@ -2941,6 +3008,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private widget.Label label10;
@@ -2964,6 +3032,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
     private widget.panelisi panelisi6;
     private widget.panelisi panelisi7;
     private widget.panelisi panelisi8;
+    private widget.panelisi panelisi9;
     private widget.TabPane tabPane;
     private widget.Table tblGroup;
     private widget.Table tblOrder;
