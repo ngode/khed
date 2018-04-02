@@ -129,112 +129,80 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jLabel4" max="32767" attributes="0"/>
+                                          <Component id="jLabel4" pref="127" max="32767" attributes="0"/>
                                           <Group type="102" attributes="0">
                                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="label14" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label19" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label20" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label21" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label22" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label27" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label29" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label30" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label28" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label23" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label33" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                                  <Component id="label34" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="label14" alignment="0" pref="125" max="32767" attributes="0"/>
+                                                  <Component id="label19" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="label20" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="label21" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="label22" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="label27" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="label29" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="label30" alignment="0" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdOperator1" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <Component id="txtKdDokOperator" max="32767" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                                      <Component id="txtNamaDokOperator" min="-2" pref="190" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaOperator1" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnOperator1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnDokOperator" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdOperator2" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <Component id="txtKdDokMerawat" min="-2" pref="100" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaOperator2" min="-2" pref="190" max="-2" attributes="0"/>
+                                                      <Component id="txtNamaDokMerawat" min="-2" pref="190" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnOperator2" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnDokMerawat" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdOperator3" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <Component id="txtKdAssDokOperator" min="-2" pref="100" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaOperator3" min="-2" pref="190" max="-2" attributes="0"/>
+                                                      <Component id="txtNamaAssDokOperator" min="-2" pref="190" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnOperator3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnAssDokOperator" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdAnestesia" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <Component id="txtKdDokAnestesi" min="-2" pref="100" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaAnestesia" min="-2" pref="190" max="-2" attributes="0"/>
+                                                      <Component id="txtNamaDokAnestesi" min="-2" pref="190" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnAnastesi" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnDokAnestesi" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdDrAnak" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <Component id="txtKdPenataAnestesi" min="-2" pref="100" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaDrAnak" min="-2" pref="190" max="-2" attributes="0"/>
+                                                      <Component id="txtNamaPenataAnestesi" min="-2" pref="190" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnDrAnak" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnPenataAnestesi" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdBidan1" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <Component id="txtKdDokAnak" min="-2" pref="100" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaBidan1" min="-2" pref="190" max="-2" attributes="0"/>
+                                                      <Component id="txtNamaDokAnak" min="-2" pref="190" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnBidan1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnDokAnak" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdBidan2" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <Component id="txtKdDokPendamping" min="-2" pref="100" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaBidan2" min="-2" pref="190" max="-2" attributes="0"/>
+                                                      <Component id="txtNamaDokPendamping" min="-2" pref="190" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnBidan2" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnDokPendamping" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdBidan3" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <Component id="txtKdPerawatOrBidan" min="-2" pref="100" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaBidan3" min="-2" pref="190" max="-2" attributes="0"/>
+                                                      <Component id="txtNamaPerawatOrBidan" min="-2" pref="190" max="-2" attributes="0"/>
                                                       <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnBidan3" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdPerawatLuar" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaPerawatLuar" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnPerawatLuar" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdInstrumen" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaInstrumen" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnInstrumen" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdPjAnak" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaPjAnak" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnPjAnak" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdDrUmum" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaDrUmum" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnDrUmum" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnPerawatOrBidan" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -243,121 +211,21 @@
                                               <Component id="txtJenisAnasthesia" min="-2" pref="293" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="label17" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label18" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label35" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label26" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label36" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label24" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label25" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label31" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label32" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label37" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                                  <Component id="label38" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdAsistenOperator1" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaAsistenOperator1" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnAsistenOperator1" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdAsistenOperator2" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaAsistenOperator2" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnAsistenOperator2" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdAsistenOperator3" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaAsistenOperator3" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnAsistenOperator3" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdAsistenAnestesia1" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaAsistenAnestesia1" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnAsistenAnestesia1" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdAsistenAnestesia2" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaAsistenAnestesia2" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnAsistenAnestesia2" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdPrResus" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaPrResus" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnPrResus" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdOnloop1" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaOnloop1" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnOnloop1" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdOnloop2" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaOnloop2" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnOnloop2" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdOnloop3" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaOnloop3" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnOnloop3" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdOnloop4" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaOnloop4" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnOnloop4" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txtKdOnloop5" min="-2" pref="100" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="txtNamaOnloop5" min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                                      <Component id="btnOnloop5" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                              <Component id="jLabel9" min="-2" pref="80" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="DTPBeri" min="-2" pref="95" max="-2" attributes="0"/>
-                                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                                              <Component id="cmbJam" min="-2" pref="45" max="-2" attributes="0"/>
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Component id="cmbMnt" min="-2" pref="45" max="-2" attributes="0"/>
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Component id="cmbDtk" min="-2" pref="45" max="-2" attributes="0"/>
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                              <Component id="ChkJln" min="-2" pref="23" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="DTPBeri" min="-2" pref="95" max="-2" attributes="0"/>
+                                      <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                                      <Component id="cmbJam" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Component id="cmbMnt" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Component id="cmbDtk" min="-2" pref="45" max="-2" attributes="0"/>
+                                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                      <Component id="ChkJln" min="-2" pref="23" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="191" max="32767" attributes="0"/>
+                              <EmptySpace pref="224" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -419,132 +287,60 @@
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label14" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdOperator1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaOperator1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnOperator1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label17" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdAsistenOperator1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaAsistenOperator1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnAsistenOperator1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdDokOperator" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaDokOperator" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDokOperator" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label19" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdOperator2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaOperator2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnOperator2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label18" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdAsistenOperator2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaAsistenOperator2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnAsistenOperator2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdDokMerawat" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaDokMerawat" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDokMerawat" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label20" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdOperator3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaOperator3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnOperator3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label35" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdAsistenOperator3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaAsistenOperator3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnAsistenOperator3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdAssDokOperator" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaAssDokOperator" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnAssDokOperator" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label21" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdAnestesia" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaAnestesia" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnAnastesi" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label26" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdAsistenAnestesia1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaAsistenAnestesia1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnAsistenAnestesia1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdDokAnestesi" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaDokAnestesi" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDokAnestesi" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label22" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdDrAnak" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaDrAnak" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnDrAnak" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label36" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdAsistenAnestesia2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaAsistenAnestesia2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnAsistenAnestesia2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdPenataAnestesi" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaPenataAnestesi" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnPenataAnestesi" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label27" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdBidan1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaBidan1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnBidan1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label24" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdPrResus" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaPrResus" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnPrResus" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdDokAnak" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaDokAnak" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDokAnak" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label29" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdBidan2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaBidan2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnBidan2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label25" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdOnloop1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaOnloop1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnOnloop1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdDokPendamping" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaDokPendamping" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDokPendamping" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="label30" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdBidan3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaBidan3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnBidan3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label31" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdOnloop2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaOnloop2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnOnloop2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdPerawatOrBidan" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaPerawatOrBidan" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnPerawatOrBidan" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="label28" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdPerawatLuar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaPerawatLuar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnPerawatLuar" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label32" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdOnloop3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaOnloop3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnOnloop3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="label23" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdInstrumen" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaInstrumen" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnInstrumen" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label37" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdOnloop4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaOnloop4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnOnloop4" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="label33" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdPjAnak" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaPjAnak" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnPjAnak" min="-2" max="-2" attributes="0"/>
-                                  <Component id="label38" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdOnloop5" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaOnloop5" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnOnloop5" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="label34" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtKdDrUmum" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtNamaDrUmum" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnDrUmum" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="29" max="32767" attributes="0"/>
+                              <EmptySpace pref="149" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -665,35 +461,32 @@
                     </Component>
                     <Component class="widget.Label" name="label14">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Operator 1 :"/>
+                        <Property name="text" type="java.lang.String" value="Dokter Operator :"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[70, 23]"/>
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.TextBox" name="txtKdOperator1">
+                    <Component class="widget.TextBox" name="txtKdDokOperator">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[80, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtKdOperator1ActionPerformed"/>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdOperator1KeyPressed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtKdDokOperatorActionPerformed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdDokOperatorKeyPressed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.TextBox" name="txtNamaOperator1">
+                    <Component class="widget.TextBox" name="txtNamaDokOperator">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[207, 23]"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNamaOperator1ActionPerformed"/>
-                      </Events>
                     </Component>
-                    <Component class="widget.Button" name="btnOperator1">
+                    <Component class="widget.Button" name="btnDokOperator">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/190.png"/>
@@ -705,7 +498,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOperator1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDokOperatorActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="widget.Label" name="jLabel4">
@@ -723,66 +516,25 @@
                         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtJenisAnasthesiaKeyPressed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.Label" name="label17">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ast. Operator 1 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdAsistenOperator1">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdAsistenOperator1KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaAsistenOperator1">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnAsistenOperator1">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsistenOperator1ActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Component class="widget.Label" name="label19">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Operator 2 :"/>
+                        <Property name="text" type="java.lang.String" value="Dokter yg Merawat :"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[70, 23]"/>
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.TextBox" name="txtKdOperator2">
+                    <Component class="widget.TextBox" name="txtKdDokMerawat">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[80, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdOperator2KeyPressed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdDokMerawatKeyPressed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.TextBox" name="txtNamaOperator2">
+                    <Component class="widget.TextBox" name="txtNamaDokMerawat">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -790,7 +542,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.Button" name="btnOperator2">
+                    <Component class="widget.Button" name="btnDokMerawat">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/190.png"/>
@@ -802,28 +554,29 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOperator2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDokMerawatActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="widget.Label" name="label20">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Operator 3 :"/>
+                        <Property name="text" type="java.lang.String" value="Ass Dokter Operator :"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[70, 23]"/>
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.TextBox" name="txtKdOperator3">
+                    <Component class="widget.TextBox" name="txtKdAssDokOperator">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[80, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdOperator3KeyPressed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtKdAssDokOperatorActionPerformed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdAssDokOperatorKeyPressed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.TextBox" name="txtNamaOperator3">
+                    <Component class="widget.TextBox" name="txtNamaAssDokOperator">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -831,7 +584,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.Button" name="btnOperator3">
+                    <Component class="widget.Button" name="btnAssDokOperator">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/190.png"/>
@@ -843,28 +596,28 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOperator3ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAssDokOperatorActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="widget.Label" name="label21">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="dr Anestesi :"/>
+                        <Property name="text" type="java.lang.String" value="Dokter Anestesi :"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[70, 23]"/>
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.TextBox" name="txtKdAnestesia">
+                    <Component class="widget.TextBox" name="txtKdDokAnestesi">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[80, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdAnestesiaKeyPressed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdDokAnestesiKeyPressed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.TextBox" name="txtNamaAnestesia">
+                    <Component class="widget.TextBox" name="txtNamaDokAnestesi">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -872,7 +625,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.Button" name="btnAnastesi">
+                    <Component class="widget.Button" name="btnDokAnestesi">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/190.png"/>
@@ -884,28 +637,28 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnastesiActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDokAnestesiActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="widget.Label" name="label22">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="dr Anak :"/>
+                        <Property name="text" type="java.lang.String" value="Penata Anestesi :"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[70, 23]"/>
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.TextBox" name="txtKdDrAnak">
+                    <Component class="widget.TextBox" name="txtKdPenataAnestesi">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[80, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdDrAnakKeyPressed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdPenataAnestesiKeyPressed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.TextBox" name="txtNamaDrAnak">
+                    <Component class="widget.TextBox" name="txtNamaPenataAnestesi">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -913,7 +666,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.Button" name="btnDrAnak">
+                    <Component class="widget.Button" name="btnPenataAnestesi">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/190.png"/>
@@ -925,192 +678,28 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDrAnakActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Button" name="btnAsistenOperator2">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsistenOperator2ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaAsistenOperator2">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdAsistenOperator2">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdAsistenOperator2KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label18">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ast. Operator 2 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnInstrumen">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInstrumenActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaInstrumen">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdInstrumen">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdInstrumenKeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label23">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Instrumen :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnPrResus">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrResusActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaPrResus">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdPrResus">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdPrResusKeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label24">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Prw.Resusitasi :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Label" name="label26">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ast. Anestesi 1 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdAsistenAnestesia1">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdAsistenAnestesia1KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaAsistenAnestesia1">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnAsistenAnestesia1">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsistenAnestesia1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPenataAnestesiActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="widget.Label" name="label27">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Bidan 1 :"/>
+                        <Property name="text" type="java.lang.String" value="Dokter Anak :"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[70, 23]"/>
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.TextBox" name="txtKdBidan1">
+                    <Component class="widget.TextBox" name="txtKdDokAnak">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[80, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdBidan1KeyPressed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdDokAnakKeyPressed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.TextBox" name="txtNamaBidan1">
+                    <Component class="widget.TextBox" name="txtNamaDokAnak">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1118,7 +707,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.Button" name="btnBidan1">
+                    <Component class="widget.Button" name="btnDokAnak">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/190.png"/>
@@ -1130,36 +719,10 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBidan1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDokAnakActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.Label" name="label28">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Prwat Luar :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdPerawatLuar">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdPerawatLuarKeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaPerawatLuar">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnPerawatLuar">
+                    <Component class="widget.Button" name="btnDokPendamping">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/190.png"/>
@@ -1171,25 +734,10 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPerawatLuarActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDokPendampingActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.Button" name="btnBidan2">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBidan2ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaBidan2">
+                    <Component class="widget.TextBox" name="txtNamaDokPendamping">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1197,19 +745,19 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.TextBox" name="txtKdBidan2">
+                    <Component class="widget.TextBox" name="txtKdDokPendamping">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[80, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdBidan2KeyPressed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdDokPendampingKeyPressed"/>
                       </Events>
                     </Component>
                     <Component class="widget.Label" name="label29">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Bidan 2 :"/>
+                        <Property name="text" type="java.lang.String" value="Dokter Pendamping :"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[70, 23]"/>
                         </Property>
@@ -1217,23 +765,23 @@
                     </Component>
                     <Component class="widget.Label" name="label30">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Bidan 3 :"/>
+                        <Property name="text" type="java.lang.String" value="Perawat/Bidan :"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[70, 23]"/>
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.TextBox" name="txtKdBidan3">
+                    <Component class="widget.TextBox" name="txtKdPerawatOrBidan">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[80, 23]"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdBidan3KeyPressed"/>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdPerawatOrBidanKeyPressed"/>
                       </Events>
                     </Component>
-                    <Component class="widget.TextBox" name="txtNamaBidan3">
+                    <Component class="widget.TextBox" name="txtNamaPerawatOrBidan">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1241,7 +789,7 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="widget.Button" name="btnBidan3">
+                    <Component class="widget.Button" name="btnPerawatOrBidan">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/picture/190.png"/>
@@ -1253,377 +801,8 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBidan3ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPerawatOrBidanActionPerformed"/>
                       </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label25">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Onloop 1 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdOnloop1">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdOnloop1KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaOnloop1">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnOnloop1">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOnloop1ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Button" name="btnOnloop2">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOnloop2ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaOnloop2">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdOnloop2">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdOnloop2KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label31">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Onloop 2 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Label" name="label32">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Onloop 3 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnOnloop3">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOnloop3ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaOnloop3">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdOnloop3">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdOnloop3KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label33">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="dr Pj. Anak :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdPjAnak">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdPjAnakKeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaPjAnak">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnPjAnak">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPjAnakActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label34">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="dr Umum :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdDrUmum">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdDrUmumKeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaDrUmum">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnDrUmum">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDrUmumActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label35">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ast. Operator 3 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdAsistenOperator3">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdAsistenOperator3KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaAsistenOperator3">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnAsistenOperator3">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsistenOperator3ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label36">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Ast. Anestesi 2 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdAsistenAnestesia2">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdAsistenAnestesia2KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaAsistenAnestesia2">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnAsistenAnestesia2">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAsistenAnestesia2ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label37">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Onloop 4 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdOnloop4">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdOnloop4KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaOnloop4">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.Button" name="btnOnloop4">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOnloop4ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Button" name="btnOnloop5">
-                      <Properties>
-                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/picture/190.png"/>
-                        </Property>
-                        <Property name="mnemonic" type="int" value="50"/>
-                        <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[28, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOnloop5ActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtNamaOnloop5">
-                      <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[207, 23]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="widget.TextBox" name="txtKdOnloop5">
-                      <Properties>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 23]"/>
-                        </Property>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtKdOnloop5KeyPressed"/>
-                      </Events>
-                    </Component>
-                    <Component class="widget.Label" name="label38">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Onloop 5 :"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[70, 23]"/>
-                        </Property>
-                      </Properties>
                     </Component>
                     <Component class="widget.Label" name="jLabel9">
                       <Properties>

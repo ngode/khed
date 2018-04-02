@@ -311,6 +311,11 @@ prepareStatement}.
 
         return this;
     }
+    
+    public GStatement setStringLike(String name, String value)
+    {
+        return setString(name, "%" + value + "%");
+    }
 
     public GStatement setString(int i, String val)
     {
