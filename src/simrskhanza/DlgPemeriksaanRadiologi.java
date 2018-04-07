@@ -3483,7 +3483,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
     private void btnCariNonRmActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCariNonRmActionPerformed
     {//GEN-HEADEREND:event_btnCariNonRmActionPerformed
-        // TODO add your handling code here:
+        tampilNonRm();
     }//GEN-LAST:event_btnCariNonRmActionPerformed
 
     private void btnCariNonRmKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_btnCariNonRmKeyPressed
