@@ -3236,11 +3236,12 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
             }
             
             HashMap<String, String> mMain = new GQuery()
-                    .a("SELECT periksa_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.umur, petugas.nama,")
+                    .a("SELECT periksa_lab.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.umur, petugas.nama,pasien.alamat,nm_poli,")
                     .a("    DATE_FORMAT(periksa_lab.tgl_periksa,'%d-%m-%Y') as tgl_periksa, periksa_lab.jam,")
                     .a("    dokter_perujuk.nm_dokter AS nm_dokter_perujuk, dokter_pj.nm_dokter AS nm_dokter_pj, pasien.alamat, DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir")
                     .a("FROM periksa_lab")
                     .a("JOIN reg_periksa ON reg_periksa.no_rawat = periksa_lab.no_rawat")
+                    .a("JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
                     .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
                     .a("JOIN petugas ON petugas.nip = periksa_lab.nip")
                     .a("JOIN dokter dokter_perujuk ON dokter_perujuk.kd_dokter = periksa_lab.dokter_perujuk")
@@ -3290,7 +3291,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                 
                 Valid.panggilUrl("billing/LaporanBiayaLab.php?norm=" + mMain.get("no_rkm_medis") + "&pasien=" + mMain.get("nm_pasien").replaceAll(" ", "_")
                         + "&tanggal=" + mMain.get("tgl_periksa") + "&jam=" + mMain.get("jam") + "&pjlab=" + mMain.get("nm_dokter_pj").replaceAll(" ", "_")
-                        + "&petugas=" + mMain.get("nama").replaceAll(" ", "_") + "&kasir=" + Sequel.cariIsi("select nama from pegawai where nik=?", var.getkode()));
+                        + "&petugas=" + mMain.get("nama").replaceAll(" ", "_") + "&kasir=" + Sequel.cariIsi("select nama from pegawai where nik=?", var.getkode()) + "&alamat=" + mMain.get("alamat").replaceAll(" ", "_") + "&poli=" + mMain.get("nm_poli").replaceAll(" ", "_"));
                 
                 Sequel.AutoComitTrue();
             }

@@ -36,6 +36,16 @@ public class GRow
     }
     
     // Get
+    public int getCount()
+    {
+        return list.size();
+    }
+    
+    public Object[] toObjectArray()
+    {
+        return list.toArray();
+    }
+    
     public Object get(String key)
     {
         if (!map.containsKey(key))

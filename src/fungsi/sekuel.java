@@ -68,6 +68,13 @@ public final class sekuel {
     private Date tanggal=new Date();
     private boolean bool=false;
     private DecimalFormat df2 = new DecimalFormat("####");
+    private koneksiDB konek;
+
+    public koneksiDB Konek() {
+        konek = new koneksiDB();
+        konek.condb();
+        return konek;
+    }
     public sekuel(){
         super();
     }
@@ -547,6 +554,25 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }    
     }
+    public void mengedit3(String table,String acuan_field,String update,int i,String[] a){
+        try {
+            ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{
+                for(angka=1;angka<=i;angka++){
+                    ps.setString(angka,a[angka-1]);
+                } 
+                ps.executeUpdate();       
+             }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }    
+    }    
     
     public boolean mengedittf(String table,String acuan_field,String update,int i,String[] a){
         bool=true;
@@ -1133,6 +1159,33 @@ public final class sekuel {
             
         return angka;
     }
+
+    public Integer cariIntegerCount(String sql){
+        angka=0;
+        try {
+            ps=connect.prepareStatement(sql);
+            try{            
+                rs=ps.executeQuery();            
+                while(rs.next()){
+                    angka=angka+rs.getInt(1);
+                }
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+            
+        return angka;
+    }    
     
     public Integer cariInteger2(String sql){
         angka=0;
@@ -1694,5 +1747,20 @@ public final class sekuel {
         int i = GConvert.parseInt(s) + 1;
 
         return String.valueOf(i);
+    }
+    
+    public boolean executeQuery(String query, boolean status){
+        try {
+            konek.condb();
+        ps = konek.condb().prepareStatement(query);
+        if(status){
+            rs = ps.executeQuery();
+        }else{
+            ps.executeUpdate();
+        }
+        return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 }

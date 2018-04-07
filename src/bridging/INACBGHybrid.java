@@ -11,16 +11,14 @@
 
 package bridging;
 
+import fungsi.koneksiDB;
 import fungsi.validasi;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -48,7 +46,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import simrskhanza.DlgHybrid;
 
 /**
  *
@@ -150,12 +147,12 @@ public class INACBGHybrid extends javax.swing.JDialog {
                         if (newState == State.SUCCEEDED) {
                             try {
                                 prop.loadFromXML(new FileInputStream("setting/database.xml"));
-                                if(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("inacbg/pages")){
+                                if(engine.getLocation().replaceAll("http://"+koneksiDB.HOST()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("inacbg/pages")){
                                     setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                    Valid.panggilUrl(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/",""));
+                                    Valid.panggilUrl(engine.getLocation().replaceAll("http://"+koneksiDB.HOST()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/",""));
                                     engine.executeScript("history.back()");
                                     setCursor(Cursor.getDefaultCursor());
-                                }else if(engine.getLocation().replaceAll("http://"+prop.getProperty("HOST")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("Keluar")){
+                                }else if(engine.getLocation().replaceAll("http://"+koneksiDB.HOST()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("Keluar")){
                                     dispose();    
                                 }
                             } catch (Exception ex) {
@@ -171,28 +168,6 @@ public class INACBGHybrid extends javax.swing.JDialog {
     }
  
     public void loadURL(String url) {  
-        
-        Properties prop = new Properties();
-        try
-        {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(DlgHybrid.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        String portApache = prop.getProperty("PORTAPACHE");
-        if (portApache == null || portApache.isEmpty())
-            portApache = "";
-        else
-            portApache = ":" + portApache;
-        
-        String host = "http://"+prop.getProperty("HOST") + "/";
-        String hostEd = "http://"+prop.getProperty("HOST") + portApache + "/";
-        
-        final String urlEd = url.replace(host, hostEd);
-        
         try {
             createScene();
         } catch (Exception e) {
@@ -200,9 +175,9 @@ public class INACBGHybrid extends javax.swing.JDialog {
         
         Platform.runLater(() -> {
             try {
-                engine.load(urlEd);
+                engine.load(url);
             }catch (Exception exception) {
-                engine.load(urlEd);
+                engine.load(url);
             }
         });        
     }    
@@ -293,6 +268,6 @@ public class INACBGHybrid extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void setJudul(String Judul){
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(90,120,80))); // NOI18N
     }
 }

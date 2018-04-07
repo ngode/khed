@@ -3,16 +3,17 @@
 <properties>
     <comment>KhanzaHMS</comment>
     <entry key="HOST">localhost</entry>
-    <entry key="DATABASE">sik2</entry>
+    <entry key="DATABASE">sik3</entry>
     <entry key="PORT">3306</entry>
     <entry key="PORTAPACHE"></entry>
     <entry key="USER">root</entry>
     <entry key="PAS"></entry>
-    <entry key="CARICEPAT">aktif</entry>
-    <entry key="HYBRIDWEB">webapps</entry>
+    <entry key="CARICEPAT">noaktif</entry>
+    <entry key="HYBRIDWEB">webappsau</entry>
+    <entry key="PORTWEB">80</entry>
     <entry key="ANTRIAN">sender</entry>
     <entry key="MENUTRANSPARAN">yes</entry>
-    <entry key="URLAPIBPJS">http://dvlp.bpjs-kesehatan.go.id:8081/devWslokalrest</entry>
+    <entry key="URLAPIBPJS">http://dvlp.bpjs-kesehatan.go.id:8081/VClaim-rest</entry>
     <entry key="SECRETKEYAPIBPJS">4mO611AC5A</entry>
     <entry key="CONSIDAPIBPJS">15486</entry>
     <entry key="URLAPIAPLICARE">http://dvlp.bpjs-kesehatan.go.id:8888/aplicaresws</entry>
@@ -25,5 +26,5 @@
     <entry key="IPPRINTERTRACER">10.50.150.57/label2</entry>
     <entry key="URLAPIINHEALTH">http://dummy.inhealth.co.id/pelkesws2</entry>
     <entry key="TOKENINHEALTH">inh_aba40329b828c943e91f2e5c7f9f1f1b</entry>
-    <entry key="PEMBULATANHARGAOBAT">no</entry>
+    <entry key="PEMBULATANHARGAOBAT">yes</entry>
 </properties>

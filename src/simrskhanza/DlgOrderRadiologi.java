@@ -214,9 +214,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
             });
         }
 
-        ChkJln.setSelected(true);
-        jam();
-
         jPopupMenu1.addPopupMenuListener(new PopupMenuListener()
         {
             @Override
@@ -546,15 +543,8 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
         jLabel12 = new widget.Label();
         txtKdKamar = new widget.TextBox();
         txtNamaKamar = new widget.TextBox();
-        Tanggal = new widget.Tanggal();
-        CmbJam = new widget.ComboBox();
-        CmbMenit = new widget.ComboBox();
-        CmbDetik = new widget.ComboBox();
-        ChkJln = new widget.CekBox();
-        jLabel16 = new widget.Label();
         txtKdDokter = new widget.TextBox();
         txtNamaDokter = new widget.TextBox();
-        jLabel15 = new widget.Label();
         jLabel7 = new widget.Label();
         jLabel13 = new widget.Label();
         txtKdPetugas = new widget.TextBox();
@@ -775,7 +765,7 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
 
         FormInput.setName("FormInput"); // NOI18N
         FormInput.setOpaque(false);
-        FormInput.setPreferredSize(new java.awt.Dimension(560, 160));
+        FormInput.setPreferredSize(new java.awt.Dimension(560, 140));
         FormInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -802,7 +792,7 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
         FormInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
 
         PanelInput.setName("PanelInput"); // NOI18N
-        PanelInput.setPreferredSize(new java.awt.Dimension(560, 130));
+        PanelInput.setPreferredSize(new java.awt.Dimension(560, 110));
         PanelInput.setLayout(null);
 
         jLabel3.setText("No.Rawat :");
@@ -848,65 +838,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
         PanelInput.add(txtNamaKamar);
         txtNamaKamar.setBounds(550, 70, 230, 23);
 
-        Tanggal.setEditable(false);
-        Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-12-2017" }));
-        Tanggal.setDisplayFormat("dd-MM-yyyy");
-        Tanggal.setName("Tanggal"); // NOI18N
-        Tanggal.setOpaque(false);
-        Tanggal.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                TanggalKeyPressed(evt);
-            }
-        });
-        PanelInput.add(Tanggal);
-        Tanggal.setBounds(470, 100, 90, 23);
-
-        CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        CmbJam.setName("CmbJam"); // NOI18N
-        CmbJam.setOpaque(false);
-        PanelInput.add(CmbJam);
-        CmbJam.setBounds(620, 100, 42, 23);
-
-        CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        CmbMenit.setName("CmbMenit"); // NOI18N
-        CmbMenit.setOpaque(false);
-        PanelInput.add(CmbMenit);
-        CmbMenit.setBounds(665, 100, 42, 23);
-
-        CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        CmbDetik.setName("CmbDetik"); // NOI18N
-        CmbDetik.setOpaque(false);
-        PanelInput.add(CmbDetik);
-        CmbDetik.setBounds(710, 100, 42, 23);
-
-        ChkJln.setBackground(new java.awt.Color(235, 255, 235));
-        ChkJln.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(195, 215, 195)));
-        ChkJln.setForeground(new java.awt.Color(153, 0, 51));
-        ChkJln.setSelected(true);
-        ChkJln.setBorderPainted(true);
-        ChkJln.setBorderPaintedFlat(true);
-        ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ChkJln.setName("ChkJln"); // NOI18N
-        ChkJln.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ChkJlnActionPerformed(evt);
-            }
-        });
-        PanelInput.add(ChkJln);
-        ChkJln.setBounds(755, 100, 23, 23);
-
-        jLabel16.setText("Jam :");
-        jLabel16.setName("jLabel16"); // NOI18N
-        PanelInput.add(jLabel16);
-        jLabel16.setBounds(530, 100, 78, 23);
-
         txtKdDokter.setEditable(false);
         txtKdDokter.setName("txtKdDokter"); // NOI18N
         PanelInput.add(txtKdDokter);
@@ -924,11 +855,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
         });
         PanelInput.add(txtNamaDokter);
         txtNamaDokter.setBounds(185, 70, 210, 23);
-
-        jLabel15.setText("Tgl.Periksa :");
-        jLabel15.setName("jLabel15"); // NOI18N
-        PanelInput.add(jLabel15);
-        jLabel15.setBounds(380, 100, 87, 23);
 
         jLabel7.setText("Dokter P.J. :");
         jLabel7.setName("jLabel7"); // NOI18N
@@ -1554,14 +1480,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNamaDokterActionPerformed
 
-    private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkJlnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ChkJlnActionPerformed
-
-    private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
-        Valid.pindah(evt, txtKdDokter, txtCariGroup);
-    }//GEN-LAST:event_TanggalKeyPressed
-
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
         isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
@@ -1750,7 +1668,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
             {
                 if (isEdit)
                 {
-                    ChkJln.setSelected(false);
                     GQuery.setAutoCommit(false);
 
                     boolean success = true;
@@ -1758,14 +1675,10 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
                     success &= new GQuery()
                             .a("UPDATE pemeriksaan_radiologi SET")
                             .a("nip = {nip},")
-                            .a("tgl_periksa = {tgl_periksa},")
-                            .a("jam = {jam},")
                             .a("kd_dokter_perujuk = {kd_dokter_perujuk},")
                             .a("kd_dokter_pj = {kd_dokter_pj}")
                             .a("WHERE kd_periksa = {kd_periksa}")
                             .set("nip", txtKdPetugas.getText())
-                            .set("tgl_periksa", Valid.SetTgl(Tanggal.getSelectedItem().toString()))
-                            .set("jam", CmbJam.getSelectedItem() + ":" + CmbMenit.getSelectedItem() + ":" + CmbDetik.getSelectedItem())
                             .set("kd_dokter_perujuk", txtKdDokter.getText())
                             .set("kd_dokter_pj", txtKdDokterPj.getText())
                             .set("kd_periksa", kdPeriksa)
@@ -1799,7 +1712,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
                     }
 
                     GQuery.setAutoCommit(true);
-                    ChkJln.setSelected(true);
 
                     if (success)
                     {
@@ -1813,7 +1725,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
                 }
                 else
                 {
-                    ChkJln.setSelected(false);
                     Sequel.AutoComitFalse();
 
                     // Ambil no otomatis
@@ -1821,13 +1732,11 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
                     boolean success = true;
 
                     // Menyimpan ke table periksa hd (UTAMA)
-                    success &= Sequel.menyimpantf2("pemeriksaan_radiologi", "?,?,?,?,?,NULL,NULL,?,?,?,?", "-", 9, new String[]
+                    success &= Sequel.menyimpantf2("pemeriksaan_radiologi", "?,?,?,NULL,NULL,NULL,NULL,?,?,?,?", "-", 7, new String[]
                     {
                         kdPeriksa,
                         txtNoRw.getText(),
                         txtKdPetugas.getText(),
-                        Valid.SetTgl(Tanggal.getSelectedItem().toString()),
-                        CmbJam.getSelectedItem() + ":" + CmbMenit.getSelectedItem() + ":" + CmbDetik.getSelectedItem(),
                         txtKdDokter.getText(),
                         txtKdDokterPj.getText(),
                         status,
@@ -1857,7 +1766,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
                     }
 
                     Sequel.AutoComitTrue();
-                    ChkJln.setSelected(true);
 
                     if (success)
                     {
@@ -2004,10 +1912,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
     private widget.CekBox ChkInput;
-    private widget.CekBox ChkJln;
-    private widget.ComboBox CmbDetik;
-    private widget.ComboBox CmbJam;
-    private widget.ComboBox CmbMenit;
     private javax.swing.JPanel FormInput;
     private widget.TextBox Jk;
     private widget.TextBox NmDokterPj;
@@ -2017,7 +1921,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
     private widget.ScrollPane Scroll2;
     private widget.ScrollPane Scroll3;
     private widget.ScrollPane Scroll4;
-    private widget.Tanggal Tanggal;
     private widget.TextBox Umur;
     private widget.Button btnAllGroup;
     private widget.Button btnAllPemeriksaan;
@@ -2031,8 +1934,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
     private widget.Label jLabel10;
     private widget.Label jLabel12;
     private widget.Label jLabel13;
-    private widget.Label jLabel15;
-    private widget.Label jLabel16;
     private widget.Label jLabel3;
     private widget.Label jLabel7;
     private widget.Label jLabel9;
@@ -2041,7 +1942,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
     private widget.Label label10;
     private widget.Label label11;
     private javax.swing.JMenuItem menuHapus;
@@ -2364,71 +2264,6 @@ public final class DlgOrderRadiologi extends javax.swing.JDialog
         Sequel.cariIsi("select jk from pasien where no_rkm_medis=? ", Jk, txtNoRM.getText());
         Sequel.cariIsi("select umur from pasien where no_rkm_medis=?", Umur, txtNoRM.getText());
         Sequel.cariIsi("select alamat from pasien where no_rkm_medis=? ", Alamat, txtNoRM.getText());
-    }
-
-    private void jam()
-    {
-        ActionListener taskPerformer = new ActionListener()
-        {
-            private int nilai_jam;
-            private int nilai_menit;
-            private int nilai_detik;
-
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                String nol_jam = "";
-                String nol_menit = "";
-                String nol_detik = "";
-                // Membuat Date
-                //Date dt = new Date();
-                Date now = Calendar.getInstance().getTime();
-
-                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
-                if (ChkJln.isSelected() == true)
-                {
-                    nilai_jam = now.getHours();
-                    nilai_menit = now.getMinutes();
-                    nilai_detik = now.getSeconds();
-                }
-                else if (ChkJln.isSelected() == false)
-                {
-                    nilai_jam = CmbJam.getSelectedIndex();
-                    nilai_menit = CmbMenit.getSelectedIndex();
-                    nilai_detik = CmbDetik.getSelectedIndex();
-                }
-
-                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_jam <= 9)
-                {
-                    // Tambahkan "0" didepannya
-                    nol_jam = "0";
-                }
-                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_menit <= 9)
-                {
-                    // Tambahkan "0" didepannya
-                    nol_menit = "0";
-                }
-                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
-                if (nilai_detik <= 9)
-                {
-                    // Tambahkan "0" didepannya
-                    nol_detik = "0";
-                }
-                // Membuat String JAM, MENIT, DETIK
-                String jam = nol_jam + Integer.toString(nilai_jam);
-                String menit = nol_menit + Integer.toString(nilai_menit);
-                String detik = nol_detik + Integer.toString(nilai_detik);
-                // Menampilkan pada Layar
-                //tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
-                CmbJam.setSelectedItem(jam);
-                CmbMenit.setSelectedItem(menit);
-                CmbDetik.setSelectedItem(detik);
-            }
-        };
-        // Timer
-        new Timer(1000, taskPerformer).start();
     }
 
     public void setNoRm(String norwt, String posisi)

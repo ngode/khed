@@ -21,6 +21,7 @@ public final class koneksiDB {
     private static final Properties prop = new Properties();  
     private static final MysqlDataSource dataSource=new MysqlDataSource();
     private static String caricepat="";
+    private static String host="";
     public static Connection condb(){      
         if(connection == null){
             try{
@@ -68,5 +69,14 @@ public final class koneksiDB {
         }
         return caricepat;
     }
+    public static String HOST(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            host=prop.getProperty("HOST");
+        }catch(Exception e){
+            host="localhost"; 
+        }
+        return host;
+    }   
     
 }

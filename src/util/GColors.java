@@ -17,6 +17,11 @@ public class GColors
     public static Color Biru15 = ColorUtil.hex2Rgb("#D9EAFD");
     public static Color Biru40 = ColorUtil.hex2Rgb("#C1E0FF");
     public static Color Biru50 = ColorUtil.hex2Rgb("#A8D3FF");
+    public static Color Biru60 = ColorUtil.hex2Rgb("#82C0FF");
+    public static Color Biru70 = ColorUtil.hex2Rgb("#2F97FF");
     public static Color Biru80 = ColorUtil.hex2Rgb("#0377A3");
     public static Color Biru90 = ColorUtil.hex2Rgb("#023860");
+    
+    public static Color Kuning = new Color(255, 234, 38);
+    public static Color Abu = ColorUtil.hex2Rgb("#829AAC");
 }
