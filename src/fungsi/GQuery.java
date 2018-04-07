@@ -108,6 +108,8 @@ public class GQuery
             qCom = qCom.replace("{" + pair.getKey() + "}", pair.getValue());
         }
         
+
+
         return qCom;
     }
     

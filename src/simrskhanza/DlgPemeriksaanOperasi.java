@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
@@ -64,6 +65,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
     DlgCariGroupOperasi dlgGroup = new DlgCariGroupOperasi(null, false);
     DlgCariKategoriOperasi dlgKategori = new DlgCariKategoriOperasi(null, false);
     DlgCariDetailOperasi dlgDetail = new DlgCariDetailOperasi(null, false);
+    DlgCariNoRawat2 dlgCariNoRawat = new DlgCariNoRawat2(null, false);
     private DlgCariPetugas dlgPetugas = new DlgCariPetugas(null, false);
     private DlgCariDokter dlgDokter = new DlgCariDokter(null, false);
 
@@ -105,6 +107,18 @@ public class DlgPemeriksaanOperasi extends BaseDialog
     // Init method
     private void addWindowClosedListener()
     {
+        dlgCariNoRawat.addWindowClosedListener(() -> 
+        {
+            JTable table = dlgCariNoRawat.getTable();
+            
+            if (table.getSelectedRow() != -1)
+            {
+                txtNoRawat.setText(table.getValueAt(table.getSelectedRow(), 0).toString());
+                txtNoRm.setText(table.getValueAt(table.getSelectedRow(), 1).toString());
+                txtNamaPasien.setText(table.getValueAt(table.getSelectedRow(), 2).toString());
+            }
+        });
+        
         dlgGroup.addWindowClosedListener(() ->
         {
             if (dlgGroup.getTable().getSelectedRow() != -1)
@@ -444,6 +458,13 @@ public class DlgPemeriksaanOperasi extends BaseDialog
     }
     
     // Methods ==========
+    private void cariNoRawat()
+    {
+        dlgCariNoRawat.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        dlgCariNoRawat.setLocationRelativeTo(internalFrame1);
+        dlgCariNoRawat.setVisible(true);
+    }
+    
     private void cariGroup()
     {
         dlgGroup.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
@@ -1147,8 +1168,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         internalFrame1 = new widget.InternalFrame();
         tabPane = new widget.TabPane();
@@ -1270,6 +1290,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         cmbMnt = new widget.ComboBox();
         cmbDtk = new widget.ComboBox();
         ChkJln = new widget.CekBox();
+        btnCariNoRawat = new widget.Button();
         pnlAction = new widget.panelisi();
         btnSimpan = new widget.Button();
         btnBaru = new widget.Button();
@@ -1323,10 +1344,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnCariKategori.setMnemonic('4');
         btnCariKategori.setToolTipText("ALt+4");
         btnCariKategori.setPreferredSize(new java.awt.Dimension(35, 22));
-        btnCariKategori.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnCariKategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariKategoriActionPerformed(evt);
             }
         });
@@ -1337,33 +1356,42 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnCariGroup.setMnemonic('4');
         btnCariGroup.setToolTipText("ALt+4");
         btnCariGroup.setPreferredSize(new java.awt.Dimension(35, 22));
-        btnCariGroup.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnCariGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariGroupActionPerformed(evt);
             }
         });
 
-        txtNoRawat.setEditable(false);
+        txtNoRawat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoRawatKeyPressed(evt);
+            }
+        });
 
         btnCariDetail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnCariDetail.setMnemonic('4');
         btnCariDetail.setToolTipText("ALt+4");
         btnCariDetail.setPreferredSize(new java.awt.Dimension(35, 22));
-        btnCariDetail.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnCariDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariDetailActionPerformed(evt);
             }
         });
 
-        txtNoRm.setEditable(false);
+        txtNoRm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNoRmKeyPressed(evt);
+            }
+        });
 
         txtNamaDetail.setEditable(false);
 
         txtNamaPasien.setEditable(false);
+        txtNamaPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNamaPasienKeyPressed(evt);
+            }
+        });
 
         txtKdDetail.setEditable(false);
 
@@ -1379,25 +1407,31 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label14.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdOperator1.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdOperator1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdOperator1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKdOperator1ActionPerformed(evt);
+            }
+        });
+        txtKdOperator1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdOperator1KeyPressed(evt);
             }
         });
 
         txtNamaOperator1.setEditable(false);
         txtNamaOperator1.setPreferredSize(new java.awt.Dimension(207, 23));
+        txtNamaOperator1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNamaOperator1ActionPerformed(evt);
+            }
+        });
 
         btnOperator1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnOperator1.setMnemonic('2');
         btnOperator1.setToolTipText("Alt+2");
         btnOperator1.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOperator1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOperator1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOperator1ActionPerformed(evt);
             }
         });
@@ -1405,10 +1439,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         jLabel4.setText("Jenis Anasthesi :");
 
         txtJenisAnasthesia.setHighlighter(null);
-        txtJenisAnasthesia.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtJenisAnasthesia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtJenisAnasthesiaKeyPressed(evt);
             }
         });
@@ -1417,10 +1449,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label17.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdAsistenOperator1.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdAsistenOperator1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdAsistenOperator1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdAsistenOperator1KeyPressed(evt);
             }
         });
@@ -1432,10 +1462,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnAsistenOperator1.setMnemonic('2');
         btnAsistenOperator1.setToolTipText("Alt+2");
         btnAsistenOperator1.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsistenOperator1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAsistenOperator1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsistenOperator1ActionPerformed(evt);
             }
         });
@@ -1444,10 +1472,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label19.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdOperator2.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdOperator2.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdOperator2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdOperator2KeyPressed(evt);
             }
         });
@@ -1459,10 +1485,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnOperator2.setMnemonic('2');
         btnOperator2.setToolTipText("Alt+2");
         btnOperator2.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOperator2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOperator2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOperator2ActionPerformed(evt);
             }
         });
@@ -1471,10 +1495,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label20.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdOperator3.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdOperator3.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdOperator3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdOperator3KeyPressed(evt);
             }
         });
@@ -1486,10 +1508,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnOperator3.setMnemonic('2');
         btnOperator3.setToolTipText("Alt+2");
         btnOperator3.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOperator3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOperator3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOperator3ActionPerformed(evt);
             }
         });
@@ -1498,10 +1518,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label21.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdAnestesia.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdAnestesia.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdAnestesia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdAnestesiaKeyPressed(evt);
             }
         });
@@ -1513,10 +1531,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnAnastesi.setMnemonic('2');
         btnAnastesi.setToolTipText("Alt+2");
         btnAnastesi.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAnastesi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAnastesi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnastesiActionPerformed(evt);
             }
         });
@@ -1525,10 +1541,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label22.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdDrAnak.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdDrAnak.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdDrAnak.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdDrAnakKeyPressed(evt);
             }
         });
@@ -1540,10 +1554,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnDrAnak.setMnemonic('2');
         btnDrAnak.setToolTipText("Alt+2");
         btnDrAnak.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnDrAnak.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnDrAnak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDrAnakActionPerformed(evt);
             }
         });
@@ -1552,10 +1564,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnAsistenOperator2.setMnemonic('2');
         btnAsistenOperator2.setToolTipText("Alt+2");
         btnAsistenOperator2.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsistenOperator2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAsistenOperator2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsistenOperator2ActionPerformed(evt);
             }
         });
@@ -1564,10 +1574,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         txtNamaAsistenOperator2.setPreferredSize(new java.awt.Dimension(207, 23));
 
         txtKdAsistenOperator2.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdAsistenOperator2.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdAsistenOperator2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdAsistenOperator2KeyPressed(evt);
             }
         });
@@ -1579,10 +1587,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnInstrumen.setMnemonic('2');
         btnInstrumen.setToolTipText("Alt+2");
         btnInstrumen.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnInstrumen.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnInstrumen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInstrumenActionPerformed(evt);
             }
         });
@@ -1591,10 +1597,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         txtNamaInstrumen.setPreferredSize(new java.awt.Dimension(207, 23));
 
         txtKdInstrumen.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdInstrumen.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdInstrumen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdInstrumenKeyPressed(evt);
             }
         });
@@ -1606,10 +1610,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnPrResus.setMnemonic('2');
         btnPrResus.setToolTipText("Alt+2");
         btnPrResus.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPrResus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPrResus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrResusActionPerformed(evt);
             }
         });
@@ -1618,10 +1620,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         txtNamaPrResus.setPreferredSize(new java.awt.Dimension(207, 23));
 
         txtKdPrResus.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdPrResus.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdPrResus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdPrResusKeyPressed(evt);
             }
         });
@@ -1633,10 +1633,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label26.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdAsistenAnestesia1.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdAsistenAnestesia1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdAsistenAnestesia1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdAsistenAnestesia1KeyPressed(evt);
             }
         });
@@ -1648,10 +1646,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnAsistenAnestesia1.setMnemonic('2');
         btnAsistenAnestesia1.setToolTipText("Alt+2");
         btnAsistenAnestesia1.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsistenAnestesia1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAsistenAnestesia1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsistenAnestesia1ActionPerformed(evt);
             }
         });
@@ -1660,10 +1656,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label27.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdBidan1.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdBidan1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdBidan1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdBidan1KeyPressed(evt);
             }
         });
@@ -1675,10 +1669,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnBidan1.setMnemonic('2');
         btnBidan1.setToolTipText("Alt+2");
         btnBidan1.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnBidan1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBidan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBidan1ActionPerformed(evt);
             }
         });
@@ -1687,10 +1679,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label28.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdPerawatLuar.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdPerawatLuar.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdPerawatLuar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdPerawatLuarKeyPressed(evt);
             }
         });
@@ -1702,10 +1692,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnPerawatLuar.setMnemonic('2');
         btnPerawatLuar.setToolTipText("Alt+2");
         btnPerawatLuar.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPerawatLuar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPerawatLuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPerawatLuarActionPerformed(evt);
             }
         });
@@ -1714,10 +1702,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnBidan2.setMnemonic('2');
         btnBidan2.setToolTipText("Alt+2");
         btnBidan2.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnBidan2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBidan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBidan2ActionPerformed(evt);
             }
         });
@@ -1726,10 +1712,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         txtNamaBidan2.setPreferredSize(new java.awt.Dimension(207, 23));
 
         txtKdBidan2.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdBidan2.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdBidan2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdBidan2KeyPressed(evt);
             }
         });
@@ -1741,10 +1725,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label30.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdBidan3.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdBidan3.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdBidan3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdBidan3KeyPressed(evt);
             }
         });
@@ -1756,10 +1738,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnBidan3.setMnemonic('2');
         btnBidan3.setToolTipText("Alt+2");
         btnBidan3.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnBidan3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBidan3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBidan3ActionPerformed(evt);
             }
         });
@@ -1768,10 +1748,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label25.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdOnloop1.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdOnloop1.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdOnloop1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdOnloop1KeyPressed(evt);
             }
         });
@@ -1783,10 +1761,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnOnloop1.setMnemonic('2');
         btnOnloop1.setToolTipText("Alt+2");
         btnOnloop1.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOnloop1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOnloop1ActionPerformed(evt);
             }
         });
@@ -1795,10 +1771,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnOnloop2.setMnemonic('2');
         btnOnloop2.setToolTipText("Alt+2");
         btnOnloop2.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOnloop2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOnloop2ActionPerformed(evt);
             }
         });
@@ -1807,10 +1781,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         txtNamaOnloop2.setPreferredSize(new java.awt.Dimension(207, 23));
 
         txtKdOnloop2.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdOnloop2.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdOnloop2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdOnloop2KeyPressed(evt);
             }
         });
@@ -1825,10 +1797,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnOnloop3.setMnemonic('2');
         btnOnloop3.setToolTipText("Alt+2");
         btnOnloop3.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOnloop3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOnloop3ActionPerformed(evt);
             }
         });
@@ -1837,10 +1807,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         txtNamaOnloop3.setPreferredSize(new java.awt.Dimension(207, 23));
 
         txtKdOnloop3.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdOnloop3.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdOnloop3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdOnloop3KeyPressed(evt);
             }
         });
@@ -1849,10 +1817,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label33.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdPjAnak.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdPjAnak.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdPjAnak.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdPjAnakKeyPressed(evt);
             }
         });
@@ -1864,10 +1830,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnPjAnak.setMnemonic('2');
         btnPjAnak.setToolTipText("Alt+2");
         btnPjAnak.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnPjAnak.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPjAnak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPjAnakActionPerformed(evt);
             }
         });
@@ -1876,10 +1840,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label34.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdDrUmum.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdDrUmum.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdDrUmum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdDrUmumKeyPressed(evt);
             }
         });
@@ -1891,10 +1853,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnDrUmum.setMnemonic('2');
         btnDrUmum.setToolTipText("Alt+2");
         btnDrUmum.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnDrUmum.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnDrUmum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDrUmumActionPerformed(evt);
             }
         });
@@ -1903,10 +1863,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label35.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdAsistenOperator3.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdAsistenOperator3.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdAsistenOperator3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdAsistenOperator3KeyPressed(evt);
             }
         });
@@ -1918,10 +1876,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnAsistenOperator3.setMnemonic('2');
         btnAsistenOperator3.setToolTipText("Alt+2");
         btnAsistenOperator3.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsistenOperator3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAsistenOperator3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsistenOperator3ActionPerformed(evt);
             }
         });
@@ -1930,10 +1886,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label36.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdAsistenAnestesia2.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdAsistenAnestesia2.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdAsistenAnestesia2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdAsistenAnestesia2KeyPressed(evt);
             }
         });
@@ -1945,10 +1899,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnAsistenAnestesia2.setMnemonic('2');
         btnAsistenAnestesia2.setToolTipText("Alt+2");
         btnAsistenAnestesia2.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnAsistenAnestesia2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAsistenAnestesia2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAsistenAnestesia2ActionPerformed(evt);
             }
         });
@@ -1957,10 +1909,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         label37.setPreferredSize(new java.awt.Dimension(70, 23));
 
         txtKdOnloop4.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdOnloop4.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdOnloop4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdOnloop4KeyPressed(evt);
             }
         });
@@ -1972,10 +1922,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnOnloop4.setMnemonic('2');
         btnOnloop4.setToolTipText("Alt+2");
         btnOnloop4.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOnloop4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOnloop4ActionPerformed(evt);
             }
         });
@@ -1984,10 +1932,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnOnloop5.setMnemonic('2');
         btnOnloop5.setToolTipText("Alt+2");
         btnOnloop5.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnOnloop5.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnOnloop5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOnloop5ActionPerformed(evt);
             }
         });
@@ -1996,10 +1942,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         txtNamaOnloop5.setPreferredSize(new java.awt.Dimension(207, 23));
 
         txtKdOnloop5.setPreferredSize(new java.awt.Dimension(80, 23));
-        txtKdOnloop5.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtKdOnloop5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtKdOnloop5KeyPressed(evt);
             }
         });
@@ -2011,44 +1955,36 @@ public class DlgPemeriksaanOperasi extends BaseDialog
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-03-2018" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setOpaque(false);
         DTPBeri.setPreferredSize(new java.awt.Dimension(100, 23));
-        DTPBeri.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        DTPBeri.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 DTPBeriKeyPressed(evt);
             }
         });
 
         cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam.setOpaque(false);
-        cmbJam.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbJam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbJamKeyPressed(evt);
             }
         });
 
         cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt.setOpaque(false);
-        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbMntKeyPressed(evt);
             }
         });
 
         cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk.setOpaque(false);
-        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbDtkKeyPressed(evt);
             }
         });
@@ -2063,6 +1999,16 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        btnCariNoRawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnCariNoRawat.setMnemonic('4');
+        btnCariNoRawat.setToolTipText("ALt+4");
+        btnCariNoRawat.setPreferredSize(new java.awt.Dimension(35, 22));
+        btnCariNoRawat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariNoRawatActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlInputLayout = new javax.swing.GroupLayout(pnlInput);
         pnlInput.setLayout(pnlInputLayout);
         pnlInputLayout.setHorizontalGroup(
@@ -2070,8 +2016,16 @@ public class DlgPemeriksaanOperasi extends BaseDialog
             .addGroup(pnlInputLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlInputLayout.createSequentialGroup()
+                    .addGroup(pnlInputLayout.createSequentialGroup()
+                        .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInputLayout.createSequentialGroup()
+                                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtNoRawat, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNoRm, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNamaPasien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlInputLayout.createSequentialGroup()
@@ -2091,21 +2045,14 @@ public class DlgPemeriksaanOperasi extends BaseDialog
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(txtKdGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNamaGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnCariDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCariKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnCariGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInputLayout.createSequentialGroup()
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtNoRawat, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtNoRm, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtNamaPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtNamaGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnCariDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnCariKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCariGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCariNoRawat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlInputLayout.createSequentialGroup()
                         .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2299,17 +2246,19 @@ public class DlgPemeriksaanOperasi extends BaseDialog
                                 .addComponent(cmbDtk, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(1, 1, 1)
                                 .addComponent(ChkJln, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         pnlInputLayout.setVerticalGroup(
             pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInputLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNoRawat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNoRm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNamaPasien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNoRawat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNoRm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNamaPasien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCariNoRawat, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2459,7 +2408,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
                     .addComponent(txtKdDrUmum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNamaDrUmum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDrUmum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         panelBiasa1.add(pnlInput, java.awt.BorderLayout.PAGE_START);
@@ -2472,10 +2421,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnSimpan.setText("Simpan");
         btnSimpan.setToolTipText("Alt+S");
         btnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnSimpan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
             }
         });
@@ -2486,10 +2433,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnBaru.setText("Baru");
         btnBaru.setToolTipText("Alt+B");
         btnBaru.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnBaru.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnBaru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBaruActionPerformed(evt);
             }
         });
@@ -2510,10 +2455,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnKeluar.setText("Keluar");
         btnKeluar.setToolTipText("Alt+K");
         btnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnKeluar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKeluarActionPerformed(evt);
             }
         });
@@ -2529,17 +2472,13 @@ public class DlgPemeriksaanOperasi extends BaseDialog
 
         tblOrder.setAutoCreateRowSorter(true);
         tblOrder.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tblOrder.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblOrderMouseClicked(evt);
             }
         });
-        tblOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tblOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblOrderKeyPressed(evt);
             }
         });
@@ -2561,7 +2500,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
 
         tglOrder1.setEditable(false);
         tglOrder1.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
+        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-03-2018" }));
         tglOrder1.setDisplayFormat("dd-MM-yyyy");
         tglOrder1.setOpaque(false);
         tglOrder1.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2573,7 +2512,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
 
         tglOrder2.setEditable(false);
         tglOrder2.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
+        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-03-2018" }));
         tglOrder2.setDisplayFormat("dd-MM-yyyy");
         tglOrder2.setOpaque(false);
         tglOrder2.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2583,17 +2522,13 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnCariOrder.setMnemonic('6');
         btnCariOrder.setToolTipText("Alt+6");
         btnCariOrder.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnCariOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnCariOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariOrderActionPerformed(evt);
             }
         });
-        btnCariOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnCariOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnCariOrderKeyPressed(evt);
             }
         });
@@ -2613,10 +2548,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnHapusOrder.setText("Hapus");
         btnHapusOrder.setToolTipText("Alt+H");
         btnHapusOrder.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnHapusOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnHapusOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusOrderActionPerformed(evt);
             }
         });
@@ -2634,17 +2567,13 @@ public class DlgPemeriksaanOperasi extends BaseDialog
 
         tblTransaksi.setAutoCreateRowSorter(true);
         tblTransaksi.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tblTransaksi.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tblTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTransaksiMouseClicked(evt);
             }
         });
-        tblTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tblTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblTransaksiKeyPressed(evt);
             }
         });
@@ -2666,7 +2595,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-03-2018" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setOpaque(false);
         tglTransaksi1.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2678,7 +2607,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-03-2018" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setOpaque(false);
         tglTransaksi2.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -2688,17 +2617,13 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnCariTransaksi.setMnemonic('6');
         btnCariTransaksi.setToolTipText("Alt+6");
         btnCariTransaksi.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnCariTransaksi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnCariTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariTransaksiActionPerformed(evt);
             }
         });
-        btnCariTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnCariTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnCariTransaksiKeyPressed(evt);
             }
         });
@@ -2718,10 +2643,8 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         btnHapusTransaksi.setText("Hapus");
         btnHapusTransaksi.setToolTipText("Alt+H");
         btnHapusTransaksi.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnHapusTransaksi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnHapusTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusTransaksiActionPerformed(evt);
             }
         });
@@ -3426,6 +3349,91 @@ public class DlgPemeriksaanOperasi extends BaseDialog
         }
     }//GEN-LAST:event_btnHapusTransaksiActionPerformed
 
+    private void btnCariNoRawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariNoRawatActionPerformed
+        cariNoRawat();
+    }//GEN-LAST:event_btnCariNoRawatActionPerformed
+
+    private void txtNoRawatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoRawatKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if (txtNoRawat.getText().trim().isEmpty())
+            {
+                GMessage.e("Submit", "Field masih kosong");
+            }
+            else
+            {
+                getDataNoRmByEnter(0, txtNoRawat.getText());
+            }
+        }
+    }//GEN-LAST:event_txtNoRawatKeyPressed
+
+    private void txtNoRmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoRmKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if (txtNoRm.getText().trim().isEmpty())
+            {
+                GMessage.e("Submit", "Field masih kosong");
+            }
+            else
+            {
+                getDataNoRmByEnter(1, txtNoRm.getText());
+            }
+        }
+    }//GEN-LAST:event_txtNoRmKeyPressed
+
+    private void txtNamaPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamaPasienKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if (txtNamaPasien.getText().trim().isEmpty())
+            {
+                GMessage.e("Submit", "Field masih kosong");
+            }
+            else
+            {
+                getDataNoRmByEnter(2, txtNamaPasien.getText());
+            }
+        }
+    }//GEN-LAST:event_txtNamaPasienKeyPressed
+
+    private void txtKdOperator1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKdOperator1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKdOperator1ActionPerformed
+
+    private void txtNamaOperator1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaOperator1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaOperator1ActionPerformed
+
+    private void getDataNoRmByEnter(int i, String s)
+    {
+        String col = "";
+        if (i == 0) col = "kamar_inap.no_rawat";
+        else if (i == 1) col = "pasien.no_rkm_medis";
+        else if (i == 2) col = "pasien.nm_pasien";
+        
+        GQuery g = new GQuery("SELECT kamar_inap.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien "
+                + " FROM kamar_inap "
+                + " JOIN reg_periksa ON reg_periksa.no_rawat = kamar_inap.no_rawat "
+                + " JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis "
+                + " WHERE " + col + " = '" + s + "' ");
+        
+        List<String[]> l = g.select();
+        
+        if (l.isEmpty())
+        {
+            GMessage.e("Operasi", "Data tidak ditemukan");
+            
+            txtNoRawat.setText("");
+            txtNoRm.setText("");
+            txtNamaPasien.setText("");
+        }
+        else
+        {
+            txtNoRawat.setText(l.get(0)[0]);
+            txtNoRm.setText(l.get(0)[1]);
+            txtNamaPasien.setText(l.get(0)[2]);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -3503,6 +3511,7 @@ public class DlgPemeriksaanOperasi extends BaseDialog
     private widget.Button btnCariDetail;
     private widget.Button btnCariGroup;
     private widget.Button btnCariKategori;
+    private widget.Button btnCariNoRawat;
     private widget.Button btnCariOrder;
     private widget.Button btnCariTransaksi;
     private widget.Button btnCetak;

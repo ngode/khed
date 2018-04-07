@@ -1164,7 +1164,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-04-2018" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1750,13 +1750,6 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                 btnEditHasilActionPerformed(evt);
             }
         });
-        btnEditHasil.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                btnEditHasilKeyPressed(evt);
-            }
-        });
         panelisi9.add(btnEditHasil);
 
         jPanel7.add(panelisi9, java.awt.BorderLayout.PAGE_END);
@@ -1813,7 +1806,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglOrder1.setEditable(false);
         tglOrder1.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-04-2018" }));
+        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
         tglOrder1.setDisplayFormat("dd-MM-yyyy");
         tglOrder1.setName("tglOrder1"); // NOI18N
         tglOrder1.setOpaque(false);
@@ -1827,7 +1820,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglOrder2.setEditable(false);
         tglOrder2.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-04-2018" }));
+        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
         tglOrder2.setDisplayFormat("dd-MM-yyyy");
         tglOrder2.setName("tglOrder2"); // NOI18N
         tglOrder2.setOpaque(false);
@@ -2015,7 +2008,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-04-2018" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setName("tglTransaksi1"); // NOI18N
         tglTransaksi1.setOpaque(false);
@@ -2029,7 +2022,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-04-2018" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setName("tglTransaksi2"); // NOI18N
         tglTransaksi2.setOpaque(false);
@@ -2217,7 +2210,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglNonRm1.setEditable(false);
         tglNonRm1.setForeground(new java.awt.Color(50, 70, 50));
-        tglNonRm1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-04-2018" }));
+        tglNonRm1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
         tglNonRm1.setDisplayFormat("dd-MM-yyyy");
         tglNonRm1.setName("tglNonRm1"); // NOI18N
         tglNonRm1.setOpaque(false);
@@ -2231,7 +2224,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglNonRm2.setEditable(false);
         tglNonRm2.setForeground(new java.awt.Color(50, 70, 50));
-        tglNonRm2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-04-2018" }));
+        tglNonRm2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
         tglNonRm2.setDisplayFormat("dd-MM-yyyy");
         tglNonRm2.setName("tglNonRm2"); // NOI18N
         tglNonRm2.setOpaque(false);
@@ -2743,7 +2736,6 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                 // NON RM ========
                 if (ckbNonRm.isSelected())
                 {
-                    // EDIT NON RM =======
                     if (isEdit)
                     {
                         success &= new GQuery()
@@ -3419,29 +3411,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         }
         
         this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_menuCetakBillingOrderActionPerformed
-
-    private void btnEditHasilActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEditHasilActionPerformed
-    {//GEN-HEADEREND:event_btnEditHasilActionPerformed
-        if (tblPemeriksaan.getSelectedRow() == -1)
-            return;
-        
-        PopHasilRad p = new PopHasilRad(null, true);
-        p.setData(txtHasil.getText());
-        p.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
-        p.setLocationRelativeTo(internalFrame1);
-        p.setVisible(true);
-        
-        if (p.isSaved)
-        {
-            txtHasil.setText(p.result);
-        }
-    }//GEN-LAST:event_btnEditHasilActionPerformed
-
-    private void btnEditHasilKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_btnEditHasilKeyPressed
-    {//GEN-HEADEREND:event_btnEditHasilKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditHasilKeyPressed
+    }//GEN-LAST:event_menuCetakBillingOrderActionPerformed                       
 
     private void btnCariPasienActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCariPasienActionPerformed
     {//GEN-HEADEREND:event_btnCariPasienActionPerformed
@@ -3576,6 +3546,23 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
     {//GEN-HEADEREND:event_menuCetakBillingNonRmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuCetakBillingNonRmActionPerformed
+
+    private void btnEditHasilActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEditHasilActionPerformed
+    {//GEN-HEADEREND:event_btnEditHasilActionPerformed
+        if (tblPemeriksaan.getSelectedRow() == -1)
+            return;
+        
+        PopHasilRad p = new PopHasilRad(null, true);
+        p.setData(txtHasil.getText());
+        p.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
+        p.setLocationRelativeTo(internalFrame1);
+        p.setVisible(true);
+        
+        if (p.isSaved)
+        {
+            txtHasil.setText(p.result);
+        }
+    }//GEN-LAST:event_btnEditHasilActionPerformed
 
     /**
      * @param args the command line arguments

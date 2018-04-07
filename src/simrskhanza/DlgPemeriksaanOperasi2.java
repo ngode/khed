@@ -758,7 +758,6 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
     }
 
     
-    // Helper Method =======
     private boolean valid()
     {
         if (txtNoRawat.getText().toString().isEmpty())

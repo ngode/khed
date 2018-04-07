@@ -404,7 +404,8 @@ public class frmUtama extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         DlgLogin = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
@@ -822,8 +823,10 @@ public class frmUtama extends javax.swing.JFrame {
         edAdmin.setToolTipText("Silahkan masukkan ID Admin");
         edAdmin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         edAdmin.setName("edAdmin"); // NOI18N
-        edAdmin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        edAdmin.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 edAdminKeyPressed(evt);
             }
         });
@@ -834,8 +837,10 @@ public class frmUtama extends javax.swing.JFrame {
         edPwd.setToolTipText("Silahkan masukkan password");
         edPwd.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         edPwd.setName("edPwd"); // NOI18N
-        edPwd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        edPwd.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 edPwdKeyPressed(evt);
             }
         });
@@ -857,8 +862,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnLogin.setToolTipText("Alt+Z");
         BtnLogin.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnLogin.setName("BtnLogin"); // NOI18N
-        BtnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnLogin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnLoginActionPerformed(evt);
             }
         });
@@ -872,8 +879,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnCancel.setToolTipText("Alt+Y");
         BtnCancel.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnCancel.setName("BtnCancel"); // NOI18N
-        BtnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnCancel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCancelActionPerformed(evt);
             }
         });
@@ -912,13 +921,17 @@ public class frmUtama extends javax.swing.JFrame {
         BtnClosePass.setText("Tutup");
         BtnClosePass.setToolTipText("Alt+2");
         BtnClosePass.setName("BtnClosePass"); // NOI18N
-        BtnClosePass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnClosePass.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnClosePassActionPerformed(evt);
             }
         });
-        BtnClosePass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnClosePass.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnClosePassKeyPressed(evt);
             }
         });
@@ -930,13 +943,17 @@ public class frmUtama extends javax.swing.JFrame {
         BtnSimpanPass.setText("Simpan");
         BtnSimpanPass.setToolTipText("Alt+1");
         BtnSimpanPass.setName("BtnSimpanPass"); // NOI18N
-        BtnSimpanPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnSimpanPass.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnSimpanPassActionPerformed(evt);
             }
         });
-        BtnSimpanPass.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        BtnSimpanPass.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 BtnSimpanPassKeyPressed(evt);
             }
         });
@@ -998,8 +1015,10 @@ public class frmUtama extends javax.swing.JFrame {
         button1.setMinimumSize(new java.awt.Dimension(28, 23));
         button1.setName("button1"); // NOI18N
         button1.setPreferredSize(new java.awt.Dimension(25, 23));
-        button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        button1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 button1ActionPerformed(evt);
             }
         });
@@ -1017,8 +1036,10 @@ public class frmUtama extends javax.swing.JFrame {
         cmbMenu.setName("cmbMenu"); // NOI18N
         cmbMenu.setOpaque(false);
         cmbMenu.setPreferredSize(new java.awt.Dimension(470, 23));
-        cmbMenu.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        cmbMenu.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
                 cmbMenuItemStateChanged(evt);
             }
         });
@@ -1026,8 +1047,10 @@ public class frmUtama extends javax.swing.JFrame {
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(470, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        TCari.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 TCariKeyPressed(evt);
             }
         });
@@ -1049,8 +1072,10 @@ public class frmUtama extends javax.swing.JFrame {
         ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
         ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        ChkInput.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 ChkInputActionPerformed(evt);
             }
         });
@@ -1073,8 +1098,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBarcode.setIconTextGap(0);
         btnBarcode.setName("btnBarcode"); // NOI18N
         btnBarcode.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBarcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBarcode.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBarcodeActionPerformed(evt);
             }
         });
@@ -1086,8 +1113,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnICD.setIconTextGap(0);
         btnICD.setName("btnICD"); // NOI18N
         btnICD.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnICD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnICD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnICDActionPerformed(evt);
             }
         });
@@ -1099,8 +1128,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnObat.setIconTextGap(0);
         btnObat.setName("btnObat"); // NOI18N
         btnObat.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnObatActionPerformed(evt);
             }
         });
@@ -1112,8 +1143,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnObatPenyakit.setIconTextGap(0);
         btnObatPenyakit.setName("btnObatPenyakit"); // NOI18N
         btnObatPenyakit.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnObatPenyakit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnObatPenyakit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnObatPenyakitActionPerformed(evt);
             }
         });
@@ -1125,8 +1158,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKamar.setIconTextGap(0);
         btnKamar.setName("btnKamar"); // NOI18N
         btnKamar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKamar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKamar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKamarActionPerformed(evt);
             }
         });
@@ -1138,8 +1173,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTindakanRalan.setIconTextGap(0);
         btnTindakanRalan.setName("btnTindakanRalan"); // NOI18N
         btnTindakanRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTindakanRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTindakanRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTindakanRalanActionPerformed(evt);
             }
         });
@@ -1151,8 +1188,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDokter.setIconTextGap(0);
         btnDokter.setName("btnDokter"); // NOI18N
         btnDokter.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDokterActionPerformed(evt);
             }
         });
@@ -1164,8 +1203,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPegawai.setIconTextGap(0);
         btnPegawai.setName("btnPegawai"); // NOI18N
         btnPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPegawai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPegawai.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPegawaiActionPerformed(evt);
             }
         });
@@ -1177,8 +1218,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPasien.setIconTextGap(0);
         btnPasien.setName("btnPasien"); // NOI18N
         btnPasien.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPasienActionPerformed(evt);
             }
         });
@@ -1190,8 +1233,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRegistrasi.setIconTextGap(0);
         btnRegistrasi.setName("btnRegistrasi"); // NOI18N
         btnRegistrasi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRegistrasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRegistrasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRegistrasiActionPerformed(evt);
             }
         });
@@ -1203,8 +1248,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRalan.setIconTextGap(0);
         btnRalan.setName("btnRalan"); // NOI18N
         btnRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRalanActionPerformed(evt);
             }
         });
@@ -1216,8 +1263,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKamarInap.setIconTextGap(0);
         btnKamarInap.setName("btnKamarInap"); // NOI18N
         btnKamarInap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKamarInap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKamarInap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKamarInapActionPerformed(evt);
             }
         });
@@ -1229,8 +1278,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRanap.setIconTextGap(0);
         btnRanap.setName("btnRanap"); // NOI18N
         btnRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRanapActionPerformed(evt);
             }
         });
@@ -1242,8 +1293,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnResepObat.setIconTextGap(0);
         btnResepObat.setName("btnResepObat"); // NOI18N
         btnResepObat.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnResepObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnResepObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnResepObatActionPerformed(evt);
             }
         });
@@ -1255,8 +1308,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRujukPasien.setIconTextGap(0);
         btnRujukPasien.setName("btnRujukPasien"); // NOI18N
         btnRujukPasien.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRujukPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRujukPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRujukPasienActionPerformed(evt);
             }
         });
@@ -1268,8 +1323,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBeriObat.setIconTextGap(0);
         btnBeriObat.setName("btnBeriObat"); // NOI18N
         btnBeriObat.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBeriObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBeriObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBeriObatActionPerformed(evt);
             }
         });
@@ -1281,8 +1338,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPasienMati.setIconTextGap(0);
         btnPasienMati.setName("btnPasienMati"); // NOI18N
         btnPasienMati.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPasienMati.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPasienMati.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPasienMatiActionPerformed(evt);
             }
         });
@@ -1294,8 +1353,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnAdmin.setIconTextGap(0);
         btnAdmin.setName("btnAdmin"); // NOI18N
         btnAdmin.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAdmin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAdminActionPerformed(evt);
             }
         });
@@ -1307,8 +1368,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUser.setIconTextGap(0);
         btnUser.setName("btnUser"); // NOI18N
         btnUser.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUser.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUserActionPerformed(evt);
             }
         });
@@ -1320,8 +1383,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnVakum.setIconTextGap(0);
         btnVakum.setName("btnVakum"); // NOI18N
         btnVakum.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnVakum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnVakum.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnVakumActionPerformed(evt);
             }
         });
@@ -1333,8 +1398,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDisplay.setIconTextGap(0);
         btnDisplay.setName("btnDisplay"); // NOI18N
         btnDisplay.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDisplay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDisplay.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDisplayActionPerformed(evt);
             }
         });
@@ -1346,8 +1413,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetupHarga.setIconTextGap(0);
         btnSetupHarga.setName("btnSetupHarga"); // NOI18N
         btnSetupHarga.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetupHarga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetupHarga.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetupHargaActionPerformed(evt);
             }
         });
@@ -1359,8 +1428,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuplier.setIconTextGap(0);
         btnSuplier.setName("btnSuplier"); // NOI18N
         btnSuplier.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSuplier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSuplier.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSuplierActionPerformed(evt);
             }
         });
@@ -1372,8 +1443,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJnsBarang.setIconTextGap(0);
         btnJnsBarang.setName("btnJnsBarang"); // NOI18N
         btnJnsBarang.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJnsBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJnsBarang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJnsBarangActionPerformed(evt);
             }
         });
@@ -1385,8 +1458,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKonversi.setIconTextGap(0);
         btnKonversi.setName("btnKonversi"); // NOI18N
         btnKonversi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKonversi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKonversi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKonversiActionPerformed(evt);
             }
         });
@@ -1398,8 +1473,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSatuan.setIconTextGap(0);
         btnSatuan.setName("btnSatuan"); // NOI18N
         btnSatuan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSatuan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSatuan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSatuanActionPerformed(evt);
             }
         });
@@ -1411,8 +1488,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCashFlow.setIconTextGap(0);
         btnCashFlow.setName("btnCashFlow"); // NOI18N
         btnCashFlow.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCashFlow.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCashFlow.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCashFlowActionPerformed(evt);
             }
         });
@@ -1424,8 +1503,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBubes.setIconTextGap(0);
         btnBubes.setName("btnBubes"); // NOI18N
         btnBubes.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBubes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBubes.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBubesActionPerformed(evt);
             }
         });
@@ -1437,8 +1518,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPostingJurnal.setIconTextGap(0);
         btnPostingJurnal.setName("btnPostingJurnal"); // NOI18N
         btnPostingJurnal.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPostingJurnal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPostingJurnal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPostingJurnalActionPerformed(evt);
             }
         });
@@ -1450,8 +1533,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekeningTahun.setIconTextGap(0);
         btnRekeningTahun.setName("btnRekeningTahun"); // NOI18N
         btnRekeningTahun.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRekeningTahun.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRekeningTahun.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRekeningTahunActionPerformed(evt);
             }
         });
@@ -1463,8 +1548,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekening.setIconTextGap(0);
         btnRekening.setName("btnRekening"); // NOI18N
         btnRekening.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRekening.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRekening.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRekeningActionPerformed(evt);
             }
         });
@@ -1476,8 +1563,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembelian.setIconTextGap(0);
         btnPembelian.setName("btnPembelian"); // NOI18N
         btnPembelian.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPembelian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPembelian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPembelianActionPerformed(evt);
             }
         });
@@ -1489,8 +1578,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenjualan.setIconTextGap(0);
         btnPenjualan.setName("btnPenjualan"); // NOI18N
         btnPenjualan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPenjualan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPenjualan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPenjualanActionPerformed(evt);
             }
         });
@@ -1502,8 +1593,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutang.setIconTextGap(0);
         btnPiutang.setName("btnPiutang"); // NOI18N
         btnPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPiutang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPiutang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPiutangActionPerformed(evt);
             }
         });
@@ -1515,8 +1608,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBayarPiutang.setIconTextGap(0);
         btnBayarPiutang.setName("btnBayarPiutang"); // NOI18N
         btnBayarPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBayarPiutang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBayarPiutang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBayarPiutangActionPerformed(evt);
             }
         });
@@ -1528,8 +1623,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnOpname.setIconTextGap(0);
         btnOpname.setName("btnOpname"); // NOI18N
         btnOpname.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnOpname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnOpname.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnOpnameActionPerformed(evt);
             }
         });
@@ -1541,8 +1638,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturBeli.setIconTextGap(0);
         btnReturBeli.setName("btnReturBeli"); // NOI18N
         btnReturBeli.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnReturBeli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnReturBeli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnReturBeliActionPerformed(evt);
             }
         });
@@ -1554,8 +1653,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturJual.setIconTextGap(0);
         btnReturJual.setName("btnReturJual"); // NOI18N
         btnReturJual.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnReturJual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnReturJual.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnReturJualActionPerformed(evt);
             }
         });
@@ -1567,8 +1668,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasi.setIconTextGap(0);
         btnSirkulasi.setName("btnSirkulasi"); // NOI18N
         btnSirkulasi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSirkulasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSirkulasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSirkulasiActionPerformed(evt);
             }
         });
@@ -1580,8 +1683,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKeuntungan.setIconTextGap(0);
         btnKeuntungan.setName("btnKeuntungan"); // NOI18N
         btnKeuntungan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKeuntungan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKeuntungan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKeuntunganActionPerformed(evt);
             }
         });
@@ -1593,8 +1698,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabaRugi.setIconTextGap(0);
         btnLabaRugi.setName("btnLabaRugi"); // NOI18N
         btnLabaRugi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnLabaRugi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLabaRugi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnLabaRugiActionPerformed(evt);
             }
         });
@@ -1606,8 +1713,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturPiutang.setIconTextGap(0);
         btnReturPiutang.setName("btnReturPiutang"); // NOI18N
         btnReturPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnReturPiutang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnReturPiutang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnReturPiutangActionPerformed(evt);
             }
         });
@@ -1619,8 +1728,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnAnalisaKamar.setIconTextGap(0);
         btnAnalisaKamar.setName("btnAnalisaKamar"); // NOI18N
         btnAnalisaKamar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAnalisaKamar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAnalisaKamar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAnalisaKamarActionPerformed(evt);
             }
         });
@@ -1632,8 +1743,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRHDOkter.setIconTextGap(0);
         btnRHDOkter.setName("btnRHDOkter"); // NOI18N
         btnRHDOkter.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRHDOkter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRHDOkter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRHDOkterActionPerformed(evt);
             }
         });
@@ -1645,8 +1758,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRBDokter.setIconTextGap(0);
         btnRBDokter.setName("btnRBDokter"); // NOI18N
         btnRBDokter.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRBDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRBDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRBDokterActionPerformed(evt);
             }
         });
@@ -1658,8 +1773,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanMasuk.setIconTextGap(0);
         btnTagihanMasuk.setName("btnTagihanMasuk"); // NOI18N
         btnTagihanMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTagihanMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTagihanMasuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTagihanMasukActionPerformed(evt);
             }
         });
@@ -1671,8 +1788,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnResume.setIconTextGap(0);
         btnResume.setName("btnResume"); // NOI18N
         btnResume.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnResume.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnResume.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnResumeActionPerformed(evt);
             }
         });
@@ -1684,8 +1803,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDiet.setIconTextGap(0);
         btnDiet.setName("btnDiet"); // NOI18N
         btnDiet.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDiet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDiet.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDietActionPerformed(evt);
             }
         });
@@ -1697,8 +1818,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRHParamedis.setIconTextGap(0);
         btnRHParamedis.setName("btnRHParamedis"); // NOI18N
         btnRHParamedis.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRHParamedis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRHParamedis.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRHParamedisActionPerformed(evt);
             }
         });
@@ -1710,8 +1833,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRBParamedis.setIconTextGap(0);
         btnRBParamedis.setName("btnRBParamedis"); // NOI18N
         btnRBParamedis.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRBParamedis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRBParamedis.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRBParamedisActionPerformed(evt);
             }
         });
@@ -1723,8 +1848,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKasir.setIconTextGap(0);
         btnKasir.setName("btnKasir"); // NOI18N
         btnKasir.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKasir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKasir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKasirActionPerformed(evt);
             }
         });
@@ -1736,8 +1863,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnLahir.setIconTextGap(0);
         btnLahir.setName("btnLahir"); // NOI18N
         btnLahir.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnLahir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLahir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnLahirActionPerformed(evt);
             }
         });
@@ -1749,8 +1878,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetBiayaHarian.setIconTextGap(0);
         btnSetBiayaHarian.setName("btnSetBiayaHarian"); // NOI18N
         btnSetBiayaHarian.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetBiayaHarian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetBiayaHarian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetBiayaHarianActionPerformed(evt);
             }
         });
@@ -1762,8 +1893,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisInventaris.setIconTextGap(0);
         btnJenisInventaris.setName("btnJenisInventaris"); // NOI18N
         btnJenisInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJenisInventaris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJenisInventaris.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJenisInventarisActionPerformed(evt);
             }
         });
@@ -1775,8 +1908,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKategoriInventaris.setIconTextGap(0);
         btnKategoriInventaris.setName("btnKategoriInventaris"); // NOI18N
         btnKategoriInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKategoriInventaris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKategoriInventaris.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKategoriInventarisActionPerformed(evt);
             }
         });
@@ -1788,8 +1923,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnLihatPiutang.setIconTextGap(0);
         btnLihatPiutang.setName("btnLihatPiutang"); // NOI18N
         btnLihatPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnLihatPiutang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLihatPiutang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnLihatPiutangActionPerformed(evt);
             }
         });
@@ -1801,8 +1938,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaboratorium.setIconTextGap(0);
         btnLaboratorium.setName("btnLaboratorium"); // NOI18N
         btnLaboratorium.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnLaboratorium.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLaboratorium.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnLaboratoriumActionPerformed(evt);
             }
         });
@@ -1814,8 +1953,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRalanMasuk.setIconTextGap(0);
         btnRalanMasuk.setName("btnRalanMasuk"); // NOI18N
         btnRalanMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRalanMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRalanMasuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRalanMasukActionPerformed(evt);
             }
         });
@@ -1827,8 +1968,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetupAplikasi.setIconTextGap(0);
         btnSetupAplikasi.setName("btnSetupAplikasi"); // NOI18N
         btnSetupAplikasi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetupAplikasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetupAplikasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetupAplikasiActionPerformed(evt);
             }
         });
@@ -1840,8 +1983,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetOtoRalan.setIconTextGap(0);
         btnSetOtoRalan.setName("btnSetOtoRalan"); // NOI18N
         btnSetOtoRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetOtoRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetOtoRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetOtoRalanActionPerformed(evt);
             }
         });
@@ -1853,8 +1998,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRanapMasuk.setIconTextGap(0);
         btnRanapMasuk.setName("btnRanapMasuk"); // NOI18N
         btnRanapMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRanapMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRanapMasuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRanapMasukActionPerformed(evt);
             }
         });
@@ -1866,8 +2013,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnProdusenInventaris.setIconTextGap(0);
         btnProdusenInventaris.setName("btnProdusenInventaris"); // NOI18N
         btnProdusenInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnProdusenInventaris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnProdusenInventaris.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnProdusenInventarisActionPerformed(evt);
             }
         });
@@ -1879,8 +2028,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetBiayaMasukSekali.setIconTextGap(0);
         btnSetBiayaMasukSekali.setName("btnSetBiayaMasukSekali"); // NOI18N
         btnSetBiayaMasukSekali.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetBiayaMasukSekali.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetBiayaMasukSekali.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetBiayaMasukSekaliActionPerformed(evt);
             }
         });
@@ -1892,8 +2043,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPaketOperasi.setIconTextGap(0);
         btnPaketOperasi.setName("btnPaketOperasi"); // NOI18N
         btnPaketOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPaketOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPaketOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPaketOperasiActionPerformed(evt);
             }
         });
@@ -1905,8 +2058,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanOperasi.setIconTextGap(0);
         btnTagihanOperasi.setName("btnTagihanOperasi"); // NOI18N
         btnTagihanOperasi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTagihanOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTagihanOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTagihanOperasiActionPerformed(evt);
             }
         });
@@ -1918,8 +2073,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnJadwal.setIconTextGap(0);
         BtnJadwal.setName("BtnJadwal"); // NOI18N
         BtnJadwal.setPreferredSize(new java.awt.Dimension(200, 90));
-        BtnJadwal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnJadwal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnJadwalActionPerformed(evt);
             }
         });
@@ -1931,8 +2088,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnMerkInventaris.setIconTextGap(0);
         btnMerkInventaris.setName("btnMerkInventaris"); // NOI18N
         btnMerkInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnMerkInventaris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnMerkInventaris.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnMerkInventarisActionPerformed(evt);
             }
         });
@@ -1944,8 +2103,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRuangInventaris.setIconTextGap(0);
         btnRuangInventaris.setName("btnRuangInventaris"); // NOI18N
         btnRuangInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRuangInventaris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRuangInventaris.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRuangInventarisActionPerformed(evt);
             }
         });
@@ -1957,8 +2118,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBarangInventaris.setIconTextGap(0);
         btnBarangInventaris.setName("btnBarangInventaris"); // NOI18N
         btnBarangInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBarangInventaris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBarangInventaris.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBarangInventarisActionPerformed(evt);
             }
         });
@@ -1970,8 +2133,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnInventaris.setIconTextGap(0);
         btnInventaris.setName("btnInventaris"); // NOI18N
         btnInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnInventaris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnInventaris.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnInventarisActionPerformed(evt);
             }
         });
@@ -1983,8 +2148,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiInventaris.setIconTextGap(0);
         btnSirkulasiInventaris.setName("btnSirkulasiInventaris"); // NOI18N
         btnSirkulasiInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSirkulasiInventaris.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSirkulasiInventaris.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSirkulasiInventarisActionPerformed(evt);
             }
         });
@@ -1996,8 +2163,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnFrekuensiRalan.setIconTextGap(0);
         btnFrekuensiRalan.setName("btnFrekuensiRalan"); // NOI18N
         btnFrekuensiRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnFrekuensiRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnFrekuensiRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnFrekuensiRalanActionPerformed(evt);
             }
         });
@@ -2009,8 +2178,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnFrekuensiRanap.setIconTextGap(0);
         btnFrekuensiRanap.setName("btnFrekuensiRanap"); // NOI18N
         btnFrekuensiRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnFrekuensiRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnFrekuensiRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnFrekuensiRanapActionPerformed(evt);
             }
         });
@@ -2022,8 +2193,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetupOtoLokasi.setIconTextGap(0);
         btnSetupOtoLokasi.setName("btnSetupOtoLokasi"); // NOI18N
         btnSetupOtoLokasi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetupOtoLokasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetupOtoLokasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetupOtoLokasiActionPerformed(evt);
             }
         });
@@ -2035,8 +2208,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanPoli.setIconTextGap(0);
         btnTagihanPoli.setName("btnTagihanPoli"); // NOI18N
         btnTagihanPoli.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTagihanPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTagihanPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTagihanPoliActionPerformed(evt);
             }
         });
@@ -2048,8 +2223,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRujukMasuk.setIconTextGap(0);
         btnRujukMasuk.setName("btnRujukMasuk"); // NOI18N
         btnRujukMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRujukMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRujukMasuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRujukMasukActionPerformed(evt);
             }
         });
@@ -2061,8 +2238,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTracker.setIconTextGap(0);
         btnTracker.setName("btnTracker"); // NOI18N
         btnTracker.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTracker.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTracker.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTrackerActionPerformed(evt);
             }
         });
@@ -2074,8 +2253,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTindakanRanap.setIconTextGap(0);
         btnTindakanRanap.setName("btnTindakanRanap"); // NOI18N
         btnTindakanRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTindakanRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTindakanRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTindakanRanapActionPerformed(evt);
             }
         });
@@ -2087,8 +2268,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetupJamInap.setIconTextGap(0);
         btnSetupJamInap.setName("btnSetupJamInap"); // NOI18N
         btnSetupJamInap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetupJamInap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetupJamInap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetupJamInapActionPerformed(evt);
             }
         });
@@ -2100,8 +2283,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnStokObatPasien.setIconTextGap(0);
         btnStokObatPasien.setName("btnStokObatPasien"); // NOI18N
         btnStokObatPasien.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnStokObatPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnStokObatPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnStokObatPasienActionPerformed(evt);
             }
         });
@@ -2113,8 +2298,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTarifLab.setIconTextGap(0);
         btnTarifLab.setName("btnTarifLab"); // NOI18N
         btnTarifLab.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTarifLab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTarifLab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTarifLabActionPerformed(evt);
             }
         });
@@ -2126,8 +2313,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetPenjab.setIconTextGap(0);
         btnSetPenjab.setName("btnSetPenjab"); // NOI18N
         btnSetPenjab.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetPenjab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetPenjab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetPenjabActionPerformed(evt);
             }
         });
@@ -2139,8 +2328,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanObatPoli.setIconTextGap(0);
         btnTagihanObatPoli.setName("btnTagihanObatPoli"); // NOI18N
         btnTagihanObatPoli.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTagihanObatPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTagihanObatPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTagihanObatPoliActionPerformed(evt);
             }
         });
@@ -2152,8 +2343,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanObatBangsal.setIconTextGap(0);
         btnTagihanObatBangsal.setName("btnTagihanObatBangsal"); // NOI18N
         btnTagihanObatBangsal.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTagihanObatBangsal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTagihanObatBangsal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTagihanObatBangsalActionPerformed(evt);
             }
         });
@@ -2165,8 +2358,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnReturPasien.setIconTextGap(0);
         btnReturPasien.setName("btnReturPasien"); // NOI18N
         btnReturPasien.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnReturPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnReturPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnReturPasienActionPerformed(evt);
             }
         });
@@ -2178,8 +2373,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKeuntunganObatRanap.setIconTextGap(0);
         btnKeuntunganObatRanap.setName("btnKeuntunganObatRanap"); // NOI18N
         btnKeuntunganObatRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKeuntunganObatRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKeuntunganObatRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKeuntunganObatRanapActionPerformed(evt);
             }
         });
@@ -2191,8 +2388,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenggajian.setIconTextGap(0);
         btnPenggajian.setName("btnPenggajian"); // NOI18N
         btnPenggajian.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPenggajian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPenggajian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPenggajianActionPerformed(evt);
             }
         });
@@ -2204,8 +2403,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapPresensi.setIconTextGap(0);
         btnRekapPresensi.setName("btnRekapPresensi"); // NOI18N
         btnRekapPresensi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRekapPresensi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRekapPresensi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRekapPresensiActionPerformed(evt);
             }
         });
@@ -2217,8 +2418,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapHarian.setIconTextGap(0);
         btnRekapHarian.setName("btnRekapHarian"); // NOI18N
         btnRekapHarian.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRekapHarian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRekapHarian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRekapHarianActionPerformed(evt);
             }
         });
@@ -2230,8 +2433,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapBulanan.setIconTextGap(0);
         btnRekapBulanan.setName("btnRekapBulanan"); // NOI18N
         btnRekapBulanan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRekapBulanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRekapBulanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRekapBulananActionPerformed(evt);
             }
         });
@@ -2243,8 +2448,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDeposit.setIconTextGap(0);
         btnDeposit.setName("btnDeposit"); // NOI18N
         btnDeposit.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDeposit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDeposit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDepositActionPerformed(evt);
             }
         });
@@ -2256,8 +2463,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetupRM.setIconTextGap(0);
         btnSetupRM.setName("btnSetupRM"); // NOI18N
         btnSetupRM.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetupRM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetupRM.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetupRMActionPerformed(evt);
             }
         });
@@ -2269,8 +2478,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnResepPulang.setIconTextGap(0);
         btnResepPulang.setName("btnResepPulang"); // NOI18N
         btnResepPulang.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnResepPulang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnResepPulang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnResepPulangActionPerformed(evt);
             }
         });
@@ -2282,8 +2493,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetupTarif.setIconTextGap(0);
         btnSetupTarif.setName("btnSetupTarif"); // NOI18N
         btnSetupTarif.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetupTarif.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetupTarif.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetupTarifActionPerformed(evt);
             }
         });
@@ -2295,8 +2508,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBarangIpsrs.setIconTextGap(0);
         btnBarangIpsrs.setName("btnBarangIpsrs"); // NOI18N
         btnBarangIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBarangIpsrs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBarangIpsrs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBarangIpsrsActionPerformed(evt);
             }
         });
@@ -2308,8 +2523,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPembelianIpsrs.setIconTextGap(0);
         btnPembelianIpsrs.setName("btnPembelianIpsrs"); // NOI18N
         btnPembelianIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPembelianIpsrs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPembelianIpsrs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPembelianIpsrsActionPerformed(evt);
             }
         });
@@ -2321,8 +2538,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengeluaranIpsrs.setIconTextGap(0);
         btnPengeluaranIpsrs.setName("btnPengeluaranIpsrs"); // NOI18N
         btnPengeluaranIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengeluaranIpsrs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPengeluaranIpsrs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPengeluaranIpsrsActionPerformed(evt);
             }
         });
@@ -2334,8 +2553,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRHMasukIpsrs.setIconTextGap(0);
         btnRHMasukIpsrs.setName("btnRHMasukIpsrs"); // NOI18N
         btnRHMasukIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRHMasukIpsrs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRHMasukIpsrs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRHMasukIpsrsActionPerformed(evt);
             }
         });
@@ -2347,8 +2568,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRHKeluarIpsrs.setIconTextGap(0);
         btnRHKeluarIpsrs.setName("btnRHKeluarIpsrs"); // NOI18N
         btnRHKeluarIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRHKeluarIpsrs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRHKeluarIpsrs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRHKeluarIpsrsActionPerformed(evt);
             }
         });
@@ -2360,8 +2583,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRBiayaIpsrs.setIconTextGap(0);
         btnRBiayaIpsrs.setName("btnRBiayaIpsrs"); // NOI18N
         btnRBiayaIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRBiayaIpsrs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRBiayaIpsrs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRBiayaIpsrsActionPerformed(evt);
             }
         });
@@ -2373,8 +2598,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTarifRadiologi.setIconTextGap(0);
         btnTarifRadiologi.setName("btnTarifRadiologi"); // NOI18N
         btnTarifRadiologi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTarifRadiologi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTarifRadiologi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTarifRadiologiActionPerformed(evt);
             }
         });
@@ -2386,8 +2613,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPeriksaRadiologi.setIconTextGap(0);
         btnPeriksaRadiologi.setName("btnPeriksaRadiologi"); // NOI18N
         btnPeriksaRadiologi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPeriksaRadiologi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPeriksaRadiologiActionPerformed(evt);
             }
         });
@@ -2399,8 +2628,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanRalanPerhari.setIconTextGap(0);
         btnTagihanRalanPerhari.setName("btnTagihanRalanPerhari"); // NOI18N
         btnTagihanRalanPerhari.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTagihanRalanPerhari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTagihanRalanPerhari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTagihanRalanPerhariActionPerformed(evt);
             }
         });
@@ -2412,8 +2643,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanRanapPerhari.setIconTextGap(0);
         btnTagihanRanapPerhari.setName("btnTagihanRanapPerhari"); // NOI18N
         btnTagihanRanapPerhari.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTagihanRanapPerhari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTagihanRanapPerhari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTagihanRanapPerhariActionPerformed(evt);
             }
         });
@@ -2425,8 +2658,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetupEmbalase.setIconTextGap(0);
         btnSetupEmbalase.setName("btnSetupEmbalase"); // NOI18N
         btnSetupEmbalase.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetupEmbalase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetupEmbalase.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetupEmbalaseActionPerformed(evt);
             }
         });
@@ -2438,8 +2673,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasiBerkas.setIconTextGap(0);
         btnSirkulasiBerkas.setName("btnSirkulasiBerkas"); // NOI18N
         btnSirkulasiBerkas.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSirkulasiBerkas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSirkulasiBerkas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSirkulasiBerkasActionPerformed(evt);
             }
         });
@@ -2451,8 +2688,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnObatPasienRalan.setIconTextGap(0);
         btnObatPasienRalan.setName("btnObatPasienRalan"); // NOI18N
         btnObatPasienRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnObatPasienRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnObatPasienRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnObatPasienRalanActionPerformed(evt);
             }
         });
@@ -2464,8 +2703,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnObatPasienRanap.setIconTextGap(0);
         btnObatPasienRanap.setName("btnObatPasienRanap"); // NOI18N
         btnObatPasienRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnObatPasienRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnObatPasienRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnObatPasienRanapActionPerformed(evt);
             }
         });
@@ -2477,8 +2718,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemesanan.setIconTextGap(0);
         btnPemesanan.setName("btnPemesanan"); // NOI18N
         btnPemesanan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPemesanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPemesanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPemesananActionPerformed(evt);
             }
         });
@@ -2490,8 +2733,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengeluaran.setIconTextGap(0);
         btnPengeluaran.setName("btnPengeluaran"); // NOI18N
         btnPengeluaran.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengeluaran.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPengeluaran.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPengeluaranActionPerformed(evt);
             }
         });
@@ -2503,8 +2748,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTambahanBiaya.setIconTextGap(0);
         btnTambahanBiaya.setName("btnTambahanBiaya"); // NOI18N
         btnTambahanBiaya.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTambahanBiaya.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTambahanBiaya.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTambahanBiayaActionPerformed(evt);
             }
         });
@@ -2516,8 +2763,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPotonganBiaya.setIconTextGap(0);
         btnPotonganBiaya.setName("btnPotonganBiaya"); // NOI18N
         btnPotonganBiaya.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPotonganBiaya.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPotonganBiaya.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPotonganBiayaActionPerformed(evt);
             }
         });
@@ -2529,8 +2778,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJMDetailDokter.setIconTextGap(0);
         btnJMDetailDokter.setName("btnJMDetailDokter"); // NOI18N
         btnJMDetailDokter.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJMDetailDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJMDetailDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJMDetailDokterActionPerformed(evt);
             }
         });
@@ -2542,8 +2793,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnIGD.setIconTextGap(0);
         btnIGD.setName("btnIGD"); // NOI18N
         btnIGD.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnIGD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnIGD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnIGDActionPerformed(evt);
             }
         });
@@ -2555,8 +2808,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBarcodeRalan.setIconTextGap(0);
         btnBarcodeRalan.setName("btnBarcodeRalan"); // NOI18N
         btnBarcodeRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBarcodeRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBarcodeRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBarcodeRalanActionPerformed(evt);
             }
         });
@@ -2568,8 +2823,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBarcodeRanap.setIconTextGap(0);
         btnBarcodeRanap.setName("btnBarcodeRanap"); // NOI18N
         btnBarcodeRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBarcodeRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBarcodeRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBarcodeRanapActionPerformed(evt);
             }
         });
@@ -2581,8 +2838,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetObatRalan.setIconTextGap(0);
         btnSetObatRalan.setName("btnSetObatRalan"); // NOI18N
         btnSetObatRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetObatRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetObatRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetObatRalanActionPerformed(evt);
             }
         });
@@ -2594,8 +2853,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetObatRanap.setIconTextGap(0);
         btnSetObatRanap.setName("btnSetObatRanap"); // NOI18N
         btnSetObatRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetObatRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetObatRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetObatRanapActionPerformed(evt);
             }
         });
@@ -2607,8 +2868,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenyakitPD3I.setIconTextGap(0);
         btnPenyakitPD3I.setName("btnPenyakitPD3I"); // NOI18N
         btnPenyakitPD3I.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPenyakitPD3I.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPenyakitPD3I.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPenyakitPD3IActionPerformed(evt);
             }
         });
@@ -2620,8 +2883,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSurveilansPD3I.setIconTextGap(0);
         btnSurveilansPD3I.setName("btnSurveilansPD3I"); // NOI18N
         btnSurveilansPD3I.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSurveilansPD3I.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSurveilansPD3I.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSurveilansPD3IActionPerformed(evt);
             }
         });
@@ -2633,8 +2898,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSurveilansRalan.setIconTextGap(0);
         btnSurveilansRalan.setName("btnSurveilansRalan"); // NOI18N
         btnSurveilansRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSurveilansRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSurveilansRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSurveilansRalanActionPerformed(evt);
             }
         });
@@ -2646,8 +2913,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDiagnosa.setIconTextGap(0);
         btnDiagnosa.setName("btnDiagnosa"); // NOI18N
         btnDiagnosa.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDiagnosa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDiagnosa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDiagnosaActionPerformed(evt);
             }
         });
@@ -2659,8 +2928,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSurveilansRanap.setIconTextGap(0);
         btnSurveilansRanap.setName("btnSurveilansRanap"); // NOI18N
         btnSurveilansRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSurveilansRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSurveilansRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSurveilansRanapActionPerformed(evt);
             }
         });
@@ -2672,8 +2943,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPnyTakMenularRanap.setIconTextGap(0);
         btnPnyTakMenularRanap.setName("btnPnyTakMenularRanap"); // NOI18N
         btnPnyTakMenularRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPnyTakMenularRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPnyTakMenularRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPnyTakMenularRanapActionPerformed(evt);
             }
         });
@@ -2685,8 +2958,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPnyTakMenularRalan.setIconTextGap(0);
         btnPnyTakMenularRalan.setName("btnPnyTakMenularRalan"); // NOI18N
         btnPnyTakMenularRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPnyTakMenularRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPnyTakMenularRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPnyTakMenularRalanActionPerformed(evt);
             }
         });
@@ -2698,8 +2973,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKunjunganRalan.setIconTextGap(0);
         btnKunjunganRalan.setName("btnKunjunganRalan"); // NOI18N
         btnKunjunganRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKunjunganRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKunjunganRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKunjunganRalanActionPerformed(evt);
             }
         });
@@ -2711,8 +2988,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl32.setIconTextGap(0);
         btnRl32.setName("btnRl32"); // NOI18N
         btnRl32.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl32.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl32.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl32ActionPerformed(evt);
             }
         });
@@ -2724,8 +3003,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl33.setIconTextGap(0);
         btnRl33.setName("btnRl33"); // NOI18N
         btnRl33.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl33.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl33.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl33ActionPerformed(evt);
             }
         });
@@ -2737,8 +3018,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl37.setIconTextGap(0);
         btnRl37.setName("btnRl37"); // NOI18N
         btnRl37.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl37.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl37.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl37ActionPerformed(evt);
             }
         });
@@ -2750,8 +3033,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl38.setIconTextGap(0);
         btnRl38.setName("btnRl38"); // NOI18N
         btnRl38.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl38.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl38.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl38ActionPerformed(evt);
             }
         });
@@ -2763,8 +3048,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTagihanDokter.setIconTextGap(0);
         btnTagihanDokter.setName("btnTagihanDokter"); // NOI18N
         btnTagihanDokter.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTagihanDokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTagihanDokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTagihanDokterActionPerformed(evt);
             }
         });
@@ -2776,8 +3063,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSMS.setIconTextGap(0);
         btnSMS.setName("btnSMS"); // NOI18N
         btnSMS.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSMS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSMS.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSMSActionPerformed(evt);
             }
         });
@@ -2789,8 +3078,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSidikJari.setIconTextGap(0);
         btnSidikJari.setName("btnSidikJari"); // NOI18N
         btnSidikJari.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSidikJari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSidikJari.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSidikJariActionPerformed(evt);
             }
         });
@@ -2802,8 +3093,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJamPresensi.setIconTextGap(0);
         btnJamPresensi.setName("btnJamPresensi"); // NOI18N
         btnJamPresensi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJamPresensi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJamPresensi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJamPresensiActionPerformed(evt);
             }
         });
@@ -2815,8 +3108,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJadwalPegawai.setIconTextGap(0);
         btnJadwalPegawai.setName("btnJadwalPegawai"); // NOI18N
         btnJadwalPegawai.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJadwalPegawai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJadwalPegawai.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJadwalPegawaiActionPerformed(evt);
             }
         });
@@ -2828,8 +3123,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisParkir.setIconTextGap(0);
         btnJenisParkir.setName("btnJenisParkir"); // NOI18N
         btnJenisParkir.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJenisParkir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJenisParkir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJenisParkirActionPerformed(evt);
             }
         });
@@ -2841,8 +3138,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBarcodeParkir.setIconTextGap(0);
         btnBarcodeParkir.setName("btnBarcodeParkir"); // NOI18N
         btnBarcodeParkir.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBarcodeParkir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBarcodeParkir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBarcodeParkirActionPerformed(evt);
             }
         });
@@ -2854,8 +3153,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnParkirMasuk.setIconTextGap(0);
         btnParkirMasuk.setName("btnParkirMasuk"); // NOI18N
         btnParkirMasuk.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnParkirMasuk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnParkirMasuk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnParkirMasukActionPerformed(evt);
             }
         });
@@ -2867,8 +3168,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetupNota.setIconTextGap(0);
         btnSetupNota.setName("btnSetupNota"); // NOI18N
         btnSetupNota.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetupNota.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetupNota.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetupNotaActionPerformed(evt);
             }
         });
@@ -2880,8 +3183,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnDpjp.setIconTextGap(0);
         BtnDpjp.setName("BtnDpjp"); // NOI18N
         BtnDpjp.setPreferredSize(new java.awt.Dimension(200, 90));
-        BtnDpjp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnDpjp.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnDpjpActionPerformed(evt);
             }
         });
@@ -2893,8 +3198,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnMutasiBarang.setIconTextGap(0);
         btnMutasiBarang.setName("btnMutasiBarang"); // NOI18N
         btnMutasiBarang.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnMutasiBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnMutasiBarang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnMutasiBarangActionPerformed(evt);
             }
         });
@@ -2906,8 +3213,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl34.setIconTextGap(0);
         btnRl34.setName("btnRl34"); // NOI18N
         btnRl34.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl34.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl34.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl34ActionPerformed(evt);
             }
         });
@@ -2919,8 +3228,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl36.setIconTextGap(0);
         btnRl36.setName("btnRl36"); // NOI18N
         btnRl36.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl36.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl36.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl36ActionPerformed(evt);
             }
         });
@@ -2932,8 +3243,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnfee_visit_dokter.setIconTextGap(0);
         btnfee_visit_dokter.setName("btnfee_visit_dokter"); // NOI18N
         btnfee_visit_dokter.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnfee_visit_dokter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnfee_visit_dokter.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnfee_visit_dokterActionPerformed(evt);
             }
         });
@@ -2945,8 +3258,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnfee_bacaan_ekg.setIconTextGap(0);
         btnfee_bacaan_ekg.setName("btnfee_bacaan_ekg"); // NOI18N
         btnfee_bacaan_ekg.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnfee_bacaan_ekg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnfee_bacaan_ekg.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnfee_bacaan_ekgActionPerformed(evt);
             }
         });
@@ -2958,8 +3273,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnfee_rujukan_rontgen.setIconTextGap(0);
         btnfee_rujukan_rontgen.setName("btnfee_rujukan_rontgen"); // NOI18N
         btnfee_rujukan_rontgen.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnfee_rujukan_rontgen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnfee_rujukan_rontgen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnfee_rujukan_rontgenActionPerformed(evt);
             }
         });
@@ -2971,8 +3288,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnfee_rujukan_ranap.setIconTextGap(0);
         btnfee_rujukan_ranap.setName("btnfee_rujukan_ranap"); // NOI18N
         btnfee_rujukan_ranap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnfee_rujukan_ranap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnfee_rujukan_ranap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnfee_rujukan_ranapActionPerformed(evt);
             }
         });
@@ -2984,8 +3303,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnfee_ralan.setIconTextGap(0);
         btnfee_ralan.setName("btnfee_ralan"); // NOI18N
         btnfee_ralan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnfee_ralan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnfee_ralan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnfee_ralanActionPerformed(evt);
             }
         });
@@ -2997,8 +3318,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnakun_bayar.setIconTextGap(0);
         btnakun_bayar.setName("btnakun_bayar"); // NOI18N
         btnakun_bayar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnakun_bayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnakun_bayar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnakun_bayarActionPerformed(evt);
             }
         });
@@ -3010,8 +3333,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnbayar_pemesanan.setIconTextGap(0);
         btnbayar_pemesanan.setName("btnbayar_pemesanan"); // NOI18N
         btnbayar_pemesanan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnbayar_pemesanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnbayar_pemesanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnbayar_pemesananActionPerformed(evt);
             }
         });
@@ -3023,8 +3348,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnObatPasienPeresep.setIconTextGap(0);
         btnObatPasienPeresep.setName("btnObatPasienPeresep"); // NOI18N
         btnObatPasienPeresep.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnObatPasienPeresep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnObatPasienPeresep.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnObatPasienPeresepActionPerformed(evt);
             }
         });
@@ -3036,8 +3363,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJenisIpsrs.setIconTextGap(0);
         btnJenisIpsrs.setName("btnJenisIpsrs"); // NOI18N
         btnJenisIpsrs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJenisIpsrs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJenisIpsrs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJenisIpsrsActionPerformed(evt);
             }
         });
@@ -3049,8 +3378,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPemasukanLain.setIconTextGap(0);
         btnPemasukanLain.setName("btnPemasukanLain"); // NOI18N
         btnPemasukanLain.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPemasukanLain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPemasukanLain.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPemasukanLainActionPerformed(evt);
             }
         });
@@ -3062,8 +3393,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengaturanRekening.setIconTextGap(0);
         btnPengaturanRekening.setName("btnPengaturanRekening"); // NOI18N
         btnPengaturanRekening.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengaturanRekening.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPengaturanRekening.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPengaturanRekeningActionPerformed(evt);
             }
         });
@@ -3075,8 +3408,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJadwalTambahan.setIconTextGap(0);
         btnJadwalTambahan.setName("btnJadwalTambahan"); // NOI18N
         btnJadwalTambahan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJadwalTambahan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJadwalTambahan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJadwalTambahanActionPerformed(evt);
             }
         });
@@ -3088,8 +3423,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnClosingKasir.setIconTextGap(0);
         btnClosingKasir.setName("btnClosingKasir"); // NOI18N
         btnClosingKasir.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnClosingKasir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnClosingKasir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnClosingKasirActionPerformed(evt);
             }
         });
@@ -3101,8 +3438,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKeterlambatanPresensi.setIconTextGap(0);
         btnKeterlambatanPresensi.setName("btnKeterlambatanPresensi"); // NOI18N
         btnKeterlambatanPresensi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKeterlambatanPresensi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKeterlambatanPresensi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKeterlambatanPresensiActionPerformed(evt);
             }
         });
@@ -3114,8 +3453,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetHargaKamar.setIconTextGap(0);
         btnSetHargaKamar.setName("btnSetHargaKamar"); // NOI18N
         btnSetHargaKamar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSetHargaKamar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSetHargaKamar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSetHargaKamarActionPerformed(evt);
             }
         });
@@ -3127,8 +3468,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapPershift.setIconTextGap(0);
         btnRekapPershift.setName("btnRekapPershift"); // NOI18N
         btnRekapPershift.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRekapPershift.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRekapPershift.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRekapPershiftActionPerformed(evt);
             }
         });
@@ -3140,8 +3483,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekBPJSNik.setIconTextGap(0);
         btnCekBPJSNik.setName("btnCekBPJSNik"); // NOI18N
         btnCekBPJSNik.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekBPJSNik.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekBPJSNik.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekBPJSNikActionPerformed(evt);
             }
         });
@@ -3153,8 +3498,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekBPJSKartu.setIconTextGap(0);
         btnCekBPJSKartu.setName("btnCekBPJSKartu"); // NOI18N
         btnCekBPJSKartu.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekBPJSKartu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekBPJSKartu.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekBPJSKartuActionPerformed(evt);
             }
         });
@@ -3166,8 +3513,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekBPJSRiwayat.setIconTextGap(0);
         btnCekBPJSRiwayat.setName("btnCekBPJSRiwayat"); // NOI18N
         btnCekBPJSRiwayat.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekBPJSRiwayat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekBPJSRiwayat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekBPJSRiwayatActionPerformed(evt);
             }
         });
@@ -3179,8 +3528,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapPresensi2.setIconTextGap(0);
         btnRekapPresensi2.setName("btnRekapPresensi2"); // NOI18N
         btnRekapPresensi2.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRekapPresensi2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRekapPresensi2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRekapPresensi2ActionPerformed(evt);
             }
         });
@@ -3192,8 +3543,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnObatPerCaraBayar.setIconTextGap(0);
         btnObatPerCaraBayar.setName("btnObatPerCaraBayar"); // NOI18N
         btnObatPerCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnObatPerCaraBayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnObatPerCaraBayar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnObatPerCaraBayarActionPerformed(evt);
             }
         });
@@ -3205,8 +3558,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKunjunganRanap.setIconTextGap(0);
         btnKunjunganRanap.setName("btnKunjunganRanap"); // NOI18N
         btnKunjunganRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKunjunganRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKunjunganRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKunjunganRanapActionPerformed(evt);
             }
         });
@@ -3218,8 +3573,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPaymentPoint.setIconTextGap(0);
         btnPaymentPoint.setName("btnPaymentPoint"); // NOI18N
         btnPaymentPoint.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPaymentPoint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPaymentPoint.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPaymentPointActionPerformed(evt);
             }
         });
@@ -3231,8 +3588,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekBPJSNomorRujukanPCare.setIconTextGap(0);
         btnCekBPJSNomorRujukanPCare.setName("btnCekBPJSNomorRujukanPCare"); // NOI18N
         btnCekBPJSNomorRujukanPCare.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekBPJSNomorRujukanPCare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekBPJSNomorRujukanPCare.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekBPJSNomorRujukanPCareActionPerformed(evt);
             }
         });
@@ -3244,8 +3603,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnICD9.setIconTextGap(0);
         btnICD9.setName("btnICD9"); // NOI18N
         btnICD9.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnICD9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnICD9.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnICD9ActionPerformed(evt);
             }
         });
@@ -3257,8 +3618,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDaruratStok.setIconTextGap(0);
         btnDaruratStok.setName("btnDaruratStok"); // NOI18N
         btnDaruratStok.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDaruratStok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDaruratStok.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDaruratStokActionPerformed(evt);
             }
         });
@@ -3270,8 +3633,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRetensiRM.setIconTextGap(0);
         btnRetensiRM.setName("btnRetensiRM"); // NOI18N
         btnRetensiRM.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRetensiRM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRetensiRM.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRetensiRMActionPerformed(evt);
             }
         });
@@ -3283,8 +3648,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTemporaryPresensi.setIconTextGap(0);
         btnTemporaryPresensi.setName("btnTemporaryPresensi"); // NOI18N
         btnTemporaryPresensi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTemporaryPresensi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTemporaryPresensi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTemporaryPresensiActionPerformed(evt);
             }
         });
@@ -3296,8 +3663,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnJurnalHarian.setIconTextGap(0);
         btnJurnalHarian.setName("btnJurnalHarian"); // NOI18N
         btnJurnalHarian.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnJurnalHarian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnJurnalHarian.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnJurnalHarianActionPerformed(evt);
             }
         });
@@ -3309,8 +3678,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSirkulasi2.setIconTextGap(0);
         btnSirkulasi2.setName("btnSirkulasi2"); // NOI18N
         btnSirkulasi2.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSirkulasi2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSirkulasi2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSirkulasi2ActionPerformed(evt);
             }
         });
@@ -3322,8 +3693,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekBPJSDiagnosa.setIconTextGap(0);
         btnCekBPJSDiagnosa.setName("btnCekBPJSDiagnosa"); // NOI18N
         btnCekBPJSDiagnosa.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekBPJSDiagnosa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekBPJSDiagnosa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekBPJSDiagnosaActionPerformed(evt);
             }
         });
@@ -3335,8 +3708,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekBPJSPoli.setIconTextGap(0);
         btnCekBPJSPoli.setName("btnCekBPJSPoli"); // NOI18N
         btnCekBPJSPoli.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekBPJSPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekBPJSPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekBPJSPoliActionPerformed(evt);
             }
         });
@@ -3348,8 +3723,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnIndustriFarmasi.setIconTextGap(0);
         btnIndustriFarmasi.setName("btnIndustriFarmasi"); // NOI18N
         btnIndustriFarmasi.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnIndustriFarmasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnIndustriFarmasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnIndustriFarmasiActionPerformed(evt);
             }
         });
@@ -3361,8 +3738,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRHJasaSarana.setIconTextGap(0);
         btnRHJasaSarana.setName("btnRHJasaSarana"); // NOI18N
         btnRHJasaSarana.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRHJasaSarana.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRHJasaSarana.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRHJasaSaranaActionPerformed(evt);
             }
         });
@@ -3374,8 +3753,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRBJasaSarana.setIconTextGap(0);
         btnRBJasaSarana.setName("btnRBJasaSarana"); // NOI18N
         btnRBJasaSarana.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRBJasaSarana.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRBJasaSarana.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRBJasaSaranaActionPerformed(evt);
             }
         });
@@ -3387,8 +3768,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRHPaketBHP.setIconTextGap(0);
         btnRHPaketBHP.setName("btnRHPaketBHP"); // NOI18N
         btnRHPaketBHP.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRHPaketBHP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRHPaketBHP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRHPaketBHPActionPerformed(evt);
             }
         });
@@ -3400,8 +3783,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRBPaketBHP.setIconTextGap(0);
         btnRBPaketBHP.setName("btnRBPaketBHP"); // NOI18N
         btnRBPaketBHP.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRBPaketBHP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRBPaketBHP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRBPaketBHPActionPerformed(evt);
             }
         });
@@ -3413,8 +3798,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangBelumLunas.setIconTextGap(0);
         btnPiutangBelumLunas.setName("btnPiutangBelumLunas"); // NOI18N
         btnPiutangBelumLunas.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPiutangBelumLunas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPiutangBelumLunas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPiutangBelumLunasActionPerformed(evt);
             }
         });
@@ -3426,8 +3813,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekBPJSFaskes.setIconTextGap(0);
         btnCekBPJSFaskes.setName("btnCekBPJSFaskes"); // NOI18N
         btnCekBPJSFaskes.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekBPJSFaskes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekBPJSFaskes.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekBPJSFaskesActionPerformed(evt);
             }
         });
@@ -3439,8 +3828,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSSEP.setIconTextGap(0);
         btnBPJSSEP.setName("btnBPJSSEP"); // NOI18N
         btnBPJSSEP.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSSEP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBPJSSEP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBPJSSEPActionPerformed(evt);
             }
         });
@@ -3452,8 +3843,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengambilanUTD.setIconTextGap(0);
         btnPengambilanUTD.setName("btnPengambilanUTD"); // NOI18N
         btnPengambilanUTD.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengambilanUTD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPengambilanUTD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPengambilanUTDActionPerformed(evt);
             }
         });
@@ -3465,8 +3858,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnTarifUtd.setIconTextGap(0);
         btnTarifUtd.setName("btnTarifUtd"); // NOI18N
         btnTarifUtd.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnTarifUtd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnTarifUtd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnTarifUtdActionPerformed(evt);
             }
         });
@@ -3478,8 +3873,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengambilanUTD2.setIconTextGap(0);
         btnPengambilanUTD2.setName("btnPengambilanUTD2"); // NOI18N
         btnPengambilanUTD2.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengambilanUTD2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPengambilanUTD2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPengambilanUTD2ActionPerformed(evt);
             }
         });
@@ -3491,8 +3888,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUTDMedisRusak.setIconTextGap(0);
         btnUTDMedisRusak.setName("btnUTDMedisRusak"); // NOI18N
         btnUTDMedisRusak.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUTDMedisRusak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUTDMedisRusak.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUTDMedisRusakActionPerformed(evt);
             }
         });
@@ -3504,8 +3903,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengambilanPenunjangUTD.setIconTextGap(0);
         btnPengambilanPenunjangUTD.setName("btnPengambilanPenunjangUTD"); // NOI18N
         btnPengambilanPenunjangUTD.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengambilanPenunjangUTD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPengambilanPenunjangUTD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPengambilanPenunjangUTDActionPerformed(evt);
             }
         });
@@ -3517,8 +3918,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPengambilanPenunjangUTD2.setIconTextGap(0);
         btnPengambilanPenunjangUTD2.setName("btnPengambilanPenunjangUTD2"); // NOI18N
         btnPengambilanPenunjangUTD2.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPengambilanPenunjangUTD2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPengambilanPenunjangUTD2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPengambilanPenunjangUTD2ActionPerformed(evt);
             }
         });
@@ -3530,8 +3933,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUTDPenunjangRusak.setIconTextGap(0);
         btnUTDPenunjangRusak.setName("btnUTDPenunjangRusak"); // NOI18N
         btnUTDPenunjangRusak.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUTDPenunjangRusak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUTDPenunjangRusak.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUTDPenunjangRusakActionPerformed(evt);
             }
         });
@@ -3543,8 +3948,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuplierIPSRS.setIconTextGap(0);
         btnSuplierIPSRS.setName("btnSuplierIPSRS"); // NOI18N
         btnSuplierIPSRS.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSuplierIPSRS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSuplierIPSRS.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSuplierIPSRSActionPerformed(evt);
             }
         });
@@ -3556,8 +3963,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUTDDonorDarah.setIconTextGap(0);
         btnUTDDonorDarah.setName("btnUTDDonorDarah"); // NOI18N
         btnUTDDonorDarah.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUTDDonorDarah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUTDDonorDarah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUTDDonorDarahActionPerformed(evt);
             }
         });
@@ -3569,8 +3978,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnMonitoringKlaim.setIconTextGap(0);
         btnMonitoringKlaim.setName("btnMonitoringKlaim"); // NOI18N
         btnMonitoringKlaim.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnMonitoringKlaim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnMonitoringKlaim.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnMonitoringKlaimActionPerformed(evt);
             }
         });
@@ -3582,8 +3993,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUTDCekalDarah.setIconTextGap(0);
         btnUTDCekalDarah.setName("btnUTDCekalDarah"); // NOI18N
         btnUTDCekalDarah.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUTDCekalDarah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUTDCekalDarah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUTDCekalDarahActionPerformed(evt);
             }
         });
@@ -3595,8 +4008,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUTDKomponenDarah.setIconTextGap(0);
         btnUTDKomponenDarah.setName("btnUTDKomponenDarah"); // NOI18N
         btnUTDKomponenDarah.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUTDKomponenDarah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUTDKomponenDarah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUTDKomponenDarahActionPerformed(evt);
             }
         });
@@ -3608,8 +4023,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUTDStokDarah.setIconTextGap(0);
         btnUTDStokDarah.setName("btnUTDStokDarah"); // NOI18N
         btnUTDStokDarah.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUTDStokDarah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUTDStokDarah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUTDStokDarahActionPerformed(evt);
             }
         });
@@ -3621,8 +4038,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUTDPemisahanDarah.setIconTextGap(0);
         btnUTDPemisahanDarah.setName("btnUTDPemisahanDarah"); // NOI18N
         btnUTDPemisahanDarah.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUTDPemisahanDarah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUTDPemisahanDarah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUTDPemisahanDarahActionPerformed(evt);
             }
         });
@@ -3634,8 +4053,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnHarianKamar.setIconTextGap(0);
         btnHarianKamar.setName("btnHarianKamar"); // NOI18N
         btnHarianKamar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnHarianKamar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnHarianKamar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnHarianKamarActionPerformed(evt);
             }
         });
@@ -3647,8 +4068,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRincianPiutangPasien.setIconTextGap(0);
         btnRincianPiutangPasien.setName("btnRincianPiutangPasien"); // NOI18N
         btnRincianPiutangPasien.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRincianPiutangPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRincianPiutangPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRincianPiutangPasienActionPerformed(evt);
             }
         });
@@ -3660,8 +4083,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnKeuntunganObat2.setIconTextGap(0);
         btnKeuntunganObat2.setName("btnKeuntunganObat2"); // NOI18N
         btnKeuntunganObat2.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnKeuntunganObat2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnKeuntunganObat2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnKeuntunganObat2ActionPerformed(evt);
             }
         });
@@ -3673,8 +4098,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnReklasifikasiRalan.setIconTextGap(0);
         btnReklasifikasiRalan.setName("btnReklasifikasiRalan"); // NOI18N
         btnReklasifikasiRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnReklasifikasiRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnReklasifikasiRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnReklasifikasiRalanActionPerformed(evt);
             }
         });
@@ -3686,8 +4113,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnReklasifikasiRanap.setIconTextGap(0);
         btnReklasifikasiRanap.setName("btnReklasifikasiRanap"); // NOI18N
         btnReklasifikasiRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnReklasifikasiRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnReklasifikasiRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnReklasifikasiRanapActionPerformed(evt);
             }
         });
@@ -3699,8 +4128,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnUTDPenyerahanDarah.setIconTextGap(0);
         btnUTDPenyerahanDarah.setName("btnUTDPenyerahanDarah"); // NOI18N
         btnUTDPenyerahanDarah.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnUTDPenyerahanDarah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnUTDPenyerahanDarah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnUTDPenyerahanDarahActionPerformed(evt);
             }
         });
@@ -3712,8 +4143,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnHutangObat.setIconTextGap(0);
         btnHutangObat.setName("btnHutangObat"); // NOI18N
         btnHutangObat.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnHutangObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnHutangObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnHutangObatActionPerformed(evt);
             }
         });
@@ -3725,8 +4158,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRiwayatBarangMedis.setIconTextGap(0);
         btnRiwayatBarangMedis.setName("btnRiwayatBarangMedis"); // NOI18N
         btnRiwayatBarangMedis.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRiwayatBarangMedis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRiwayatBarangMedis.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRiwayatBarangMedisActionPerformed(evt);
             }
         });
@@ -3738,8 +4173,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnSensusHarianPoli.setIconTextGap(0);
         btnSensusHarianPoli.setName("btnSensusHarianPoli"); // NOI18N
         btnSensusHarianPoli.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnSensusHarianPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnSensusHarianPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnSensusHarianPoliActionPerformed(evt);
             }
         });
@@ -3751,8 +4188,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl4a.setIconTextGap(0);
         btnRl4a.setName("btnRl4a"); // NOI18N
         btnRl4a.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl4a.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl4a.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl4aActionPerformed(evt);
             }
         });
@@ -3764,8 +4203,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnAplicareReferensiKamar.setIconTextGap(0);
         btnAplicareReferensiKamar.setName("btnAplicareReferensiKamar"); // NOI18N
         btnAplicareReferensiKamar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAplicareReferensiKamar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAplicareReferensiKamar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAplicareReferensiKamarActionPerformed(evt);
             }
         });
@@ -3777,8 +4218,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnAplicareKetersediaanKamar.setIconTextGap(0);
         btnAplicareKetersediaanKamar.setName("btnAplicareKetersediaanKamar"); // NOI18N
         btnAplicareKetersediaanKamar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAplicareKetersediaanKamar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAplicareKetersediaanKamar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAplicareKetersediaanKamarActionPerformed(evt);
             }
         });
@@ -3790,8 +4233,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnInaCBGKlaimBaruOtomatis.setIconTextGap(0);
         btnInaCBGKlaimBaruOtomatis.setName("btnInaCBGKlaimBaruOtomatis"); // NOI18N
         btnInaCBGKlaimBaruOtomatis.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnInaCBGKlaimBaruOtomatis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnInaCBGKlaimBaruOtomatis.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnInaCBGKlaimBaruOtomatisActionPerformed(evt);
             }
         });
@@ -3803,8 +4248,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnInaCBGKlaimBaruManual.setIconTextGap(0);
         btnInaCBGKlaimBaruManual.setName("btnInaCBGKlaimBaruManual"); // NOI18N
         btnInaCBGKlaimBaruManual.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnInaCBGKlaimBaruManual.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnInaCBGKlaimBaruManual.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnInaCBGKlaimBaruManualActionPerformed(evt);
             }
         });
@@ -3816,8 +4263,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnInaCBGCoderNIK.setIconTextGap(0);
         btnInaCBGCoderNIK.setName("btnInaCBGCoderNIK"); // NOI18N
         btnInaCBGCoderNIK.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnInaCBGCoderNIK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnInaCBGCoderNIK.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnInaCBGCoderNIKActionPerformed(evt);
             }
         });
@@ -3829,8 +4278,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnMutasiBerkas.setIconTextGap(0);
         btnMutasiBerkas.setName("btnMutasiBerkas"); // NOI18N
         btnMutasiBerkas.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnMutasiBerkas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnMutasiBerkas.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnMutasiBerkasActionPerformed(evt);
             }
         });
@@ -3842,8 +4293,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnAkunPiutang.setIconTextGap(0);
         btnAkunPiutang.setName("btnAkunPiutang"); // NOI18N
         btnAkunPiutang.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnAkunPiutang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAkunPiutang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnAkunPiutangActionPerformed(evt);
             }
         });
@@ -3855,8 +4308,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRHKSO.setIconTextGap(0);
         btnRHKSO.setName("btnRHKSO"); // NOI18N
         btnRHKSO.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRHKSO.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRHKSO.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRHKSOActionPerformed(evt);
             }
         });
@@ -3868,8 +4323,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRBKSO.setIconTextGap(0);
         btnRBKSO.setName("btnRBKSO"); // NOI18N
         btnRBKSO.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRBKSO.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRBKSO.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRBKSOActionPerformed(evt);
             }
         });
@@ -3881,8 +4338,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRHMenejemen.setIconTextGap(0);
         btnRHMenejemen.setName("btnRHMenejemen"); // NOI18N
         btnRHMenejemen.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRHMenejemen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRHMenejemen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRHMenejemenActionPerformed(evt);
             }
         });
@@ -3894,8 +4353,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRBMenejemen.setIconTextGap(0);
         btnRBMenejemen.setName("btnRBMenejemen"); // NOI18N
         btnRBMenejemen.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRBMenejemen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRBMenejemen.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRBMenejemenActionPerformed(evt);
             }
         });
@@ -3907,8 +4368,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekEligibilitasInhealth.setIconTextGap(0);
         btnCekEligibilitasInhealth.setName("btnCekEligibilitasInhealth"); // NOI18N
         btnCekEligibilitasInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekEligibilitasInhealth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekEligibilitasInhealth.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekEligibilitasInhealthActionPerformed(evt);
             }
         });
@@ -3920,8 +4383,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnReferensiKamarInhealth.setIconTextGap(0);
         btnReferensiKamarInhealth.setName("btnReferensiKamarInhealth"); // NOI18N
         btnReferensiKamarInhealth.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnReferensiKamarInhealth.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnReferensiKamarInhealth.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnReferensiKamarInhealthActionPerformed(evt);
             }
         });
@@ -3933,8 +4398,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekInhealthPoli.setIconTextGap(0);
         btnCekInhealthPoli.setName("btnCekInhealthPoli"); // NOI18N
         btnCekInhealthPoli.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekInhealthPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekInhealthPoli.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekInhealthPoliActionPerformed(evt);
             }
         });
@@ -3946,8 +4413,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCekInhealthFaskes.setIconTextGap(0);
         btnCekInhealthFaskes.setName("btnCekInhealthFaskes"); // NOI18N
         btnCekInhealthFaskes.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCekInhealthFaskes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCekInhealthFaskes.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCekInhealthFaskesActionPerformed(evt);
             }
         });
@@ -3959,8 +4428,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnInhealthSJP.setIconTextGap(0);
         btnInhealthSJP.setName("btnInhealthSJP"); // NOI18N
         btnInhealthSJP.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnInhealthSJP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnInhealthSJP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnInhealthSJPActionPerformed(evt);
             }
         });
@@ -3972,8 +4443,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangRalan.setIconTextGap(0);
         btnPiutangRalan.setName("btnPiutangRalan"); // NOI18N
         btnPiutangRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPiutangRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPiutangRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPiutangRalanActionPerformed(evt);
             }
         });
@@ -3985,8 +4458,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangRanap.setIconTextGap(0);
         btnPiutangRanap.setName("btnPiutangRanap"); // NOI18N
         btnPiutangRanap.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPiutangRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPiutangRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPiutangRanapActionPerformed(evt);
             }
         });
@@ -3998,8 +4473,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangPerCaraBayar.setIconTextGap(0);
         btnPiutangPerCaraBayar.setName("btnPiutangPerCaraBayar"); // NOI18N
         btnPiutangPerCaraBayar.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPiutangPerCaraBayar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPiutangPerCaraBayar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPiutangPerCaraBayarActionPerformed(evt);
             }
         });
@@ -4011,8 +4488,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaPelayananRalan.setIconTextGap(0);
         btnLamaPelayananRalan.setName("btnLamaPelayananRalan"); // NOI18N
         btnLamaPelayananRalan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnLamaPelayananRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLamaPelayananRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnLamaPelayananRalanActionPerformed(evt);
             }
         });
@@ -4024,8 +4503,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnCatatanPasien.setIconTextGap(0);
         btnCatatanPasien.setName("btnCatatanPasien"); // NOI18N
         btnCatatanPasien.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnCatatanPasien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnCatatanPasien.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnCatatanPasienActionPerformed(evt);
             }
         });
@@ -4037,8 +4518,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl4b.setIconTextGap(0);
         btnRl4b.setName("btnRl4b"); // NOI18N
         btnRl4b.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl4b.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl4b.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl4bActionPerformed(evt);
             }
         });
@@ -4050,8 +4533,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl4asebab.setIconTextGap(0);
         btnRl4asebab.setName("btnRl4asebab"); // NOI18N
         btnRl4asebab.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl4asebab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl4asebab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl4asebabActionPerformed(evt);
             }
         });
@@ -4063,8 +4548,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnRl4bsebab.setIconTextGap(0);
         btnRl4bsebab.setName("btnRl4bsebab"); // NOI18N
         btnRl4bsebab.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl4bsebab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnRl4bsebab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnRl4bsebabActionPerformed(evt);
             }
         });
@@ -4076,8 +4563,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDataHAIs.setIconTextGap(0);
         btnDataHAIs.setName("btnDataHAIs"); // NOI18N
         btnDataHAIs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDataHAIs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDataHAIs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDataHAIsActionPerformed(evt);
             }
         });
@@ -4089,8 +4578,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnHarianHAIs.setIconTextGap(0);
         btnHarianHAIs.setName("btnHarianHAIs"); // NOI18N
         btnHarianHAIs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnHarianHAIs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnHarianHAIs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnHarianHAIsActionPerformed(evt);
             }
         });
@@ -4102,8 +4593,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnBulananHAIs.setIconTextGap(0);
         btnBulananHAIs.setName("btnBulananHAIs"); // NOI18N
         btnBulananHAIs.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBulananHAIs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnBulananHAIs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnBulananHAIsActionPerformed(evt);
             }
         });
@@ -4115,8 +4608,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnHitungBor.setIconTextGap(0);
         btnHitungBor.setName("btnHitungBor"); // NOI18N
         btnHitungBor.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnHitungBor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnHitungBor.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnHitungBorActionPerformed(evt);
             }
         });
@@ -4128,8 +4623,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnPerusahaan.setIconTextGap(0);
         btnPerusahaan.setName("btnPerusahaan"); // NOI18N
         btnPerusahaan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnPerusahaan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnPerusahaan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnPerusahaanActionPerformed(evt);
             }
         });
@@ -4140,8 +4637,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDaftarPermintaanResep.setIconTextGap(0);
         btnDaftarPermintaanResep.setName("btnDaftarPermintaanResep"); // NOI18N
         btnDaftarPermintaanResep.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDaftarPermintaanResep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDaftarPermintaanResep.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDaftarPermintaanResepActionPerformed(evt);
             }
         });
@@ -4152,8 +4651,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnLamaPelayananApotek.setIconTextGap(0);
         btnLamaPelayananApotek.setName("btnLamaPelayananApotek"); // NOI18N
         btnLamaPelayananApotek.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnLamaPelayananApotek.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLamaPelayananApotek.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnLamaPelayananApotekActionPerformed(evt);
             }
         });
@@ -4601,8 +5102,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDataPenjualan.setIconTextGap(0);
         btnDataPenjualan.setName("btnDataPenjualan"); // NOI18N
         btnDataPenjualan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDataPenjualan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDataPenjualan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDataPenjualanActionPerformed(evt);
             }
         });
@@ -4613,8 +5116,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnInputPenjualan.setIconTextGap(0);
         btnInputPenjualan.setName("btnInputPenjualan"); // NOI18N
         btnInputPenjualan.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnInputPenjualan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnInputPenjualan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnInputPenjualanActionPerformed(evt);
             }
         });
@@ -4625,8 +5130,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnDataPenyerahanDarah.setIconTextGap(0);
         btnDataPenyerahanDarah.setName("btnDataPenyerahanDarah"); // NOI18N
         btnDataPenyerahanDarah.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnDataPenyerahanDarah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDataPenyerahanDarah.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnDataPenyerahanDarahActionPerformed(evt);
             }
         });
@@ -4634,24 +5141,32 @@ public class frmUtama extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("::[ Khanza Hospital Management System 2017 ]::");
         setIconImages(null);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentMoved(java.awt.event.ComponentEvent evt) {
+        addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+            public void componentMoved(java.awt.event.ComponentEvent evt)
+            {
                 formComponentMoved(evt);
             }
-            public void componentResized(java.awt.event.ComponentEvent evt) {
+            public void componentResized(java.awt.event.ComponentEvent evt)
+            {
                 formComponentResized(evt);
             }
         });
-        addWindowStateListener(new java.awt.event.WindowStateListener() {
-            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+        addWindowStateListener(new java.awt.event.WindowStateListener()
+        {
+            public void windowStateChanged(java.awt.event.WindowEvent evt)
+            {
                 formWindowStateChanged(evt);
             }
         });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosed(java.awt.event.WindowEvent evt)
+            {
                 formWindowClosed(evt);
             }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
+            public void windowOpened(java.awt.event.WindowEvent evt)
+            {
                 formWindowOpened(evt);
             }
         });
@@ -4678,8 +5193,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnMenu.setPreferredSize(new java.awt.Dimension(68, 40));
         BtnMenu.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         BtnMenu.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnMenu.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnMenuActionPerformed(evt);
             }
         });
@@ -4707,8 +5224,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolReg.setPreferredSize(new java.awt.Dimension(88, 40));
         BtnToolReg.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         BtnToolReg.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnToolReg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnToolReg.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnToolRegActionPerformed(evt);
             }
         });
@@ -4728,8 +5247,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolIGD.setPreferredSize(new java.awt.Dimension(84, 40));
         btnToolIGD.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnToolIGD.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnToolIGD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnToolIGD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnToolIGDActionPerformed(evt);
             }
         });
@@ -4757,8 +5278,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolBcdRalan.setPreferredSize(new java.awt.Dimension(74, 40));
         btnToolBcdRalan.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnToolBcdRalan.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnToolBcdRalan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnToolBcdRalan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnToolBcdRalanActionPerformed(evt);
             }
         });
@@ -4778,8 +5301,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolBcdRanap.setPreferredSize(new java.awt.Dimension(74, 40));
         btnToolBcdRanap.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnToolBcdRanap.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnToolBcdRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnToolBcdRanap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnToolBcdRanapActionPerformed(evt);
             }
         });
@@ -4799,8 +5324,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolLab.setPreferredSize(new java.awt.Dimension(78, 40));
         btnToolLab.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnToolLab.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnToolLab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnToolLab.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnToolLabActionPerformed(evt);
             }
         });
@@ -4820,8 +5347,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolRad.setPreferredSize(new java.awt.Dimension(84, 40));
         btnToolRad.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnToolRad.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnToolRad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnToolRad.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnToolRadActionPerformed(evt);
             }
         });
@@ -4841,8 +5370,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolHD.setPreferredSize(new java.awt.Dimension(94, 40));
         btnToolHD.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnToolHD.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnToolHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnToolHD.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnToolHDActionPerformed(evt);
             }
         });
@@ -4862,8 +5393,10 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolOperasi.setPreferredSize(new java.awt.Dimension(84, 40));
         btnToolOperasi.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnToolOperasi.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnToolOperasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnToolOperasi.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btnToolOperasiActionPerformed(evt);
             }
         });
@@ -4882,8 +5415,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolJualObat.setPreferredSize(new java.awt.Dimension(88, 40));
         BtnToolJualObat.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         BtnToolJualObat.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnToolJualObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnToolJualObat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnToolJualObatActionPerformed(evt);
             }
         });
@@ -4911,8 +5446,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolKamnap.setPreferredSize(new java.awt.Dimension(96, 40));
         BtnToolKamnap.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         BtnToolKamnap.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnToolKamnap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnToolKamnap.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnToolKamnapActionPerformed(evt);
             }
         });
@@ -4932,8 +5469,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolKasir.setPreferredSize(new java.awt.Dimension(94, 40));
         BtnToolKasir.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         BtnToolKasir.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnToolKasir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnToolKasir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnToolKasirActionPerformed(evt);
             }
         });
@@ -4960,8 +5499,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnLog.setPreferredSize(new java.awt.Dimension(75, 40));
         BtnLog.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         BtnLog.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnLog.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnLog.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnLogActionPerformed(evt);
             }
         });
@@ -4980,8 +5521,10 @@ public class frmUtama extends javax.swing.JFrame {
         BtnClose.setPreferredSize(new java.awt.Dimension(80, 40));
         BtnClose.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         BtnClose.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
-        BtnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        BtnClose.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnCloseActionPerformed(evt);
             }
         });
@@ -5070,8 +5613,10 @@ public class frmUtama extends javax.swing.JFrame {
         PanelWall.setPreferredSize(new java.awt.Dimension(200, 200));
         PanelWall.setRound(false);
         PanelWall.setWarna(new java.awt.Color(110, 110, 110));
-        PanelWall.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        PanelWall.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 PanelWallMouseMoved(evt);
             }
         });
@@ -5142,8 +5687,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnLogin.setIconTextGap(6);
         MnLogin.setName("MnLogin"); // NOI18N
         MnLogin.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnLogin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 BtnLogActionPerformed(evt);
             }
         });
@@ -5164,8 +5711,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnGantiPassword.setIconTextGap(6);
         MnGantiPassword.setName("MnGantiPassword"); // NOI18N
         MnGantiPassword.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnGantiPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnGantiPassword.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnGantiPasswordBtnLogActionPerformed(evt);
             }
         });
@@ -5179,8 +5728,10 @@ public class frmUtama extends javax.swing.JFrame {
         MenuKeluar.setIconTextGap(6);
         MenuKeluar.setName("MenuKeluar"); // NOI18N
         MenuKeluar.setPreferredSize(new java.awt.Dimension(250, 35));
-        MenuKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MenuKeluar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MenuKeluarBtnKeluarActionPerformed(evt);
             }
         });
@@ -5206,8 +5757,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnBelumDatang1.setIconTextGap(6);
         MnBelumDatang1.setName("MnBelumDatang1"); // NOI18N
         MnBelumDatang1.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnBelumDatang1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBelumDatang1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBelumDatang1ActionPerformed(evt);
             }
         });
@@ -5221,8 +5774,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnBelumDatang.setIconTextGap(6);
         MnBelumDatang.setName("MnBelumDatang"); // NOI18N
         MnBelumDatang.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnBelumDatang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnBelumDatang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnBelumDatangActionPerformed(evt);
             }
         });
@@ -5236,8 +5791,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnSudahPulang.setIconTextGap(6);
         MnSudahPulang.setName("MnSudahPulang"); // NOI18N
         MnSudahPulang.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnSudahPulang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSudahPulang.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSudahPulangActionPerformed(evt);
             }
         });
@@ -5251,8 +5808,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapBulanan.setIconTextGap(6);
         MnRekapBulanan.setName("MnRekapBulanan"); // NOI18N
         MnRekapBulanan.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnRekapBulanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRekapBulanan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRekapBulananActionPerformed(evt);
             }
         });
@@ -5266,8 +5825,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapHadir.setIconTextGap(6);
         MnRekapHadir.setName("MnRekapHadir"); // NOI18N
         MnRekapHadir.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnRekapHadir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRekapHadir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRekapHadirActionPerformed(evt);
             }
         });
@@ -5293,8 +5854,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapBulanan1.setIconTextGap(6);
         MnRekapBulanan1.setName("MnRekapBulanan1"); // NOI18N
         MnRekapBulanan1.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnRekapBulanan1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRekapBulanan1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRekapBulanan1ActionPerformed(evt);
             }
         });
@@ -5308,8 +5871,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapBulanan2.setIconTextGap(6);
         MnRekapBulanan2.setName("MnRekapBulanan2"); // NOI18N
         MnRekapBulanan2.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnRekapBulanan2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRekapBulanan2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRekapBulanan2ActionPerformed(evt);
             }
         });
@@ -5323,8 +5888,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnSudahPulang1.setIconTextGap(6);
         MnSudahPulang1.setName("MnSudahPulang1"); // NOI18N
         MnSudahPulang1.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnSudahPulang1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSudahPulang1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSudahPulang1ActionPerformed(evt);
             }
         });
@@ -5338,8 +5905,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnSudahPulang3.setIconTextGap(6);
         MnSudahPulang3.setName("MnSudahPulang3"); // NOI18N
         MnSudahPulang3.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnSudahPulang3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSudahPulang3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSudahPulang3ActionPerformed(evt);
             }
         });
@@ -5353,8 +5922,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnSudahPulang6.setIconTextGap(6);
         MnSudahPulang6.setName("MnSudahPulang6"); // NOI18N
         MnSudahPulang6.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnSudahPulang6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSudahPulang6.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSudahPulang6ActionPerformed(evt);
             }
         });
@@ -5368,8 +5939,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnSudahPulang4.setIconTextGap(6);
         MnSudahPulang4.setName("MnSudahPulang4"); // NOI18N
         MnSudahPulang4.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnSudahPulang4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSudahPulang4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSudahPulang4ActionPerformed(evt);
             }
         });
@@ -5383,8 +5956,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnSudahPulang2.setIconTextGap(6);
         MnSudahPulang2.setName("MnSudahPulang2"); // NOI18N
         MnSudahPulang2.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnSudahPulang2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSudahPulang2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSudahPulang2ActionPerformed(evt);
             }
         });
@@ -5398,8 +5973,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnSudahPulang5.setIconTextGap(6);
         MnSudahPulang5.setName("MnSudahPulang5"); // NOI18N
         MnSudahPulang5.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnSudahPulang5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnSudahPulang5.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnSudahPulang5ActionPerformed(evt);
             }
         });
@@ -5413,8 +5990,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapHadir1.setIconTextGap(6);
         MnRekapHadir1.setName("MnRekapHadir1"); // NOI18N
         MnRekapHadir1.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnRekapHadir1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRekapHadir1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRekapHadir1ActionPerformed(evt);
             }
         });
@@ -5428,8 +6007,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnInfoBed.setIconTextGap(6);
         MnInfoBed.setName("MnInfoBed"); // NOI18N
         MnInfoBed.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnInfoBed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnInfoBed.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnInfoBedActionPerformed(evt);
             }
         });
@@ -5443,8 +6024,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnInfoBed2.setIconTextGap(6);
         MnInfoBed2.setName("MnInfoBed2"); // NOI18N
         MnInfoBed2.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnInfoBed2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnInfoBed2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnInfoBed2ActionPerformed(evt);
             }
         });
@@ -5458,8 +6041,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnInfoBed1.setIconTextGap(6);
         MnInfoBed1.setName("MnInfoBed1"); // NOI18N
         MnInfoBed1.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnInfoBed1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnInfoBed1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnInfoBed1ActionPerformed(evt);
             }
         });
@@ -5485,8 +6070,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnAnjungan.setIconTextGap(6);
         MnAnjungan.setName("MnAnjungan"); // NOI18N
         MnAnjungan.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnAnjungan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnAnjungan.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnAnjunganActionPerformed(evt);
             }
         });
@@ -5500,8 +6087,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapHadir3.setIconTextGap(6);
         MnRekapHadir3.setName("MnRekapHadir3"); // NOI18N
         MnRekapHadir3.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnRekapHadir3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRekapHadir3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRekapHadir3ActionPerformed(evt);
             }
         });
@@ -5515,8 +6104,10 @@ public class frmUtama extends javax.swing.JFrame {
         MnRekapHadir4.setIconTextGap(6);
         MnRekapHadir4.setName("MnRekapHadir4"); // NOI18N
         MnRekapHadir4.setPreferredSize(new java.awt.Dimension(250, 35));
-        MnRekapHadir4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MnRekapHadir4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 MnRekapHadir4ActionPerformed(evt);
             }
         });
@@ -5533,17 +6124,23 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jMenu4.setName("jMenu4"); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(124, 30));
-        jMenu4.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+        jMenu4.addMenuListener(new javax.swing.event.MenuListener()
+        {
+            public void menuCanceled(javax.swing.event.MenuEvent evt)
+            {
             }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            public void menuDeselected(javax.swing.event.MenuEvent evt)
+            {
             }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
+            public void menuSelected(javax.swing.event.MenuEvent evt)
+            {
                 jMenu4MenuSelected(evt);
             }
         });
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenu4MouseClicked(evt);
             }
         });

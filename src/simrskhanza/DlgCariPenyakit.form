@@ -39,7 +39,6 @@
                   <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
                 </LineBorder>
               </Border>
-              <Font PropertyName="font" name="Tahoma" size="11" style="0"/>
               <Color PropertyName="color" blue="28" green="46" red="32" type="rgb"/>
             </TitledBorder>
           </Border>
@@ -192,7 +191,7 @@
             </Component>
             <Component class="widget.Label" name="label10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Record :"/>
+                <Property name="text" type="java.lang.String" value="Records :"/>
                 <Property name="name" type="java.lang.String" value="label10" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[60, 23]"/>

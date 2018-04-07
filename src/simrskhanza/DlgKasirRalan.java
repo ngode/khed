@@ -142,7 +142,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 public void changedUpdate(DocumentEvent e) {tampilkasir();}
             });
         }         
-         
+        
         billing.dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
