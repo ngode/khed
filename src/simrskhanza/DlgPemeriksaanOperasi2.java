@@ -87,6 +87,7 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
         
         tampilOrder();
         tampilTransaksi();
+        cariKelas();
     }
 
     // Init method
@@ -513,6 +514,7 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
             return;
         
         HashMap<String, String> paket = getPaket();
+        String s = paket.get("kode_paket");
         
         boolean success;
         
@@ -930,12 +932,15 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
     
     private HashMap<String, String> getPaket()
     {
-        return new GQuery()
+        String g = kelas;
+        String sdh = g + "";
+        HashMap<String, String> h = new GQuery()
                 .a("SELECT * FROM paket_operasi")
                 .a("WHERE operasi_kategori = {kat} AND kelas = {kls}")
                 .set("kat", txtKdKategori.getText())
                 .set("kls", kelas)
                 .getRowWithName();
+        return h;
     }
     
     private void jam()
