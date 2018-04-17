@@ -498,7 +498,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
     {
         Object[] row =
         {
-            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Proses", "Id"
+            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Status", "Id"
         };
         
         mdlOrder = new DefaultTableModel(null, row)
@@ -577,7 +577,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
     {
         Object[] row =
         {
-            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Proses", "Id"
+            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Status", "Id"
         };
         
         mdlTransaksi = new DefaultTableModel(null, row)
@@ -678,8 +678,25 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         Valid.tabelKosong(mdlPemeriksaan);
         Valid.tabelKosong(mdlDetail);
         
+        for (i = 0; i < tbTarif.getRowCount(); i++)
+        {
+            tbTarif.setValueAt(false, i, 0);
+        }
+        
+        for (i = 0; i < tblDetail.getRowCount(); i++)
+        {
+            tblDetail.setValueAt(false, i, 0);
+        }
+        
+        // NON RM ==========
+        txtNamaNonRm.setText("");
+        txtUmurNonRm.setText("");
+        txtAlamatNonRm.setText("");
+        
         tampilOrder();
         tampilTransksi();
+        
+        showRm(true);
     }
     
     private void dariOrder(String idPeriksa)
@@ -2368,7 +2385,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         if (success)
         {
             JOptionPane.showMessageDialog(rootPane, "Proses simpan selesai...!");
-            isReset();
+            clearSemua();
         }
         else
         {
@@ -2505,42 +2522,6 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                 {
                     JOptionPane.showMessageDialog(null, "Proses simpan GGL!");
                 }
-    }
-    
-    public void isReset()
-    {
-        for (i = 0; i < tbTarif.getRowCount(); i++)
-        {
-            tbTarif.setValueAt(false, i, 0);
-        }
-        
-        for (i = 0; i < tblDetail.getRowCount(); i++)
-        {
-            tblDetail.setValueAt(false, i, 0);
-        }
-
-        _idPeriksa = null;
-        
-        txtNoRw.setText("");
-        txtNoRM.setText("");
-        txtNamaPasien.setText("");
-        
-        txtKdPj.setText("");
-        txtNamaPj.setText("");
-        txtKdPtg.setText("");
-        txtNamaPtg.setText("");
-        txtKdPerujuk.setText("");
-        txtNamaPerujuk.setText("");
-        
-        // NON RM ==========
-        txtNamaNonRm.setText("");
-        txtUmurNonRm.setText("");
-        txtAlamatNonRm.setText("");
-        
-        tampilOrder();
-        tampilTransksi();
-        
-        showRm(true);
     }
     
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -2957,14 +2938,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         {
             int r = tblOrder.getSelectedRow();
             
-            for (int a = r; a >= 0; a--)
-            {
-                if (tblOrder.getValueAt(a, 8) != null)
-                {
-                    dariOrder(tblOrder.getValueAt(a, 8).toString());
-                    break;
-                }
-            }
+            dariOrder(tblOrder.getValueAt(r, 8).toString());
         }
     }//GEN-LAST:event_tblOrderMouseClicked
 
@@ -3123,14 +3097,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         {
             int r = tblTransaksi.getSelectedRow();
             
-            for (int a = r; a >= 0; a--)
-            {
-                if (tblTransaksi.getValueAt(a, 8) != null && !tblTransaksi.getValueAt(a, 8).toString().isEmpty())
-                {
-                    dariTransaksi(tblTransaksi.getValueAt(a, 8).toString());
-                    break;
-                }
-            }
+            dariTransaksi(tblTransaksi.getValueAt(r, 8).toString());
         }
     }//GEN-LAST:event_tblTransaksiMouseClicked
 
@@ -4437,7 +4404,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         {
             String s = new GQuery()
                     .a("SELECT id_periksa, reg_periksa.no_rawat AS no_rawat, CONCAT(pasien.no_rkm_medis, ' ', pasien.nm_pasien) AS pasien,")
-                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, proses")
+                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, periksa_lab.status")
                     .a("FROM periksa_lab")
                     .a("JOIN reg_periksa ON reg_periksa.no_rawat = periksa_lab.no_rawat")
                     .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
@@ -4468,69 +4435,9 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                     rsTransksi.getString("jam"),
                     rsTransksi.getString("dokter_perujuk"),
                     rsTransksi.getString("dokter_pj"),
-                    rsTransksi.getString("proses"),
+                    rsTransksi.getString("status"),
                     rsTransksi.getString("id_periksa"),
                 });
-                
-                String s2 = new GQuery()
-                        .a("SELECT * FROM detail_periksa_lab")
-                        .a("JOIN jns_perawatan_lab ON jns_perawatan_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw")
-                        .a("WHERE id_periksa = {id_periksa}")
-                        .set("id_periksa", rsTransksi.getString("id_periksa"))
-                        .compile();
-                
-                psTransaksiD1 = koneksi.prepareStatement(s2);
-                rsTransaksiD1 = psTransaksiD1.executeQuery();
-                
-                mdlOrder.addRow(new Object[] 
-                {
-                    "",
-                    "",
-                    "Pemeriksaan",
-                    "Hasil",
-                    "Satuan",
-                    "Nilai Rujukan",
-                    "Keterangan"
-                });
-                
-                while (rsTransaksiD1.next())
-                {
-                    mdlOrder.addRow(new Object[] 
-                    {
-                        "",
-                        "",
-                        rsTransaksiD1.getString("nm_perawatan"),
-                        "",
-                        "",
-                        "",
-                        ""
-                    });
-                    
-                    String s3 = new GQuery()
-                            .a("SELECT pemeriksaan, nilai, satuan, nilai_rujukan, keterangan")
-                            .a("FROM detail_periksa_lab_2")
-                            .a("JOIN template_laboratorium ON template_laboratorium.id_template = detail_periksa_lab_2.id_template")
-                            .a("WHERE id_detail_1 = {id_detail}")
-                            .set("id_detail", rsTransaksiD1.getString("id_detail"))
-                            .compile();
-                    
-                    psTransaksiD2 = koneksi.prepareStatement(s3);
-                    rsTransaksiD2 = psTransaksiD2.executeQuery();
-                    
-                    while (rsTransaksiD2.next())
-                    {
-                        mdlOrder.addRow(new Object[] 
-                        {
-                            "",
-                            "",
-                            "  - " + rsTransaksiD2.getString("pemeriksaan"),
-                            rsTransaksiD2.getString("nilai"),
-                            rsTransaksiD2.getString("satuan"),
-                            rsTransaksiD2.getString("nilai_rujukan"),
-                            rsTransaksiD2.getString("keterangan")
-                        });
-                    }
-                }
             }
         }
         catch (Exception e)
@@ -4547,7 +4454,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         {
             String s = new GQuery()
                     .a("SELECT id_periksa, reg_periksa.no_rawat AS no_rawat, CONCAT(pasien.no_rkm_medis, ' ', pasien.nm_pasien) AS pasien,")
-                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, proses")
+                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, periksa_lab.status")
                     .a("FROM periksa_lab")
                     .a("JOIN reg_periksa ON reg_periksa.no_rawat = periksa_lab.no_rawat")
                     .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
@@ -4578,75 +4485,9 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                     rsTransksi.getString("jam"),
                     rsTransksi.getString("dokter_perujuk"),
                     rsTransksi.getString("dokter_pj"),
-                    rsTransksi.getString("proses"),
+                    rsTransksi.getString("status"),
                     rsTransksi.getString("id_periksa"),
                 });
-                
-                String s2 = new GQuery()
-                        .a("SELECT * FROM detail_periksa_lab")
-                        .a("JOIN jns_perawatan_lab ON jns_perawatan_lab.kd_jenis_prw = detail_periksa_lab.kd_jenis_prw")
-                        .a("WHERE id_periksa = {id_periksa}")
-                        .set("id_periksa", rsTransksi.getString("id_periksa"))
-                        .compile();
-                
-                psTransaksiD1 = koneksi.prepareStatement(s2);
-                rsTransaksiD1 = psTransaksiD1.executeQuery();
-                
-                mdlTransaksi.addRow(new Object[] 
-                {
-                    "",
-                    "",
-                    "Pemeriksaan",
-                    "Hasil",
-                    "Satuan",
-                    "Nilai Rujukan",
-                    "Keterangan",
-                    "",
-                    ""
-                });
-                
-                while (rsTransaksiD1.next())
-                {
-                    mdlTransaksi.addRow(new Object[] 
-                    {
-                        "",
-                        "",
-                        rsTransaksiD1.getString("nm_perawatan"),
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""
-                    });
-                    
-                    String s3 = new GQuery()
-                            .a("SELECT pemeriksaan, nilai, satuan, nilai_rujukan, keterangan")
-                            .a("FROM detail_periksa_lab_2")
-                            .a("JOIN template_laboratorium ON template_laboratorium.id_template = detail_periksa_lab_2.id_template")
-                            .a("WHERE id_detail_1 = {id_detail}")
-                            .set("id_detail", rsTransaksiD1.getString("id_detail"))
-                            .compile();
-                    
-                    psTransaksiD2 = koneksi.prepareStatement(s3);
-                    rsTransaksiD2 = psTransaksiD2.executeQuery();
-                    
-                    while (rsTransaksiD2.next())
-                    {
-                        mdlTransaksi.addRow(new Object[] 
-                        {
-                            "",
-                            "",
-                            "  - " + rsTransaksiD2.getString("pemeriksaan"),
-                            rsTransaksiD2.getString("nilai"),
-                            rsTransaksiD2.getString("satuan"),
-                            rsTransaksiD2.getString("nilai_rujukan"),
-                            rsTransaksiD2.getString("keterangan"),
-                            "",
-                            ""
-                        });
-                    }
-                }
             }
         }
         catch (Exception e)

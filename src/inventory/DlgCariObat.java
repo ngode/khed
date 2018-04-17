@@ -12,6 +12,8 @@
 
 package inventory;
 
+import fungsi.GConvert;
+import fungsi.GQuery;
 import fungsi.WarnaTable2;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -871,6 +873,30 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
                             tbObat.setValueAt("",tbObat.getSelectedRow(),1);
                         }
+                        
+                        // Check obat lebih dari 100 rb
+                        String kdPj = new GQuery()
+                                .a("SELECT kd_pj FROM reg_periksa WHERE no_rawat = {no_rawat}")
+                                .set("no_rawat", TNoRw.getText())
+                                .getString();
+                        
+                        if (kdPj.equals("35") || kdPj.equals("BPJ") || kdPj.equals("36") || kdPj.equals("A65")) 
+                        {
+                            int totSblm = new GQuery()
+                                    .a("SELECT SUM(biaya_obat * jml) FROM detail_pemberian_obat WHERE no_rawat = {no_rawat}")
+                                    .set("no_rawat", TNoRw.getText())
+                                    .getInt();
+                            
+                            int jml = GConvert.parseInt(tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString());
+                            double hrg = (double)tbObat.getValueAt(tbObat.getSelectedRow(), 6);
+                            
+                            if (totSblm + jml * hrg > 100000)
+                            {
+                                JOptionPane.showMessageDialog(rootPane, "Maaf, obat sudah melebihi batas maksimal Rp 100.000");
+                                tbObat.setValueAt("",tbObat.getSelectedRow(),1);
+                            }
+                        }
+                        // ============================
                         
                         try {
                             if(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0,0")) {
