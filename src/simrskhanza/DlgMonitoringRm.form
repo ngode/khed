@@ -69,9 +69,6 @@
             <Component class="widget.Table" name="tblTable">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="componentPopupMenu" type="javax.swing.JPopupMenu" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="default"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="tblTable" noResource="true"/>
               </Properties>
               <Events>

@@ -64,7 +64,7 @@ public final class DlgMonitoringRm extends javax.swing.JDialog
     
     // Dialogs =======
     private final DlgCariPoli dlgCariPoli = new DlgCariPoli(null, false);
-    private final DlgPilihanCetakDokumen dlgCetak = new DlgPilihanCetakDokumen(null,false);
+    private final DlgPilihanCetakDokumenRM dlgCetak = new DlgPilihanCetakDokumenRM(null, true);
 
     /**
      * Creates new form DlgReg
@@ -125,9 +125,9 @@ public final class DlgMonitoringRm extends javax.swing.JDialog
                 
                 if (st.isEmpty())
                     return colorAwal;
-                else if (st.equals("Sudah Dikirim"))
+                else if (st.equals("Dikirim"))
                     return colorKeluar;
-                else if (st.equals("Sudah Kembali"))
+                else if (st.equals("Kembali"))
                     return colorKembali;
                 else if (st.equals("Tidak Ada"))
                     return colorTidakAda;
@@ -690,9 +690,9 @@ public final class DlgMonitoringRm extends javax.swing.JDialog
             
             if (st.isEmpty())
                 setButton(true, true, true, false, false);
-            else if (st.equals("Sudah Dikirim"))
+            else if (st.equals("Dikirim"))
                 setButton(true, false, false, true, true);
-            else if (st.equals("Sudah Kembali"))
+            else if (st.equals("Kembali"))
                 setButton(true, false, false, false, true);
             else if (st.equals("Tidak Ada"))
                 setButton(true, false, false, false, true);
@@ -721,46 +721,47 @@ private void cmbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRS
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPrintActionPerformed
     {//GEN-HEADEREND:event_btnPrintActionPerformed
-//        dlgCetak.tampil2();
-//        dlgCetak.setNoRm(rs.getString("temp1"),rs.getString("temp2"),rs.getString("temp3"),rs.getString("temp4"),
-//                rs.getString("temp5"),rs.getString("temp6"),rs.getString("temp7"),rs.getString("temp8"),
-//                rs.getString("temp9"),rs.getString("temp10"),rs.getString("temp11"),rs.getString("temp12"));
-//        dlgCetak.setSize(500,400);
-//        dlgCetak.setLocationRelativeTo(internalFrame1);
-//        dlgCetak.setVisible(true);
-        
         // Untuk sementara
         if (tblTable.getSelectedRowCount() == 0)
             return;
         
-        boolean exist = new GQuery()
-                .a("SELECT COUNT(*) FROM mutasi_berkas WHERE no_rawat = {no_rawat}")
-                .set("no_rawat", txtNoReg.getText())
-                .getInt() > 0;
+        dlgCetak.tampil();
+        dlgCetak.setNoRm(txtNoReg.getText(), txtNoRm.getText());
+        dlgCetak.setSize(500,400);
+        dlgCetak.setLocationRelativeTo(internalFrame1);
+        dlgCetak.setVisible(true);
         
-        boolean suc;
-        
-        if (!exist)
+        if (dlgCetak.slipPrinted)
         {
-            suc = new GQuery()
-                    .a("INSERT INTO mutasi_berkas VALUES ({no_rawat}, {status}, {print}, NOW(), NULL, NULL, NULL)")
+            boolean exist = new GQuery()
+                    .a("SELECT COUNT(*) FROM mutasi_berkas WHERE no_rawat = {no_rawat}")
                     .set("no_rawat", txtNoReg.getText())
-                    .set("status", "")
-                    .set("print", "1")
-                    .write();
+                    .getInt() > 0;
+
+            boolean suc;
+
+            if (!exist)
+            {
+                suc = new GQuery()
+                        .a("INSERT INTO mutasi_berkas VALUES ({no_rawat}, {status}, {print}, NOW(), NULL, NULL, NULL)")
+                        .set("no_rawat", txtNoReg.getText())
+                        .set("status", "")
+                        .set("print", "1")
+                        .write();
+            }
+            else
+            {
+                suc = new GQuery()
+                        .a("UPDATE mutasi_berkas SET print = '1' WHERE no_rawat = {no_rawat}")
+                        .set("no_rawat", txtNoReg.getText())
+                        .write();
+            }
+
+            if (suc) 
+                tampil();
+            else 
+                GMessage.e("Error", "Error saat menyimpan data");
         }
-        else
-        {
-            suc = new GQuery()
-                    .a("UPDATE mutasi_berkas SET print = '1' WHERE no_rawat = {no_rawat}")
-                    .set("no_rawat", txtNoReg.getText())
-                    .write();
-        }
-        
-        if (suc) 
-            tampil();
-        else 
-            GMessage.e("Error", "Error saat menyimpan data");
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnKirimActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnKirimActionPerformed
@@ -780,14 +781,14 @@ private void cmbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRS
             suc = new GQuery()
                     .a("INSERT INTO mutasi_berkas VALUES ({no_rawat}, {status}, {print}, NOW(), NULL, NULL, NULL)")
                     .set("no_rawat", txtNoReg.getText())
-                    .set("status", "Sudah Dikirim")
+                    .set("status", "Dikirim")
                     .set("print", "0")
                     .write();
         }
         else
         {
             suc = new GQuery()
-                    .a("UPDATE mutasi_berkas SET status = 'Sudah Dikirim', dikirim = NOW() WHERE no_rawat = {no_rawat}")
+                    .a("UPDATE mutasi_berkas SET status = 'Dikirim', dikirim = NOW() WHERE no_rawat = {no_rawat}")
                     .set("no_rawat", txtNoReg.getText())
                     .write();
         }
@@ -839,7 +840,7 @@ private void cmbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRS
             return;
         
         boolean suc = new GQuery()
-                .a("UPDATE mutasi_berkas SET status = 'Sudah Kembali' WHERE no_rawat = {no_rawat}")
+                .a("UPDATE mutasi_berkas SET status = 'Kembali' WHERE no_rawat = {no_rawat}")
                 .set("no_rawat", txtNoReg.getText())
                 .write();
         
