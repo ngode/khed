@@ -13,6 +13,8 @@ public class Button extends usu.widget.ButtonGlass {
      * Serial version UID
      */
     private static final long serialVersionUID = 1L;
+    
+    private boolean hasAccess = true;
 
     public Button() {
         super();
@@ -22,5 +24,16 @@ public class Button extends usu.widget.ButtonGlass {
         setMargin(new Insets(2, 7, 2, 7));
         setIconTextGap(4);
         setRoundRect(true);
+    }
+    
+    public void setHasAccess(boolean b)
+    {
+        hasAccess = b;
+    }
+
+    @Override
+    public void setEnabled(boolean b)
+    {
+        super.setEnabled(b & hasAccess);
     }
 }

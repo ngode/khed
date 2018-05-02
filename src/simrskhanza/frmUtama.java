@@ -292,6 +292,7 @@ public class frmUtama extends javax.swing.JFrame {
     private final Connection koneksi=koneksiDB.condb();
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
+    private final DlgMonitoringRm dlgMonitoringRm = new DlgMonitoringRm(null, false);
     private final DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
     private final DlgAbout About=new DlgAbout(this,false);   
     private final DlgPenggajian penggajian=new DlgPenggajian(this,false); 
@@ -9490,19 +9491,26 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
     private void btnMutasiBerkasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMutasiBerkasActionPerformed
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        Hybrid.setJudul("::[ Mutasi Berkas Rekam Medis ]::","monitoringberkas/pages");
-        
-        
-        
-        try {
-            Hybrid.loadURL("http://"+prop.getProperty("HOST") + "/"+prop.getProperty("HYBRIDWEB")+"/"+"monitoringberkas/login.php?act=login&usere=admin&passwordte=akusayangsamakamu");                    
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
-        }
+//        Hybrid.setJudul("::[ Mutasi Berkas Rekam Medis ]::","monitoringberkas/pages");
+//        
+//        
+//        
+//        try {
+//            Hybrid.loadURL("http://"+prop.getProperty("HOST") + "/"+prop.getProperty("HYBRIDWEB")+"/"+"monitoringberkas/login.php?act=login&usere=admin&passwordte=akusayangsamakamu");                    
+//        } catch (Exception ex) {
+//            System.out.println("Notifikasi : "+ex);
+//        }
+//
+//        Hybrid.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+//        Hybrid.setLocationRelativeTo(PanelUtama);        
+//        Hybrid.setVisible(true);    
 
-        Hybrid.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-        Hybrid.setLocationRelativeTo(PanelUtama);        
-        Hybrid.setVisible(true);        
+        // Ganti dengan Dialog Mutasi Berkas yang baru
+        dlgMonitoringRm.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        dlgMonitoringRm.setLocationRelativeTo(PanelUtama);
+        dlgMonitoringRm.tampil();
+        dlgMonitoringRm.setVisible(true);
+
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnMutasiBerkasActionPerformed

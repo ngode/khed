@@ -27,7 +27,7 @@ public class CekBox extends JCheckBox{
         setFocusPainted(false);
         
         this.setBorder(javax.swing.BorderFactory.createLineBorder(GColors.Biru15));// new Color(237,242,232)));new Color(237,242,232)));
-        setOpaque(true);
+        setOpaque(false);
         setSize(WIDTH,23);
     }
 

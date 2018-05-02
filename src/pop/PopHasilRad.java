@@ -6,6 +6,7 @@
 package pop;
 
 import java.awt.Font;
+import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,7 +50,7 @@ public class PopHasilRad extends javax.swing.JDialog
 
         internalFrame = new widget.InternalFrame();
         Scroll7 = new widget.ScrollPane();
-        txtHasil = new javax.swing.JTextArea();
+        txtHasil = new widget.EditorPane();
         panelisi6 = new widget.panelisi();
         jPanel1 = new javax.swing.JPanel();
         BtnCloseIn6 = new widget.Button();
@@ -57,6 +58,10 @@ public class PopHasilRad extends javax.swing.JDialog
         jPanel2 = new javax.swing.JPanel();
         btnMinus = new widget.Button();
         btnPlus = new widget.Button();
+        panelisi7 = new widget.panelisi();
+        jPanel4 = new javax.swing.JPanel();
+        btnBold = new javax.swing.JToggleButton();
+        btnItalic = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("KonsulPoli"); // NOI18N
@@ -69,11 +74,6 @@ public class PopHasilRad extends javax.swing.JDialog
 
         Scroll7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(245, 255, 235)));
         Scroll7.setOpaque(true);
-
-        txtHasil.setColumns(20);
-        txtHasil.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
-        txtHasil.setRows(5);
-        txtHasil.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         Scroll7.setViewportView(txtHasil);
 
         internalFrame.add(Scroll7, java.awt.BorderLayout.CENTER);
@@ -148,6 +148,32 @@ public class PopHasilRad extends javax.swing.JDialog
 
         internalFrame.add(panelisi6, java.awt.BorderLayout.PAGE_END);
 
+        panelisi7.setBorder(null);
+        panelisi7.setPreferredSize(new java.awt.Dimension(100, 35));
+        panelisi7.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setOpaque(false);
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        btnBold.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnBold.setText("B");
+        btnBold.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnBoldActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnBold);
+
+        btnItalic.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        btnItalic.setText("I");
+        jPanel4.add(btnItalic);
+
+        panelisi7.add(jPanel4, java.awt.BorderLayout.WEST);
+
+        internalFrame.add(panelisi7, java.awt.BorderLayout.PAGE_START);
+
         getContentPane().add(internalFrame, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -188,6 +214,11 @@ public class PopHasilRad extends javax.swing.JDialog
         textSize = f.getSize() + 1;
         txtHasil.setFont(new Font(f.getName(), f.getStyle(), textSize));
     }//GEN-LAST:event_btnPlusActionPerformed
+
+    private void btnBoldActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBoldActionPerformed
+    {//GEN-HEADEREND:event_btnBoldActionPerformed
+        
+    }//GEN-LAST:event_btnBoldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,13 +279,17 @@ public class PopHasilRad extends javax.swing.JDialog
     private widget.Button BtnCloseIn6;
     private widget.Button BtnSimpan6;
     private widget.ScrollPane Scroll7;
+    private javax.swing.JToggleButton btnBold;
+    private javax.swing.JToggleButton btnItalic;
     private widget.Button btnMinus;
     private widget.Button btnPlus;
     private widget.InternalFrame internalFrame;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
     private widget.panelisi panelisi6;
-    private javax.swing.JTextArea txtHasil;
+    private widget.panelisi panelisi7;
+    private widget.EditorPane txtHasil;
     // End of variables declaration//GEN-END:variables
 
     public void setData(String s)

@@ -8,7 +8,7 @@
     <entry key="PORTAPACHE"></entry>
     <entry key="USER">root</entry>
     <entry key="PAS"></entry>
-    <entry key="CARICEPAT">noaktif</entry>
+    <entry key="CARICEPAT">aktif</entry>
     <entry key="HYBRIDWEB">webapps</entry>
     <entry key="PORTWEB">80</entry>
     <entry key="ANTRIAN">sender</entry>

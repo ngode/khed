@@ -21,6 +21,7 @@ public class TextBox extends JTextField
     private List<TextChangedListener> textChangedListeners = new ArrayList<>();
     
     private String lastText;
+    private String value = "";
         
     public TextBox()
     {
@@ -33,8 +34,6 @@ public class TextBox extends JTextField
         setBackground(GColors.Biru10);// new Color(250,255,245));
         setHorizontalAlignment(LEFT);
         setSize(WIDTH, 23);
-        
-        addDocumentListener();
     }
     
     @Override
@@ -76,12 +75,35 @@ public class TextBox extends JTextField
 
     public void addTextChangedListener(TextChangedListener listener)
     {
+        addDocumentListener();
         textChangedListeners.add(listener);
     }
     
     public void removeTextChangedListener(TextChangedListener listener)
     {
         textChangedListeners.remove(listener);
+    }
+    
+    public void setTextWithValue(String text, String value)
+    {
+        setText(text);
+        setValue(value);
+    }
+    
+    public void setValue(String value)
+    {
+        this.value = value;
+    }
+    
+    public void setEmpty()
+    {
+        setText("");
+        setValue("");
+    }
+    
+    public String getValue()
+    {
+        return value;
     }
     
     // pirvate ===============

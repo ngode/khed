@@ -78,6 +78,11 @@ public class GQuery
         return set(key, val, false);
     }
     
+    public GQuery setLike(String key, String val)
+    {
+        return set(key, "%" + val + "%", true);
+    }
+    
     private GQuery set(String key, String val, boolean withQuote)
     {
         if (!query.toString().contains("{" + key + "}"))

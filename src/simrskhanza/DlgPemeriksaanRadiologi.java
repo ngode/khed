@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -137,18 +138,41 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         txtKdKamar.setDocument(new batasInput((byte) 20).getKata(txtKdKamar));
         txtKdDokter.setDocument(new batasInput((byte) 20).getKata(txtKdDokter));
 
-        petugas.addWindowListener(new WindowListener()
+        // ======= Set hak akses expertise hanya untuk dokter ======
+        String idUser = var.getkode();
+        
+        // Kalo dia sbg admin utama, biarin aja
+        if (!idUser.equals("Admin Utama"))
         {
-            @Override
-            public void windowOpened(WindowEvent e)
-            {
-            }
+            // Tes apakah id user ada di dokter
+            String user = Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", idUser);
 
-            @Override
-            public void windowClosing(WindowEvent e)
+            // Kalo di dokter gak ada, berarti petugas
+            if(user.equals(""))
             {
+                // Gak kasih hak akses expertise kalo yg login petugas
+                btnEditHasil.setHasAccess(false);
+                
+                txtKdPetugas.setText(idUser);
+                Sequel.cariIsi("SELECT nama FROM petugas WHERE nip = ?", NmPtg, idUser);
             }
-
+        }
+        // =========================================================
+        
+        // ============ Set pj radiologi ===========================
+        // Ambil pj_rad dari db
+        String pjRad = Sequel.cariIsi("SELECT kd_dokterrad FROM set_pjlab");
+        
+        // Kalo di database ada pj nya
+        if (!pjRad.equals(""))
+        {
+            txtKdDokterPj.setText(pjRad);
+            Sequel.cariIsi("SELECT nm_dokter FROM dokter WHERE kd_dokter = ?", NmDokterPj, pjRad);
+        }
+        // =========================================================
+        
+        petugas.addWindowListener(new WindowAdapter()
+        {
             @Override
             public void windowClosed(WindowEvent e)
             {
@@ -162,40 +186,10 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                     txtKdPetugas.requestFocus();
                 }
             }
-
-            @Override
-            public void windowIconified(WindowEvent e)
-            {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e)
-            {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e)
-            {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e)
-            {
-            }
         });
-
-        dokter.addWindowListener(new WindowListener()
+        
+        dokter.addWindowListener(new WindowAdapter()
         {
-            @Override
-            public void windowOpened(WindowEvent e)
-            {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e)
-            {
-            }
-
             @Override
             public void windowClosed(WindowEvent e)
             {
@@ -208,26 +202,6 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                         txtKdDokterPj.requestFocus();
                     }
                 }
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e)
-            {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e)
-            {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e)
-            {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e)
-            {
             }
         });
         
@@ -706,7 +680,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         btnTambahPemeriksaan = new widget.Button();
         jPanel7 = new javax.swing.JPanel();
         Scroll7 = new widget.ScrollPane();
-        txtHasil = new javax.swing.JTextArea();
+        txtHasil = new widget.EditorPane();
         panelisi9 = new widget.panelisi();
         btnEditHasil = new widget.Button();
         panelisi3 = new widget.panelisi();
@@ -1164,7 +1138,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1724,10 +1698,6 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         Scroll7.setName("Scroll7"); // NOI18N
         Scroll7.setOpaque(true);
 
-        txtHasil.setEditable(false);
-        txtHasil.setColumns(20);
-        txtHasil.setRows(5);
-        txtHasil.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         txtHasil.setName("txtHasil"); // NOI18N
         Scroll7.setViewportView(txtHasil);
 
@@ -1806,7 +1776,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglOrder1.setEditable(false);
         tglOrder1.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
+        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         tglOrder1.setDisplayFormat("dd-MM-yyyy");
         tglOrder1.setName("tglOrder1"); // NOI18N
         tglOrder1.setOpaque(false);
@@ -1820,7 +1790,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglOrder2.setEditable(false);
         tglOrder2.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
+        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         tglOrder2.setDisplayFormat("dd-MM-yyyy");
         tglOrder2.setName("tglOrder2"); // NOI18N
         tglOrder2.setOpaque(false);
@@ -2008,7 +1978,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setName("tglTransaksi1"); // NOI18N
         tglTransaksi1.setOpaque(false);
@@ -2022,7 +1992,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setName("tglTransaksi2"); // NOI18N
         tglTransaksi2.setOpaque(false);
@@ -2210,7 +2180,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglNonRm1.setEditable(false);
         tglNonRm1.setForeground(new java.awt.Color(50, 70, 50));
-        tglNonRm1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
+        tglNonRm1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         tglNonRm1.setDisplayFormat("dd-MM-yyyy");
         tglNonRm1.setName("tglNonRm1"); // NOI18N
         tglNonRm1.setOpaque(false);
@@ -2224,7 +2194,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
 
         tglNonRm2.setEditable(false);
         tglNonRm2.setForeground(new java.awt.Color(50, 70, 50));
-        tglNonRm2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-04-2018" }));
+        tglNonRm2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         tglNonRm2.setDisplayFormat("dd-MM-yyyy");
         tglNonRm2.setName("tglNonRm2"); // NOI18N
         tglNonRm2.setOpaque(false);
@@ -3326,8 +3296,8 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_menuCetakBillingTransaksiActionPerformed
 
-    private void menuCetakBillingOrderActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_menuCetakBillingOrderActionPerformed
-    {//GEN-HEADEREND:event_menuCetakBillingOrderActionPerformed
+    private void menuCetakBillingOrderActionPerformed(java.awt.event.ActionEvent evt)                                                      
+    {                                                          
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         
         if (mdlOrder.getRowCount() == 0)
@@ -3411,7 +3381,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         }
         
         this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_menuCetakBillingOrderActionPerformed                       
+    }                                                                            
 
     private void btnCariPasienActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCariPasienActionPerformed
     {//GEN-HEADEREND:event_btnCariPasienActionPerformed
@@ -3714,7 +3684,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
     private widget.TextBox txtCariOrder;
     private widget.TextBox txtCariPemeriksaan;
     private widget.TextBox txtCariTransaksi;
-    private javax.swing.JTextArea txtHasil;
+    private widget.EditorPane txtHasil;
     private widget.TextBox txtKdDokter;
     private widget.TextBox txtKdDokterPj;
     private widget.TextBox txtKdKamar;
@@ -3894,7 +3864,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                     .a("FROM pemeriksaan_radiologi")
                     .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_radiologi.no_rawat")
                     .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
-                    .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_radiologi.no_rawat")
+                    .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_radiologi.no_rawat AND kamar_inap.stts_pulang = '-'")
                     .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
                     .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
                     .a("LEFT JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
@@ -3968,7 +3938,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
                     .a("FROM pemeriksaan_radiologi")
                     .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_radiologi.no_rawat")
                     .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
-                    .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_radiologi.no_rawat")
+                    .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_radiologi.no_rawat AND kamar_inap.stts_pulang = '-'")
                     .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
                     .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
                     .a("LEFT JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")

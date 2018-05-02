@@ -77,7 +77,7 @@ public class DlgHarianHAIs extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
         Scroll = new widget.ScrollPane();
-        LoadHTML = new widget.editorpane();
+        LoadHTML = new widget.EditorPane();
 
         Kd2.setName("Kd2"); // NOI18N
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
@@ -316,7 +316,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.TextBox Kd2;
-    private widget.editorpane LoadHTML;
+    private widget.EditorPane LoadHTML;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.Tanggal Tgl1;

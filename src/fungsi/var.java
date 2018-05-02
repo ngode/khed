@@ -15,6 +15,7 @@ import java.sql.ResultSet;
  * @author Owner
  */
 public final class var {
+    
     private static final Connection koneksi=koneksiDB.condb();
     private static PreparedStatement ps,ps2;
     private static ResultSet rs,rs2;
