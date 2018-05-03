@@ -42,8 +42,8 @@ public class RoundBorder extends AbstractBorder
 
     public Shape getBorderShape(int x, int y, int w, int h)
     {
-        int r = h; //h / 2;
-        return new RoundRectangle2D.Double(x, y, w, h, r, r);
+        //int r = (int)(h * 0.8); //h / 2;
+        return new RoundRectangle2D.Double(x, y, w, h, 12, 12);
     }
 
     @Override

@@ -1519,6 +1519,45 @@ public final class sekuel {
         }
     }
    
+   public boolean exist(String sql, String val)
+   {
+       boolean res = false;
+       
+       try
+       {
+           ps = connect.prepareStatement(sql);
+           ps.setString(1, val);
+           
+           try
+           {
+               rs = ps.executeQuery();
+               if (rs.next()) res = true;
+           }
+           catch (Exception e)
+           {
+               System.out.println("Notifikasi : " + e);
+           }
+           finally
+           {
+               if (rs != null)
+               {
+                   rs.close();
+               }
+
+               if (ps != null)
+               {
+                   ps.close();
+               }
+           }
+       }
+       catch (Exception e)
+       {
+           System.out.println("Notifikasi : " + e);
+       }
+       
+       return res;
+   }
+   
     public List<String[]> select(String q)
     {
         List<String[]> res = new ArrayList<>();
