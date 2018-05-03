@@ -6,7 +6,6 @@
 package pop;
 
 import java.awt.Font;
-import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
 
 /**
