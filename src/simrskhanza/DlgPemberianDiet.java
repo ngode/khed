@@ -47,7 +47,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
         setSize(1300,674);
 
         Object[] row={"No.Rawat","Nama Pasien","Kamar","Tanggal","Waktu","Diagnosa",
-            "Bentuk Makanan", "Jenis Diet", "Ekstra","Status"};
+            "Bentuk Makanan", "Jenis Diet", "Ekstra","Status", "Status Pulang"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -57,7 +57,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 11; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(120);
@@ -78,6 +78,8 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
             }else if(i==8){
                 column.setPreferredWidth(150);
             }else if(i==9){
+                column.setPreferredWidth(150);
+            }else if(i==10){
                 column.setPreferredWidth(150);
             }
         }
@@ -177,15 +179,18 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
         try {
             ps=koneksi.prepareStatement("select detail_beri_diet.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, " +
                 "concat(detail_beri_diet.kd_kamar,', ',bangsal.nm_bangsal),detail_beri_diet.tanggal,detail_beri_diet.waktu, " +
-                "detail_beri_diet.bentuk_makanan, detail_beri_diet.jenis_diet, detail_beri_diet.ekstra, detail_beri_diet.status " +
+                "detail_beri_diet.bentuk_makanan, detail_beri_diet.jenis_diet, detail_beri_diet.ekstra, detail_beri_diet.status, detail_beri_diet.sts_Pulang " +
                 "from detail_beri_diet inner join reg_periksa inner join pasien inner join kamar inner join bangsal " +
                 "on detail_beri_diet.no_rawat=reg_periksa.no_rawat " +
                 "and detail_beri_diet.kd_kamar=kamar.kd_kamar "+
                 "and kamar.kd_bangsal=bangsal.kd_bangsal "+
                 "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                "where detail_beri_diet.tanggal between ? and ? and detail_beri_diet.waktu like ? and bangsal.nm_bangsal like ? and detail_beri_diet.no_rawat like ? or "+
-                "detail_beri_diet.tanggal between ? and ? and detail_beri_diet.waktu like ? and bangsal.nm_bangsal like ? and reg_periksa.no_rkm_medis like ? or "+
-                "detail_beri_diet.tanggal between ? and ? and detail_beri_diet.waktu like ? and bangsal.nm_bangsal like ? and pasien.nm_pasien like ? "+
+                "where detail_beri_diet.tanggal between ? and ? and detail_beri_diet.waktu like ? and bangsal.nm_bangsal like ? and "+
+                "detail_beri_diet.no_rawat like ? and detail_beri_diet.sts_Pulang = '-' or "+
+                "detail_beri_diet.tanggal between ? and ? and detail_beri_diet.waktu like ? "+
+                "and bangsal.nm_bangsal like ? and reg_periksa.no_rkm_medis like ? and detail_beri_diet.sts_Pulang = '-' or "+
+                "detail_beri_diet.tanggal between ? and ? and detail_beri_diet.waktu like ? and bangsal.nm_bangsal like ? "+
+                "and pasien.nm_pasien like ? and detail_beri_diet.sts_Pulang = '-' "+
                 "order by bangsal.nm_bangsal,detail_beri_diet.bentuk_makanan, detail_beri_diet.jenis_diet");
             ps2=koneksi.prepareStatement("select detail_beri_diet.jenis_diet, count(detail_beri_diet.jenis_diet) as jumlah " +
                 "from detail_beri_diet inner join reg_periksa inner join pasien inner join kamar inner join bangsal " +
@@ -479,7 +484,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2018" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -494,7 +499,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2018" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -586,7 +591,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2018" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-04-2018" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -618,7 +623,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
         Kamar.setHighlighter(null);
         Kamar.setName("Kamar"); // NOI18N
         FormInput.add(Kamar);
-        Kamar.setBounds(497, 12, 243, 23);
+        Kamar.setBounds(500, 10, 243, 23);
 
         jLabel1.setText("Ekstra :");
         jLabel1.setName("jLabel1"); // NOI18N
@@ -719,7 +724,7 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
                     Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+
                     cmbJam.getSelectedItem()+"','"+
                     NmBentukMakanan.getText()+"','"+NmJenisDiet.getText()+"','"+
-                    NmEkstra.getText()+"','BELUM'","data");
+                    NmEkstra.getText()+"','BELUM', '-'","data");
             tampil();
             emptTeks();
         }
@@ -1025,7 +1030,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     rs.getString(1),rs.getString(2)+", "+rs.getString(3),
                     rs.getString(4),rs.getString(5),rs.getString(6),
                     Sequel.cariIsi("select diagnosa_awal from kamar_inap where no_rawat=? order by tgl_masuk desc",rs.getString(1)),
-                    rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10)
+                    rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11)
                 });
             }
         }catch(Exception e){
@@ -1099,7 +1104,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         isForm();
     }
     
-    private void isForm(){
+     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,99));

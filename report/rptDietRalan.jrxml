@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="421" pageHeight="297" orientation="Landscape" columnWidth="421" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true">
-	<property name="ireport.zoom" value="2.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="151" pageHeight="93" columnWidth="151" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" >
+	<property name="ireport.zoom" value="4.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="namars" class="java.lang.String">
@@ -57,107 +57,63 @@ and reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="177" splitType="Stretch">
+		<band height="93" splitType="Stretch">
 			<textField>
-				<reportElement x="37" y="10" width="347" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="37" y="29" width="347" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="37" y="49" width="347" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{kontakrs}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="78" y="100" width="189" height="20"/>
+				<reportElement x="34" y="39" width="111" height="10" />
 				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
+					<font fontName="Courier New" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": "+$F{no_rkm_medis}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="78" y="120" width="189" height="20"/>
+				<reportElement x="34" y="49" width="111" height="11" />
 				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
+					<font fontName="Courier New" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": "+$F{nm_pasien}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="78" y="140" width="189" height="20"/>
+				<reportElement x="34" y="62" width="111" height="9" />
 				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
+					<font fontName="Courier New" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[": "+$F{tgl_lahir}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="21" y="100" width="51" height="20"/>
+				<reportElement x="3" y="39" width="31" height="10" />
 				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
+					<font fontName="Courier New" size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[No. RM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="21" y="120" width="51" height="20"/>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" isBold="true"/>
+				<reportElement x="3" y="49" width="31" height="11" />
+				<textElement>
+					<font fontName="Courier New" size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Nama]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="21" y="140" width="51" height="20"/>
+				<reportElement x="3" y="62" width="31" height="9" />
 				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
+					<font fontName="Courier New" size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Tgl. Lahir]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="94" y="77" width="313" height="20"/>
+				<reportElement x="34" y="28" width="111" height="10" />
 				<textElement textAlignment="Right">
-					<font fontName="Tahoma" isBold="true"/>
+					<font fontName="Courier New" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{jenis_diet}+", "+$F{bentuk_makanan}+", "+$F{ekstra}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="416" y="4" width="1" height="165"/>
-				<graphicElement>
-					<pen lineWidth="2.0"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="11" y="167" width="406" height="2"/>
-				<graphicElement>
-					<pen lineWidth="2.0"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="11" y="2" width="1" height="165"/>
-				<graphicElement>
-					<pen lineWidth="2.0"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="11" y="2" width="406" height="2"/>
-				<graphicElement>
-					<pen lineWidth="2.0"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="12" y="70" width="405" height="2"/>
-				<graphicElement>
-					<pen lineWidth="2.0"/>
-				</graphicElement>
-			</line>
+			<textField>
+				<reportElement x="3" y="28" width="31" height="10" />
+				<textElement>
+					<font fontName="Courier New" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{waktu}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

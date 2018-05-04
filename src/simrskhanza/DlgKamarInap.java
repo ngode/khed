@@ -4289,7 +4289,7 @@ private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
                     rs2=psanak.executeQuery();
                     if(rs2.next()){
-                        DlgOrderOperasi d = new DlgOrderOperasi(null,false);
+                        DlgOrderOperasi1 d = new DlgOrderOperasi1(null,false);
                         d.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                         d.setLocationRelativeTo(internalFrame1);
                         d.setNoRm(rs2.getString("no_rawat2"), "Ranap");  
@@ -4312,7 +4312,7 @@ private void MnOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 System.out.println(e);
             } 
         }else{
-            DlgOrderOperasi d = new DlgOrderOperasi(null,false);
+            DlgOrderOperasi1 d = new DlgOrderOperasi1(null,false);
             d.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             d.setLocationRelativeTo(internalFrame1);
             d.setNoRm(norawat.getText(), "Ranap");  
@@ -4335,7 +4335,7 @@ private void MnHapusTagihanOperasiActionPerformed(java.awt.event.ActionEvent evt
                     psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
                     rs2=psanak.executeQuery();
                     if(rs2.next()){
-                        Sequel.queryu("delete from operasi where no_rawat='"+rs2.getString("no_rawat2")+"'");
+                        Sequel.queryu("delete from hrj_operasi where no_rawat='"+rs2.getString("no_rawat2")+"'");
                         Sequel.queryu("delete from beri_obat_operasi where no_rawat='"+rs2.getString("no_rawat2")+"'");
                     }else{
                           JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
@@ -4355,7 +4355,7 @@ private void MnHapusTagihanOperasiActionPerformed(java.awt.event.ActionEvent evt
                 System.out.println(e);
             }
       }else{
-                Sequel.queryu("delete from operasi where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0) +"'");
+                Sequel.queryu("delete from hrj_operasi where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0) +"'");
                 Sequel.queryu("delete from beri_obat_operasi where no_rawat='"+tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0)+"'");
       }    
 }//GEN-LAST:event_MnHapusTagihanOperasiActionPerformed

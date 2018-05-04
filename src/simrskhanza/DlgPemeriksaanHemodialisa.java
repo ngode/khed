@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -47,7 +48,9 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import laporan.DlgPenyakit;
 import util.GMessage;
+import simrskhanza.cari.DlgCariReg;
 
 /**
  *
@@ -57,6 +60,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 {
     // CHILD ====
     private DlgCariPetugas petugas = new DlgCariPetugas(null, false);
+    private DlgPenyakit penyakit = new DlgPenyakit(null, false);
+    private DlgPenyakit penyakit2 = new DlgPenyakit(null, false);
     private DlgCariDokter dlgDokter;
 
     private DefaultTableModel mdlTindakan, mdlTransaksi, mdlOrder;
@@ -68,7 +73,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
     private List<String> selKodes = new ArrayList<>();
     private List<String[]> selDatas = new ArrayList<>();
-    private String kdPeriksa;
+    private String kdPeriksa, status = "";
+    private boolean isEdit = false;
     
     private int pil = -1;
     
@@ -173,6 +179,52 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
             }
         });
         
+        penyakit.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (var.getform().equals("DlgPeriksaRadiologi"))
+                {
+                    if (penyakit.getTable().getSelectedRow() != -1)
+                    {
+                        DiagnosaUtama.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(), 2).toString());
+                        txtKdDiagnosaUtama.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(), 1).toString());
+                    }
+                        txtKdDiagnosaUtama.requestFocus();
+                } else if (var.getform().equals("DlgPeriksaRadiologi2"))
+                {
+                    if (penyakit.getTable().getSelectedRow() != -1)
+                    {
+                        DiagnosaKomorbiditas1.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(), 2).toString());
+                        txtKdDiagnosaKomorbiditas1.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(), 1).toString());
+                    }
+                        txtKdDiagnosaKomorbiditas1.requestFocus();
+                } else if (var.getform().equals("DlgPeriksaRadiologi3"))
+                {
+                    if (penyakit.getTable().getSelectedRow() != -1)
+                    {
+                        DiagnosaKomorbiditas2.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(), 2).toString());
+                        txtKdDiagnosaKomorbiditas2.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(), 1).toString());
+                    }
+                        txtKdDiagnosaKomorbiditas2.requestFocus();
+                } else if (var.getform().equals("DlgPeriksaRadiologi4"))
+                {
+                    if (penyakit.getTable().getSelectedRow() != -1)
+                    {
+                        ProsedurTindakan.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(), 2).toString());
+                        txtKdProsedurTindakan.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(), 1).toString());
+                    }
+                        txtKdProsedurTindakan.requestFocus();
+                }
+                        
+            }
+
+        
+        
+        });
+        
+        
+        
+        
         petugas.addWindowListener(new WindowListener()
         {
             @Override
@@ -188,7 +240,7 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
             @Override
             public void windowClosed(WindowEvent e)
             {
-                if (var.getform().equals("DlgPeriksaRadiologi"))
+                if (var.getform().equals("DlgPetugas"))
                 {
                     if (petugas.getTable().getSelectedRow() != -1)
                     {
@@ -619,8 +671,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         txtPostBb.setText("");
         txtPostNadi.setText("");
         txtPostRes.setText("");
-        txtKdPetugas.setText("");
-        NmPtg.setText("");
+        txtKdProsedurTindakan.setText("");
+        ProsedurTindakan.setText("");
         txtKdDokter.setText("");
         txtNamaDokter.setText("");
         txtKdDokterKons.setText("");
@@ -646,14 +698,14 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPopupMenu2 = new javax.swing.JPopupMenu();
         menuUbah1 = new javax.swing.JMenuItem();
         menuHapus1 = new javax.swing.JMenuItem();
         menuCetakHasil = new javax.swing.JMenuItem();
         menuCetakBilling = new javax.swing.JMenuItem();
+        menuCetakHasilDanBiling = new javax.swing.JMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         menuUbah = new javax.swing.JMenuItem();
         menuHapus = new javax.swing.JMenuItem();
@@ -727,9 +779,40 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         txtKdDokterPel = new widget.TextBox();
         txtNamaDokterPel = new widget.TextBox();
         jLabel28 = new widget.Label();
-        txtKdPetugas = new widget.TextBox();
+        txtKdProsedurTindakan = new widget.TextBox();
         btnPetugas = new widget.Button();
+        ProsedurTindakan = new widget.TextBox();
+        jLabel8 = new widget.Label();
+        jLabel29 = new widget.Label();
+        jLabel30 = new widget.Label();
+        jLabel32 = new widget.Label();
+        btnDiagnosaUtama = new widget.Button();
+        btnDiagnosaKomorniditas1 = new widget.Button();
+        btnProsedurTindakan = new widget.Button();
+        jLabel31 = new widget.Label();
+        jLabel37 = new widget.Label();
+        jLabel38 = new widget.Label();
+        jLabel39 = new widget.Label();
+        jLabel40 = new widget.Label();
+        jLabel41 = new widget.Label();
+        jLabel42 = new widget.Label();
+        txtWaktuSelesaiHD = new widget.TextBox();
+        txtNamaObat2 = new widget.TextBox();
+        txtNamaObat3 = new widget.TextBox();
+        txtNamaObat5 = new widget.TextBox();
+        txtNamaObat4 = new widget.TextBox();
+        txtNamaObat1 = new widget.TextBox();
+        txtWaktuMulaiHD = new widget.TextBox();
         NmPtg = new widget.TextBox();
+        DiagnosaUtama = new widget.TextBox();
+        DiagnosaKomorbiditas1 = new widget.TextBox();
+        DiagnosaKomorbiditas2 = new widget.TextBox();
+        txtKdPetugas = new widget.TextBox();
+        txtKdDiagnosaUtama = new widget.TextBox();
+        txtKdDiagnosaKomorbiditas1 = new widget.TextBox();
+        txtKdDiagnosaKomorbiditas2 = new widget.TextBox();
+        btnDiagnosaKomorniditas2 = new widget.Button();
+        btnCariPasien = new widget.Button();
         Scroll3 = new widget.ScrollPane();
         tblTindakan = new widget.Table();
         panelBiasa3 = new widget.PanelBiasa();
@@ -783,10 +866,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         menuUbah1.setIconTextGap(5);
         menuUbah1.setName("menuUbah1"); // NOI18N
         menuUbah1.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuUbah1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuUbah1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuUbah1ActionPerformed(evt);
             }
         });
@@ -802,10 +883,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         menuHapus1.setIconTextGap(5);
         menuHapus1.setName("menuHapus1"); // NOI18N
         menuHapus1.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuHapus1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuHapus1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuHapus1ActionPerformed(evt);
             }
         });
@@ -815,16 +894,14 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         menuCetakHasil.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         menuCetakHasil.setForeground(new java.awt.Color(60, 80, 50));
         menuCetakHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        menuCetakHasil.setText("Cetak Hasil");
+        menuCetakHasil.setText("Cetak Hasil dan Biling");
         menuCetakHasil.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         menuCetakHasil.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         menuCetakHasil.setIconTextGap(5);
         menuCetakHasil.setName("menuCetakHasil"); // NOI18N
         menuCetakHasil.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuCetakHasil.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuCetakHasil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCetakHasilActionPerformed(evt);
             }
         });
@@ -840,14 +917,29 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         menuCetakBilling.setIconTextGap(5);
         menuCetakBilling.setName("menuCetakBilling"); // NOI18N
         menuCetakBilling.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuCetakBilling.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuCetakBilling.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCetakBillingActionPerformed(evt);
             }
         });
         jPopupMenu2.add(menuCetakBilling);
+
+        menuCetakHasilDanBiling.setBackground(new java.awt.Color(255, 255, 255));
+        menuCetakHasilDanBiling.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        menuCetakHasilDanBiling.setForeground(new java.awt.Color(60, 80, 50));
+        menuCetakHasilDanBiling.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        menuCetakHasilDanBiling.setText("Cetak Hasil");
+        menuCetakHasilDanBiling.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        menuCetakHasilDanBiling.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        menuCetakHasilDanBiling.setIconTextGap(5);
+        menuCetakHasilDanBiling.setName("menuCetakHasilDanBiling"); // NOI18N
+        menuCetakHasilDanBiling.setPreferredSize(new java.awt.Dimension(220, 26));
+        menuCetakHasilDanBiling.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCetakHasilDanBilingActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(menuCetakHasilDanBiling);
 
         jPopupMenu1.setForeground(new java.awt.Color(60, 80, 50));
         jPopupMenu1.setAutoscrolls(true);
@@ -865,10 +957,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         menuUbah.setIconTextGap(5);
         menuUbah.setName("menuUbah"); // NOI18N
         menuUbah.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuUbah.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuUbahActionPerformed(evt);
             }
         });
@@ -884,10 +974,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         menuHapus.setIconTextGap(5);
         menuHapus.setName("menuHapus"); // NOI18N
         menuHapus.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuHapus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuHapusActionPerformed(evt);
             }
         });
@@ -903,10 +991,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         menuCetakBilling1.setIconTextGap(5);
         menuCetakBilling1.setName("menuCetakBilling1"); // NOI18N
         menuCetakBilling1.setPreferredSize(new java.awt.Dimension(220, 26));
-        menuCetakBilling1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        menuCetakBilling1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCetakBilling1ActionPerformed(evt);
             }
         });
@@ -941,10 +1027,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnSimpan.setToolTipText("Alt+S");
         btnSimpan.setName("btnSimpan"); // NOI18N
         btnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnSimpan.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
             }
         });
@@ -956,10 +1040,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
         BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnBatal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBatalActionPerformed(evt);
             }
         });
@@ -971,10 +1053,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnHapusActionPerformed(evt);
             }
         });
@@ -1002,16 +1082,12 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKeluarActionPerformed(evt);
             }
         });
         panelGlass8.add(BtnKeluar);
-
-        jPanel3.add(panelGlass8, java.awt.BorderLayout.CENTER);
 
         panelGlass9.setName("panelGlass9"); // NOI18N
         panelGlass9.setPreferredSize(new java.awt.Dimension(44, 44));
@@ -1024,10 +1100,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
         txtCari.setName("txtCari"); // NOI18N
         txtCari.setPreferredSize(new java.awt.Dimension(200, 23));
-        txtCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCariKeyPressed(evt);
             }
         });
@@ -1042,10 +1116,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         ckbChecked.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ckbChecked.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ckbChecked.setName("ckbChecked"); // NOI18N
-        ckbChecked.addChangeListener(new javax.swing.event.ChangeListener()
-        {
-            public void stateChanged(javax.swing.event.ChangeEvent evt)
-            {
+        ckbChecked.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 ckbCheckedStateChanged(evt);
             }
         });
@@ -1056,17 +1128,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariActionPerformed(evt);
             }
         });
-        BtnCari.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnCariKeyPressed(evt);
             }
         });
@@ -1083,7 +1151,9 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         LCount.setPreferredSize(new java.awt.Dimension(45, 23));
         panelGlass9.add(LCount);
 
-        jPanel3.add(panelGlass9, java.awt.BorderLayout.PAGE_START);
+        panelGlass8.add(panelGlass9);
+
+        jPanel3.add(panelGlass8, java.awt.BorderLayout.CENTER);
 
         panelBiasa1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
@@ -1103,10 +1173,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         txtNoRw.setEditable(false);
         txtNoRw.setHighlighter(null);
         txtNoRw.setName("txtNoRw"); // NOI18N
-        txtNoRw.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtNoRw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNoRwActionPerformed(evt);
+            }
+        });
+        txtNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNoRwKeyPressed(evt);
             }
         });
@@ -1116,6 +1189,11 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         txtNoRm.setEditable(false);
         txtNoRm.setHighlighter(null);
         txtNoRm.setName("txtNoRm"); // NOI18N
+        txtNoRm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNoRmActionPerformed(evt);
+            }
+        });
         FormInput.add(txtNoRm);
         txtNoRm.setBounds(258, 12, 143, 23);
 
@@ -1123,32 +1201,28 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         txtNamaPasien.setHighlighter(null);
         txtNamaPasien.setName("txtNamaPasien"); // NOI18N
         txtNamaPasien.setPreferredSize(new java.awt.Dimension(25, 28));
-        txtNamaPasien.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNamaPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamaPasienActionPerformed(evt);
             }
         });
         FormInput.add(txtNamaPasien);
         txtNamaPasien.setBounds(403, 12, 320, 23);
 
-        jLabel7.setText("Pre");
+        jLabel7.setText("Diagnosa");
         jLabel7.setName("jLabel7"); // NOI18N
         FormInput.add(jLabel7);
-        jLabel7.setBounds(30, 110, 50, 23);
+        jLabel7.setBounds(10, 110, 70, 23);
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2018" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
         DTPBeri.setPreferredSize(new java.awt.Dimension(100, 23));
-        DTPBeri.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        DTPBeri.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 DTPBeriKeyPressed(evt);
             }
         });
@@ -1158,10 +1232,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJam.setName("cmbJam"); // NOI18N
         cmbJam.setOpaque(false);
-        cmbJam.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbJam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbJamKeyPressed(evt);
             }
         });
@@ -1171,10 +1243,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMnt.setName("cmbMnt"); // NOI18N
         cmbMnt.setOpaque(false);
-        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbMntKeyPressed(evt);
             }
         });
@@ -1184,10 +1254,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDtk.setName("cmbDtk"); // NOI18N
         cmbDtk.setOpaque(false);
-        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbDtkKeyPressed(evt);
             }
         });
@@ -1210,38 +1278,34 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         jLabel12.setText("Umur :");
         jLabel12.setName("jLabel12"); // NOI18N
         FormInput.add(jLabel12);
-        jLabel12.setBounds(507, 42, 60, 23);
+        jLabel12.setBounds(500, 40, 60, 23);
 
         txtUmur.setEditable(false);
         txtUmur.setHighlighter(null);
         txtUmur.setName("txtUmur"); // NOI18N
-        txtUmur.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtUmur.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUmurKeyPressed(evt);
             }
         });
         FormInput.add(txtUmur);
-        txtUmur.setBounds(580, 40, 130, 23);
+        txtUmur.setBounds(570, 40, 130, 23);
 
         jLabel16.setText("J.K. :");
         jLabel16.setName("jLabel16"); // NOI18N
         FormInput.add(jLabel16);
-        jLabel16.setBounds(700, 40, 50, 23);
+        jLabel16.setBounds(690, 40, 50, 23);
 
         txtJk.setEditable(false);
         txtJk.setHighlighter(null);
         txtJk.setName("txtJk"); // NOI18N
-        txtJk.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtJk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtJkKeyPressed(evt);
             }
         });
         FormInput.add(txtJk);
-        txtJk.setBounds(760, 40, 50, 23);
+        txtJk.setBounds(750, 40, 50, 23);
 
         jLabel4.setText("Alamat :");
         jLabel4.setName("jLabel4"); // NOI18N
@@ -1251,25 +1315,28 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         txtAlamat.setEditable(false);
         txtAlamat.setHighlighter(null);
         txtAlamat.setName("txtAlamat"); // NOI18N
+        txtAlamat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAlamatActionPerformed(evt);
+            }
+        });
         FormInput.add(txtAlamat);
         txtAlamat.setBounds(81, 42, 426, 23);
 
         jLabel13.setText("TD :");
         jLabel13.setName("jLabel13"); // NOI18N
         FormInput.add(jLabel13);
-        jLabel13.setBounds(30, 140, 50, 23);
+        jLabel13.setBounds(380, 140, 30, 23);
 
         txtPreTd.setHighlighter(null);
         txtPreTd.setName("txtPreTd"); // NOI18N
-        txtPreTd.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtPreTd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPreTdKeyPressed(evt);
             }
         });
         FormInput.add(txtPreTd);
-        txtPreTd.setBounds(90, 140, 160, 23);
+        txtPreTd.setBounds(420, 140, 60, 23);
 
         jLabel9.setText("Tanggal :");
         jLabel9.setName("jLabel9"); // NOI18N
@@ -1279,271 +1346,498 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         jLabel14.setText("BB :");
         jLabel14.setName("jLabel14"); // NOI18N
         FormInput.add(jLabel14);
-        jLabel14.setBounds(30, 170, 50, 23);
+        jLabel14.setBounds(380, 170, 30, 23);
 
         txtPreBb.setHighlighter(null);
         txtPreBb.setName("txtPreBb"); // NOI18N
-        txtPreBb.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtPreBb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPreBbKeyPressed(evt);
             }
         });
         FormInput.add(txtPreBb);
-        txtPreBb.setBounds(90, 170, 160, 23);
+        txtPreBb.setBounds(420, 170, 60, 23);
 
         jLabel15.setText("NADI :");
         jLabel15.setName("jLabel15"); // NOI18N
         FormInput.add(jLabel15);
-        jLabel15.setBounds(30, 200, 50, 23);
+        jLabel15.setBounds(370, 200, 40, 23);
 
         txtPreNadi.setHighlighter(null);
         txtPreNadi.setName("txtPreNadi"); // NOI18N
-        txtPreNadi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtPreNadi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPreNadiKeyPressed(evt);
             }
         });
         FormInput.add(txtPreNadi);
-        txtPreNadi.setBounds(90, 200, 160, 23);
+        txtPreNadi.setBounds(420, 200, 60, 23);
 
         jLabel17.setText("RES :");
         jLabel17.setName("jLabel17"); // NOI18N
         FormInput.add(jLabel17);
-        jLabel17.setBounds(30, 230, 50, 23);
+        jLabel17.setBounds(360, 230, 50, 23);
 
         txtPreRes.setHighlighter(null);
         txtPreRes.setName("txtPreRes"); // NOI18N
-        txtPreRes.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtPreRes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPreResKeyPressed(evt);
             }
         });
         FormInput.add(txtPreRes);
-        txtPreRes.setBounds(90, 230, 160, 23);
+        txtPreRes.setBounds(420, 230, 60, 23);
 
         jLabel18.setText("Post");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(260, 110, 50, 23);
+        jLabel18.setBounds(470, 110, 50, 23);
 
         jLabel19.setText("TD :");
         jLabel19.setName("jLabel19"); // NOI18N
         FormInput.add(jLabel19);
-        jLabel19.setBounds(260, 140, 50, 23);
+        jLabel19.setBounds(470, 140, 50, 23);
 
         txtPostTd.setHighlighter(null);
         txtPostTd.setName("txtPostTd"); // NOI18N
-        txtPostTd.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtPostTd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPostTdKeyPressed(evt);
             }
         });
         FormInput.add(txtPostTd);
-        txtPostTd.setBounds(320, 140, 160, 23);
+        txtPostTd.setBounds(530, 140, 60, 23);
 
         jLabel20.setText("BB :");
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
-        jLabel20.setBounds(260, 170, 50, 23);
+        jLabel20.setBounds(470, 170, 50, 23);
 
         txtPostBb.setHighlighter(null);
         txtPostBb.setName("txtPostBb"); // NOI18N
-        txtPostBb.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtPostBb.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPostBbKeyPressed(evt);
             }
         });
         FormInput.add(txtPostBb);
-        txtPostBb.setBounds(320, 170, 160, 23);
+        txtPostBb.setBounds(530, 170, 60, 23);
 
         jLabel21.setText("NADI :");
         jLabel21.setName("jLabel21"); // NOI18N
         FormInput.add(jLabel21);
-        jLabel21.setBounds(260, 200, 50, 23);
+        jLabel21.setBounds(470, 200, 50, 23);
 
         txtPostNadi.setHighlighter(null);
         txtPostNadi.setName("txtPostNadi"); // NOI18N
-        txtPostNadi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtPostNadi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPostNadiKeyPressed(evt);
             }
         });
         FormInput.add(txtPostNadi);
-        txtPostNadi.setBounds(320, 200, 160, 23);
+        txtPostNadi.setBounds(530, 200, 60, 23);
 
         jLabel22.setText("RES :");
         jLabel22.setName("jLabel22"); // NOI18N
         FormInput.add(jLabel22);
-        jLabel22.setBounds(260, 230, 50, 23);
+        jLabel22.setBounds(470, 230, 50, 23);
 
         txtPostRes.setHighlighter(null);
         txtPostRes.setName("txtPostRes"); // NOI18N
-        txtPostRes.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtPostRes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPostResKeyPressed(evt);
             }
         });
         FormInput.add(txtPostRes);
-        txtPostRes.setBounds(320, 230, 160, 23);
+        txtPostRes.setBounds(530, 230, 60, 23);
 
         jLabel23.setText("HD ke :");
         jLabel23.setName("jLabel23"); // NOI18N
         FormInput.add(jLabel23);
-        jLabel23.setBounds(360, 70, 50, 23);
+        jLabel23.setBounds(350, 70, 50, 23);
 
         txtHdKe.setHighlighter(null);
         txtHdKe.setName("txtHdKe"); // NOI18N
-        txtHdKe.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtHdKe.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtHdKeKeyPressed(evt);
             }
         });
         FormInput.add(txtHdKe);
-        txtHdKe.setBounds(420, 70, 70, 23);
+        txtHdKe.setBounds(410, 70, 50, 23);
 
         jLabel24.setText("Dokter Perujuk  :");
         jLabel24.setName("jLabel24"); // NOI18N
         FormInput.add(jLabel24);
-        jLabel24.setBounds(510, 140, 92, 23);
+        jLabel24.setBounds(580, 140, 120, 23);
 
         txtKdDokter.setEditable(false);
         txtKdDokter.setName("txtKdDokter"); // NOI18N
         FormInput.add(txtKdDokter);
-        txtKdDokter.setBounds(610, 140, 80, 23);
+        txtKdDokter.setBounds(700, 140, 50, 23);
 
         txtNamaDokter.setEditable(false);
         txtNamaDokter.setHighlighter(null);
         txtNamaDokter.setName("txtNamaDokter"); // NOI18N
-        txtNamaDokter.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNamaDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamaDokterActionPerformed(evt);
             }
         });
         FormInput.add(txtNamaDokter);
-        txtNamaDokter.setBounds(700, 140, 190, 23);
+        txtNamaDokter.setBounds(760, 140, 150, 23);
 
         jLabel25.setText("Dokter Konsultan :");
         jLabel25.setName("jLabel25"); // NOI18N
         FormInput.add(jLabel25);
-        jLabel25.setBounds(510, 170, 92, 23);
+        jLabel25.setBounds(590, 170, 110, 23);
 
         txtKdDokterKons.setEditable(false);
         txtKdDokterKons.setName("txtKdDokterKons"); // NOI18N
         FormInput.add(txtKdDokterKons);
-        txtKdDokterKons.setBounds(610, 170, 80, 23);
+        txtKdDokterKons.setBounds(700, 170, 50, 23);
 
         txtNamaDokterKons.setEditable(false);
         txtNamaDokterKons.setHighlighter(null);
         txtNamaDokterKons.setName("txtNamaDokterKons"); // NOI18N
-        txtNamaDokterKons.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNamaDokterKons.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamaDokterKonsActionPerformed(evt);
             }
         });
         FormInput.add(txtNamaDokterKons);
-        txtNamaDokterKons.setBounds(700, 170, 190, 23);
+        txtNamaDokterKons.setBounds(760, 170, 150, 23);
 
         jLabel26.setText("Dokter PJ  :");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
-        jLabel26.setBounds(510, 200, 92, 23);
+        jLabel26.setBounds(600, 200, 92, 23);
 
         txtKdDokterPj.setEditable(false);
         txtKdDokterPj.setName("txtKdDokterPj"); // NOI18N
         FormInput.add(txtKdDokterPj);
-        txtKdDokterPj.setBounds(610, 200, 80, 23);
+        txtKdDokterPj.setBounds(700, 200, 50, 23);
 
         txtNamaDokterPj.setEditable(false);
         txtNamaDokterPj.setHighlighter(null);
         txtNamaDokterPj.setName("txtNamaDokterPj"); // NOI18N
-        txtNamaDokterPj.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNamaDokterPj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamaDokterPjActionPerformed(evt);
             }
         });
         FormInput.add(txtNamaDokterPj);
-        txtNamaDokterPj.setBounds(700, 200, 190, 23);
+        txtNamaDokterPj.setBounds(760, 200, 150, 23);
 
         jLabel27.setText("Dokter Pelaksana :");
         jLabel27.setName("jLabel27"); // NOI18N
         FormInput.add(jLabel27);
-        jLabel27.setBounds(510, 230, 92, 23);
+        jLabel27.setBounds(580, 230, 120, 23);
 
         txtKdDokterPel.setEditable(false);
         txtKdDokterPel.setName("txtKdDokterPel"); // NOI18N
         FormInput.add(txtKdDokterPel);
-        txtKdDokterPel.setBounds(610, 230, 80, 23);
+        txtKdDokterPel.setBounds(700, 230, 50, 23);
 
         txtNamaDokterPel.setEditable(false);
         txtNamaDokterPel.setHighlighter(null);
         txtNamaDokterPel.setName("txtNamaDokterPel"); // NOI18N
-        txtNamaDokterPel.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        txtNamaDokterPel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamaDokterPelActionPerformed(evt);
             }
         });
         FormInput.add(txtNamaDokterPel);
-        txtNamaDokterPel.setBounds(700, 230, 190, 23);
+        txtNamaDokterPel.setBounds(760, 230, 150, 23);
 
         jLabel28.setText("Petugas :");
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
-        jLabel28.setBounds(510, 70, 60, 23);
+        jLabel28.setBounds(470, 70, 60, 23);
 
-        txtKdPetugas.setEditable(false);
-        txtKdPetugas.setName("txtKdPetugas"); // NOI18N
-        txtKdPetugas.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
-                txtKdPetugasKeyPressed(evt);
+        txtKdProsedurTindakan.setEditable(false);
+        txtKdProsedurTindakan.setName("txtKdProsedurTindakan"); // NOI18N
+        txtKdProsedurTindakan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKdProsedurTindakanKeyPressed(evt);
             }
         });
-        FormInput.add(txtKdPetugas);
-        txtKdPetugas.setBounds(580, 70, 80, 23);
+        FormInput.add(txtKdProsedurTindakan);
+        txtKdProsedurTindakan.setBounds(140, 230, 50, 23);
 
         btnPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPetugas.setMnemonic('2');
         btnPetugas.setToolTipText("Alt+2");
         btnPetugas.setName("btnPetugas"); // NOI18N
-        btnPetugas.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPetugas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPetugasActionPerformed(evt);
             }
         });
         FormInput.add(btnPetugas);
-        btnPetugas.setBounds(870, 70, 28, 23);
+        btnPetugas.setBounds(800, 70, 28, 23);
+
+        ProsedurTindakan.setEditable(false);
+        ProsedurTindakan.setName("ProsedurTindakan"); // NOI18N
+        FormInput.add(ProsedurTindakan);
+        ProsedurTindakan.setBounds(200, 230, 140, 23);
+
+        jLabel8.setText("Pre");
+        jLabel8.setName("jLabel8"); // NOI18N
+        FormInput.add(jLabel8);
+        jLabel8.setBounds(360, 110, 50, 23);
+
+        jLabel29.setText("Dianosa Utama");
+        jLabel29.setName("jLabel29"); // NOI18N
+        FormInput.add(jLabel29);
+        jLabel29.setBounds(40, 140, 90, 23);
+
+        jLabel30.setText("Diagnosa Komorbiditas");
+        jLabel30.setName("jLabel30"); // NOI18N
+        FormInput.add(jLabel30);
+        jLabel30.setBounds(0, 170, 130, 20);
+
+        jLabel32.setText("Prosedur Tindakan");
+        jLabel32.setName("jLabel32"); // NOI18N
+        FormInput.add(jLabel32);
+        jLabel32.setBounds(20, 230, 107, 23);
+
+        btnDiagnosaUtama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnDiagnosaUtama.setMnemonic('2');
+        btnDiagnosaUtama.setToolTipText("Alt+2");
+        btnDiagnosaUtama.setName("btnDiagnosaUtama"); // NOI18N
+        btnDiagnosaUtama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosaUtamaActionPerformed(evt);
+            }
+        });
+        FormInput.add(btnDiagnosaUtama);
+        btnDiagnosaUtama.setBounds(340, 140, 28, 23);
+
+        btnDiagnosaKomorniditas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnDiagnosaKomorniditas1.setMnemonic('2');
+        btnDiagnosaKomorniditas1.setToolTipText("Alt+2");
+        btnDiagnosaKomorniditas1.setName("btnDiagnosaKomorniditas1"); // NOI18N
+        btnDiagnosaKomorniditas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosaKomorniditas1ActionPerformed(evt);
+            }
+        });
+        FormInput.add(btnDiagnosaKomorniditas1);
+        btnDiagnosaKomorniditas1.setBounds(340, 170, 28, 23);
+
+        btnProsedurTindakan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnProsedurTindakan.setMnemonic('2');
+        btnProsedurTindakan.setToolTipText("Alt+2");
+        btnProsedurTindakan.setName("btnProsedurTindakan"); // NOI18N
+        btnProsedurTindakan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProsedurTindakanActionPerformed(evt);
+            }
+        });
+        FormInput.add(btnProsedurTindakan);
+        btnProsedurTindakan.setBounds(340, 230, 28, 23);
+
+        jLabel31.setText("Nama Obat :");
+        jLabel31.setName("jLabel31"); // NOI18N
+        FormInput.add(jLabel31);
+        jLabel31.setBounds(880, 110, 120, 23);
+
+        jLabel37.setText("Nama Obat :");
+        jLabel37.setName("jLabel37"); // NOI18N
+        FormInput.add(jLabel37);
+        jLabel37.setBounds(890, 140, 110, 23);
+
+        jLabel38.setText("Nama Obat :");
+        jLabel38.setName("jLabel38"); // NOI18N
+        FormInput.add(jLabel38);
+        jLabel38.setBounds(910, 170, 92, 23);
+
+        jLabel39.setText("Nama Obat :");
+        jLabel39.setName("jLabel39"); // NOI18N
+        FormInput.add(jLabel39);
+        jLabel39.setBounds(880, 200, 120, 23);
+
+        jLabel40.setText("Nama Obat :");
+        jLabel40.setName("jLabel40"); // NOI18N
+        FormInput.add(jLabel40);
+        jLabel40.setBounds(880, 230, 120, 23);
+
+        jLabel41.setText("Waktu Mulai HD :");
+        jLabel41.setName("jLabel41"); // NOI18N
+        FormInput.add(jLabel41);
+        jLabel41.setBounds(830, 40, 120, 23);
+
+        jLabel42.setText("Waktu Selesai :");
+        jLabel42.setName("jLabel42"); // NOI18N
+        FormInput.add(jLabel42);
+        jLabel42.setBounds(840, 70, 110, 23);
+
+        txtWaktuSelesaiHD.setHighlighter(null);
+        txtWaktuSelesaiHD.setName("txtWaktuSelesaiHD"); // NOI18N
+        txtWaktuSelesaiHD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtWaktuSelesaiHDKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtWaktuSelesaiHD);
+        txtWaktuSelesaiHD.setBounds(960, 70, 80, 23);
+
+        txtNamaObat2.setHighlighter(null);
+        txtNamaObat2.setName("txtNamaObat2"); // NOI18N
+        txtNamaObat2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNamaObat2KeyPressed(evt);
+            }
+        });
+        FormInput.add(txtNamaObat2);
+        txtNamaObat2.setBounds(1010, 140, 120, 23);
+
+        txtNamaObat3.setHighlighter(null);
+        txtNamaObat3.setName("txtNamaObat3"); // NOI18N
+        txtNamaObat3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNamaObat3KeyPressed(evt);
+            }
+        });
+        FormInput.add(txtNamaObat3);
+        txtNamaObat3.setBounds(1010, 170, 120, 23);
+
+        txtNamaObat5.setHighlighter(null);
+        txtNamaObat5.setName("txtNamaObat5"); // NOI18N
+        txtNamaObat5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNamaObat5KeyPressed(evt);
+            }
+        });
+        FormInput.add(txtNamaObat5);
+        txtNamaObat5.setBounds(1010, 230, 120, 23);
+
+        txtNamaObat4.setHighlighter(null);
+        txtNamaObat4.setName("txtNamaObat4"); // NOI18N
+        txtNamaObat4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNamaObat4KeyPressed(evt);
+            }
+        });
+        FormInput.add(txtNamaObat4);
+        txtNamaObat4.setBounds(1010, 200, 120, 23);
+
+        txtNamaObat1.setHighlighter(null);
+        txtNamaObat1.setName("txtNamaObat1"); // NOI18N
+        txtNamaObat1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNamaObat1KeyPressed(evt);
+            }
+        });
+        FormInput.add(txtNamaObat1);
+        txtNamaObat1.setBounds(1010, 110, 120, 23);
+
+        txtWaktuMulaiHD.setHighlighter(null);
+        txtWaktuMulaiHD.setName("txtWaktuMulaiHD"); // NOI18N
+        txtWaktuMulaiHD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtWaktuMulaiHDKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtWaktuMulaiHD);
+        txtWaktuMulaiHD.setBounds(960, 40, 80, 23);
 
         NmPtg.setEditable(false);
         NmPtg.setName("NmPtg"); // NOI18N
         FormInput.add(NmPtg);
-        NmPtg.setBounds(670, 70, 195, 23);
+        NmPtg.setBounds(630, 70, 170, 23);
+
+        DiagnosaUtama.setEditable(false);
+        DiagnosaUtama.setName("DiagnosaUtama"); // NOI18N
+        DiagnosaUtama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiagnosaUtamaActionPerformed(evt);
+            }
+        });
+        FormInput.add(DiagnosaUtama);
+        DiagnosaUtama.setBounds(200, 140, 140, 23);
+
+        DiagnosaKomorbiditas1.setEditable(false);
+        DiagnosaKomorbiditas1.setName("DiagnosaKomorbiditas1"); // NOI18N
+        FormInput.add(DiagnosaKomorbiditas1);
+        DiagnosaKomorbiditas1.setBounds(200, 170, 140, 23);
+
+        DiagnosaKomorbiditas2.setEditable(false);
+        DiagnosaKomorbiditas2.setName("DiagnosaKomorbiditas2"); // NOI18N
+        FormInput.add(DiagnosaKomorbiditas2);
+        DiagnosaKomorbiditas2.setBounds(200, 200, 140, 23);
+
+        txtKdPetugas.setEditable(false);
+        txtKdPetugas.setName("txtKdPetugas"); // NOI18N
+        txtKdPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKdPetugasKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtKdPetugas);
+        txtKdPetugas.setBounds(540, 70, 80, 23);
+
+        txtKdDiagnosaUtama.setEditable(false);
+        txtKdDiagnosaUtama.setName("txtKdDiagnosaUtama"); // NOI18N
+        txtKdDiagnosaUtama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKdDiagnosaUtamaActionPerformed(evt);
+            }
+        });
+        txtKdDiagnosaUtama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKdDiagnosaUtamaKeyPressed(evt);
+            }
+        });
+        FormInput.add(txtKdDiagnosaUtama);
+        txtKdDiagnosaUtama.setBounds(140, 140, 50, 23);
+
+        txtKdDiagnosaKomorbiditas1.setEditable(false);
+        txtKdDiagnosaKomorbiditas1.setName("txtKdDiagnosaKomorbiditas1"); // NOI18N
+        txtKdDiagnosaKomorbiditas1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKdDiagnosaKomorbiditas1KeyPressed(evt);
+            }
+        });
+        FormInput.add(txtKdDiagnosaKomorbiditas1);
+        txtKdDiagnosaKomorbiditas1.setBounds(140, 170, 50, 23);
+
+        txtKdDiagnosaKomorbiditas2.setEditable(false);
+        txtKdDiagnosaKomorbiditas2.setName("txtKdDiagnosaKomorbiditas2"); // NOI18N
+        txtKdDiagnosaKomorbiditas2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtKdDiagnosaKomorbiditas2KeyPressed(evt);
+            }
+        });
+        FormInput.add(txtKdDiagnosaKomorbiditas2);
+        txtKdDiagnosaKomorbiditas2.setBounds(140, 200, 50, 23);
+
+        btnDiagnosaKomorniditas2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnDiagnosaKomorniditas2.setMnemonic('2');
+        btnDiagnosaKomorniditas2.setToolTipText("Alt+2");
+        btnDiagnosaKomorniditas2.setName("btnDiagnosaKomorniditas2"); // NOI18N
+        btnDiagnosaKomorniditas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosaKomorniditas2ActionPerformed(evt);
+            }
+        });
+        FormInput.add(btnDiagnosaKomorniditas2);
+        btnDiagnosaKomorniditas2.setBounds(340, 200, 28, 23);
+
+        btnCariPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnCariPasien.setMnemonic('2');
+        btnCariPasien.setToolTipText("Alt+2");
+        btnCariPasien.setName("btnCariPasien"); // NOI18N
+        btnCariPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariPasienActionPerformed(evt);
+            }
+        });
+        FormInput.add(btnCariPasien);
+        btnCariPasien.setBounds(720, 10, 28, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1553,24 +1847,18 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         tblTindakan.setAutoCreateRowSorter(true);
         tblTindakan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tblTindakan.setName("tblTindakan"); // NOI18N
-        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tblTindakan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTindakanMouseClicked(evt);
             }
         });
-        tblTindakan.addPropertyChangeListener(new java.beans.PropertyChangeListener()
-        {
-            public void propertyChange(java.beans.PropertyChangeEvent evt)
-            {
+        tblTindakan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tblTindakanPropertyChange(evt);
             }
         });
-        tblTindakan.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tblTindakan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblTindakanKeyPressed(evt);
             }
         });
@@ -1592,17 +1880,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         tblOrder.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tblOrder.setComponentPopupMenu(jPopupMenu1);
         tblOrder.setName("tblOrder"); // NOI18N
-        tblOrder.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblOrderMouseClicked(evt);
             }
         });
-        tblOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tblOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblOrderKeyPressed(evt);
             }
         });
@@ -1627,7 +1911,7 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
         tglOrder1.setEditable(false);
         tglOrder1.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        tglOrder1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2018" }));
         tglOrder1.setDisplayFormat("dd-MM-yyyy");
         tglOrder1.setName("tglOrder1"); // NOI18N
         tglOrder1.setOpaque(false);
@@ -1641,7 +1925,7 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
         tglOrder2.setEditable(false);
         tglOrder2.setForeground(new java.awt.Color(50, 70, 50));
-        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        tglOrder2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2018" }));
         tglOrder2.setDisplayFormat("dd-MM-yyyy");
         tglOrder2.setName("tglOrder2"); // NOI18N
         tglOrder2.setOpaque(false);
@@ -1655,10 +1939,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
         txtCariOrder.setName("txtCariOrder"); // NOI18N
         txtCariOrder.setPreferredSize(new java.awt.Dimension(170, 23));
-        txtCariOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtCariOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCariOrderKeyPressed(evt);
             }
         });
@@ -1669,17 +1951,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnCariOrder.setToolTipText("Alt+6");
         btnCariOrder.setName("btnCariOrder"); // NOI18N
         btnCariOrder.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnCariOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnCariOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariOrderActionPerformed(evt);
             }
         });
-        btnCariOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnCariOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnCariOrderKeyPressed(evt);
             }
         });
@@ -1695,17 +1973,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnHapusOrder.setToolTipText("Alt+H");
         btnHapusOrder.setName("btnHapusOrder"); // NOI18N
         btnHapusOrder.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnHapusOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnHapusOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusOrderActionPerformed(evt);
             }
         });
-        btnHapusOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnHapusOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnHapusOrderKeyPressed(evt);
             }
         });
@@ -1717,17 +1991,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnAllOrder.setToolTipText("Alt+M");
         btnAllOrder.setName("btnAllOrder"); // NOI18N
         btnAllOrder.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnAllOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAllOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllOrderActionPerformed(evt);
             }
         });
-        btnAllOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnAllOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnAllOrderKeyPressed(evt);
             }
         });
@@ -1739,17 +2009,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnPrintOrder.setToolTipText("Alt+T");
         btnPrintOrder.setName("btnPrintOrder"); // NOI18N
         btnPrintOrder.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnPrintOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPrintOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintOrderActionPerformed(evt);
             }
         });
-        btnPrintOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnPrintOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnPrintOrderKeyPressed(evt);
             }
         });
@@ -1761,17 +2027,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnKeluarOrder.setToolTipText("Alt+K");
         btnKeluarOrder.setName("btnKeluarOrder"); // NOI18N
         btnKeluarOrder.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnKeluarOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnKeluarOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKeluarOrderActionPerformed(evt);
             }
         });
-        btnKeluarOrder.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnKeluarOrder.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnKeluarOrderKeyPressed(evt);
             }
         });
@@ -1794,17 +2056,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         tblTransaksi.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tblTransaksi.setComponentPopupMenu(jPopupMenu2);
         tblTransaksi.setName("tblTransaksi"); // NOI18N
-        tblTransaksi.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        tblTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTransaksiMouseClicked(evt);
             }
         });
-        tblTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        tblTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 tblTransaksiKeyPressed(evt);
             }
         });
@@ -1829,7 +2087,7 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2018" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setName("tglTransaksi1"); // NOI18N
         tglTransaksi1.setOpaque(false);
@@ -1843,7 +2101,7 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-12-2017" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2018" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setName("tglTransaksi2"); // NOI18N
         tglTransaksi2.setOpaque(false);
@@ -1857,10 +2115,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
         txtCariTransaksi.setName("txtCariTransaksi"); // NOI18N
         txtCariTransaksi.setPreferredSize(new java.awt.Dimension(170, 23));
-        txtCariTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        txtCariTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCariTransaksiKeyPressed(evt);
             }
         });
@@ -1871,17 +2127,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnCariTransaksi.setToolTipText("Alt+6");
         btnCariTransaksi.setName("btnCariTransaksi"); // NOI18N
         btnCariTransaksi.setPreferredSize(new java.awt.Dimension(28, 23));
-        btnCariTransaksi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnCariTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCariTransaksiActionPerformed(evt);
             }
         });
-        btnCariTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnCariTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnCariTransaksiKeyPressed(evt);
             }
         });
@@ -1897,17 +2149,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnHapusTransaksi.setToolTipText("Alt+H");
         btnHapusTransaksi.setName("btnHapusTransaksi"); // NOI18N
         btnHapusTransaksi.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnHapusTransaksi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnHapusTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusTransaksiActionPerformed(evt);
             }
         });
-        btnHapusTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnHapusTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnHapusTransaksiKeyPressed(evt);
             }
         });
@@ -1919,17 +2167,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnAllTransaksi.setToolTipText("Alt+M");
         btnAllTransaksi.setName("btnAllTransaksi"); // NOI18N
         btnAllTransaksi.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnAllTransaksi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnAllTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAllTransaksiActionPerformed(evt);
             }
         });
-        btnAllTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnAllTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnAllTransaksiKeyPressed(evt);
             }
         });
@@ -1941,17 +2185,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnPrintTransaksi.setToolTipText("Alt+T");
         btnPrintTransaksi.setName("btnPrintTransaksi"); // NOI18N
         btnPrintTransaksi.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnPrintTransaksi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnPrintTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintTransaksiActionPerformed(evt);
             }
         });
-        btnPrintTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnPrintTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnPrintTransaksiKeyPressed(evt);
             }
         });
@@ -1963,17 +2203,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         btnKeluarTransaksi.setToolTipText("Alt+K");
         btnKeluarTransaksi.setName("btnKeluarTransaksi"); // NOI18N
         btnKeluarTransaksi.setPreferredSize(new java.awt.Dimension(100, 30));
-        btnKeluarTransaksi.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        btnKeluarTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKeluarTransaksiActionPerformed(evt);
             }
         });
-        btnKeluarTransaksi.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        btnKeluarTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 btnKeluarTransaksiKeyPressed(evt);
             }
         });
@@ -2385,13 +2621,21 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
             .a("SELECT pemeriksaan_hd.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.umur, petugas.nama,")
             .a("    DATE_FORMAT(pemeriksaan_hd.tgl_periksa,'%d-%m-%Y') as tgl_periksa, pemeriksaan_hd.jam_mulai AS jam,")
             .a("    dokter_perujuk.nm_dokter AS nm_dokter_perujuk, dokter_pj.nm_dokter AS nm_dokter_pj, pasien.alamat, DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,")
-            .a("    hd_ke, pre_td, pre_bb, pre_nadi, pre_res, pos_td, pos_bb, pos_nadi, pos_res")
+            .a("    pykt.nm_penyakit AS diagnosa_utama,")
+            .a("    pykt2.nm_penyakit AS diagnosa_komorbiditas1,")
+            .a("    pykt3.nm_penyakit AS diagnosa_komorbiditas2,")
+            .a("    pykt4.nm_penyakit AS prosedur_tindakan,")
+            .a("hd_ke, pre_td, pre_bb, pre_nadi, pre_res, pos_td, pos_bb, pos_nadi, pos_res, waktu_mulai_hd, waktu_selesai_hd, nama_obat1, nama_obat2, nama_obat3, nama_obat4, nama_obat5")
             .a("FROM pemeriksaan_hd")
             .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
             .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
             .a("JOIN petugas ON petugas.nip = pemeriksaan_hd.nip")
             .a("JOIN dokter dokter_perujuk ON dokter_perujuk.kd_dokter = pemeriksaan_hd.kd_dokter_perujuk")
             .a("JOIN dokter dokter_pj ON dokter_pj.kd_dokter = pemeriksaan_hd.kd_dokter_pj")
+            .a("JOIN penyakit pykt ON pykt.kd_penyakit = pemeriksaan_hd.kd_diagnosa_utama")
+            .a("JOIN penyakit pykt2 ON pykt2.kd_penyakit = pemeriksaan_hd.kd_diagnosa_komorbiditas1")
+            .a("JOIN penyakit pykt3 ON pykt3.kd_penyakit = pemeriksaan_hd.kd_diagnosa_komorbiditas2")
+            .a("JOIN penyakit pykt4 ON pykt4.kd_penyakit = pemeriksaan_hd.kd_diagnosa_utama")        
             .a("WHERE kd_periksa = {id_periksa}")
             .set("id_periksa", idPeriksa)
             .getRowComplete();
@@ -2432,6 +2676,17 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
                 param.put("namakamar", namakamar);
                 
                 // Hasil2
+                param.put("diagnosa_utama", rMain.getString("diagnosa_utama"));
+                param.put("diagnosa_komorbiditas1", rMain.getString("diagnosa_komorbiditas1"));
+                param.put("diagnosa_komorbiditas2", rMain.getString("diagnosa_komorbiditas2"));
+                param.put("prosedur_tindakan", rMain.getString("prosedur_tindakan"));
+                param.put("waktu_selesai_hd", rMain.getString("waktu_selesai_hd"));
+                param.put("waktu_mulai_hd", rMain.getString("waktu_mulai_hd"));
+                param.put("nama_obat1", rMain.getString("nama_obat1"));
+                param.put("nama_obat2", rMain.getString("nama_obat2"));
+                param.put("nama_obat3", rMain.getString("nama_obat3"));
+                param.put("nama_obat4", rMain.getString("nama_obat4"));
+                param.put("nama_obat5", rMain.getString("nama_obat5"));
                 param.put("hd_ke", rMain.getString("hd_ke"));
                 param.put("pre_td", rMain.getString("pre_td"));
                 param.put("pre_bb", rMain.getString("pre_bb"));
@@ -2456,24 +2711,35 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
 
                 // Ngambil detail
                 GResult resDet = new GQuery()
-                .a("SELECT nm_perawatan FROM det_pemeriksaan_hd")
+                .a("SELECT  nm_perawatan, biaya_rawat FROM det_pemeriksaan_hd")
                 .a("JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = det_pemeriksaan_hd.kd_jenis_prw")
                 .a("WHERE kd_periksa = {id_periksa}")
                 .set("id_periksa", idPeriksa)
                 .selectComplete();
 
+                int i = 1;
+                int total = 0;
+                
+                for (GRow row : resDet){
+                    total+=row.getInt("biaya_rawat");
+                }
+                
+                param.put("total", total+"");
+                
                 for (GRow row : resDet)
                 {
                     new GQuery()
-                    .a("INSERT INTO temporary (temp1) VALUES ({temp1})")
+                    .a("INSERT INTO temporary (temp1, temp2, temp3) VALUES ({temp1}, {temp2}, {temp3})")
                     .set("temp1", row.getString("nm_perawatan"))
+                    .set("temp2", row.getString("biaya_rawat"))
+                    .set("temp3", (i++) + "")
                     .write();
                 }
 
                 GQuery.setAutoCommit(true);
 
-                Valid.MyReport("rptPeriksaHemodialisaFix.jrxml", "report", "::[ Hasil Pemeriksaan Radiologi ]::",
-                    "select no, temp1, temp2 from temporary order by no asc", param);
+                Valid.MyReport("rptPeriksaHemodialisaFixx.jrxml", "report", "::[ Hasil Pemeriksaan Radiologi ]::",
+                    "select no, temp1, temp2, temp3 from temporary order by no asc", param);
 
             }
         }
@@ -2577,25 +2843,14 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         hapusOrder();
     }//GEN-LAST:event_menuHapusActionPerformed
 
-    private void txtKdPetugasKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtKdPetugasKeyPressed
-    {//GEN-HEADEREND:event_txtKdPetugasKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN)
-        {
-            Sequel.cariIsi("select nama from petugas where nip=?", NmPtg, txtKdPetugas.getText());
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_UP)
-        {
-            btnPetugasActionPerformed(null);
-        }
-        else
-        {
-
-        }
-    }//GEN-LAST:event_txtKdPetugasKeyPressed
+    private void txtKdProsedurTindakanKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_txtKdProsedurTindakanKeyPressed
+    {//GEN-HEADEREND:event_txtKdProsedurTindakanKeyPressed
+        
+    }//GEN-LAST:event_txtKdProsedurTindakanKeyPressed
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPetugasActionPerformed
     {//GEN-HEADEREND:event_btnPetugasActionPerformed
-        var.setform("DlgPeriksaRadiologi");
+        var.setform("DlgPetugas");
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
@@ -2692,6 +2947,266 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_menuCetakBilling1ActionPerformed
 
+    private void btnDiagnosaUtamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosaUtamaActionPerformed
+        var.setform("DlgPeriksaRadiologi");
+        penyakit.emptTeks();
+        penyakit.isCek();
+        penyakit.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
+        penyakit.setLocationRelativeTo(internalFrame1);
+        penyakit.setVisible(true);
+    }//GEN-LAST:event_btnDiagnosaUtamaActionPerformed
+
+    private void btnDiagnosaKomorniditas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosaKomorniditas1ActionPerformed
+        var.setform("DlgPeriksaRadiologi2");
+        penyakit.emptTeks();
+        penyakit.isCek();
+        penyakit.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
+        penyakit.setLocationRelativeTo(internalFrame1);
+        penyakit.setVisible(true);
+    }//GEN-LAST:event_btnDiagnosaKomorniditas1ActionPerformed
+
+    private void btnProsedurTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProsedurTindakanActionPerformed
+        var.setform("DlgPeriksaRadiologi4");
+        penyakit.emptTeks();
+        penyakit.isCek();
+        penyakit.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
+        penyakit.setLocationRelativeTo(internalFrame1);
+        penyakit.setVisible(true);
+    }//GEN-LAST:event_btnProsedurTindakanActionPerformed
+
+    private void txtWaktuSelesaiHDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtWaktuSelesaiHDKeyPressed
+        
+    }//GEN-LAST:event_txtWaktuSelesaiHDKeyPressed
+
+    private void txtNamaObat2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamaObat2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaObat2KeyPressed
+
+    private void txtNamaObat3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamaObat3KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaObat3KeyPressed
+
+    private void txtNamaObat5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamaObat5KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaObat5KeyPressed
+
+    private void txtNamaObat4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamaObat4KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaObat4KeyPressed
+
+    private void txtNamaObat1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNamaObat1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaObat1KeyPressed
+
+    private void txtWaktuMulaiHDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtWaktuMulaiHDKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtWaktuMulaiHDKeyPressed
+
+    private void DiagnosaUtamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagnosaUtamaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DiagnosaUtamaActionPerformed
+
+    private void txtKdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKdPetugasKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN)
+        {
+            Sequel.cariIsi("select nama from petugas where nip=?", NmPtg, txtKdPetugas.getText());
+        }
+        else if (evt.getKeyCode() == KeyEvent.VK_UP)
+        {
+            btnPetugasActionPerformed(null);
+        }
+        else
+        {
+
+        }
+    }//GEN-LAST:event_txtKdPetugasKeyPressed
+
+    private void txtKdDiagnosaUtamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKdDiagnosaUtamaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKdDiagnosaUtamaKeyPressed
+
+    private void txtKdDiagnosaKomorbiditas1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKdDiagnosaKomorbiditas1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKdDiagnosaKomorbiditas1KeyPressed
+
+    private void txtKdDiagnosaKomorbiditas2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtKdDiagnosaKomorbiditas2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKdDiagnosaKomorbiditas2KeyPressed
+
+    private void txtKdDiagnosaUtamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKdDiagnosaUtamaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKdDiagnosaUtamaActionPerformed
+
+    private void btnDiagnosaKomorniditas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosaKomorniditas2ActionPerformed
+        var.setform("DlgPeriksaRadiologi3");
+        penyakit.emptTeks();
+        penyakit.isCek();
+        penyakit.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
+        penyakit.setLocationRelativeTo(internalFrame1);
+        penyakit.setVisible(true);
+    }//GEN-LAST:event_btnDiagnosaKomorniditas2ActionPerformed
+
+    private void menuCetakHasilDanBilingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCetakHasilDanBilingActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        if (mdlTransaksi.getRowCount() == 0)
+        {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
+        }
+        else if (tblTransaksi.getSelectedRow() == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Maaf, Gagal mencteak. Pilih dulu data yang mau dicetak.");
+        }
+        else
+        {
+            int r = tblTransaksi.getSelectedRow();
+            String idPeriksa = null;
+
+            // Mencari row utama di tiap transaksi
+            for (int a = r; a >= 0; a--)
+            {
+                if (!tblTransaksi.getValueAt(a, 0).toString().isEmpty())
+                {
+                    idPeriksa = tblTransaksi.getValueAt(a, 0).toString();
+                    break;
+                }
+            }
+
+            // Kalo gak nemu id periksa
+            if (idPeriksa == null)
+            {
+                JOptionPane.showMessageDialog(null, "Pemeriksaan tidak ditemukan");
+                return;
+            }
+
+            GRow rMain = new GQuery()
+            .a("SELECT pemeriksaan_hd.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.umur, petugas.nama,")
+            .a("    DATE_FORMAT(pemeriksaan_hd.tgl_periksa,'%d-%m-%Y') as tgl_periksa, pemeriksaan_hd.jam_mulai AS jam,")
+            .a("    dokter_perujuk.nm_dokter AS nm_dokter_perujuk, dokter_pj.nm_dokter AS nm_dokter_pj, pasien.alamat, DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y') as tgl_lahir,")
+            .a("    hd_ke, pre_td, pre_bb, pre_nadi, pre_res, pos_td, pos_bb, pos_nadi, pos_res")
+            .a("FROM pemeriksaan_hd")
+            .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
+            .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+            .a("JOIN petugas ON petugas.nip = pemeriksaan_hd.nip")
+            .a("JOIN dokter dokter_perujuk ON dokter_perujuk.kd_dokter = pemeriksaan_hd.kd_dokter_perujuk")
+            .a("JOIN dokter dokter_pj ON dokter_pj.kd_dokter = pemeriksaan_hd.kd_dokter_pj")
+            .a("WHERE kd_periksa = {id_periksa}")
+            .set("id_periksa", idPeriksa)
+            .getRowComplete();
+
+            if (rMain != null)
+            {
+                String kamar = Sequel.cariIsi("select ifnull(kd_kamar,'') from kamar_inap where no_rawat='" + rMain.getString("no_rawat") + "' order by tgl_masuk desc limit 1");
+                String namakamar = "";
+                
+                if (!kamar.equals(""))
+                {
+                    namakamar = kamar + ", " + Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar on bangsal.kd_bangsal=kamar.kd_bangsal "
+                        + " where kamar.kd_kamar='" + kamar + "' ");
+
+                    kamar = "Kamar";
+                }
+                else if (kamar.equals(""))
+                {
+                    kamar = "Poli";
+                    namakamar = Sequel.cariIsi("select nm_poli from poliklinik inner join reg_periksa on poliklinik.kd_poli=reg_periksa.kd_poli "
+                        + "where reg_periksa.no_rawat='" + rMain.getString("no_rawat") + "'");
+                }
+
+                // Mengisi RAPOT atas
+                Map<String, Object> param = new HashMap<>();
+                param.put("noperiksa", rMain.getString("no_rawat"));
+                param.put("norm", rMain.getString("no_rkm_medis"));
+                param.put("namapasien", rMain.getString("nm_pasien"));
+                param.put("jkel", rMain.getString("jk"));
+                param.put("umur", rMain.getString("umur"));
+                param.put("pengirim", rMain.getString("nm_dokter_perujuk"));
+                param.put("tanggal", rMain.getString("tgl_periksa"));
+                param.put("penjab", rMain.getString("nm_dokter_pj"));
+                param.put("petugas", rMain.getString("nama"));
+                param.put("jam", rMain.getString("jam"));
+                param.put("alamat", rMain.getString("alamat"));
+                param.put("kamar", kamar);
+                param.put("namakamar", namakamar);
+                
+                // Hasil2
+                param.put("hd_ke", rMain.getString("hd_ke"));
+                param.put("pre_td", rMain.getString("pre_td"));
+                param.put("pre_bb", rMain.getString("pre_bb"));
+                param.put("pre_nadi", rMain.getString("pre_nadi"));
+                param.put("pre_res", rMain.getString("pre_res"));
+                param.put("pos_td", rMain.getString("pos_td"));
+                param.put("pos_bb", rMain.getString("pos_bb"));
+                param.put("pos_nadi", rMain.getString("pos_nadi"));
+                param.put("pos_res", rMain.getString("pos_res"));
+
+                // Dari GLOBAL setting
+                param.put("namars", var.getnamars());
+                param.put("alamatrs", var.getalamatrs());
+                param.put("kotars", var.getkabupatenrs());
+                param.put("propinsirs", var.getpropinsirs());
+                param.put("kontakrs", var.getkontakrs());
+                param.put("emailrs", var.getemailrs());
+                param.put("logo", Sequel.cariGambar("select logo from setting"));
+
+                GQuery.setAutoCommit(false);
+                Sequel.queryu("delete from temporary");
+
+                // Ngambil detail
+                GResult resDet = new GQuery()
+                .a("SELECT nm_perawatan FROM det_pemeriksaan_hd")
+                .a("JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = det_pemeriksaan_hd.kd_jenis_prw")
+                .a("WHERE kd_periksa = {id_periksa}")
+                .set("id_periksa", idPeriksa)
+                .selectComplete();
+
+                for (GRow row : resDet)
+                {
+                    new GQuery()
+                    .a("INSERT INTO temporary (temp1) VALUES ({temp1})")
+                    .set("temp1", row.getString("nm_perawatan"))
+                    .write();
+                }
+
+                GQuery.setAutoCommit(true);
+
+                Valid.MyReport("rptPeriksaHemodialisaFix22.jrxml", "report", "::[ Hasil Pemeriksaan Radiologi ]::",
+                    "select no, temp1, temp2 from temporary order by no asc", param);
+
+            }
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_menuCetakHasilDanBilingActionPerformed
+
+    private void btnCariPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariPasienActionPerformed
+        DlgCariReg d = new DlgCariReg(null, true);
+        d.setSize(internalFrame1.getWidth() - 40, internalFrame1.getHeight() - 40);
+        d.setLocationRelativeTo(internalFrame1);
+        d.setVisible(true);
+        
+        if (d.RESULT)
+        {
+            txtNoRw.setText(d.DATA[d.NO_RAWAT]);
+            txtNoRm.setText(d.DATA[d.NO_RKM_MEDIS]);
+            txtNamaPasien.setText(d.DATA[d.NAMA_PASIEN]);
+            txtKdDokter.setText(d.DATA[d.KD_DOKTER]);
+            txtNamaDokter.setText(d.DATA[d.NAMA_DOKTER]);
+            status = d.DATA[d.STATUS];
+        }
+    }//GEN-LAST:event_btnCariPasienActionPerformed
+
+    private void txtNoRwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoRwActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNoRwActionPerformed
+
+    private void txtNoRmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoRmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNoRmActionPerformed
+
+    private void txtAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlamatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAlamatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2722,17 +3237,25 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     private widget.Button BtnPrint;
     private widget.CekBox ChkJln;
     private widget.Tanggal DTPBeri;
+    private widget.TextBox DiagnosaKomorbiditas1;
+    private widget.TextBox DiagnosaKomorbiditas2;
+    private widget.TextBox DiagnosaUtama;
     private widget.PanelBiasa FormInput;
     private widget.Label LCount;
     private widget.TextBox NmPtg;
     private javax.swing.JPanel PanelInput;
+    private widget.TextBox ProsedurTindakan;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
     private widget.ScrollPane Scroll3;
     private widget.Button btnAllOrder;
     private widget.Button btnAllTransaksi;
     private widget.Button btnCariOrder;
+    private widget.Button btnCariPasien;
     private widget.Button btnCariTransaksi;
+    private widget.Button btnDiagnosaKomorniditas1;
+    private widget.Button btnDiagnosaKomorniditas2;
+    private widget.Button btnDiagnosaUtama;
     private widget.Button btnHapusOrder;
     private widget.Button btnHapusTransaksi;
     private widget.Button btnKeluarOrder;
@@ -2740,6 +3263,7 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     private widget.Button btnPetugas;
     private widget.Button btnPrintOrder;
     private widget.Button btnPrintTransaksi;
+    private widget.Button btnProsedurTindakan;
     private widget.Button btnSimpan;
     private widget.CekBox ckbChecked;
     private widget.ComboBox cmbDtk;
@@ -2764,14 +3288,25 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     private widget.Label jLabel26;
     private widget.Label jLabel27;
     private widget.Label jLabel28;
+    private widget.Label jLabel29;
     private widget.Label jLabel3;
+    private widget.Label jLabel30;
+    private widget.Label jLabel31;
+    private widget.Label jLabel32;
     private widget.Label jLabel33;
     private widget.Label jLabel34;
     private widget.Label jLabel35;
     private widget.Label jLabel36;
+    private widget.Label jLabel37;
+    private widget.Label jLabel38;
+    private widget.Label jLabel39;
     private widget.Label jLabel4;
+    private widget.Label jLabel40;
+    private widget.Label jLabel41;
+    private widget.Label jLabel42;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
+    private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2785,6 +3320,7 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     private javax.swing.JMenuItem menuCetakBilling;
     private javax.swing.JMenuItem menuCetakBilling1;
     private javax.swing.JMenuItem menuCetakHasil;
+    private javax.swing.JMenuItem menuCetakHasilDanBiling;
     private javax.swing.JMenuItem menuHapus;
     private javax.swing.JMenuItem menuHapus1;
     private javax.swing.JMenuItem menuUbah;
@@ -2810,15 +3346,24 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     private widget.TextBox txtCariTransaksi;
     private widget.TextBox txtHdKe;
     private widget.TextBox txtJk;
+    private widget.TextBox txtKdDiagnosaKomorbiditas1;
+    private widget.TextBox txtKdDiagnosaKomorbiditas2;
+    private widget.TextBox txtKdDiagnosaUtama;
     private widget.TextBox txtKdDokter;
     private widget.TextBox txtKdDokterKons;
     private widget.TextBox txtKdDokterPel;
     private widget.TextBox txtKdDokterPj;
     private widget.TextBox txtKdPetugas;
+    private widget.TextBox txtKdProsedurTindakan;
     private widget.TextBox txtNamaDokter;
     private widget.TextBox txtNamaDokterKons;
     private widget.TextBox txtNamaDokterPel;
     private widget.TextBox txtNamaDokterPj;
+    private widget.TextBox txtNamaObat1;
+    private widget.TextBox txtNamaObat2;
+    private widget.TextBox txtNamaObat3;
+    private widget.TextBox txtNamaObat4;
+    private widget.TextBox txtNamaObat5;
     private widget.TextBox txtNamaPasien;
     private widget.TextBox txtNoRm;
     private widget.TextBox txtNoRw;
@@ -2831,6 +3376,8 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     private widget.TextBox txtPreRes;
     private widget.TextBox txtPreTd;
     private widget.TextBox txtUmur;
+    private widget.TextBox txtWaktuMulaiHD;
+    private widget.TextBox txtWaktuSelesaiHD;
     // End of variables declaration//GEN-END:variables
 
     private void tindakanBaru()
@@ -2875,19 +3422,23 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     
     private void tindakanFromOrder(String kdPeriksa)
     {
-        fillData(kdPeriksa, false);
+        isEdit = true;
+        
+        fillData2(kdPeriksa, false);
         
         this.kdPeriksa = kdPeriksa;
     }
     
     private void tindakanFromTransaksi(String kdPeriksa)
     {
+        isEdit = true;
+        
         fillData(kdPeriksa, true);
         
         this.kdPeriksa = kdPeriksa;
     }
     
-    private void fillData(String kdPeriksa, boolean isTransaksi)
+    private void fillData2(String kdPeriksa, boolean isTransaksi)
     {
         ResultSet rs = new GStatement(koneksi)
                 .a("SELECT kd_jenis_prw, material, bhp, tarif_tindakandr, tarif_tindakanpr, kso, manajemen, biaya_rawat")
@@ -2931,7 +3482,7 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
                 .a("kd_dokter_pj, dpj.nm_dokter AS d_pj,")
                 .a("kd_dokter_pelaksana, dpel.nm_dokter AS d_pel,")
                 .a("pemeriksaan_hd.nip, petugas.nama AS nama_petugas,")
-                .a("hd_ke, pre_td, pre_bb, pre_nadi, pre_res, pos_td, pos_bb, pos_nadi, pos_res")
+                .a("hd_ke, pre_td, pre_bb, pre_nadi, pre_res, pos_td, pos_bb, pos_nadi, pos_res, waktu_mulai_hd, waktu_selesai_hd, nama_obat1, nama_obat2, nama_obat3, nama_obat4, nama_obat5")
                 .a("FROM pemeriksaan_hd")
                 .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
                 .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
@@ -2979,6 +3530,132 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
                     txtPostBb.setText(rs2.getString("pos_bb"));
                     txtPostNadi.setText(rs2.getString("pos_nadi"));
                     txtPostRes.setText(rs2.getString("pos_res"));
+                    txtWaktuMulaiHD.setText(rs2.getString("waktu_mulai_hd"));
+                    txtWaktuSelesaiHD.setText(rs2.getString("waktu_selesai_hd"));
+                }
+            }
+        } 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    private void fillData(String kdPeriksa, boolean isTransaksi)
+    {
+        ResultSet rs = new GStatement(koneksi)
+                .a("SELECT kd_jenis_prw, material, bhp, tarif_tindakandr, tarif_tindakanpr, kso, manajemen, biaya_rawat")
+                .a("FROM det_pemeriksaan_hd")
+                .a("WHERE kd_periksa = :kd")
+                .setString("kd", kdPeriksa)
+                .executeQuery();
+
+        selKodes.clear();
+        selDatas.clear();
+
+        try 
+        {
+            while (rs.next())
+            {
+                selKodes.add(rs.getString(1));
+                selDatas.add(new String[]
+                {
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8)
+                });
+            }
+        } 
+        catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        tampilTindakan();
+        
+        ResultSet rs2 = new GStatement(koneksi)
+                .a("SELECT reg_periksa.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien,")
+                .a("CONCAT(pasien.alamat, ' ', nm_kel, ' ', nm_kec, ' ', nm_kab) AS alamat,")
+                .a("umur, pasien.jk, kd_dokter_perujuk, dper.nm_dokter AS d_per,")
+                .a("kd_dokter_konsultan, dkon.nm_dokter AS d_kon,")
+                .a("kd_dokter_pj, dpj.nm_dokter AS d_pj,")
+                .a("kd_diagnosa_utama, pykt.nm_penyakit AS diagnosa_utama,")
+                .a("kd_diagnosa_komorbiditas1, pykt2.nm_penyakit AS diagnosa_komorbiditas1,")
+                .a("kd_diagnosa_komorbiditas2, pykt3.nm_penyakit AS diagnosa_komorbiditas2,")
+                .a("kd_prosedur_tindakan, pykt4.nm_penyakit AS prosedur_tindakan,")
+                .a("kd_dokter_pelaksana, dpel.nm_dokter AS d_pel,")
+                .a("pemeriksaan_hd.nip, petugas.nama AS nama_petugas,")
+                .a("hd_ke, pre_td, pre_bb, pre_nadi, pre_res, pos_td, pos_bb, pos_nadi, pos_res, waktu_mulai_hd, waktu_selesai_hd, nama_obat1, nama_obat2, nama_obat3, nama_obat4, nama_obat5")
+                .a("FROM pemeriksaan_hd")
+                .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
+                .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("JOIN kelurahan ON kelurahan.kd_kel = pasien.kd_kel")
+                .a("JOIN kecamatan ON kecamatan.kd_kec = pasien.kd_kec")
+                .a("JOIN kabupaten ON kabupaten.kd_kab = pasien.kd_kab")
+                .a("JOIN penyakit pykt ON pykt.kd_penyakit = pemeriksaan_hd.kd_diagnosa_utama")
+                .a("JOIN penyakit pykt2 ON pykt2.kd_penyakit = pemeriksaan_hd.kd_diagnosa_komorbiditas1")
+                .a("JOIN penyakit pykt3 ON pykt3.kd_penyakit = pemeriksaan_hd.kd_diagnosa_komorbiditas2")
+                .a("JOIN penyakit pykt4 ON pykt4.kd_penyakit = pemeriksaan_hd.kd_diagnosa_utama")
+                .a("JOIN dokter dper ON dper.kd_dokter = kd_dokter_perujuk")
+                .a("JOIN petugas ON petugas.nip = pemeriksaan_hd.nip")
+                .a("LEFT JOIN dokter dkon ON dkon.kd_dokter = kd_dokter_konsultan")
+                .a("LEFT JOIN dokter dpj ON dpj.kd_dokter = kd_dokter_pj")
+                .a("LEFT JOIN dokter dpel ON dpel.kd_dokter = kd_dokter_pelaksana")
+                .a("WHERE kd_periksa = :kd")
+                .setString("kd", kdPeriksa)
+                .executeQuery();
+        
+        try
+        {
+            if (rs2.next())
+            {
+                txtNoRw.setText(rs2.getString("no_rawat"));
+                txtNoRm.setText(rs2.getString("no_rkm_medis"));
+                txtNamaPasien.setText(rs2.getString("nm_pasien"));
+                txtAlamat.setText(rs2.getString("alamat"));
+                txtUmur.setText(rs2.getString("umur"));
+                txtJk.setText(rs2.getString("jk"));
+                txtKdDokter.setText(rs2.getString("kd_dokter_perujuk"));
+                txtNamaDokter.setText(rs2.getString("d_per"));
+                txtKdPetugas.setText(rs2.getString("nip"));
+                NmPtg.setText(rs2.getString("nama_petugas"));
+                
+                if (isTransaksi)
+                {
+                    txtKdDokterKons.setText(rs2.getString("kd_dokter_konsultan"));
+                    txtNamaDokterKons.setText(rs2.getString("d_kon"));
+                    txtKdDokterPj.setText(rs2.getString("kd_dokter_pj"));
+                    txtNamaDokterPj.setText(rs2.getString("d_pj"));
+                    txtKdDokterPel.setText(rs2.getString("kd_dokter_pelaksana"));
+                    txtNamaDokterPel.setText(rs2.getString("d_pel"));
+                    txtHdKe.setText(rs2.getString("hd_ke"));
+                    txtPreTd.setText(rs2.getString("pre_td"));
+                    txtPreBb.setText(rs2.getString("pre_bb"));
+                    txtPreNadi.setText(rs2.getString("pre_nadi"));
+                    txtPreRes.setText(rs2.getString("pre_res"));
+                    txtPostTd.setText(rs2.getString("pos_td"));
+                    txtPostBb.setText(rs2.getString("pos_bb"));
+                    txtPostNadi.setText(rs2.getString("pos_nadi"));
+                    txtPostRes.setText(rs2.getString("pos_res"));
+                    txtWaktuMulaiHD.setText(rs2.getString("waktu_mulai_hd"));
+                    txtWaktuSelesaiHD.setText(rs2.getString("waktu_selesai_hd"));
+                    txtNamaObat1.setText(rs2.getString("nama_obat1"));
+                    txtNamaObat2.setText(rs2.getString("nama_obat2"));
+                    txtNamaObat3.setText(rs2.getString("nama_obat3"));
+                    txtNamaObat4.setText(rs2.getString("nama_obat4"));
+                    txtNamaObat5.setText(rs2.getString("nama_obat5"));
+                    txtKdDiagnosaUtama.setText(rs2.getString("kd_diagnosa_utama"));
+                    DiagnosaUtama.setText(rs2.getString("diagnosa_utama"));
+                    txtKdDiagnosaKomorbiditas1.setText(rs2.getString("kd_diagnosa_komorbiditas1"));
+                    DiagnosaKomorbiditas1.setText(rs2.getString("diagnosa_komorbiditas1"));
+                    txtKdDiagnosaKomorbiditas2.setText(rs2.getString("kd_diagnosa_komorbiditas2"));
+                    DiagnosaKomorbiditas2.setText(rs2.getString("diagnosa_komorbiditas2"));
+                    txtKdProsedurTindakan.setText(rs2.getString("kd_prosedur_tindakan"));
+                    ProsedurTindakan.setText(rs2.getString("prosedur_tindakan"));
                 }
             }
         } 
@@ -3005,62 +3682,210 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         boolean success = true;
         GQuery.setAutoCommit(false);
         
-        success &= new GQuery()
-                .a("UPDATE pemeriksaan_hd SET")
-                .a("tgl_selesai = {tgl_selesai},")
-                .a("jam_selesai = {jam_selesai},")
-                .a("hd_ke = {hd_ke},")
-                .a("pre_td = {pre_td},")
-                .a("pre_bb = {pre_bb},")
-                .a("pre_nadi = {pre_nadi},")
-                .a("pre_res = {pre_res},")
-                .a("pos_td = {pos_td},")
-                .a("pos_bb = {pos_bb},")
-                .a("pos_nadi = {pos_nadi},")
-                .a("pos_res = {pos_res},")
-                .a("kd_dokter_konsultan = {konsultan},")
-                .a("kd_dokter_pj = {pj},")
-                .a("kd_dokter_pelaksana = {pel},")
-                .a("status = '1'")
-                .a("WHERE kd_periksa = {kd_periksa}")
-                .set("tgl_selesai", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
-                .set("jam_selesai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
-                .set("hd_ke", txtHdKe.getText())
-                .set("pre_td", txtPreTd.getText())
-                .set("pre_bb", txtPreBb.getText())
-                .set("pre_nadi", txtPreNadi.getText())
-                .set("pre_res", txtPreRes.getText())
-                .set("pos_td", txtPostTd.getText())
-                .set("pos_bb", txtPostBb.getText())
-                .set("pos_nadi", txtPostNadi.getText())
-                .set("pos_res", txtPostRes.getText())
-                .set("konsultan", txtKdDokterKons.getText())
-                .set("pj", txtKdDokterPj.getText())
-                .set("pel", txtKdDokterPel.getText())
-                .set("kd_periksa", kdPeriksa)
-                .write();
-
-        success &= new GQuery()
-                .a("DELETE FROM det_pemeriksaan_hd WHERE kd_periksa = {kd}")
-                .set("kd", kdPeriksa)
-                .write();
-        
-        for (String[] s : selDatas)
+        if (isEdit)
         {
-            success &= new GQuery()
-                    .a("INSERT INTO det_pemeriksaan_hd VALUES ({kd}, {jns}, {material}, {bhp}, {dr}, {pr}, {kso}, {man}, {tot})")
-                    .set("kd", kdPeriksa)
-                    .set("jns", s[0])
-                    .set("material", s[1])
-                    .set("bhp", s[2])
-                    .set("dr", s[3])
-                    .set("pr", s[4])
-                    .set("kso", s[5])
-                    .set("man", s[6])
-                    .set("tot", s[7])
-                    .write();
-        }
         
+                success &= new GQuery()
+                        .a("UPDATE pemeriksaan_hd SET")
+                        .a("tgl_selesai = {tgl_selesai},")
+                        .a("jam_selesai = {jam_selesai},")
+                        .a("hd_ke = {hd_ke},")
+                        .a("pre_td = {pre_td},")
+                        .a("pre_bb = {pre_bb},")
+                        .a("pre_nadi = {pre_nadi},")
+                        .a("pre_res = {pre_res},")
+                        .a("pos_td = {pos_td},")
+                        .a("pos_bb = {pos_bb},")
+                        .a("pos_nadi = {pos_nadi},")
+                        .a("pos_res = {pos_res},")
+                        .a("kd_dokter_konsultan = {konsultan},")
+                        .a("kd_dokter_pj = {pj},")
+                        .a("kd_dokter_pelaksana = {pel},")
+                        .a("waktu_mulai_hd = {waktu_mulai_hd},")
+                        .a("waktu_selesai_hd = {waktu_selesai_hd},")
+                        .a("nama_obat1 = {nama_obat1},")
+                        .a("nama_obat2 = {nama_obat2},")
+                        .a("nama_obat3 = {nama_obat3},")
+                        .a("nama_obat4 = {nama_obat4},")
+                        .a("nama_obat5 = {nama_obat5},")
+                        .a("kd_diagnosa_utama = {kd_diagnosa_utama},")
+                        .a("kd_diagnosa_komorbiditas1 = {kd_diagnosa_komorbiditas1},")
+                        .a("kd_diagnosa_komorbiditas2 = {kd_diagnosa_komorbiditas2},")
+                        .a("kd_prosedur_tindakan = {kd_prosedur_tindakan},")
+                        .a("status = '1'")
+                        .a("WHERE kd_periksa = {kd_periksa}")
+                        .set("tgl_selesai", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
+                        .set("jam_selesai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                        .set("hd_ke", txtHdKe.getText())
+                        .set("pre_td", txtPreTd.getText())
+                        .set("pre_bb", txtPreBb.getText())
+                        .set("pre_nadi", txtPreNadi.getText())
+                        .set("pre_res", txtPreRes.getText())
+                        .set("pos_td", txtPostTd.getText())
+                        .set("pos_bb", txtPostBb.getText())
+                        .set("pos_nadi", txtPostNadi.getText())
+                        .set("pos_res", txtPostRes.getText())
+                        .set("konsultan", txtKdDokterKons.getText())
+                        .set("pj", txtKdDokterPj.getText())
+                        .set("pel", txtKdDokterPel.getText())
+                        .set("waktu_mulai_hd", txtWaktuMulaiHD.getText())
+                        .set("waktu_selesai_hd", txtWaktuSelesaiHD.getText())
+                        .set("nama_obat1", txtNamaObat1.getText())
+                        .set("nama_obat2", txtNamaObat2.getText())
+                        .set("nama_obat3", txtNamaObat3.getText())
+                        .set("nama_obat4", txtNamaObat4.getText())
+                        .set("nama_obat5", txtNamaObat5.getText())
+                        .set("kd_diagnosa_utama", txtKdDiagnosaUtama.getText())
+                        .set("kd_diagnosa_komorbiditas1", txtKdDiagnosaKomorbiditas1.getText())
+                        .set("kd_diagnosa_komorbiditas2", txtKdDiagnosaKomorbiditas2.getText())
+                        .set("kd_prosedur_tindakan", txtKdProsedurTindakan.getText())
+                        .set("kd_periksa", kdPeriksa)
+                        .write();
+
+                success &= new GQuery()
+                        .a("DELETE FROM det_pemeriksaan_hd WHERE kd_periksa = {kd}")
+                        .set("kd", kdPeriksa)
+                        .write();
+
+                for (String[] s : selDatas)
+                {
+                    success &= new GQuery()
+                            .a("INSERT INTO det_pemeriksaan_hd VALUES ({kd}, {jns}, {material}, {bhp}, {dr}, {pr}, {kso}, {man}, {tot})")
+                            .set("kd", kdPeriksa)
+                            .set("jns", s[0])
+                            .set("material", s[1])
+                            .set("bhp", s[2])
+                            .set("dr", s[3])
+                            .set("pr", s[4])
+                            .set("kso", s[5])
+                            .set("man", s[6])
+                            .set("tot", s[7])
+                            .write();
+                }
+        
+        } else {
+            
+            String kdPeriksa = Sequel.autoNumber("pemeriksaan_hd", "kd_periksa");
+            
+            success &= new GQuery()
+                        .a("INSERT INTO pemeriksaan_hd VALUES ({kd_periksa}, "
+                                + "{no_rawat},"
+                                + "{tgl_periksa},"
+                                + "{jam_mulai}, "
+                                + "{tgl_selesai}, "
+                                + "{jam_selesai}, "
+                                + "{hd_ke}, "
+                                + "{pre_td}, "
+                                + "{pre_bb}, "
+                                + "{pre_nadi}, "
+                                + "{pre_res}, "
+                                + "{pos_td}, "
+                                + "{pos_bb}, "
+                                + "{pos_nadi}, "
+                                + "{pos_res}, "
+                                + "{kd_dokter_perujuk}, "
+                                + "{kd_dokter_konsultan}, "
+                                + "{kd_dokter_pj}, "
+                                + "{kd_dokter_pelaksana}, "
+                                + "{nip}, "
+                                + "{status}, "
+                                + "{jns_periksa},"
+                                + "{waktu_mulai_hd}, "
+                                + "{waktu_selesai_hd}, "
+                                + "{nama_obat1}, "
+                                + "{nama_obat2}, "
+                                + "{nama_obat3}, "
+                                + "{nama_obat4}, "
+                                + "{nama_obat5}, "
+                                + "{kd_diagnosa_utama}, "
+                                + "{kd_diagnosa_komorbiditas1}, "
+                                + "{kd_diagnosa_komorbiditas2}, "
+                                + "{kd_prosedur_tindakan})")
+//                        .a("INSERT pemeriksaan_hd SET")
+//                        .a("kd_periksa = {kdPeriksa},")
+//                        .a("tgl_selesai = {tgl_selesai},")
+//                        .a("jam_selesai = {jam_selesai},")
+//                        .a("hd_ke = {hd_ke},")
+//                        .a("pre_td = {pre_td},")
+//                        .a("pre_bb = {pre_bb},")
+//                        .a("pre_nadi = {pre_nadi},")
+//                        .a("pre_res = {pre_res},")
+//                        .a("pos_td = {pos_td},")
+//                        .a("pos_bb = {pos_bb},")
+//                        .a("pos_nadi = {pos_nadi},")
+//                        .a("pos_res = {pos_res},")
+//                        .a("kd_dokter_konsultan = {konsultan},")
+//                        .a("kd_dokter_pj = {pj},")
+//                        .a("kd_dokter_pelaksana = {pel},")
+//                        .a("waktu_mulai_hd = {waktu_mulai_hd},")
+//                        .a("waktu_selesai_hd = {waktu_selesai_hd},")
+//                        .a("nama_obat1 = {nama_obat1},")
+//                        .a("nama_obat2 = {nama_obat2},")
+//                        .a("nama_obat3 = {nama_obat3},")
+//                        .a("nama_obat4 = {nama_obat4},")
+//                        .a("nama_obat5 = {nama_obat5},")
+//                        .a("kd_diagnosa_utama = {kd_diagnosa_utama},")
+//                        .a("kd_diagnosa_komorbiditas1 = {kd_diagnosa_komorbiditas1},")
+//                        .a("kd_diagnosa_komorbiditas2 = {kd_diagnosa_komorbiditas2},")
+//                        .a("kd_prosedur_tindakan = {kd_prosedur_tindakan},")
+//                        .a("status = '1'")
+                        .set("kd_periksa", kdPeriksa)
+                        .set("no_rawat", txtNoRw.getText())
+                        .set("tgl_periksa", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
+                        .set("jam_mulai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                        .set("tgl_selesai", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
+                        .set("jam_selesai", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                        .set("hd_ke", txtHdKe.getText())
+                        .set("pre_td", txtPreTd.getText())
+                        .set("pre_bb", txtPreBb.getText())
+                        .set("pre_nadi", txtPreNadi.getText())
+                        .set("pre_res", txtPreRes.getText())
+                        .set("pos_td", txtPostTd.getText())
+                        .set("pos_bb", txtPostBb.getText())
+                        .set("pos_nadi", txtPostNadi.getText())
+                        .set("pos_res", txtPostRes.getText())
+                        .set("kd_dokter_perujuk", "10")
+                        .set("kd_dokter_konsultan", txtKdDokterKons.getText())
+                        .set("kd_dokter_pj", txtKdDokterPj.getText())
+                        .set("kd_dokter_pelaksana", txtKdDokterPel.getText())
+                        .set("nip", "ADM_LAB")
+                        .set("status", "1")
+                        .set("jns_periksa", "Ralan")
+                        .set("waktu_mulai_hd", txtWaktuMulaiHD.getText())
+                        .set("waktu_selesai_hd", txtWaktuSelesaiHD.getText())
+                        .set("nama_obat1", txtNamaObat1.getText())
+                        .set("nama_obat2", txtNamaObat2.getText())
+                        .set("nama_obat3", txtNamaObat3.getText())
+                        .set("nama_obat4", txtNamaObat4.getText())
+                        .set("nama_obat5", txtNamaObat5.getText())
+                        .set("kd_diagnosa_utama", txtKdDiagnosaUtama.getText())
+                        .set("kd_diagnosa_komorbiditas1", txtKdDiagnosaKomorbiditas1.getText())
+                        .set("kd_diagnosa_komorbiditas2", txtKdDiagnosaKomorbiditas2.getText())
+                        .set("kd_prosedur_tindakan", txtKdProsedurTindakan.getText())
+                        .write();
+
+//                success &= new GQuery()
+//                        .a("DELETE FROM det_pemeriksaan_hd WHERE kd_periksa = {kd}")
+//                        .set("kd", kdPeriksa)
+//                        .write();
+
+                for (String[] s : selDatas)
+                {
+                    success &= new GQuery()
+                            .a("INSERT INTO det_pemeriksaan_hd VALUES ({kd}, {jns}, {material}, {bhp}, {dr}, {pr}, {kso}, {man}, {tot})")
+                            .set("kd", kdPeriksa)
+                            .set("jns", s[0])
+                            .set("material", s[1])
+                            .set("bhp", s[2])
+                            .set("dr", s[3])
+                            .set("pr", s[4])
+                            .set("kso", s[5])
+                            .set("man", s[6])
+                            .set("tot", s[7])
+                            .write();
+                }
+            
+        }
         GQuery.setAutoCommit(true);
         
         if (success)
@@ -3085,6 +3910,36 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         else if (txtKdPetugas.getText().isEmpty() || NmPtg.getText().isEmpty())
         {
             GMessage.e("Error", "Pilih petugas dahulu");
+            return false;
+        }
+        else if (txtKdDiagnosaUtama.getText().isEmpty() )
+        {
+            GMessage.e("Error", "Pilih Diagnosa Utama dahulu");
+            return false;
+        }
+        else if (txtKdDiagnosaKomorbiditas1.getText().isEmpty() )
+        {
+            GMessage.e("Error", "Pilih Diagnosa Komorbiditas 1 dahulu");
+            return false;
+        }
+        else if (txtKdDiagnosaKomorbiditas2.getText().isEmpty() )
+        {
+            GMessage.e("Error", "Pilih Diagnosa Komorbiditas 2 Utama dahulu");
+            return false;
+        }
+        else if (txtKdProsedurTindakan.getText().isEmpty() )
+        {
+            GMessage.e("Error", "Pilih Prosedur Tindakan dahulu");
+            return false;
+        }
+        else if (txtWaktuMulaiHD.getText().isEmpty() )
+        {
+            GMessage.e("Error", "Pilih Waktu Mulai HD dahulu");
+            return false;
+        }
+        else if (txtWaktuSelesaiHD.getText().isEmpty() )
+        {
+            GMessage.e("Error", "Pilih Waktu Selesai HD dahulu");
             return false;
         }
         else if (txtKdDokterKons.getText().isEmpty())

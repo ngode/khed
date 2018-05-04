@@ -11,6 +11,7 @@
 package simrskhanza;
 
 import base.BaseDialog;
+import fungsi.GQuery;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -58,7 +59,7 @@ public final class DlgCariKategoriOperasi extends BaseDialog
         
         tabMode = new DefaultTableModel(null, new String[]
         {
-            "Kode Kategori", "Nama Kategori"
+            "Kode Kategori", "Nama Kategori", "Tarif"
         })
         {
             @Override
@@ -82,6 +83,10 @@ public final class DlgCariKategoriOperasi extends BaseDialog
             else if (i == 1)
             {
                 column.setPreferredWidth(500);
+            }
+            else if (i == 2)
+            {
+                column.setPreferredWidth(200);
             }
         }
         
@@ -402,6 +407,20 @@ public final class DlgCariKategoriOperasi extends BaseDialog
     public void tampil()
     {
         Valid.tabelKosong(tabMode);
+        
+        new GQuery()
+                .a("SELECT * FROM paket_operasi_2")
+                .selectWithName()
+                .forEach(s -> 
+                {
+                    tabMode.addRow(new Object[]
+                    {
+                        s.get("kode_paket"), s.get("nama_paket"), s.get("tarif")
+                    });
+                });
+        
+        if (true) return;
+        
         try
         {
             ps = koneksi.prepareStatement("select kd_kategori, nm_kategori "

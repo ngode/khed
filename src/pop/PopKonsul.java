@@ -7,6 +7,7 @@ package pop;
 
 import fungsi.GQuery;
 import fungsi.sekuel;
+import fungsi.validasi;
 import fungsi.var;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -29,9 +30,12 @@ public class PopKonsul extends javax.swing.JDialog
     private DlgCariPoli poli = new DlgCariPoli(null,false);
     private DlgCariPoli2 poli2 = new DlgCariPoli2(null,false);
     
+    private validasi Valid=new validasi();
+    
     private sekuel sql = new sekuel();
     
-    String aktifJadwal, status, noRw;
+    String aktifJadwal, status, noRw,kdpoli1,kdKonsul,kdPoli_before,Tgl;
+    Integer kondisi;
     
     int parentW, parentH;
     
@@ -64,15 +68,36 @@ public class PopKonsul extends javax.swing.JDialog
         clearData();
         
         // Get status pasien ==        
-        status = new GQuery()
-                .a("SELECT if(tgl_daftar = CURDATE(), 'Baru', 'Lama') as daftar")
-                .a("FROM pasien")
-                .a("WHERE no_rkm_medis = '{no_rm}'")
-                .set("no_rm", noRm)
-                .getString();
-        
+//        status = new GQuery()
+//                .a("SELECT if(tgl_daftar = CURDATE(), 'Baru', 'Lama') as daftar")
+//                .a("FROM pasien")
+//                .a("WHERE no_rkm_medis = '{no_rm}'")
+//                .set("no_rm", noRm)
+//                .getString();
+        status = sql.cariIsi("SELECT if(tgl_daftar = CURDATE(), 'Baru', 'Lama') as daftar FROM pasien WHERE no_rkm_medis = '"+noRm+"'");
         this.noRw = noRw;
     }
+    public void setText(String kdDok,String nmDok,String kdPoli,String nmPoli,String Biaya){
+        kddokter.setText(kdDok);
+        TDokter.setText(nmDok);
+        kdpoli.setText(kdPoli);
+        TPoli.setText(nmPoli);
+        TBiaya.setText(Biaya);
+    }
+    public void setkdKonsul(String kdKonsul){
+        this.kdKonsul = kdKonsul;
+    }
+    public void setKondisi(Integer kon){
+        this.kondisi = kon;
+    }
+    public void setKdPoli(String kdPoli){
+        this.kdPoli_before = kdPoli;
+    }
+    
+    public void setTgl(String Tgl){
+        this.Tgl=Tgl;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,8 +106,7 @@ public class PopKonsul extends javax.swing.JDialog
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         internalFrame = new widget.InternalFrame();
         BtnCloseIn6 = new widget.Button();
@@ -96,6 +120,8 @@ public class PopKonsul extends javax.swing.JDialog
         BtnDokter = new widget.Button();
         kdpoli = new widget.TextBox();
         BtnUnit = new widget.Button();
+        jLabel22 = new widget.Label();
+        TNo_Reg = new widget.TextBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("KonsulPoli"); // NOI18N
@@ -110,10 +136,8 @@ public class PopKonsul extends javax.swing.JDialog
         BtnCloseIn6.setMnemonic('U');
         BtnCloseIn6.setText("Tutup");
         BtnCloseIn6.setToolTipText("Alt+U");
-        BtnCloseIn6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnCloseIn6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCloseIn6ActionPerformed(evt);
             }
         });
@@ -124,10 +148,8 @@ public class PopKonsul extends javax.swing.JDialog
         BtnSimpan6.setMnemonic('S');
         BtnSimpan6.setText("Simpan");
         BtnSimpan6.setToolTipText("Alt+S");
-        BtnSimpan6.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnSimpan6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpan6ActionPerformed(evt);
             }
         });
@@ -136,84 +158,90 @@ public class PopKonsul extends javax.swing.JDialog
 
         TDokter.setEditable(false);
         internalFrame.add(TDokter);
-        TDokter.setBounds(200, 40, 280, 23);
+        TDokter.setBounds(210, 70, 280, 23);
 
-        jLabel20.setText("Dr Dituju :");
+        jLabel20.setText("No_Reg :");
         internalFrame.add(jLabel20);
-        jLabel20.setBounds(10, 40, 77, 23);
+        jLabel20.setBounds(20, 40, 77, 23);
 
         jLabel21.setText("Unit :");
         internalFrame.add(jLabel21);
-        jLabel21.setBounds(10, 70, 77, 23);
+        jLabel21.setBounds(20, 100, 77, 23);
 
         TPoli.setEditable(false);
         internalFrame.add(TPoli);
-        TPoli.setBounds(160, 70, 210, 23);
+        TPoli.setBounds(170, 100, 210, 23);
 
-        TBiaya.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        TBiaya.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 TBiayaKeyPressed(evt);
             }
         });
         internalFrame.add(TBiaya);
-        TBiaya.setBounds(380, 70, 94, 23);
+        TBiaya.setBounds(390, 100, 94, 23);
 
         kddokter.setHighlighter(null);
-        kddokter.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 kddokterKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                kddokterKeyReleased(evt);
             }
         });
         internalFrame.add(kddokter);
-        kddokter.setBounds(90, 40, 100, 23);
+        kddokter.setBounds(100, 70, 100, 23);
 
         BtnDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter.setMnemonic('3');
         BtnDokter.setToolTipText("ALt+3");
-        BtnDokter.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnDokterActionPerformed(evt);
             }
         });
         internalFrame.add(BtnDokter);
-        BtnDokter.setBounds(480, 40, 28, 23);
+        BtnDokter.setBounds(490, 70, 28, 23);
 
         kdpoli.setHighlighter(null);
-        kdpoli.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        kdpoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kdpoliActionPerformed(evt);
             }
         });
-        kdpoli.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        kdpoli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 kdpoliKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                kdpoliKeyReleased(evt);
             }
         });
         internalFrame.add(kdpoli);
-        kdpoli.setBounds(90, 70, 66, 23);
+        kdpoli.setBounds(100, 100, 66, 23);
 
         BtnUnit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnUnit.setMnemonic('4');
         BtnUnit.setToolTipText("ALt+4");
-        BtnUnit.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        BtnUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnUnitActionPerformed(evt);
             }
         });
         internalFrame.add(BtnUnit);
-        BtnUnit.setBounds(480, 70, 28, 23);
+        BtnUnit.setBounds(490, 100, 28, 23);
+
+        jLabel22.setText("Dr Dituju :");
+        internalFrame.add(jLabel22);
+        jLabel22.setBounds(20, 70, 77, 23);
+
+        TNo_Reg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNo_RegKeyPressed(evt);
+            }
+        });
+        internalFrame.add(TNo_Reg);
+        TNo_Reg.setBounds(100, 40, 60, 23);
 
         getContentPane().add(internalFrame, java.awt.BorderLayout.CENTER);
 
@@ -227,7 +255,11 @@ public class PopKonsul extends javax.swing.JDialog
 
     private void BtnSimpan6ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BtnSimpan6ActionPerformed
     {//GEN-HEADEREND:event_BtnSimpan6ActionPerformed
-        simpan();
+        if(kondisi == 1){
+            simpan();
+        }else if(kondisi == 2){
+            edit();
+        }
     }//GEN-LAST:event_BtnSimpan6ActionPerformed
 
     private void TBiayaKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_TBiayaKeyPressed
@@ -273,6 +305,7 @@ public class PopKonsul extends javax.swing.JDialog
         }else
         {
             dokter.isCek();
+            dokter.setPoli(kdpoli.getText());
             dokter.TCari.requestFocus();
             dokter.setSize(parentW - 40, parentH - 40);
             dokter.setLocationRelativeTo(internalFrame);
@@ -328,6 +361,22 @@ public class PopKonsul extends javax.swing.JDialog
     {//GEN-HEADEREND:event_kdpoliActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_kdpoliActionPerformed
+
+    private void TNo_RegKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNo_RegKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TNo_RegKeyPressed
+
+    private void kddokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyReleased
+        // TODO add your handling code here:
+        isNumber();
+    }//GEN-LAST:event_kddokterKeyReleased
+
+    private void kdpoliKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpoliKeyReleased
+        // TODO add your handling code here:
+        isNumber();
+        
+        
+    }//GEN-LAST:event_kdpoliKeyReleased
 
     /**
      * @param args the command line arguments
@@ -390,10 +439,12 @@ public class PopKonsul extends javax.swing.JDialog
     private widget.Button BtnUnit;
     private widget.TextBox TBiaya;
     private widget.TextBox TDokter;
+    private widget.TextBox TNo_Reg;
     private widget.TextBox TPoli;
     private widget.InternalFrame internalFrame;
     private widget.Label jLabel20;
     private widget.Label jLabel21;
+    private widget.Label jLabel22;
     private widget.TextBox kddokter;
     private widget.TextBox kdpoli;
     // End of variables declaration//GEN-END:variables
@@ -632,15 +683,32 @@ public class PopKonsul extends javax.swing.JDialog
     private void simpan()
     {
         boolean b = new GQuery()
-                .a("INSERT INTO konsul_poli (no_rawat, kd_dokter, kd_poli) VALUES ({no_rw}, {kd_dokter}, {kd_poli})")
+                .a("INSERT INTO konsul_poli (no_rawat, kd_dokter, kd_poli,no_reg) VALUES ({no_rw}, {kd_dokter}, {kd_poli}, {no_reg})")
                 .set("no_rw", noRw)
                 .set("kd_dokter", kddokter.getText())
                 .set("kd_poli", kdpoli.getText())
+                .set("no_reg", TNo_Reg.getText())
                 .write();
         
         if (b)
         {
             dispose();
         }
+    }
+    private void edit(){
+        Boolean ed = false;
+        
+       
+        ed = sql.queryutf("Update konsul_poli set kd_dokter='"+kddokter.getText()+"' ,kd_poli='"+kdpoli.getText()+"' where kd_kosul='"+kdKonsul+"'");
+        if(ed == true){
+            dispose();
+        }
+    }
+    private void isNumber(){  
+//        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(rujuk_masuk.no_rawat,4),signed)),0) from reg_periksa inner join rujuk_masuk on reg_periksa.no_rawat=rujuk_masuk.no_rawat where reg_periksa.tgl_registrasi='"+Tgl+"' ","BR/"+dateformat.format(DTPReg.getDate())+"/",4,NoBalasan); 
+        String no = sql.cariIsi("SELECT COUNT(reg_periksa.no_rawat) FROM konsul_poli LEFT Join reg_periksa on reg_periksa.no_rawat=konsul_poli.no_rawat WHERE konsul_poli.kd_poli='"+kdpoli.getText()+"' AND konsul_poli.kd_dokter='"+kddokter.getText()+"' and reg_periksa.tgl_registrasi='"+Tgl+"'");
+        
+        Valid.autoNomer31("SELECT COUNT(reg_periksa.no_rawat) FROM reg_periksa WHERE kd_poli='"+kdpoli.getText()+"' AND kd_dokter='"+kddokter.getText()+"' and tgl_registrasi='"+Tgl+"'",no,"",3,TNo_Reg);             
+                
     }
 }

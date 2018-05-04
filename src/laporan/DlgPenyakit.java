@@ -1065,4 +1065,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         BtnEdit.setEnabled(var.getpenyakit());
         BtnPrint.setEnabled(var.getpenyakit());
     }
+
+    public JTable getTable(){
+            return tbPenyakit;
+        }
 }

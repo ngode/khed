@@ -3,7 +3,7 @@
 <properties>
     <comment>KhanzaHMS</comment>
     <entry key="HOST">localhost</entry>
-    <entry key="DATABASE">sik3</entry>
+    <entry key="DATABASE">sik5</entry>
     <entry key="PORT">3306</entry>
     <entry key="PORTAPACHE"></entry>
     <entry key="USER">root</entry>

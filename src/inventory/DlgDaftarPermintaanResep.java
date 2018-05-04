@@ -119,6 +119,8 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         DTPCari1 = new widget.Tanggal();
         jLabel21 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
+        label11 = new widget.Label();
+        cmbStatus = new widget.ComboBox();
         label9 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
@@ -141,7 +143,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Peresepan Obat Oleh Dokter ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(90,120,80))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Peresepan Obat Oleh Dokter ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(90, 120, 80))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -162,7 +164,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-10-2017" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-05-2018" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -177,12 +179,32 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-10-2017" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-05-2018" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
         DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
         panelisi2.add(DTPCari2);
+
+        label11.setText("Status :");
+        label11.setName("label11"); // NOI18N
+        label11.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelisi2.add(label11);
+
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Sudah Terlayani", "Belum Terlayani" }));
+        cmbStatus.setName("cmbStatus"); // NOI18N
+        cmbStatus.setPreferredSize(new java.awt.Dimension(120, 23));
+        cmbStatus.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbStatusItemStateChanged(evt);
+            }
+        });
+        cmbStatus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmbStatusKeyPressed(evt);
+            }
+        });
+        panelisi2.add(cmbStatus);
 
         label9.setText("Key Word :");
         label9.setName("label9"); // NOI18N
@@ -454,8 +476,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         }else{
             if(Sequel.cariInteger("select count(no_rawat) from kamar_inap where no_rawat=?",tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),3).toString())>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            }else if(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),7).toString().equals("Sudah Terlayani")){
-                JOptionPane.showMessageDialog(rootPane,"Resep sudah tervalidasi ..!!");
             }else {
                 if(var.getkode().equals("Admin Utama")){
                     dlgobt.setNoRm(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),3).toString(),
@@ -508,6 +528,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         tampil();
     }//GEN-LAST:event_formWindowOpened
 
+    private void cmbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbStatusItemStateChanged
+        
+    }//GEN-LAST:event_cmbStatusItemStateChanged
+
+    private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbStatusKeyPressed
+        Valid.pindah(evt, TCari,BtnKeluar);
+    }//GEN-LAST:event_cmbStatusKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -534,11 +562,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Tanggal DTPCari2;
     private widget.Label LCount;
     private widget.TextBox TCari;
+    private widget.ComboBox cmbStatus;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel20;
     private widget.Label jLabel21;
     private javax.swing.JPanel jPanel2;
     private widget.Label label10;
+    private widget.Label label11;
     private widget.Label label9;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi2;
@@ -554,27 +584,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     " if(resep_obat.jam_peresepan=resep_obat.jam,'Belum Terlayani','Sudah Terlayani') as status "+
                     " from resep_obat inner join reg_periksa inner join pasien inner join dokter on resep_obat.no_rawat=reg_periksa.no_rawat  "+
                     " and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and resep_obat.kd_dokter=dokter.kd_dokter where "+
-                    " resep_obat.tgl_perawatan between ? and ? and resep_obat.no_resep like ? or "+
-                    " resep_obat.tgl_perawatan between ? and ? and resep_obat.no_rawat like ? or "+
-                    " resep_obat.tgl_perawatan between ? and ? and pasien.no_rkm_medis like ? or "+
-                    " resep_obat.tgl_perawatan between ? and ? and pasien.nm_pasien like ? or "+
-                    " resep_obat.tgl_perawatan between ? and ? and dokter.nm_dokter like ? order by resep_obat.tgl_perawatan,resep_obat.jam");
+                    " resep_obat.tgl_perawatan between ? and ? and resep_obat.no_resep like ? and if(resep_obat.jam_peresepan=resep_obat.jam,'Belum Terlayani','Sudah Terlayani') like ? or "+
+                    " resep_obat.tgl_perawatan between ? and ? and resep_obat.no_rawat like ? and if(resep_obat.jam_peresepan=resep_obat.jam,'Belum Terlayani','Sudah Terlayani') like ? or "+
+                    " resep_obat.tgl_perawatan between ? and ? and pasien.no_rkm_medis like ? and if(resep_obat.jam_peresepan=resep_obat.jam,'Belum Terlayani','Sudah Terlayani') like ? or "+
+                    " resep_obat.tgl_perawatan between ? and ? and pasien.nm_pasien like ? and if(resep_obat.jam_peresepan=resep_obat.jam,'Belum Terlayani','Sudah Terlayani') like ? or "+
+                    " resep_obat.tgl_perawatan between ? and ? and dokter.nm_dokter like ? and if(resep_obat.jam_peresepan=resep_obat.jam,'Belum Terlayani','Sudah Terlayani') like ? "+
+                    " order by resep_obat.tgl_perawatan,resep_obat.jam");
             try{
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
-                ps.setString(4,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                ps.setString(5,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                ps.setString(6,"%"+TCari.getText().trim()+"%");
-                ps.setString(7,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                ps.setString(8,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                ps.setString(9,"%"+TCari.getText().trim()+"%");
-                ps.setString(10,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                ps.setString(11,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                ps.setString(12,"%"+TCari.getText().trim()+"%");
+                ps.setString(4,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
+                ps.setString(5,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                ps.setString(6,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                ps.setString(7,"%"+TCari.getText().trim()+"%");
+                ps.setString(8,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
+                ps.setString(9,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                ps.setString(10,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                ps.setString(11,"%"+TCari.getText().trim()+"%");
+                ps.setString(12,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
                 ps.setString(13,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(14,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 ps.setString(15,"%"+TCari.getText().trim()+"%");
+                ps.setString(16,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
+                ps.setString(17,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                ps.setString(18,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                ps.setString(19,"%"+TCari.getText().trim()+"%");
+                ps.setString(20,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new String[]{
