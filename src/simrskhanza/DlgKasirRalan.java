@@ -86,7 +86,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         setSize(885,674);
 
         Object[] rowkasir={"Kd.Dokter","Dokter Dituju","Nomer RM","Pasien","Poliklinik","Penanggung Jawab","Alamat P.J.","Hubungan P.J.",
-                           "Biaya Regristrasi","Jenis Bayar","Status","No.Rawat","Tanggal","Jam","No.Reg","kdKonsul"};
+                           "Biaya Regristrasi","Jenis Bayar","Status","No.Rawat","Tanggal","Jam","No.Reg","KdPoli","kdKonsul"};
         tabModekasir=new DefaultTableModel(null,rowkasir){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -95,7 +95,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         tbKasirRalan.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbKasirRalan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i <= 15; i++) {
+        for (i = 0; i <= 16; i++) {
             TableColumn column = tbKasirRalan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(70);
@@ -129,6 +129,11 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 column.setPreferredWidth(47);
             }
             else if(i==15){
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+                column.setWidth(0);
+            }
+            else if(i==16){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
                 column.setWidth(0);
@@ -2964,6 +2969,11 @@ private void btnCariDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         billing.dokter.isCek();
         billing.dokter.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
         billing.dokter.setLocationRelativeTo(internalFrame1);
+        
+        int row = tbKasirRalan.getSelectedRow();
+        int col = tbKasirRalan.getColumnCount()- 2;
+        String kdPoli = (String) tbKasirRalan.getValueAt(row, col);
+        billing.dokter.setPoli(kdPoli);
         billing.dokter.setVisible(true);
 }//GEN-LAST:event_btnCariDokterActionPerformed
 
@@ -4174,7 +4184,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         try{   
             pskasir=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                 "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,"+
-                "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab "+
+                "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab, poliklinik.kd_poli "+
                 "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
                 "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj "+
                 "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_poli=poliklinik.kd_poli  where  "+
@@ -4191,34 +4201,24 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.almt_pj like ? or "+
                 " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.hubunganpj like ? order by reg_periksa.no_rawat desc");
             try {
-                 pskonsul=koneksi.prepareStatement("select konsul_poli.no_reg,konsul_poli.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                "konsul_poli.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,CONCAT(poliklinik.nm_poli,'(konsul)') as nm_poli,"+
-                "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,konsul_poli.kd_kosul "+
-                "from konsul_poli Left JOIN reg_periksa on reg_periksa.no_rawat=konsul_poli.no_rawat  inner join dokter inner join pasien inner join poliklinik inner join penjab "+
-                "on konsul_poli.kd_dokter=dokter.kd_dokter and reg_periksa.kd_pj=penjab.kd_pj "+
-                "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and konsul_poli.kd_poli=poliklinik.kd_poli  where  "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.no_reg like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  konsul_poli.no_rawat like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.tgl_registrasi like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  konsul_poli.kd_dokter like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  dokter.nm_dokter like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.no_rkm_medis like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  pasien.nm_pasien like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  poliklinik.nm_poli like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.p_jawab like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  penjab.png_jawab like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.almt_pj like ? or "+
-                " reg_periksa.status_lanjut='Ralan' and (poliklinik.nm_poli like ? OR (SELECT GROUP_CONCAT(nm_poli) FROM konsul_poli kp JOIN poliklinik pk ON pk.kd_poli = kp.kd_poli WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and  (dokter.nm_dokter like ? OR (SELECT GROUP_CONCAT(nm_dokter) FROM konsul_poli kp JOIN dokter dk ON dk.kd_dokter = kp.kd_dokter WHERE kp.no_rawat = reg_periksa.no_rawat) like ?) and reg_periksa.stts like ? and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.hubunganpj like ? order by konsul_poli.no_rawat desc");
-//                     pskonsul=koneksi.prepareStatement("select konsul_poli.no_reg, konsul_poli.no_rawat,reg_periksa.tgl_registrasi," +
-//                    "reg_periksa.jam_reg,konsul_poli.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis," +
-//                    "pasien.nm_pasien,CONCAT(poliklinik.nm_poli,'(konsul)') as nm_poli," +
-//                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,konsul_poli.kd_poli,konsul_poli.kd_kosul" +
-//                    "  from konsul_poli Left JOIN reg_periksa on reg_periksa.no_rawat=konsul_poli.no_rawat JOIN penjab ON penjab.kd_pj=reg_periksa.p_jawab JOIN dokter ON" +
-//                    " dokter.kd_dokter=konsul_poli.kd_dokter JOIN poliklinik ON poliklinik.kd_poli=konsul_poli.kd_poli JOIN pasien ON pasien.no_rkm_medis=reg_periksa.no_rkm_medis " +           
-//                    " where  "+
-//                    " reg_periksa.status_lanjut='Ralan' and poliklinik.nm_poli like '%"+CrPoli.getText()+"%' and  dokter.nm_dokter like '%"+CrPtg.getText()+"%'  and reg_periksa.stts like '%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%' and reg_periksa.tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and (reg_periksa.no_reg like '%"+TCari.getText().trim()+"%' or "+
-//                    " reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.tgl_registrasi like '%"+TCari.getText().trim()+"%' or konsul_poli.kd_dokter like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or poliklinik.nm_poli like '%"+TCari.getText().trim()+"%' or reg_periksa.p_jawab like '%"+TCari.getText().trim()+"%' or penjab.png_jawab like '%"+TCari.getText().trim()+"%' or reg_periksa.almt_pj like '%"+TCari.getText().trim()+"%' or reg_periksa.hubunganpj like '%"+TCari.getText().trim()+"%' ) order by reg_periksa.no_rawat desc ");
-//                    
+                     pskonsul=koneksi.prepareStatement("select konsul_poli.no_reg, konsul_poli.no_rawat,reg_periksa.tgl_registrasi," +
+                    "reg_periksa.jam_reg,konsul_poli.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis," +
+                    "pasien.nm_pasien,CONCAT(poliklinik.nm_poli,'(konsul)') as nm_poli," +
+                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,konsul_poli.kd_poli,konsul_poli.kd_kosul, poliklinik.kd_poli " +
+                    "  from konsul_poli Left JOIN reg_periksa on reg_periksa.no_rawat=konsul_poli.no_rawat JOIN penjab ON penjab.kd_pj=reg_periksa.p_jawab JOIN dokter ON" +
+                    " dokter.kd_dokter=konsul_poli.kd_dokter JOIN poliklinik ON poliklinik.kd_poli=konsul_poli.kd_poli JOIN pasien ON pasien.no_rkm_medis=reg_periksa.no_rkm_medis " +           
+                    " where  "+
+                    " reg_periksa.status_lanjut='Ralan' and poliklinik.nm_poli like '%"+CrPoli.getText()+"%' and  dokter.nm_dokter like '%"+CrPtg.getText()+"%'  and reg_periksa.stts like '%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%' and reg_periksa.tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and (reg_periksa.no_reg like '%"+TCari.getText().trim()+"%' or "+
+                    " reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.tgl_registrasi like '%"+TCari.getText().trim()+"%' or konsul_poli.kd_dokter like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or poliklinik.nm_poli like '%"+TCari.getText().trim()+"%' or reg_periksa.p_jawab like '%"+TCari.getText().trim()+"%' or penjab.png_jawab like '%"+TCari.getText().trim()+"%' or reg_periksa.almt_pj like '%"+TCari.getText().trim()+"%' or reg_periksa.hubunganpj like '%"+TCari.getText().trim()+"%' ) order by reg_periksa.no_rawat desc ");
+                    System.out.println("select konsul_poli.no_reg, konsul_poli.no_rawat,reg_periksa.tgl_registrasi," +
+                    "reg_periksa.jam_reg,konsul_poli.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis," +
+                    "pasien.nm_pasien,CONCAT(poliklinik.nm_poli,'(konsul)') as nm_poli," +
+                    "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,konsul_poli.kd_poli,konsul_poli.kd_kosul" +
+                    "  from konsul_poli Left JOIN reg_periksa on reg_periksa.no_rawat=konsul_poli.no_rawat JOIN penjab ON penjab.kd_pj=reg_periksa.p_jawab JOIN dokter ON" +
+                    " dokter.kd_dokter=konsul_poli.kd_dokter JOIN poliklinik ON poliklinik.kd_poli=konsul_poli.kd_poli JOIN pasien ON pasien.no_rkm_medis=reg_periksa.no_rkm_medis " +           
+                    " where  "+
+                    " reg_periksa.status_lanjut='Ralan' and poliklinik.nm_poli like '%"+CrPoli.getText()+"%' and  dokter.nm_dokter like '%"+CrPtg.getText()+"%'  and reg_periksa.stts like '%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%' and reg_periksa.tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and (reg_periksa.no_reg like '%"+TCari.getText().trim()+"%' or "+
+                    " reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.tgl_registrasi like '%"+TCari.getText().trim()+"%' or konsul_poli.kd_dokter like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or poliklinik.nm_poli like '%"+TCari.getText().trim()+"%' or reg_periksa.p_jawab like '%"+TCari.getText().trim()+"%' or penjab.png_jawab like '%"+TCari.getText().trim()+"%' or reg_periksa.almt_pj like '%"+TCari.getText().trim()+"%' or reg_periksa.hubunganpj like '%"+TCari.getText().trim()+"%' ) order by reg_periksa.no_rawat desc ");
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
                     }
@@ -4319,104 +4319,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 pskasir.setString(94,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 pskasir.setString(95,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 pskasir.setString(96,"%"+TCari.getText().trim()+"%");
-                
-                pskonsul.setString(1,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(2,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(3,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(4,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(5,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(6,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(7,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(8,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(9,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(10,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(11,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(12,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(13,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(14,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(15,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(16,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(17,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(18,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(19,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(20,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(21,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(22,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(23,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(24,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(25,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(26,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(27,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(28,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(29,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(30,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(31,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(32,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(33,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(34,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(35,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(36,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(37,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(38,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(39,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(40,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(41,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(42,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(43,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(44,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(45,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(46,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(47,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(48,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(49,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(50,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(51,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(52,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(53,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(54,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(55,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(56,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(57,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(58,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(59,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(60,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(61,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(62,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(63,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(64,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(65,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(66,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(67,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(68,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(69,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(70,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(71,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(72,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(73,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(74,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(75,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(76,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(77,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(78,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(79,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(80,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(81,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(82,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(83,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(84,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(85,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(86,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(87,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(88,"%"+TCari.getText().trim()+"%");
-                pskonsul.setString(89,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(90,"%"+CrPoli.getText()+"%");
-                pskonsul.setString(91,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(92,"%"+CrPtg.getText()+"%");
-                pskonsul.setString(93,"%"+cmbStatus.getSelectedItem().toString().replaceAll("Semua","")+"%");
-                pskonsul.setString(94,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                pskonsul.setString(95,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                pskonsul.setString(96,"%"+TCari.getText().trim()+"%");
-                
                 rskasir=pskasir.executeQuery();
                 rskonsul=pskonsul.executeQuery();
                 while(rskasir.next()){
@@ -4435,7 +4337,9 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                    rskasir.getString("no_rawat"),
                                    rskasir.getString("tgl_registrasi"),
                                    rskasir.getString("jam_reg"),
-                                   rskasir.getString(1)});
+                                   rskasir.getString(1),
+                                   rskasir.getString("kd_poli")
+                    });
                 }
                 while (rskonsul.next()) { 
                         tabModekasir.addRow(new Object[] {
@@ -4454,6 +4358,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                    rskonsul.getString("tgl_registrasi"),
                                    rskonsul.getString("jam_reg"),
                                    rskonsul.getString(1),
+                                   rskonsul.getString("kd_poli"),
                                    rskonsul.getString("kd_kosul")
                                     });
                         }

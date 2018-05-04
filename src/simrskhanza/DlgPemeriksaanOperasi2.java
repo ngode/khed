@@ -47,7 +47,6 @@ import widget.TextBox;
 public class DlgPemeriksaanOperasi2 extends BaseDialog
 {
     // Const =========
-    private static final int COBA = 0;
     private static final int DOK_OPERATOR = 0;
     private static final int DOK_MERAWAT = 1;
     private static final int ASS_DOK_OPERATOR = 2;

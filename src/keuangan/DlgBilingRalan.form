@@ -1622,7 +1622,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="03-01-2018 14:15:38"/>
+                    <StringItem index="0" value="04-05-2018 23:09:31"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -1787,7 +1787,6 @@
                     <Property name="text" type="java.lang.String" value="Potongan"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkPotongan" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkPotonganActionPerformed"/>
@@ -1804,7 +1803,6 @@
                     <Property name="text" type="java.lang.String" value="Laboratorium"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkLaborat" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkLaboratActionPerformed"/>
@@ -1821,7 +1819,6 @@
                     <Property name="text" type="java.lang.String" value="Tarif Dokter"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkTarifDokter" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkTarifDokterActionPerformed"/>
@@ -1838,7 +1835,6 @@
                     <Property name="text" type="java.lang.String" value="Tarif Paramedis"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkTarifPrm" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkTarifPrmActionPerformed"/>
@@ -1855,7 +1851,6 @@
                     <Property name="text" type="java.lang.String" value="Tambahan"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkTambahan" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkTambahanActionPerformed"/>
@@ -1872,7 +1867,6 @@
                     <Property name="text" type="java.lang.String" value="Obat"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkObat" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkObatActionPerformed"/>
@@ -1889,7 +1883,6 @@
                     <Property name="text" type="java.lang.String" value="Radiologi"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkRadiologi" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkRadiologiActionPerformed"/>
@@ -1935,7 +1928,6 @@
                     <Property name="text" type="java.lang.String" value="Administrasi"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkAdministrasi" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkAdministrasiActionPerformed"/>
@@ -1952,7 +1944,6 @@
                     <Property name="text" type="java.lang.String" value="Sarpras"/>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="name" type="java.lang.String" value="chkSarpras" noResource="true"/>
-                    <Property name="opaque" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkSarprasActionPerformed"/>
