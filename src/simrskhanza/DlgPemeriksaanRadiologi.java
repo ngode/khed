@@ -130,7 +130,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         // ======= Set hak akses expertise hanya untuk dokter ======
         String idUser = var.getkode();
         
-        // Kalo dia sbg admin utama, biarin aja
+        // Kalo dia sbg admin utama, biarin aja ya
         if (!idUser.equals("Admin Utama"))
         {
             // Tes apakah id user ada di dokter
@@ -248,7 +248,6 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         };
 
         tblGroup.setModel(mdlGroup);
-
         tblGroup.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tblGroup.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
