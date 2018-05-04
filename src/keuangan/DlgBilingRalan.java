@@ -53,7 +53,7 @@ public class DlgBilingRalan extends javax.swing.JDialog
     public DlgCariDokter dokter = new DlgCariDokter(null, false);
     public DlgCariPoli poli = new DlgCariPoli(null, false);
     public DlgCariObat dlgobt = new DlgCariObat(null, false);
-    public DlgRawatJalan dlgrwjl = new DlgRawatJalan(null, false);
+    public DlgRawatJalan dlgrwjl = new DlgRawatJalan(null, false, false);
     public DlgPenanggungJawab penjab = new DlgPenanggungJawab(null, false);
     private double ttl = 0, y = 0, subttl = 0, ralanparamedis = 0, piutang = 0, itembayar = 0, itempiutang = 0,
             bayar = 0, total = 0, tamkur = 0, detailjs = 0, detailbhp = 0, ppn = 0, besarppn = 0, tagihanppn = 0,
@@ -2692,7 +2692,7 @@ private void tbBillingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
                             {
                                 kdptg = Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?", TNoRw.getText());
                                 nmptg = Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", kdptg);
-                                dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "");
+                                dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "", false);
                                 //perawatan.setModal(true);
                                 dlgrwjl.perawatan.isCek();
                                 dlgrwjl.perawatan.tampil();
@@ -2745,7 +2745,7 @@ private void tbBillingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
                             {
                                 kdptg = Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?", TNoRw.getText());
                                 nmptg = Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", kdptg);
-                                dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "");
+                                dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "", false);
                                 //perawatan.setModal(true);
                                 dlgrwjl.perawatan.isCek();
                                 dlgrwjl.perawatan.tampil();
@@ -2874,7 +2874,7 @@ private void tbBillingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             {
                                 kdptg = Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?", TNoRw.getText());
                                 nmptg = Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", kdptg);
-                                dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "");
+                                dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "", false);
                                 //perawatan.setModal(true);
                                 dlgrwjl.perawatan.isCek();
                                 dlgrwjl.perawatan.tampil();
@@ -2926,7 +2926,7 @@ private void tbBillingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             {
                                 kdptg = Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?", TNoRw.getText());
                                 nmptg = Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", kdptg);
-                                dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "");
+                                dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "", false);
                                 //perawatan.setModal(true);
                                 dlgrwjl.perawatan.isCek();
                                 dlgrwjl.perawatan.tampil();
@@ -3865,7 +3865,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             var.setform("DlgBilingRalan");
             kdptg = Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?", TNoRw.getText());
             nmptg = Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", kdptg);
-            dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "");
+            dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "", false);
             dlgrwjl.perawatan.isCek();
             dlgrwjl.perawatan.tampil();
             dlgrwjl.perawatan.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
@@ -3882,7 +3882,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             var.setform("DlgBilingRalan");
             kdptg = Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?", TNoRw.getText());
             nmptg = Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", kdptg);
-            dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "");
+            dlgrwjl.perawatan.setNoRm(TNoRw.getText(), kdptg, nmptg, "rawat_jl_dr", "", "", "", "", "", "", "-", "-", "", "", "", "", "", "", false);
             dlgrwjl.perawatan.isCek();
             dlgrwjl.perawatan.tampil();
             dlgrwjl.perawatan.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());

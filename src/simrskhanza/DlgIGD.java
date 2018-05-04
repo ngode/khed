@@ -3035,7 +3035,7 @@ private void MnRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             if(Sequel.cariInteger("select count(no_rawat) from kamar_inap where no_rawat=?",TNoRw.getText())>0){
                         JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
             }else {
-                DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
+                DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false,false);
                 dlgrwjl.isCek();
                 dlgrwjl.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                 dlgrwjl.setLocationRelativeTo(internalFrame1);

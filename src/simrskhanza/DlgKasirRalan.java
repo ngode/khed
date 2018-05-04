@@ -2517,7 +2517,7 @@ private void MnRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             }else{
                 if(var.getkode().equals("Admin Utama")){
                     billing.dlgrwjl.perawatan.setNoRm(TNoRw.getText(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),
-                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"rawat_jl_dr","","","","","","","-","-","","","","","","");
+                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"rawat_jl_drpr","","","","","","","-","-","","","","","","", false);
                     
                     billing.dlgrwjl.perawatan.isCek();
                     billing.dlgrwjl.perawatan.tampil();
@@ -2529,7 +2529,7 @@ private void MnRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                         JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
                     }else{
                         billing.dlgrwjl.perawatan.setNoRm(TNoRw.getText(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString(),
-                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"rawat_jl_dr","","","","","","","-","-","","","","","","");
+                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),1).toString(),"rawat_jl_drpr","","","","","","","-","-","","","","","","", false);
                         billing.dlgrwjl.perawatan.isCek();
                         billing.dlgrwjl.perawatan.tampil();
                         billing.dlgrwjl.perawatan.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
@@ -2861,7 +2861,7 @@ private void MnDataRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             if(Sequel.cariInteger("select count(no_rawat) from kamar_inap where no_rawat=?",TNoRw.getText())>0){
                 JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
             }else {
-                DlgRawatJalan dlgrwjl2=new DlgRawatJalan(null,false);
+                DlgRawatJalan dlgrwjl2=new DlgRawatJalan(null,false,false);
                 dlgrwjl2.isCek();
                 dlgrwjl2.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
                 dlgrwjl2.setLocationRelativeTo(internalFrame1);

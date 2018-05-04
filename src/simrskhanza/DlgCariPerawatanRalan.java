@@ -51,7 +51,8 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
     private PreparedStatement pstindakan,pstindakan2,pstindakan3,pstindakan4,
             pssimpandokter,pssimpanperawat,pssimpandokterperawat,psset_tarif;
     private ResultSet rstindakan,rsset_tarif;
-    private String pilihtable="",kd_pj="",kd_poli="",poli_ralan="Yes",cara_bayar_ralan="Yes";
+    //PERHATIAAANNN :: pilihtable="rawat_jl_drpr"
+    private String pilihtable="rawat_jl_drpr",kd_pj="",kd_poli="",poli_ralan="Yes",cara_bayar_ralan="Yes";
     private boolean[] pilih; 
     private String[] kode,nama,kategori;
     private double[] totaltnd,bagianrs,bhp,jmdokter,jmperawat,kso,menejemen;
@@ -896,10 +897,15 @@ private void BtnSimpanTindakanActionPerformed(java.awt.event.ActionEvent evt) {/
 }//GEN-LAST:event_BtnSimpanTindakanActionPerformed
 
 private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbTindakan.getRowCount();i++){ 
+            bersihkan();
+}//GEN-LAST:event_ppBersihkanActionPerformed
+
+private void bersihkan()
+{
+    for(i=0;i<tbTindakan.getRowCount();i++){ 
                 tbTindakan.setValueAt(false,i,0);
             }
-}//GEN-LAST:event_ppBersihkanActionPerformed
+}
 
 private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -983,7 +989,12 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }//GEN-LAST:event_formWindowActivated
 
     private void ppPetugasDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPetugasDokterActionPerformed
-        ppBersihkanActionPerformed(evt);
+        ppPetugasDokter();
+    }//GEN-LAST:event_ppPetugasDokterActionPerformed
+
+    private void ppPetugasDokter()
+    {
+        bersihkan();
         FormInput.setPreferredSize(new Dimension(WIDTH, 74));
         pilihtable="rawat_jl_drpr";
         jLabel5.setText(" Dokter :");
@@ -997,8 +1008,8 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         NmPetugas2.setVisible(true);
         btnPetugas.setVisible(true);
         tampil();
-    }//GEN-LAST:event_ppPetugasDokterActionPerformed
-
+    }
+    
     private void Nip2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Nip2KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_Nip2KeyPressed
@@ -1244,7 +1255,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 switch (pilihtable) {
                     case "rawat_jl_dr":
                         while(rstindakan.next()){
-                            if(rstindakan.getDouble("total_byrdr")>0){
+                            if(rstindakan.getDouble("total_byrdr")>=0){
                                 TabModeTindakan.addRow(new Object[] {
                                     false,rstindakan.getString(1),rstindakan.getString(2),rstindakan.getString(3),
                                     rstindakan.getDouble("total_byrdr"),rstindakan.getDouble("material"),
@@ -1257,7 +1268,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         break;
                     case "rawat_jl_pr":
                         while(rstindakan.next()){
-                            if(rstindakan.getDouble("total_byrpr")>0){
+                            if(rstindakan.getDouble("total_byrpr")>=0){
                                 TabModeTindakan.addRow(new Object[] {
                                     false,rstindakan.getString(1),rstindakan.getString(2),rstindakan.getString(3),
                                     rstindakan.getDouble("total_byrpr"),rstindakan.getDouble("material"),
@@ -1270,7 +1281,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         break;
                     case "rawat_jl_drpr":
                         while(rstindakan.next()){
-                            if(rstindakan.getDouble("total_byrdrpr")>0){
+                            if(rstindakan.getDouble("total_byrdrpr")>=0){
                                 TabModeTindakan.addRow(new Object[] {
                                     false,rstindakan.getString(1),rstindakan.getString(2),rstindakan.getString(3),
                                     rstindakan.getDouble("total_byrdrpr"),rstindakan.getDouble("material"),
@@ -1320,10 +1331,11 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         BtnTambahTindakan.setEnabled(var.gettarif_ralan());
     }
     
+    // PERHATIAANNN :: pilihtable langsung diset ke: rawat_jl_drpr
     public void setNoRm(String norwt,String kdpetugas,String nmpetugas, String pilihtable,
             String suhu, String tensi,String hasil, String perkembangan,String tanggal, 
             String jam,String kdpetugas2,String nmpetugas2, String berat,String tinggi, 
-            String nadi,String respirasi,String gcs,String alergi) {
+            String nadi,String respirasi,String gcs,String alergi, boolean isFromRanap) {
         
         for(i=0;i<tbTindakan.getRowCount();i++){ 
             tbTindakan.setValueAt(false,i,0);
@@ -1333,10 +1345,10 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         nmdokter.setText(nmpetugas);
         Nip2.setText(kdpetugas2);
         NmPetugas2.setText(nmpetugas2);
-        this.pilihtable=pilihtable;
+        this.pilihtable="rawat_jl_drpr";
         this.kd_pj=Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=?",norwt);
         this.kd_poli=Sequel.cariIsi("select kd_poli from reg_periksa where no_rawat=?",norwt);
-        switch (pilihtable) {
+        switch (this.pilihtable) {
             case "rawat_jl_dr":
                 FormInput.setPreferredSize(new Dimension(710, 44));
                 jLabel5.setText("Dokter :");                
@@ -1380,7 +1392,12 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             psset_tarif=koneksi.prepareStatement("select * from set_tarif");
             try {
                 rsset_tarif=psset_tarif.executeQuery();
-                if(rsset_tarif.next()){
+                
+                if (isFromRanap) {
+                    poli_ralan="No";
+                    cara_bayar_ralan="No";
+                }
+                else if(rsset_tarif.next()){
                     poli_ralan=rsset_tarif.getString("poli_ralan");
                     cara_bayar_ralan=rsset_tarif.getString("cara_bayar_ralan");
                 }else{

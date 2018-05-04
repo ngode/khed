@@ -58,13 +58,16 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private PreparedStatement ps,ps2,ps3,ps4;
     private ResultSet rs;
     private int i=0;
+    private boolean isFromRanap;
 
     /** Creates new form DlgPerawatan
      * @param parent
      * @param modal */
-    public DlgRawatJalan(java.awt.Frame parent, boolean modal) {
+    public DlgRawatJalan(java.awt.Frame parent, boolean modal, boolean isFromRanap) {
         super(parent, modal);
         initComponents();
+        this.isFromRanap = isFromRanap;
+        TabRawat.setSelectedIndex(2);
 
         this.setLocation(8,1);
         setSize(885,674);
@@ -2125,7 +2128,7 @@ private void btnTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 }else{
                     if(var.getkode().equals("Admin Utama")){
                         perawatan.setNoRm(TNoRw.getText(),KdDok.getText(),TDokter.getText(),"rawat_jl_dr",TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","","-","-",
-                                TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());                        
+                                TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText(), isFromRanap);                        
                         var.setform("DlgRawatJalan");
                         perawatan.isCek();
                         perawatan.tampil();
@@ -2138,7 +2141,7 @@ private void btnTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             TCari.requestFocus();
                         }else{                        
                             perawatan.setNoRm(TNoRw.getText(),KdDok.getText(),TDokter.getText(),"rawat_jl_dr",TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","","-","-",
-                                TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());                        
+                                TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText(), isFromRanap);                        
                             var.setform("DlgRawatJalan");
                             perawatan.isCek();
                             perawatan.tampil();
@@ -2155,7 +2158,7 @@ private void btnTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     if(var.getkode().equals("Admin Utama")){
                         var.setform("DlgRawatJalan");
                         perawatan.setNoRm(TNoRw.getText(),kdptg.getText(),TPerawat.getText(),"rawat_jl_pr",TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","","-","-",
-                            TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());                        
+                            TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText(), isFromRanap);                        
                         perawatan.isCek();
                         perawatan.tampil();
                         perawatan.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
@@ -2168,7 +2171,7 @@ private void btnTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }else{ 
                             var.setform("DlgRawatJalan");
                             perawatan.setNoRm(TNoRw.getText(),kdptg.getText(),TPerawat.getText(),"rawat_jl_pr",TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","","-","-",
-                            TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());                        
+                            TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText(), isFromRanap);                        
                             perawatan.isCek();
                             perawatan.tampil();
                             perawatan.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
@@ -2186,7 +2189,7 @@ private void btnTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     if(var.getkode().equals("Admin Utama")){
                         var.setform("DlgRawatJalan");
                         perawatan.setNoRm(TNoRw.getText(),KdDok2.getText(),TDokter2.getText(),"rawat_jl_drpr",TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","",kdptg2.getText(),TPerawat2.getText(),
-                                TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());                        
+                                TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText(), isFromRanap);                        
                         perawatan.isCek();
                         perawatan.tampil();
                         perawatan.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
@@ -2199,7 +2202,7 @@ private void btnTindakanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         }else{ 
                             var.setform("DlgRawatJalan");
                             perawatan.setNoRm(TNoRw.getText(),KdDok2.getText(),TDokter2.getText(),"rawat_jl_drpr",TSuhu.getText(),TTensi.getText(),TKeluhan.getText(),TPemeriksaan.getText(),"","",kdptg2.getText(),TPerawat2.getText(),
-                                TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());                        
+                                TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText(), isFromRanap);                        
                             perawatan.isCek();
                             perawatan.tampil();
                             perawatan.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
@@ -2515,7 +2518,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgRawatJalan dialog = new DlgRawatJalan(new javax.swing.JFrame(), true);
+            DlgRawatJalan dialog = new DlgRawatJalan(new javax.swing.JFrame(), true, false);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -2945,11 +2948,13 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         KdDok.setText(Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?",norwt));
+        KdDok2.setText(Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat=?",norwt));
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
         isRawat();
         isPsien();  
         Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",TDokter,KdDok.getText());
+        Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?",TDokter2,KdDok2.getText());
         ChkInput.setSelected(true);
         isForm(); 
     }

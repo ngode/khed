@@ -2660,7 +2660,7 @@ private void MnRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             JOptionPane.showMessageDialog(null,"Maaf, Pasien belum dipilih...!!!");
             TNoRw.requestFocus();
         }else{
-            DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
+            DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false,true);
             dlgrwjl.isCek();
             dlgrwjl.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
             dlgrwjl.setLocationRelativeTo(internalFrame1);
@@ -3507,7 +3507,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             JOptionPane.showMessageDialog(null,"Maaf, Pasien belum dipilih...!!!");
             TNoRw.requestFocus();
         }else{
-            DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
+            DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false,true);
             dlgrwjl.isCek();
             dlgrwjl.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
             dlgrwjl.setLocationRelativeTo(internalFrame1);
