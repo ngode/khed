@@ -222,8 +222,35 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         
         });
         
+        // ======= Set hak akses expertise hanya untuk dokter ======
+        String idUser = var.getkode();
         
+        // Kalo dia sbg admin utama, biarin aja ya
+        if (!idUser.equals("Admin Utama"))
+        {
+            // Tes apakah id user ada di dokter
+            String user = Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", idUser);
+
+            // Kalo di dokter gak ada, berarti petugas
+            if(user.equals(""))
+            {
+                txtKdPetugas.setText(idUser);
+                Sequel.cariIsi("SELECT nama FROM petugas WHERE nip = ?", NmPtg, idUser);
+            }
+        }
+        // =========================================================
         
+        // ============ Set pj radiologi ===========================
+        // Ambil pj_rad dari db
+        String pjHd = Sequel.cariIsi("SELECT kd_dokterhemodialisa FROM set_pjlab");
+        
+        // Kalo di database ada pj nya
+        if (!pjHd.equals(""))
+        {
+            txtKdDokterPj.setText(pjHd);
+            Sequel.cariIsi("SELECT nm_dokter FROM dokter WHERE kd_dokter = ?", txtNamaDokterPj, pjHd);
+        }
+        // =========================================================
         
         petugas.addWindowListener(new WindowListener()
         {
@@ -352,12 +379,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     {
         Object[] row =
         {
-            "Kd Periksa", "No Rawat", "Pasien", "Tgl Periksa", "Jam Periksa", "Status"
+            "Kd Periksa", "No Rawat", "Pasien", "Tgl Periksa", "Jam Periksa", "Status",
+            "Kode Periksa", "Nama Pemeriksaan", "Biaya Pemeriksaan"
         };
         
         int[] sz = 
         {
-            0, 120, 300, 200, 140, 90
+            0, 120, 300, 200, 140, 90, 90, 140, 200
         };
         
         mdlTransaksi = new DefaultTableModel(null, row)
@@ -393,10 +421,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         
         psTransaksi = new GStatement(koneksi)
                 .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
-                .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status")
+                .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status, ")
+                .a("det_pemeriksaan_hd.kd_jenis_prw, nm_perawatan, det_pemeriksaan_hd.biaya_rawat")
                 .a("FROM pemeriksaan_hd")
                 .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
                 .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("JOIN det_pemeriksaan_hd ON pemeriksaan_hd.kd_periksa = det_pemeriksaan_hd.kd_periksa")
+                .a("JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = det_pemeriksaan_hd.kd_jenis_prw")
                 .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_hd.no_rawat")
                 .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
                 .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
@@ -417,12 +448,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
     {
         Object[] row =
         {
-            "Kd Periksa", "No Rawat", "Pasien", "Tgl Periksa", "Jam Periksa", "Status"
+            "Kd Periksa", "No Rawat", "Pasien", "Tgl Periksa", "Jam Periksa", "Status", 
+            "Kode Periksa", "Nama Pemeriksaan", "Biaya Pemeriksaan"
         };
         
         int[] sz = 
         {
-            0, 120, 300, 200, 140, 90
+            0, 120, 300, 200, 140, 90, 90, 140, 200
         };
         
         mdlOrder = new DefaultTableModel(null, row)
@@ -458,10 +490,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
         
         psOrder = new GStatement(koneksi)
                 .a("SELECT pemeriksaan_hd.kd_periksa, pemeriksaan_hd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
-                .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status")
+                .a("    tgl_periksa, jam_mulai, IF (pemeriksaan_hd.status = 0, 'Belum', 'Sudah') as status, ")
+                .a("det_pemeriksaan_hd.kd_jenis_prw, nm_perawatan, det_pemeriksaan_hd.biaya_rawat")
                 .a("FROM pemeriksaan_hd")
                 .a("JOIN reg_periksa ON reg_periksa.no_rawat = pemeriksaan_hd.no_rawat")
                 .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
+                .a("JOIN det_pemeriksaan_hd ON pemeriksaan_hd.kd_periksa = det_pemeriksaan_hd.kd_periksa")
+                .a("JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = det_pemeriksaan_hd.kd_jenis_prw")
                 .a("LEFT JOIN kamar_inap ON kamar_inap.no_rawat = pemeriksaan_hd.no_rawat")
                 .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
                 .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
@@ -551,32 +586,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
                     pas,
                     rsTransaksi.getString("tgl_periksa"),
                     rsTransaksi.getString("jam_mulai"),
-                    rsTransaksi.getString("status")
+                    rsTransaksi.getString("status"),
+                    rsTransaksi.getString("kd_jenis_prw"),
+                    rsTransaksi.getString("nm_perawatan"),
+                    Valid.SetAngka(rsTransaksi.getDouble("biaya_rawat"))
                 };
                 
                 mdlTransaksi.addRow(o);
-                mdlTransaksi.addRow(new Object[]
-                {
-                    "", "", "Kode Periksa", "Nama Pemeriksaan", "Biaya Pemeriksaan", ""
-                });
-                
-                psTransaksiDet.setString("kd_periksa", rsTransaksi.getString("kd_periksa"));
-                rsTransaksiDet = psTransaksiDet.executeQuery();
-                
-                while (rsTransaksiDet.next())
-                {
-                    Object[] od = new Object[]
-                    {
-                        "",
-                        "",
-                        rsTransaksiDet.getString("kd_jenis_prw"),
-                        rsTransaksiDet.getString("nm_perawatan"),
-                        Valid.SetAngka(rsTransaksiDet.getDouble("biaya_rawat")),
-                        ""
-                    };
-
-                    mdlTransaksi.addRow(od);
-                }
             }
         } 
         catch (SQLException ex) 
@@ -618,32 +634,13 @@ public class DlgPemeriksaanHemodialisa extends javax.swing.JDialog
                     pas,
                     rsOrder.getString("tgl_periksa"),
                     rsOrder.getString("jam_mulai"),
-                    rsOrder.getString("status")
+                    rsOrder.getString("status"),
+                    rsOrder.getString("kd_jenis_prw"),
+                    rsOrder.getString("nm_perawatan"),
+                    Valid.SetAngka(rsOrder.getDouble("biaya_rawat")),
                 };
                 
                 mdlOrder.addRow(o);
-                mdlOrder.addRow(new Object[]
-                {
-                    "", "", "Kode Periksa", "Nama Pemeriksaan", "Biaya Pemeriksaan", ""
-                });
-                
-                psOrderDet.setString("kd_periksa", rsOrder.getString("kd_periksa"));
-                rsOrderDet = psOrderDet.executeQuery();
-                
-                while (rsOrderDet.next())
-                {
-                    Object[] od = new Object[]
-                    {
-                        "",
-                        "",
-                        rsOrderDet.getString("kd_jenis_prw"),
-                        rsOrderDet.getString("nm_perawatan"),
-                        Valid.SetAngka(rsOrderDet.getDouble("biaya_rawat")),
-                        ""
-                    };
-
-                    mdlOrder.addRow(od);
-                }
             }
         } 
         catch (SQLException ex) 
