@@ -1,4 +1,5 @@
 /*
+Ini diedit
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -11,7 +12,6 @@
 package simrskhanza;
 
 import fungsi.ButtonCell;
-import fungsi.GConvert;
 import fungsi.GQuery;
 import fungsi.GResult;
 import fungsi.GRow;
@@ -23,18 +23,14 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.var;
-import interfaces.TextChangedListener;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,24 +42,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.Jurnal;
 import pop.PopHasilRad;
 import simrskhanza.cari.DlgCariReg;
 import util.GColors;
-import util.GConst;
 import util.GMessage;
-import widget.Button;
-import widget.TextBox;
 
 /**
  *
