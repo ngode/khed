@@ -12,6 +12,8 @@
 
 package simrskhanza;
 
+import java.util.List;
+import fungsi.GQuery;
 import keuangan.DlgJnsPerawatanRalan;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
@@ -30,6 +32,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -71,6 +74,18 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10,2);
         setSize(656,250);
+        
+        // init cbPoli
+        List<String> l = new ArrayList<>();
+        l.add("-");
+        
+        new GQuery()
+                .a("SELECT nm_poli FROM poliklinik")
+                .select()
+                .forEach(s -> { l.add(s[0]); });
+        
+        cbPoli.setModel(new javax.swing.DefaultComboBoxModel(l.toArray()));
+        // end of init cbPoli
 
         Object[] row={"P","Kode","Nama Perawatan","Kategori Perawatan","Tarif/Biaya","Bagian RS","BHP","JM Dokter","JM Perawat","KSO","Menejemen"};
         TabModeTindakan=new DefaultTableModel(null,row){
@@ -255,6 +270,8 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         cmbMnt = new widget.ComboBox();
         cmbDtk = new widget.ComboBox();
         ChkJln = new widget.CekBox();
+        cbPoli = new widget.ComboBox();
+        jLabel4 = new widget.Label();
 
         Popup.setName("Popup"); // NOI18N
 
@@ -624,7 +641,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
 
         DTPTgl.setEditable(false);
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-09-2017" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-05-2018" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -689,6 +706,27 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         });
         FormInput.add(ChkJln);
         ChkJln.setBounds(781, 10, 23, 23);
+
+        cbPoli.setForeground(new java.awt.Color(153, 0, 51));
+        cbPoli.setName("cbPoli"); // NOI18N
+        cbPoli.setOpaque(false);
+        cbPoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPoliActionPerformed(evt);
+            }
+        });
+        cbPoli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbPoliKeyPressed(evt);
+            }
+        });
+        FormInput.add(cbPoli);
+        cbPoli.setBounds(530, 40, 122, 23);
+
+        jLabel4.setText("Poli :");
+        jLabel4.setName("jLabel4"); // NOI18N
+        FormInput.add(jLabel4);
+        jLabel4.setBounds(430, 40, 96, 23);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1066,6 +1104,14 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         // TODO add your handling code here:
     }//GEN-LAST:event_ChkJlnActionPerformed
 
+    private void cbPoliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbPoliKeyPressed
+        
+    }//GEN-LAST:event_cbPoliKeyPressed
+
+    private void cbPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPoliActionPerformed
+        tampil();
+    }//GEN-LAST:event_cbPoliActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1092,6 +1138,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Tanggal DTPTgl;
     private widget.PanelBiasa FormInput;
     private widget.TextBox Jam;
+    private widget.ComboBox Kategori;
     private widget.Label LCount;
     private widget.TextBox Nip2;
     private widget.TextBox NmPetugas2;
@@ -1112,10 +1159,12 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.TextBox Tanggal;
     private widget.Button btnDokter;
     private widget.Button btnPetugas;
+    private widget.ComboBox cbPoli;
     private widget.ComboBox cmbDtk;
     private widget.ComboBox cmbJam;
     private widget.ComboBox cmbMnt;
     private widget.InternalFrame internalFrame1;
+    private widget.Label jLabel4;
     private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
@@ -1189,31 +1238,31 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 });
             }
             
-            pstindakan=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori,"+
+            pstindakan=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori, poliklinik.nm_poli, "+
                    "jns_perawatan.total_byrdr,jns_perawatan.total_byrpr,jns_perawatan.total_byrdrpr,jns_perawatan.bhp,jns_perawatan.material,"+
                    "jns_perawatan.tarif_tindakandr,jns_perawatan.tarif_tindakanpr,jns_perawatan.kso,jns_perawatan.menejemen from jns_perawatan inner join kategori_perawatan "+
-                   "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori  "+
+                   "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori join poliklinik on poliklinik.kd_poli = jns_perawatan.kd_poli "+
                    "where (jns_perawatan.kd_kategori = '-' OR jns_perawatan.kd_kategori = 'rl' OR jns_perawatan.kd_kategori = 'gz') AND (jns_perawatan.status='1' and (jns_perawatan.kd_pj=? or jns_perawatan.kd_pj='-') and (jns_perawatan.kd_poli=? or jns_perawatan.kd_poli='-') and jns_perawatan.kd_jenis_prw like ? or "+
                     "jns_perawatan.status='1' and (jns_perawatan.kd_pj=? or jns_perawatan.kd_pj='-') and (jns_perawatan.kd_poli=? or jns_perawatan.kd_poli='-') and jns_perawatan.nm_perawatan like ? or "+
                     "jns_perawatan.status='1' and (jns_perawatan.kd_pj=? or jns_perawatan.kd_pj='-') and (jns_perawatan.kd_poli=? or jns_perawatan.kd_poli='-') and kategori_perawatan.nm_kategori like ?) order by jns_perawatan.nm_perawatan "); 
-            pstindakan2=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori,"+
+            pstindakan2=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori, poliklinik.nm_poli, "+
                    "jns_perawatan.total_byrdr,jns_perawatan.total_byrpr,jns_perawatan.total_byrdrpr,jns_perawatan.bhp,jns_perawatan.material,"+
                    "jns_perawatan.tarif_tindakandr,jns_perawatan.tarif_tindakanpr,jns_perawatan.kso,jns_perawatan.menejemen from jns_perawatan inner join kategori_perawatan "+
-                   "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori  "+
+                   "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori join poliklinik on poliklinik.kd_poli = jns_perawatan.kd_poli  "+
                    "where (jns_perawatan.kd_kategori = '-' OR jns_perawatan.kd_kategori = 'rl' OR jns_perawatan.kd_kategori = 'gz') AND (jns_perawatan.status='1' and (jns_perawatan.kd_pj=? or jns_perawatan.kd_pj='-') and jns_perawatan.kd_jenis_prw like ? or "+
                     "jns_perawatan.status='1' and (jns_perawatan.kd_pj=? or jns_perawatan.kd_pj='-') and jns_perawatan.nm_perawatan like ? or "+
                     "jns_perawatan.status='1' and (jns_perawatan.kd_pj=? or jns_perawatan.kd_pj='-') and kategori_perawatan.nm_kategori like ?) order by jns_perawatan.nm_perawatan ");        
-            pstindakan3=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori,"+
+            pstindakan3=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori, poliklinik.nm_poli, "+
                    "jns_perawatan.total_byrdr,jns_perawatan.total_byrpr,jns_perawatan.total_byrdrpr,jns_perawatan.bhp,jns_perawatan.material,"+
                    "jns_perawatan.tarif_tindakandr,jns_perawatan.tarif_tindakanpr,jns_perawatan.kso,jns_perawatan.menejemen from jns_perawatan inner join kategori_perawatan "+
-                   "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori  "+
+                   "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori join poliklinik on poliklinik.kd_poli = jns_perawatan.kd_poli  "+
                    "where (jns_perawatan.kd_kategori = '-' OR jns_perawatan.kd_kategori = 'rl' OR jns_perawatan.kd_kategori = 'gz') AND (jns_perawatan.status='1' and (jns_perawatan.kd_poli=? or jns_perawatan.kd_poli='-') and jns_perawatan.kd_jenis_prw like ? or "+
                     "jns_perawatan.status='1' and (jns_perawatan.kd_poli=? or jns_perawatan.kd_poli='-') and jns_perawatan.nm_perawatan like ? or "+
                     "jns_perawatan.status='1' and (jns_perawatan.kd_poli=? or jns_perawatan.kd_poli='-') and kategori_perawatan.nm_kategori like ?) order by jns_perawatan.nm_perawatan ");     
-            pstindakan4=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori,"+
+            pstindakan4=koneksi.prepareStatement("select jns_perawatan.kd_jenis_prw,jns_perawatan.nm_perawatan,kategori_perawatan.nm_kategori, poliklinik.nm_poli, "+
                    "jns_perawatan.total_byrdr,jns_perawatan.total_byrpr,jns_perawatan.total_byrdrpr,jns_perawatan.bhp,jns_perawatan.material,"+
                    "jns_perawatan.tarif_tindakandr,jns_perawatan.tarif_tindakanpr,jns_perawatan.kso,jns_perawatan.menejemen from jns_perawatan inner join kategori_perawatan "+
-                   "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori  "+
+                   "on jns_perawatan.kd_kategori=kategori_perawatan.kd_kategori join poliklinik on poliklinik.kd_poli = jns_perawatan.kd_poli  "+
                    "where (jns_perawatan.kd_kategori = '-' OR jns_perawatan.kd_kategori = 'rl' OR jns_perawatan.kd_kategori = 'gz') AND (jns_perawatan.status='1' and jns_perawatan.kd_jenis_prw like ? or "+
                     "jns_perawatan.status='1' and jns_perawatan.nm_perawatan like ? or "+
                     "jns_perawatan.status='1' and kategori_perawatan.nm_kategori like ?) order by jns_perawatan.nm_perawatan "); 
@@ -1256,6 +1305,11 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     case "rawat_jl_dr":
                         while(rstindakan.next()){
                             if(rstindakan.getDouble("total_byrdr")>=0){
+                                if (cbPoli.isVisible() 
+                                        && !((String) cbPoli.getSelectedItem()).equals("-")
+                                        && !((String) cbPoli.getSelectedItem()).equals(rstindakan.getString("nm_poli"))) {
+                                    continue;
+                                } 
                                 TabModeTindakan.addRow(new Object[] {
                                     false,rstindakan.getString(1),rstindakan.getString(2),rstindakan.getString(3),
                                     rstindakan.getDouble("total_byrdr"),rstindakan.getDouble("material"),
@@ -1269,6 +1323,11 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     case "rawat_jl_pr":
                         while(rstindakan.next()){
                             if(rstindakan.getDouble("total_byrpr")>=0){
+                                if (cbPoli.isVisible() 
+                                        && !((String) cbPoli.getSelectedItem()).equals("-")
+                                        && !((String) cbPoli.getSelectedItem()).equals(rstindakan.getString("nm_poli"))) {
+                                    continue;
+                                } 
                                 TabModeTindakan.addRow(new Object[] {
                                     false,rstindakan.getString(1),rstindakan.getString(2),rstindakan.getString(3),
                                     rstindakan.getDouble("total_byrpr"),rstindakan.getDouble("material"),
@@ -1282,6 +1341,11 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     case "rawat_jl_drpr":
                         while(rstindakan.next()){
                             if(rstindakan.getDouble("total_byrdrpr")>=0){
+                                if (cbPoli.isVisible() 
+                                        && !((String) cbPoli.getSelectedItem()).equals("-")
+                                        && !((String) cbPoli.getSelectedItem()).equals(rstindakan.getString("nm_poli"))) {
+                                    continue;
+                                } 
                                 TabModeTindakan.addRow(new Object[] {
                                     false,rstindakan.getString(1),rstindakan.getString(2),rstindakan.getString(3),
                                     rstindakan.getDouble("total_byrdrpr"),rstindakan.getDouble("material"),
@@ -1336,6 +1400,8 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             String suhu, String tensi,String hasil, String perkembangan,String tanggal, 
             String jam,String kdpetugas2,String nmpetugas2, String berat,String tinggi, 
             String nadi,String respirasi,String gcs,String alergi, boolean isFromRanap) {
+        
+        cbPoli.setVisible(isFromRanap);
         
         for(i=0;i<tbTindakan.getRowCount();i++){ 
             tbTindakan.setValueAt(false,i,0);
