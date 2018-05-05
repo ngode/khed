@@ -277,7 +277,9 @@ public class DlgPasien extends javax.swing.JDialog {
         cmbGolongan.setNextFocusableComponent(txtNamaPasien);
         
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        if (koneksiDB.cariCepat().equals("aktif")) TCari.addTextChangedListener(x -> tampil());
+        
+        // Harus gak aktif karena ngeloadnya lama
+        //if (koneksiDB.cariCepat().equals("aktif")) TCari.addTextChangedListener(x -> tampil());
         
         ChkInput.setSelected(false);
         isForm();
@@ -2062,7 +2064,7 @@ public class DlgPasien extends javax.swing.JDialog {
         jLabel6.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass9.add(jLabel6);
 
-        cmbHlm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "100", "200", "300", "400", "500", "1000", "Semua" }));
+        cmbHlm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "100", "200", "300", "400", "500", "1000" }));
         cmbHlm.setName("cmbHlm"); // NOI18N
         cmbHlm.setOpaque(false);
         cmbHlm.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -2179,7 +2181,7 @@ public class DlgPasien extends javax.swing.JDialog {
         jLabel13.setBounds(10, 100, 95, 23);
 
         dtpTglLahir.setForeground(new java.awt.Color(50, 70, 50));
-        dtpTglLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-05-2018" }));
+        dtpTglLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-05-2018" }));
         dtpTglLahir.setDisplayFormat("dd-MM-yyyy");
         dtpTglLahir.setName("dtpTglLahir"); // NOI18N
         dtpTglLahir.setOpaque(false);
@@ -2317,7 +2319,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
         dtpDaftar.setEditable(false);
         dtpDaftar.setForeground(new java.awt.Color(50, 70, 50));
-        dtpDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-05-2018" }));
+        dtpDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-05-2018" }));
         dtpDaftar.setDisplayFormat("dd-MM-yyyy");
         dtpDaftar.setName("dtpDaftar"); // NOI18N
         dtpDaftar.setOpaque(false);
@@ -5264,7 +5266,7 @@ private void ppRegistrasiBtnPrintActionPerformed(java.awt.event.ActionEvent evt)
                    "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj)," +
                    "pasien.no_telp_pj, nm_suku, pasien.group_unit, pasien.unit, pasien.status_kel_dinas, pasien.nama_kel_dinas, pasien.nrp_nip, pasien.kesatuan, "
                     + "pasien.group_pangkat, pasien.pangkat, pasien.golongan "
-                    + "from pasien " +
+                    + "from pasien " + 
                    "inner join kelurahan inner join kecamatan inner join kabupaten "+
                    "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "
