@@ -162,4 +162,9 @@ public class GQuery
     {
         return sql.write(compile());
     }
+
+     public List<Object[]> selectAsObJectArray()
+    {
+        return sql.selectAsObject(compile());
+    }
 }

@@ -157,7 +157,7 @@ import keuangan.DlgFeePeriksaRalan;
 import keuangan.DlgFeeRujukanRontgen;
 import keuangan.DlgFeeVisitDokter;
 import keuangan.DlgJnsPerawatanLab;
-import keuangan.DlgJnsPerawatanOperasi;
+import keuangan.DlgJnsPerawatanOperasi1;
 import keuangan.DlgJnsPerawatanRadiologi;
 import keuangan.DlgJnsPerawatanUTD;
 import keuangan.DlgJurnal;
@@ -6726,7 +6726,7 @@ private void BtnSimpanPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:e
         
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgJnsPerawatanOperasi produsen=new DlgJnsPerawatanOperasi(this,false);
+        DlgJnsPerawatanOperasi1 produsen=new DlgJnsPerawatanOperasi1(this,false);
         produsen.emptTeks();
         produsen.isCek();
         produsen.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
