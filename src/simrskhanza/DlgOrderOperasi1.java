@@ -42,6 +42,7 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
     DlgCariGroupOperasi dlgGroup = new DlgCariGroupOperasi(null, false);
     DlgCariKategoriOperasi dlgKategori = new DlgCariKategoriOperasi(null, false);
     DlgCariDetailOperasi dlgDetail = new DlgCariDetailOperasi(null, false);
+    DlgCariDokter dlgCariDokter = new DlgCariDokter(null, false);
     
     // Comps ======
     DefaultTableModel mdlOrder;
@@ -154,6 +155,15 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
                 txtNamaDetail.setText(dlgDetail.getTable().getValueAt(dlgDetail.getTable().getSelectedRow(),1).toString());
             }
         });
+        
+        dlgCariDokter.addWindowClosedListener(() ->
+        {
+            if (dlgCariDokter.getTable().getSelectedRow() != -1)
+            {
+                txtKdDokter.setText(dlgCariDokter.getTable().getValueAt(dlgCariDokter.getTable().getSelectedRow(),0).toString());
+                txtNamaDokter.setText(dlgCariDokter.getTable().getValueAt(dlgCariDokter.getTable().getSelectedRow(),1).toString());
+            }
+        });
     }
     
     private void addTextChangedListener()
@@ -197,6 +207,15 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
         dlgDetail.setKdKategori(txtKdKategori.getText());
         dlgDetail.tampil();
         dlgDetail.setVisible(true);
+    }
+    
+    private void cariDokter()
+    {
+        dlgCariDokter.emptTeks();
+        dlgCariDokter.isCek();
+        dlgCariDokter.setSize(internalFrame1.getWidth()-40,internalFrame1.getHeight()-40);
+        dlgCariDokter.setLocationRelativeTo(internalFrame1);
+        dlgCariDokter.setVisible(true);
     }
     
     private void baru()
@@ -245,11 +264,11 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
             GMessage.e("Kosong", "Kategori tidak boleh kosong");
             return;
         }
-//        else if (txtKdDetail.getText().trim().isEmpty())
-//        {
-//            GMessage.e("Kosong", "Detail tidak boleh kosong");
-//            return;
-//        }
+        else if (txtKdDokter.getText().trim().isEmpty())
+        {
+            GMessage.e("Kosong", "Dokter tidak boleh kosong");
+            return;
+        }
         
         if (GMessage.q("Konfirmasi", "Data sudah benar?"))
         {
@@ -264,7 +283,8 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
                     .a("kd_detail = {kd_detail},")
                     .a("kode_paket = {kode_paket},")
                     .a("tgl_operasi = {tgl_operasi},")
-                    .a("jam_operasi = {jam_operasi}")
+                    .a("jam_operasi = {jam_operasi},")
+                    .a("dokter_operator = {dokter_operator}")
                     .a("WHERE kd_operasi = {kd_operasi}")
                     .set("kd_group", txtKdGroup.getText())
                     .set("kd_kategori", txtKdKategori.getText())
@@ -272,15 +292,16 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
                     .set("kode_paket", txtKdKategori.getText())
                     .set("tgl_operasi", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
                     .set("jam_operasi", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
+                    .set("dokter_operator", txtKdDokter.getText())
                     .set("kd_operasi", kdOperasi)
                     .write();
             }
             else
             {
                 b = new GQuery()
-                    .a("INSERT INTO hrj_operasi (no_rawat, kd_group, kd_kategori, kd_detail, kode_paket,")
+                    .a("INSERT INTO hrj_operasi (no_rawat, kd_group, kd_kategori, kd_detail, kode_paket, dokter_operator,")
                     .a("tgl_operasi, jam_operasi, status, proses)")
-                    .a("VALUES ({no_rw}, {kd_group}, {kd_kategori}, {kd_detail}, {kode_paket}, {tgl_operasi}, {jam_operasi}, {status}, 'Belum')")
+                    .a("VALUES ({no_rw}, {kd_group}, {kd_kategori}, {kd_detail}, {kode_paket}, {dokter_operator}, {tgl_operasi}, {jam_operasi}, {status}, 'Belum')")
                     .set("no_rw", txtNoRawat.getText())
                     .set("kd_group", txtKdGroup.getText())
                     .set("kd_kategori", txtKdKategori.getText())
@@ -289,6 +310,7 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
                     .set("tgl_operasi", Valid.SetTgl(DTPBeri.getSelectedItem().toString()))
                     .set("jam_operasi", cmbJam.getSelectedItem() + ":" + cmbMnt.getSelectedItem() + ":" + cmbDtk.getSelectedItem())
                     .set("status", status)
+                    .set("dokter_operator", txtKdDokter.getText())
                     .write();
             }
 
@@ -416,6 +438,10 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
         cmbMnt = new widget.ComboBox();
         cmbDtk = new widget.ComboBox();
         ChkJln = new widget.CekBox();
+        btnCariDokter = new widget.Button();
+        txtNamaDokter = new widget.TextBox();
+        txtKdDokter = new widget.TextBox();
+        label5 = new widget.Label();
         pnlAction = new widget.panelisi();
         btnSimpan = new widget.Button();
         btnBaru = new widget.Button();
@@ -436,7 +462,7 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
 
         panelisi1.setLayout(new java.awt.BorderLayout());
 
-        pnlInput.setPreferredSize(new java.awt.Dimension(779, 176));
+        pnlInput.setPreferredSize(new java.awt.Dimension(779, 200));
 
         label1.setText("No Rawat :");
 
@@ -498,7 +524,7 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
 
         DTPBeri.setEditable(false);
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2018" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-05-2018" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setOpaque(false);
         DTPBeri.setPreferredSize(new java.awt.Dimension(100, 23));
@@ -542,6 +568,22 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
         ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        btnCariDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnCariDokter.setMnemonic('4');
+        btnCariDokter.setToolTipText("ALt+4");
+        btnCariDokter.setPreferredSize(new java.awt.Dimension(35, 22));
+        btnCariDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCariDokterActionPerformed(evt);
+            }
+        });
+
+        txtNamaDokter.setEditable(false);
+
+        txtKdDokter.setEditable(false);
+
+        label5.setText("Dokter :");
+
         javax.swing.GroupLayout pnlInputLayout = new javax.swing.GroupLayout(pnlInput);
         pnlInput.setLayout(pnlInputLayout);
         pnlInputLayout.setHorizontalGroup(
@@ -549,53 +591,62 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
             .addGroup(pnlInputLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlInputLayout.createSequentialGroup()
+                            .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlInputLayout.createSequentialGroup()
+                                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtKdKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNamaKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlInputLayout.createSequentialGroup()
+                                        .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtKdDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNamaDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(pnlInputLayout.createSequentialGroup()
+                                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtKdGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtNamaGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pnlInputLayout.createSequentialGroup()
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(DTPBeri, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(2, 2, 2)
+                                    .addComponent(cmbJam, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(1, 1, 1)
+                                    .addComponent(cmbMnt, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(1, 1, 1)
+                                    .addComponent(cmbDtk, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(1, 1, 1)
+                                    .addComponent(ChkJln, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnCariDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCariKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnCariGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInputLayout.createSequentialGroup()
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtNoRawat, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtNoRm, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtNamaPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlInputLayout.createSequentialGroup()
-                        .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnlInputLayout.createSequentialGroup()
-                                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtKdKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNamaKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pnlInputLayout.createSequentialGroup()
-                                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtKdDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNamaDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pnlInputLayout.createSequentialGroup()
-                                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtKdGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNamaGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlInputLayout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(DTPBeri, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(cmbJam, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(cmbMnt, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(cmbDtk, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(ChkJln, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnCariDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnCariKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnCariGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInputLayout.createSequentialGroup()
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNoRawat, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKdDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNoRm, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNamaDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNamaPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCariDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlInputLayout.setVerticalGroup(
@@ -631,13 +682,20 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKdDokter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNamaDokter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCariDokter, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(DTPBeri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cmbJam, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbMnt, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbDtk, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChkJln, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         panelisi1.add(pnlInput, java.awt.BorderLayout.PAGE_START);
@@ -812,11 +870,16 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
 
     }//GEN-LAST:event_cmbDtkKeyPressed
 
+    private void btnCariDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariDokterActionPerformed
+        cariDokter();
+    }//GEN-LAST:event_btnCariDokterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.CekBox ChkJln;
     private widget.Tanggal DTPBeri;
     private widget.Button btnBaru;
     private widget.Button btnCariDetail;
+    private widget.Button btnCariDokter;
     private widget.Button btnCariGroup;
     private widget.Button btnCariKategori;
     private widget.Button btnCetak;
@@ -834,15 +897,18 @@ public class DlgOrderOperasi1 extends javax.swing.JDialog
     private widget.Label label2;
     private widget.Label label3;
     private widget.Label label4;
+    private widget.Label label5;
     private widget.panelisi panelisi1;
     private widget.panelisi pnlAction;
     private widget.PanelBiasa pnlInput;
     private widget.ScrollPane scrollPane;
     private widget.Table tblOrder;
     private widget.TextBox txtKdDetail;
+    private widget.TextBox txtKdDokter;
     private widget.TextBox txtKdGroup;
     private widget.TextBox txtKdKategori;
     private widget.TextBox txtNamaDetail;
+    private widget.TextBox txtNamaDokter;
     private widget.TextBox txtNamaGroup;
     private widget.TextBox txtNamaKategori;
     private widget.TextBox txtNamaPasien;

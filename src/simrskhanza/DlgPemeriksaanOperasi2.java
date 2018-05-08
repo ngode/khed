@@ -17,6 +17,7 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import fungsi.var;
 import interfaces.TextChangedListener;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -324,12 +325,12 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
     {
         Object[] row =
         {
-            "Kd Order", "Kd Group", "Kd Kategori", "Kd Detail", "No Rawat", "Pasien", "Group", "Kategori", "Detail", "Tgl Operasi"
+            "Kd Order", "Kd Group", "Kd Kategori", "Kd Detail", "No Rawat", "Pasien", "Group", "Kategori", "Dokter Operator", "Detail", "Tgl Operasi", "Kd Dokter"
         };
         
         int[] sz = 
         {
-            80, 50, 50, 50, 120, 300, 200, 200, 200, 150
+            80, 50, 50, 50, 120, 300, 200, 200, 200, 200, 150, 0
         };
         
         mdlOrder = new DefaultTableModel(null, row)
@@ -478,7 +479,9 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
         txtKdDetail.setText(tblOrder.getValueAt(i, 3) == null ? "-" : tblOrder.getValueAt(i, 3).toString());
         txtNamaGroup.setText(tblOrder.getValueAt(i, 6).toString());
         txtNamaKategori.setText(tblOrder.getValueAt(i, 7).toString());
-        txtNamaDetail.setText(tblOrder.getValueAt(i, 8) == null ? "-" : tblOrder.getValueAt(i, 8).toString());
+        txtNamaDetail.setText(tblOrder.getValueAt(i, 9) == null ? "-" : tblOrder.getValueAt(i, 9).toString());
+        txtKdDokOperator.setText(tblOrder.getValueAt(i, 11) == null ? "-" : tblOrder.getValueAt(i, 11).toString());
+        txtNamaDokOperator.setText(tblOrder.getValueAt(i, 8) == null ? "-" : tblOrder.getValueAt(i, 8).toString());
         
         cariKelas();
     }
@@ -734,7 +737,7 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
         Valid.tabelKosong(mdlOrder);
 
         new GQuery()
-                .a("SELECT kd_operasi, hrj_operasi.no_rawat, paket_operasi_2.*, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
+                .a("SELECT kd_operasi, hrj_operasi.no_rawat, hrj_operasi.dokter_operator, dokter.nm_dokter, paket_operasi_2.*, pasien.no_rkm_medis, pasien.nm_pasien, kamar.kd_kamar, bangsal.nm_bangsal, poliklinik.nm_poli,")
                 .a("operasi_group.kd_group, operasi_detail.kd_detail, nm_group, nm_detail, tgl_operasi, jam_operasi, tgl_selesai, jam_selesai")
                 .a("FROM hrj_operasi")
                 .a("LEFT JOIN operasi_detail ON operasi_detail.kd_detail = hrj_operasi.kd_detail")
@@ -747,6 +750,7 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
                 .a("LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar")
                 .a("LEFT JOIN bangsal ON bangsal.kd_bangsal = kamar.kd_bangsal")
                 .a("LEFT JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli")
+                .a("JOIN dokter ON dokter.kd_dokter = hrj_operasi.dokter_operator")
                 .a("WHERE DATE(tgl_operasi) BETWEEN {tgl1} AND {tgl2} AND proses = 'Belum'")
                 .a("ORDER BY tgl_operasi")
                 .set("tgl1", Valid.SetTgl(tglOrder1.getSelectedItem().toString()))
@@ -777,8 +781,10 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
                         pas,
                         s.get("nm_group"),
                         s.get("nama_paket"),
+                        s.get("nm_dokter"),
                         s.get("nm_detail"),
-                        s.get("tgl_operasi") + " " + s.get("jam_operasi")
+                        s.get("tgl_operasi") + " " + s.get("jam_operasi"),
+                        s.get("dokter_operator")
                     };
 
                     mdlOrder.addRow(o);
@@ -858,11 +864,11 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
             GMessage.w("Salah", "Pilih kategori dulu");
             return false;
         }
-//        else if (txtNamaDetail.getText().trim().isEmpty())
-//        {
-//            GMessage.w("Salah", "Pilih detail dulu");
-//            return false;
-//        }
+        else if (txtKdDokOperator.getText().trim().isEmpty())
+        {
+            GMessage.w("Salah", "Pilih dokter operator dulu");
+            return false;
+        }
         
         return true;
     }
@@ -2499,15 +2505,15 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
                         "&diagnosa=" + Utilz.cariDiagnosa(h.get("no_rawat")) + "&group=" + h.get("nm_group") +
                         "&kategori=" + h.get("nama_paket") + "&detail=" + h.get("nm_detail") + "&tanggal_operasi=" +
                         h.get("tgl_selesai") + 
-                        "&dokter_operator=" + Utilz.cariNamaDokter(h.get("dokter_operator")).replace(" ", "_") + 
-                        "&dokter_yang_merawat=" + Utilz.cariNamaDokter(h.get("dokter_yang_merawat")).replace(" ", "_") + 
-                        "&ass_dokter_operator=" + Utilz.cariNamaDokter(h.get("ass_dokter_operator")).replace(" ", "_") + 
-                        "&dokter_anestesi=" + Utilz.cariNamaDokter(h.get("dokter_anestesi")).replace(" ", "_") + 
-                        "&penata_anestesi=" + Utilz.cariNamaDokter(h.get("penata_anestesi")).replace(" ", "_") + 
-                        "&dokter_anak=" + Utilz.cariNamaDokter(h.get("dokter_anak")).replace(" ", "_") + 
-                        "&dokter_pendamping=" + Utilz.cariNamaDokter(h.get("dokter_pendamping")).replace(" ", "_") + 
-                        "&perawat_bidan=" + Utilz.cariNamaDokter(h.get("perawat_bidan")).replace(" ", "_") + 
-                        "&admin=Admin_OK"
+                        "&dokter_operator=" + Utilz.cariNamaDokter(h.get("dokter_operator")).trim().replace(" ", "_") + 
+                        "&dokter_yang_merawat=" + Utilz.cariNamaDokter(h.get("dokter_yang_merawat")).trim().replace(" ", "_") + 
+                        "&ass_dokter_operator=" + Utilz.cariNamaDokter(h.get("ass_dokter_operator")).trim().replace(" ", "_") + 
+                        "&dokter_anestesi=" + Utilz.cariNamaDokter(h.get("dokter_anestesi")).trim().replace(" ", "_") + 
+                        "&penata_anestesi=" + Utilz.cariNamaDokter(h.get("penata_anestesi")).trim().replace(" ", "_") + 
+                        "&dokter_anak=" + Utilz.cariNamaDokter(h.get("dokter_anak")).trim().replace(" ", "_") + 
+                        "&dokter_pendamping=" + Utilz.cariNamaDokter(h.get("dokter_pendamping")).trim().replace(" ", "_") + 
+                        "&perawat_bidan=" + Utilz.cariNamaDokter(h.get("perawat_bidan")).trim().replace(" ", "_") + 
+                        "&admin=" + Sequel.cariIsi("select nama from pegawai where nik=?", var.getkode())
                 );
                 
                 HashMap<String, String> m = new HashMap<>();
@@ -2856,10 +2862,20 @@ public class DlgPemeriksaanOperasi2 extends BaseDialog
         
         static String cariNamaDokter(String kdDokter)
         {
-            return new GQuery()
+            String d = new GQuery()
                     .a("SELECT nm_dokter FROM dokter WHERE kd_dokter = {x}")
                     .set("x", kdDokter)
                     .getString();
+            
+            if (d.isEmpty())
+            {
+                d = new GQuery()
+                    .a("SELECT nama FROM petugas WHERE nip = {x}")
+                    .set("x", kdDokter)
+                    .getString();
+            }
+            
+            return d.isEmpty() ? "null" : d;
         }
         
         static String cariDiagnosa(String noRawat)

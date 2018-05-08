@@ -60,7 +60,7 @@
             <Container class="widget.PanelBiasa" name="pnlInput">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[779, 176]"/>
+                  <Dimension value="[779, 200]"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -72,65 +72,76 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="label3" min="-2" pref="86" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="txtKdKategori" min="-2" pref="93" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtNamaKategori" min="-2" pref="534" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="label3" min="-2" pref="86" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="txtKdKategori" min="-2" pref="93" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txtNamaKategori" min="-2" pref="534" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="label4" min="-2" pref="86" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="txtKdDetail" min="-2" pref="91" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txtNamaDetail" min="-2" pref="536" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="label4" min="-2" pref="86" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="label2" min="-2" pref="86" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="txtKdDetail" min="-2" pref="91" max="-2" attributes="0"/>
+                                              <Component id="txtKdGroup" min="-2" pref="93" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtNamaDetail" min="-2" pref="536" max="-2" attributes="0"/>
+                                              <Component id="txtNamaGroup" min="-2" pref="534" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jLabel9" min="-2" pref="80" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="DTPBeri" min="-2" pref="95" max="-2" attributes="0"/>
+                                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                                              <Component id="cmbJam" min="-2" pref="45" max="-2" attributes="0"/>
+                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                              <Component id="cmbMnt" min="-2" pref="45" max="-2" attributes="0"/>
+                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                              <Component id="cmbDtk" min="-2" pref="45" max="-2" attributes="0"/>
+                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                              <Component id="ChkJln" min="-2" pref="23" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="label2" min="-2" pref="86" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtKdGroup" min="-2" pref="93" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtNamaGroup" min="-2" pref="534" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jLabel9" min="-2" pref="80" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="DTPBeri" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                                          <Component id="cmbJam" min="-2" pref="45" max="-2" attributes="0"/>
-                                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                          <Component id="cmbMnt" min="-2" pref="45" max="-2" attributes="0"/>
-                                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                          <Component id="cmbDtk" min="-2" pref="45" max="-2" attributes="0"/>
-                                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                          <Component id="ChkJln" min="-2" pref="23" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="btnCariDetail" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Component id="btnCariKategori" min="-2" pref="22" max="-2" attributes="0"/>
+                                              <Component id="btnCariGroup" min="-2" pref="22" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="btnCariDetail" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="btnCariKategori" min="-2" pref="22" max="-2" attributes="0"/>
-                                          <Component id="btnCariGroup" min="-2" pref="22" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="label1" min="-2" pref="86" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtNoRawat" min="-2" pref="156" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtNoRm" min="-2" pref="132" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtNamaPasien" min="-2" pref="361" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="label1" min="-2" pref="86" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="label5" min="-2" pref="86" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtNoRawat" min="-2" pref="156" max="-2" attributes="0"/>
+                                  <Component id="txtKdDokter" min="-2" pref="91" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtNoRm" min="-2" pref="132" max="-2" attributes="0"/>
+                                  <Component id="txtNamaDokter" min="-2" pref="536" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtNamaPasien" min="-2" pref="361" max="-2" attributes="0"/>
+                                  <Component id="btnCariDokter" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -177,6 +188,15 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="label5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtKdDokter" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNamaDokter" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="btnCariDokter" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="DTPBeri" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel9" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                               </Group>
@@ -185,7 +205,7 @@
                               <Component id="cmbDtk" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                               <Component id="ChkJln" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -314,7 +334,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="04-05-2018"/>
+                        <StringItem index="0" value="09-05-2018"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -530,6 +550,36 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
+                  </Properties>
+                </Component>
+                <Component class="widget.Button" name="btnCariDokter">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/190.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="52"/>
+                    <Property name="toolTipText" type="java.lang.String" value="ALt+4"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[35, 22]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCariDokterActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.TextBox" name="txtNamaDokter">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="widget.TextBox" name="txtKdDokter">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+                <Component class="widget.Label" name="label5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Dokter :"/>
                   </Properties>
                 </Component>
               </SubComponents>
