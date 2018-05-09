@@ -498,7 +498,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
     {
         Object[] row =
         {
-            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Status", "Id"
+            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Status", "Id","Validasi"
         };
         
         mdlOrder = new DefaultTableModel(null, row)
@@ -512,7 +512,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
             {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class,
             };
 
             @Override
@@ -528,7 +528,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         tblOrder.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tblOrder.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 9; i++)
+        for (i = 0; i < 10; i++)
         {
             TableColumn column = tblOrder.getColumnModel().getColumn(i);
             if (i == 0)
@@ -565,8 +565,9 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
             }
             else if (i == 8)
             {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                column.setPreferredWidth(75);
+            }else if(i==9){
+                column.setPreferredWidth(150);
             }
         }
 
@@ -577,7 +578,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
     {
         Object[] row =
         {
-            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Status", "Id"
+            "No Rawat", "Pasien", "Petugas", "Tgl Periksa", "Jam Periksa", "Dokter Perujuk", "Penanggung Jawab", "Status", "Id","Validasi"
         };
         
         mdlTransaksi = new DefaultTableModel(null, row)
@@ -592,7 +593,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
             {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, 
             };
 
             @Override
@@ -608,7 +609,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         tblTransaksi.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tblTransaksi.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 9; i++)
+        for (i = 0; i < 10; i++)
         {
             TableColumn column = tblTransaksi.getColumnModel().getColumn(i);
             if (i == 0)
@@ -645,8 +646,9 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
             }
             else if (i == 8)
             {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                column.setPreferredWidth(75);
+            }else if(i==9){
+                column.setPreferredWidth(150);
             }
         }
 
@@ -972,6 +974,8 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         txtUmurNonRm = new widget.TextBox();
         label3 = new widget.Label();
         txtAlamatNonRm = new widget.TextBox();
+        cmbValidasi = new widget.ComboBox();
+        jLabel13 = new widget.Label();
         panelisi2 = new widget.panelisi();
         internalFrame2 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
@@ -1387,10 +1391,10 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         PanelInput.add(txtNamaPasien);
         txtNamaPasien.setBounds(372, 12, 370, 23);
 
-        jLabel11.setText("Pemeriksaan :");
+        jLabel11.setText("Validasi :");
         jLabel11.setName("jLabel11"); // NOI18N
         PanelInput.add(jLabel11);
-        jLabel11.setBounds(0, 102, 92, 23);
+        jLabel11.setBounds(780, 130, 60, 23);
 
         jLabel7.setText("Dokter P.J. :");
         jLabel7.setName("jLabel7"); // NOI18N
@@ -1445,7 +1449,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2018" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-05-2018" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1536,7 +1540,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         Scroll1.setViewportView(tbTarif);
 
         PanelInput.add(Scroll1);
-        Scroll1.setBounds(95, 127, 677, 110);
+        Scroll1.setBounds(90, 130, 677, 120);
 
         jLabel15.setText("Tgl.Periksa :");
         jLabel15.setName("jLabel15"); // NOI18N
@@ -1707,6 +1711,22 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         PanelInput.add(pnlNonRm);
         pnlNonRm.setBounds(860, 10, 500, 110);
 
+        cmbValidasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Belum Validasi", "Sudah Validasi" }));
+        cmbValidasi.setName("cmbValidasi"); // NOI18N
+        cmbValidasi.setOpaque(false);
+        cmbValidasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cmbValidasiKeyPressed(evt);
+            }
+        });
+        PanelInput.add(cmbValidasi);
+        cmbValidasi.setBounds(850, 130, 100, 20);
+
+        jLabel13.setText("Pemeriksaan :");
+        jLabel13.setName("jLabel13"); // NOI18N
+        PanelInput.add(jLabel13);
+        jLabel13.setBounds(0, 102, 92, 23);
+
         FormInput.add(PanelInput, java.awt.BorderLayout.CENTER);
 
         panelisi1.add(FormInput, java.awt.BorderLayout.PAGE_START);
@@ -1762,7 +1782,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         tglTransaksi1.setEditable(false);
         tglTransaksi1.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2018" }));
+        tglTransaksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-05-2018" }));
         tglTransaksi1.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi1.setName("tglTransaksi1"); // NOI18N
         tglTransaksi1.setOpaque(false);
@@ -1776,7 +1796,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         tglTransaksi2.setEditable(false);
         tglTransaksi2.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2018" }));
+        tglTransaksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-05-2018" }));
         tglTransaksi2.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi2.setName("tglTransaksi2"); // NOI18N
         tglTransaksi2.setOpaque(false);
@@ -1945,7 +1965,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         tglTransaksi3.setEditable(false);
         tglTransaksi3.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2018" }));
+        tglTransaksi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-05-2018" }));
         tglTransaksi3.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi3.setName("tglTransaksi3"); // NOI18N
         tglTransaksi3.setOpaque(false);
@@ -1959,7 +1979,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
 
         tglTransaksi4.setEditable(false);
         tglTransaksi4.setForeground(new java.awt.Color(50, 70, 50));
-        tglTransaksi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2018" }));
+        tglTransaksi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-05-2018" }));
         tglTransaksi4.setDisplayFormat("dd-MM-yyyy");
         tglTransaksi4.setName("tglTransaksi4"); // NOI18N
         tglTransaksi4.setOpaque(false);
@@ -2243,7 +2263,8 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                         .a("jam_selesai = {jam_selesai},")
                         .a("dokter_perujuk = {dokter_perujuk},")
                         .a("kd_dokter = {kd_dokter},")
-                        .a("proses = 'Sudah'")
+                        .a("proses = 'Sudah',")
+                        .a("validasi = {validasi}")
                         .a("WHERE id_periksa = {id_periksa}")
                         .set("no_rawat", txtNoRw.getText())
                         .set("nip", txtKdPtg.getText())
@@ -2251,6 +2272,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                         .set("jam_selesai", CmbJam.getSelectedItem() + ":" + CmbMenit.getSelectedItem() + ":" + CmbDetik.getSelectedItem())
                         .set("dokter_perujuk", txtKdPerujuk.getText())
                         .set("kd_dokter", txtKdPj.getText())
+                        .set("validasi", cmbValidasi.getSelectedItem().toString())
                         .set("id_periksa", _idPeriksa)
                         .write();
 
@@ -2268,7 +2290,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                 success &= new GQuery()
                         .a("INSERT INTO periksa_lab")
                         .a("VALUES ({id_periksa}, {no_rawat}, {nip}, {tgl_periksa}, {jam}, {tgl_periksa}, {jam},")
-                        .a("{dokter_perujuk}, {kd_dokter}, {status}, {proses})")
+                        .a("{dokter_perujuk}, {kd_dokter}, {status}, {proses},{validasi})")
                         .set("id_periksa", _idPeriksa)
                         .set("no_rawat", txtNoRw.getText())
                         .set("nip", txtKdPtg.getText())
@@ -2278,6 +2300,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                         .set("kd_dokter", txtKdPj.getText())
                         .set("status", status)
                         .set("proses", "Sudah")
+                        .set("validasi","Belum Validasi")
                         .write();
             }
 
@@ -2402,7 +2425,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                     koneksi.setAutoCommit(false);
 
                     pssimpanperiksa = koneksi.prepareStatement("UPDATE periksa_lab SET nip = ?, tgl_selesai = ?, "
-                            + "jam_selesai = ?, dokter_perujuk = ?, kd_dokter = ?, proses = ? " 
+                            + "jam_selesai = ?, dokter_perujuk = ?, kd_dokter = ?, proses = ?, validasi = ? " 
                             + "WHERE id_periksa = ?");
 
                     pssimpanperiksa.setString(1, txtKdPtg.getText());
@@ -2411,7 +2434,8 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                     pssimpanperiksa.setString(4, txtKdPerujuk.getText());
                     pssimpanperiksa.setString(5, txtKdPj.getText());
                     pssimpanperiksa.setString(6, "Sudah");
-                    pssimpanperiksa.setString(7, _idPeriksa);
+                    pssimpanperiksa.setString(7, "Belum Validasi");
+                    pssimpanperiksa.setString(8, _idPeriksa);
                     pssimpanperiksa.executeUpdate();
 
                     // Hapus dulu semua detailnya
@@ -3644,6 +3668,10 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         }
     }//GEN-LAST:event_btnCariPasienActionPerformed
 
+    private void cmbValidasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbValidasiKeyPressed
+
+    }//GEN-LAST:event_cmbValidasiKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -3711,12 +3739,14 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
     private widget.Button btnTarif;
     private javax.swing.ButtonGroup buttonGroup1;
     private widget.CekBox ckbNonRm;
+    private widget.ComboBox cmbValidasi;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
     private widget.Label jLabel12;
+    private widget.Label jLabel13;
     private widget.Label jLabel15;
     private widget.Label jLabel16;
     private widget.Label jLabel3;
@@ -4404,7 +4434,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         {
             String s = new GQuery()
                     .a("SELECT id_periksa, reg_periksa.no_rawat AS no_rawat, CONCAT(pasien.no_rkm_medis, ' ', pasien.nm_pasien) AS pasien,")
-                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, periksa_lab.status")
+                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, periksa_lab.status, validasi")
                     .a("FROM periksa_lab")
                     .a("JOIN reg_periksa ON reg_periksa.no_rawat = periksa_lab.no_rawat")
                     .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
@@ -4437,6 +4467,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                     rsTransksi.getString("dokter_pj"),
                     rsTransksi.getString("status"),
                     rsTransksi.getString("id_periksa"),
+                    rsTransksi.getString("validasi"),
                 });
             }
         }
@@ -4454,7 +4485,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
         {
             String s = new GQuery()
                     .a("SELECT id_periksa, reg_periksa.no_rawat AS no_rawat, CONCAT(pasien.no_rkm_medis, ' ', pasien.nm_pasien) AS pasien,")
-                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, periksa_lab.status")
+                    .a("petugas.nama AS petugas, tgl_periksa, jam, dp.nm_dokter AS dokter_perujuk, dj.nm_dokter AS dokter_pj, periksa_lab.status, validasi")
                     .a("FROM periksa_lab")
                     .a("JOIN reg_periksa ON reg_periksa.no_rawat = periksa_lab.no_rawat")
                     .a("JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis")
@@ -4487,6 +4518,7 @@ public final class DlgPemeriksaanLaboratorium extends javax.swing.JDialog
                     rsTransksi.getString("dokter_pj"),
                     rsTransksi.getString("status"),
                     rsTransksi.getString("id_periksa"),
+                    rsTransksi.getString("validasi"),
                 });
             }
         }
