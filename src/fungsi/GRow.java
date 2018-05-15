@@ -58,7 +58,7 @@ public class GRow
     
     public String getString(String key)
     {
-        return get(key).toString();
+        return get(key) == null ? null : get(key).toString();
     }
     
     public int getInt(String key)

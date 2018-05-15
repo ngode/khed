@@ -67,7 +67,12 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.isFromRanap = isFromRanap;
+        
+        // Biar default DR PR
         TabRawat.setSelectedIndex(2);
+        // Nge hide tab dr doang sama pr doang
+        TabRawat.remove(internalFrame2);
+        TabRawat.remove(internalFrame3);
 
         this.setLocation(8,1);
         setSize(885,674);

@@ -63,7 +63,7 @@ public class DlgPasien extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     public  DlgPenanggungJawab penjab=new DlgPenanggungJawab(null,false);
-    public  DlgKabupaten kab=new DlgKabupaten(null,false);
+    public  DlgKabupaten kab = new DlgKabupaten(null,false);
     public  DlgKecamatan kec=new DlgKecamatan(null,false);
     public  DlgKelurahan kel=new DlgKelurahan(null,false);
     private int pilih=0,z=0,j=0,p_no_ktp=0,p_tmp_lahir=0,p_nm_ibu=0,p_alamat=0,
@@ -5266,6 +5266,87 @@ private void ppRegistrasiBtnPrintActionPerformed(java.awt.event.ActionEvent evt)
                    "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj)," +
                    "pasien.no_telp_pj, nm_suku, pasien.group_unit, pasien.unit, pasien.status_kel_dinas, pasien.nama_kel_dinas, pasien.nrp_nip, pasien.kesatuan, "
                     + "pasien.group_pangkat, pasien.pangkat, pasien.golongan "
+                    + "from pasien "
+                    + "JOIN (SELECT no_rkm_medis FROM pasien LIMIT 100000, 10) AS p ON p.no_rkm_medis = pasien.no_rkm_medis " + 
+                   "inner join kelurahan inner join kecamatan inner join kabupaten "+
+                   "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
+                   "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "
+                    + "LEFT JOIN hrj_suku ON hrj_suku.kd_suku = pasien.kd_suku "
+                    + "WHERE pasien.no_rkm_medis LIKE ?");           
+            
+            try{
+                ps.setString(1,"%"+TCari.getText().trim()+"%");
+//                ps.setString(2,"%"+TCari.getText().trim()+"%");
+//                ps.setInt(3,Integer.parseInt(cmbHlm.getSelectedItem().toString()));
+                rs=ps.executeQuery();
+                
+                while(rs.next()){
+                    tabMode.addRow(new Object[]{false,rs.getString(1),
+                                   rs.getString(2),
+                                   rs.getString(3),
+                                   rs.getString(4),
+                                   rs.getString(5),
+                                   rs.getString(6),
+                                   rs.getString(7),
+                                   rs.getString(8),
+                                   rs.getString(9),
+                                   rs.getString(10),
+                                   rs.getString(11),
+                                   rs.getString(12),
+                                   rs.getString(13),
+                                   rs.getString(14),
+                                   rs.getString(15),
+                                   rs.getString(16),
+                                   rs.getString(17),
+                                   rs.getString(18),
+                                   rs.getString(19),
+                                   rs.getString(20),"Klik Kanan, Tampilkan Banyak Daftar",
+                                   rs.getString(21),
+                                   rs.getString(22),
+                                   rs.getString(23),
+                                   rs.getString(24),
+                                   rs.getString(25),
+                                   rs.getString(26),
+                                   rs.getString(27),
+                                   rs.getString(28),
+                                   rs.getString(29),
+                                   rs.getString(30),
+                                   rs.getString(31),
+                                   rs.getString(32),
+                                   rs.getString(33)});
+                }          
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(ps != null){
+                    ps.close();
+                }
+                
+                if(ps2 != null){
+                    ps2.close();
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+            
+        LCount.setText(""+tabMode.getRowCount());
+    }
+    
+    public void tampilOld() {     
+        Valid.tabelKosong(tabMode);
+        try{
+            ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
+                   "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
+                   "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
+                   "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.no_peserta,pasien.pekerjaanpj,"+
+                   "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj)," +
+                   "pasien.no_telp_pj, nm_suku, pasien.group_unit, pasien.unit, pasien.status_kel_dinas, pasien.nama_kel_dinas, pasien.nrp_nip, pasien.kesatuan, "
+                    + "pasien.group_pangkat, pasien.pangkat, pasien.golongan "
                     + "from pasien " + 
                    "inner join kelurahan inner join kecamatan inner join kabupaten "+
                    "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
@@ -5614,6 +5695,88 @@ private void ppRegistrasiBtnPrintActionPerformed(java.awt.event.ActionEvent evt)
     }
 
     private void prosesCari2() {
+        Valid.tabelKosong(tabMode);
+        try{
+            ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
+                   "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.gol_darah, pasien.pekerjaan,"+
+                   "pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
+                   "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.no_peserta,pasien.pekerjaanpj,"+
+                   "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj)," +
+                   "pasien.no_telp_pj, nm_suku, pasien.group_unit, pasien.unit, pasien.status_kel_dinas, pasien.nama_kel_dinas, pasien.nrp_nip, pasien.kesatuan, "
+                    + "pasien.group_pangkat, pasien.pangkat, pasien.golongan "
+                    + "from pasien "
+                    + "JOIN (SELECT no_rkm_medis FROM pasien WHERE no_rkm_medis LIKE ? OR nm_pasien LIKE ? LIMIT ?) AS p ON p.no_rkm_medis = pasien.no_rkm_medis " + 
+                   "inner join kelurahan inner join kecamatan inner join kabupaten "+
+                   "inner join penjab on pasien.kd_pj=penjab.kd_pj and pasien.kd_kel=kelurahan.kd_kel "+
+                   "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "
+                    + "LEFT JOIN hrj_suku ON hrj_suku.kd_suku = pasien.kd_suku "+
+                    "order by pasien.no_rkm_medis desc");           
+            
+            try 
+            {
+                ps.setString(1,"%"+TCari.getText().trim()+"%");
+                ps.setString(2,"%"+TCari.getText().trim()+"%");
+                ps.setInt(3,Integer.parseInt(cmbHlm.getSelectedItem().toString()));
+                rs=ps.executeQuery();
+                while(rs.next()){
+                    tabMode.addRow(new Object[] {false,rs.getString(1),
+                                   rs.getString(2),
+                                   rs.getString(3),
+                                   rs.getString(4),
+                                   rs.getString(5),
+                                   rs.getString(6),
+                                   rs.getString(7),
+                                   rs.getString(8),
+                                   rs.getString(9),
+                                   rs.getString(10),
+                                   rs.getString(11),
+                                   rs.getString(12),
+                                   rs.getString(13),
+                                   rs.getString(14),
+                                   rs.getString(15),
+                                   rs.getString(16),
+                                   rs.getString(17),
+                                   rs.getString(18),
+                                   rs.getString(19),
+                                   rs.getString(20),
+                                   Sequel.cariIsi("select count(reg_periksa.no_rkm_medis) from reg_periksa where reg_periksa.no_rkm_medis=?",rs.getString(1))+" X",
+                                   rs.getString(21),
+                                   rs.getString(22),
+                                   rs.getString(23),
+                                   rs.getString(24),
+                                   rs.getString(25),
+                                   rs.getString(26),
+                                   rs.getString(27),
+                                   rs.getString(28),
+                                   rs.getString(29),
+                                   rs.getString(30),
+                                   rs.getString(31),
+                                   rs.getString(32),
+                                   rs.getString(33)});
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            } finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(ps != null){
+                    ps.close();
+                }
+                
+                if(ps2 != null){
+                    ps2.close();
+                }
+            }
+                      
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
+        LCount.setText(""+tabMode.getRowCount());
+    }
+    
+    private void prosesCari2Old() {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+

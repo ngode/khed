@@ -2,6 +2,7 @@ package widget;
 
 import java.awt.Color;
 import javax.swing.JTable;
+import javax.swing.table.TableColumn;
 import util.GColors;
 
 /**
@@ -32,5 +33,23 @@ public class Table extends JTable {
         super.getTableHeader().setBorder(javax.swing.BorderFactory.createLineBorder(GColors.Biru15));// new Color(237,242,232)));new Color(248,253,243)));
         super.getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
         super.getTableHeader().setReorderingAllowed(false);
+    }
+    
+    public void setColWidth(int[] w)
+    {
+        for (int a = 0; a < w.length; a++)
+        {
+            TableColumn col = getColumnModel().getColumn(a);
+            
+            if (w[a] == 0)
+            {
+                col.setMinWidth(0);
+                col.setMaxWidth(0);
+            }
+            else
+            {
+                col.setPreferredWidth(w[a]);
+            }
+        }
     }
 }

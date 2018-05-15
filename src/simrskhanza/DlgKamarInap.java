@@ -30,6 +30,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.FileInputStream;
@@ -51,6 +52,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.DlgBilingRanap;
 import keuangan.DlgLhtPiutang;
+import pop.PopListPindahKamar;
 
 /**
  *
@@ -65,7 +67,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
     public  DlgKamar kamar=new DlgKamar(null,false);
     public  DlgReg reg=new DlgReg(null,false);
-    public  DlgBilingRanap billing=new DlgBilingRanap( null,false);
+    public  DlgBilingRanap billing=new DlgBilingRanap(null,false);
     public  DlgRujukMasuk rujukmasuk=new DlgRujukMasuk(null,false);
     public  DlgDiagnosaPenyakit diagnosa=new DlgDiagnosaPenyakit(null,false);
     private DlgOrderLaboratorium dlgOrderLab = new DlgOrderLaboratorium(null, false);
@@ -274,12 +276,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
             public void keyReleased(KeyEvent e) {}
         }); 
         
-        kamar.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
+        kamar.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
                 if(var.getform().equals("DlgKamarInap")){
                     if(kamar.getTable().getSelectedRow()!= -1){   
@@ -304,14 +301,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     kdkamar.requestFocus();
                 }
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
         });
         
         diagnosa.addWindowListener(new WindowListener() {
@@ -592,6 +581,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         ppRiwayat = new javax.swing.JMenuItem();
         ppCatatanPasien = new javax.swing.JMenuItem();
         ppDataHAIs = new javax.swing.JMenuItem();
+        ppListPindahKamar = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         JamMasuk = new widget.TextBox();
         WindowPindahKamar = new javax.swing.JDialog();
@@ -933,7 +923,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel19.setText("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         jLabel19.setName("jLabel19"); // NOI18N
         internalFrame2.add(jLabel19);
-        jLabel19.setBounds(-10, 200, 850, 14);
+        jLabel19.setBounds(-10, 200, 850, 16);
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpan.setMnemonic('S');
@@ -2162,6 +2152,25 @@ public class DlgKamarInap extends javax.swing.JDialog {
         });
         jPopupMenu1.add(ppDataHAIs);
 
+        ppListPindahKamar.setBackground(new java.awt.Color(255, 255, 255));
+        ppListPindahKamar.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppListPindahKamar.setForeground(new java.awt.Color(60, 80, 50));
+        ppListPindahKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppListPindahKamar.setText("List Pindah Kamar");
+        ppListPindahKamar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppListPindahKamar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppListPindahKamar.setIconTextGap(5);
+        ppListPindahKamar.setName("ppListPindahKamar"); // NOI18N
+        ppListPindahKamar.setPreferredSize(new java.awt.Dimension(220, 26));
+        ppListPindahKamar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                ppListPindahKamarBtnPrintActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppListPindahKamar);
+
         JamMasuk.setEditable(false);
         JamMasuk.setForeground(new java.awt.Color(255, 255, 255));
         JamMasuk.setHighlighter(null);
@@ -2340,7 +2349,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel30.setText("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         jLabel30.setName("jLabel30"); // NOI18N
         internalFrame3.add(jLabel30);
-        jLabel30.setBounds(-10, 215, 850, 14);
+        jLabel30.setBounds(-10, 215, 850, 16);
 
         BtnSimpanpindah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpanpindah.setMnemonic('S');
@@ -2917,7 +2926,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari1.setEditable(false);
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-05-2018" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2946,7 +2955,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari2.setEditable(false);
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-05-2018" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2980,7 +2989,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari3.setEditable(false);
         DTPCari3.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-05-2018" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -3009,7 +3018,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         DTPCari4.setEditable(false);
         DTPCari4.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2017" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-05-2018" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -6236,6 +6245,14 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }
     }//GEN-LAST:event_MnPeriksaHdActionPerformed
 
+    private void ppListPindahKamarBtnPrintActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ppListPindahKamarBtnPrintActionPerformed
+    {//GEN-HEADEREND:event_ppListPindahKamarBtnPrintActionPerformed
+        PopListPindahKamar p = new PopListPindahKamar(null, true);
+        p.setNoRw(norawat.getText());
+        p.setLocationRelativeTo(Scroll);
+        p.setVisible(true);
+    }//GEN-LAST:event_ppListPindahKamarBtnPrintActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -6435,6 +6452,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private widget.panelisi panelGlass11;
     private javax.swing.JMenuItem ppCatatanPasien;
     private javax.swing.JMenuItem ppDataHAIs;
+    private javax.swing.JMenuItem ppListPindahKamar;
     private javax.swing.JMenuItem ppRiwayat;
     private widget.Table tbKamIn;
     private widget.TextBox ttlbiaya;
@@ -6483,7 +6501,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             try {
                 rs=koneksi.prepareStatement(
                        "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab),reg_periksa.p_jawab,reg_periksa.hubunganpj,"+
-                       "penjab.png_jawab,concat(kamar_inap.kd_kamar,' ',bangsal.nm_bangsal),kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir," +
+                       "penjab.png_jawab,concat(kamar.no_kamar, '-', kamar.no_bed,' ',bangsal.nm_bangsal),kamar_inap.trf_kamar,kamar_inap.diagnosa_awal,kamar_inap.diagnosa_akhir," +
                        "kamar_inap.tgl_masuk,kamar_inap.jam_masuk,if(kamar_inap.tgl_keluar='0000-00-00','',kamar_inap.tgl_keluar),"+
                        "if(kamar_inap.jam_keluar='00:00:00','',kamar_inap.jam_keluar),kamar_inap.ttl_biaya,kamar_inap.stts_pulang, lama,dokter.nm_dokter,kamar_inap.kd_kamar,reg_periksa.kd_pj "+
                        "from kamar_inap inner join reg_periksa inner join pasien inner join kamar inner join bangsal inner join kelurahan inner join kecamatan inner join kabupaten inner join dokter inner join penjab " +

@@ -9,6 +9,7 @@ import fungsi.GResult;
 import fungsi.GRow;
 import fungsi.WarnaTable;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
@@ -27,8 +28,6 @@ public abstract class DlgCari extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
-        
-        internalFrame1.setBorder(new TitledBorder("TEST"));
         
         model = new DefaultTableModel(null, getColumns())
         {
@@ -81,6 +80,25 @@ public abstract class DlgCari extends javax.swing.JDialog
         model.fireTableDataChanged();
     }
     
+    private void selectData()
+    {
+        if (table.getSelectedRow() != -1)
+        {
+            int r = table.getSelectedRow();
+            
+            DATA = new String[model.getColumnCount()];
+            
+            for (int a = 0; a < DATA.length; a++)
+            {
+                DATA[a] = table.getValueAt(r, a).toString();
+            }
+            
+            RESULT = true;
+            
+            dispose();
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -103,7 +121,7 @@ public abstract class DlgCari extends javax.swing.JDialog
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder("::[ Cari ]::"));
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "::[ Cari ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 40))); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout());
 
         Scroll.setToolTipText("Klik data di table, kemudian klik kanan untuk memilih menu yang diinginkan");
@@ -141,7 +159,7 @@ public abstract class DlgCari extends javax.swing.JDialog
 
         dtpDari.setEditable(false);
         dtpDari.setForeground(new java.awt.Color(50, 70, 50));
-        dtpDari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-04-2018" }));
+        dtpDari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-05-2018" }));
         dtpDari.setDisplayFormat("dd-MM-yyyy");
         dtpDari.setOpaque(false);
         dtpDari.setPreferredSize(new java.awt.Dimension(133, 23));
@@ -154,7 +172,7 @@ public abstract class DlgCari extends javax.swing.JDialog
 
         dtpSampai.setEditable(false);
         dtpSampai.setForeground(new java.awt.Color(50, 70, 50));
-        dtpSampai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-04-2018" }));
+        dtpSampai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-05-2018" }));
         dtpSampai.setDisplayFormat("dd-MM-yyyy");
         dtpSampai.setOpaque(false);
         dtpSampai.setPreferredSize(new java.awt.Dimension(133, 23));
@@ -204,26 +222,18 @@ public abstract class DlgCari extends javax.swing.JDialog
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tableMouseClicked
     {//GEN-HEADEREND:event_tableMouseClicked
-        if (evt.getClickCount() == 2 && table.getSelectedRow() != -1)
+        if (evt.getClickCount() == 2)
         {
-            int r = table.getSelectedRow();
-            
-            DATA = new String[model.getColumnCount()];
-            
-            for (int a = 0; a < DATA.length; a++)
-            {
-                DATA[a] = table.getValueAt(r, a).toString();
-            }
-            
-            RESULT = true;
-            
-            dispose();
+            selectData();
         }
     }//GEN-LAST:event_tableMouseClicked
 
     private void tableKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_tableKeyPressed
     {//GEN-HEADEREND:event_tableKeyPressed
-        
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE)
+        {
+            selectData();
+        }
     }//GEN-LAST:event_tableKeyPressed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCariActionPerformed
