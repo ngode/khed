@@ -11,6 +11,7 @@
  */
 
 package simrskhanza;
+import fungsi.GQuery;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -1456,7 +1457,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             stat=koneksi.prepareStatement(
                    "select dokter.kd_dokter,dokter.nm_dokter,dokter.jk,dokter.tmp_lahir, "+
                    "dokter.tgl_lahir,dokter.gol_drh,dokter.agama,dokter.almt_tgl,dokter.no_telp, "+
-                   "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek, nm_poli "+
+                   "dokter.stts_nikah,spesialis.nm_sps,dokter.alumni,dokter.no_ijn_praktek, dokter.kd_poli_all "+
                    "from dokter inner join spesialis on dokter.kd_sps=spesialis.kd_sps "+
                    "LEFT JOIN poliklinik ON poliklinik.kd_poli = dokter.kd_poli " +
                    "where dokter.status='1' and dokter.jk like ? and dokter.gol_drh like ? and dokter.stts_nikah like ? and dokter.kd_dokter like ? or "+
@@ -1518,21 +1519,37 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 stat.setString(44,"%"+TCari.getText().trim()+"%");
                 rs=stat.executeQuery();
                 while(rs.next()){
+                    
+                    String poli = "";
+                    int i = 0;
+                    String s14 = rs.getString(14);
+                    
+                    if (s14 == null) poli = "-";
+                    else
+                    {
+                        for (String s : s14.split(","))
+                        {
+                            if (i > 0) poli += ", ";
+                            poli += new GQuery("SELECT nm_poli FROM poliklinik WHERE kd_poli = '" + s + "'").getString();
+                            i++;
+                        }
+                    }
+                    
                     tabMode.addRow(new Object[]{
                         rs.getString(1),
-                                   rs.getString(2),
-                                   rs.getString(3),
-                                   rs.getString(4),
-                                   rs.getString(5),
-                                   rs.getString(6),
-                                   rs.getString(7),
-                                   rs.getString(8),
-                                   rs.getString(9),
-                                   rs.getString(10),
-                                   rs.getString(11),
-                                   rs.getString(12),
-                                   rs.getString(13),
-                                   rs.getString(14)});
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        poli});
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);

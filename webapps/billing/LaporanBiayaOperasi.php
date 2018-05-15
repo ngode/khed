@@ -21,54 +21,54 @@
         $kategori = $_GET['kategori'];
         $detail = $_GET['detail'] == 'null' ? '-' : $_GET['detail'];
         $tanggal_operasi = $_GET['tanggal_operasi'];
-
+        
         $dokter_operator = $_GET['dokter_operator'] == 'null' ? '' :
         "<tr>
              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Dokter Operator</font></td>
              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
-             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".$_GET['dokter_operator']."</font></td>
+             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $_GET['dokter_operator'])."</font></td>
          </tr>";
         $dokter_yang_merawat = $_GET['dokter_yang_merawat'] == 'null' ? '' :
         "<tr>
              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Dokter Yang Merawat</font></td>
              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
-             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".$_GET['dokter_yang_merawat']."</font></td>
+             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $_GET['dokter_yang_merawat'])."</font></td>
          </tr>";
         $ass_dokter_operator = $_GET['ass_dokter_operator'] == 'null' ? '' :
         "<tr>
              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Asisten Dokter Operator</font></td>
              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
-             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".$_GET['ass_dokter_operator']."</font></td>
+             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $_GET['ass_dokter_operator'])."</font></td>
          </tr>";
         $dokter_anestesi = $_GET['dokter_anestesi'] == 'null' ? '' :
         "<tr>
              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Dokter Anestesi</font></td>
              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
-             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".$_GET['dokter_anestesi']."</font></td>
+             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $_GET['dokter_anestesi'])."</font></td>
          </tr>";
         $penata_anestesi = $_GET['penata_anestesi'] == 'null' ? '' :
         "<tr>
              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Penata Anestesi</font></td>
              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
-             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".$_GET['penata_anestesi']."</font></td>
+             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $_GET['penata_anestesi'])."</font></td>
          </tr>";
         $dokter_anak = $_GET['dokter_anak'] == 'null' ? '' :
         "<tr>
              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Dokter Anak</font></td>
              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
-             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".$_GET['dokter_anak']."</font></td>
+             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $_GET['dokter_anak'])."</font></td>
          </tr>";
         $dokter_pendamping = $_GET['dokter_pendamping'] == 'null' ? '' :
         "<tr>
              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Dokter Pendamping</font></td>
              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
-             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".$_GET['dokter_pendamping']."</font></td>
+             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $_GET['dokter_pendamping'])."</font></td>
          </tr>";
         $perawat_bidan = $_GET['perawat_bidan'] == 'null' ? '' :
         "<tr>
              <td width='35%'><font color='000000' size='1'  face='Tahoma'>Perawat / Bidan</font></td>
              <td><font color='000000' size='1'  face='Tahoma'>:</font></td>
-             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".$_GET['perawat_bidan']."</font></td>
+             <td width='65%'><font color='000000' size='1'  face='Tahoma'>".str_replace("_"," ", $_GET['perawat_bidan'])."</font></td>
          </tr>";
         $admin = $_GET['admin'];
 
