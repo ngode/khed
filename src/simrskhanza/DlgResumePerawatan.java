@@ -116,7 +116,7 @@ public final class DlgResumePerawatan extends javax.swing.JDialog {
         TKd = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
-        LoadHTML = new widget.EditorPane();
+        LoadHTML = new widget.editorpane();
         panelGlass5 = new widget.panelisi();
         label11 = new widget.Label();
         Tgl1 = new widget.Tanggal();
@@ -392,7 +392,7 @@ private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Button BtnPrint;
     private widget.Button BtnSeek2;
     private widget.TextBox KdRw;
-    private widget.EditorPane LoadHTML;
+    private widget.editorpane LoadHTML;
     private widget.ScrollPane Scroll;
     private widget.TextBox TKd;
     private widget.TextBox TPasien;

@@ -668,7 +668,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
         btnTambahPemeriksaan = new widget.Button();
         jPanel7 = new javax.swing.JPanel();
         Scroll7 = new widget.ScrollPane();
-        txtHasil = new widget.EditorPane();
+        txtHasil = new widget.editorpane();
         panelisi9 = new widget.panelisi();
         btnEditHasil = new widget.Button();
         panelisi3 = new widget.panelisi();
@@ -3672,7 +3672,7 @@ public final class DlgPemeriksaanRadiologi extends javax.swing.JDialog
     private widget.TextBox txtCariOrder;
     private widget.TextBox txtCariPemeriksaan;
     private widget.TextBox txtCariTransaksi;
-    private widget.EditorPane txtHasil;
+    private widget.editorpane txtHasil;
     private widget.TextBox txtKdDokter;
     private widget.TextBox txtKdDokterPj;
     private widget.TextBox txtKdKamar;

@@ -175,7 +175,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
         nmpenjab = new widget.TextBox();
         BtnSeek3 = new widget.Button();
         Scroll = new widget.ScrollPane();
-        LoadHTML = new widget.EditorPane();
+        LoadHTML = new widget.editorpane();
 
         TKd.setForeground(new java.awt.Color(255, 255, 255));
         TKd.setName("TKd"); // NOI18N
@@ -583,7 +583,7 @@ public final class DlgSensusHarianPoli extends javax.swing.JDialog {
     private widget.Button BtnPrint;
     private widget.Button BtnSeek2;
     private widget.Button BtnSeek3;
-    private widget.EditorPane LoadHTML;
+    private widget.editorpane LoadHTML;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TKd;

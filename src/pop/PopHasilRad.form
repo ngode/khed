@@ -71,7 +71,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="widget.EditorPane" name="txtHasil">
+            <Component class="widget.editorpane" name="txtHasil">
             </Component>
           </SubComponents>
         </Container>

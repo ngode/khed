@@ -79,9 +79,9 @@ public class DlgRL4A extends javax.swing.JDialog {
         BtnKeluar = new widget.Button();
         TabRawat = new javax.swing.JTabbedPane();
         internalFrame2 = new widget.InternalFrame();
-        LoadHTML = new widget.EditorPane();
+        LoadHTML = new widget.editorpane();
         internalFrame3 = new widget.InternalFrame();
-        LoadHTML1 = new widget.EditorPane();
+        LoadHTML1 = new widget.editorpane();
 
         Kd2.setName("Kd2"); // NOI18N
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
@@ -352,8 +352,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.TextBox Kd2;
-    private widget.EditorPane LoadHTML;
-    private widget.EditorPane LoadHTML1;
+    private widget.editorpane LoadHTML;
+    private widget.editorpane LoadHTML1;
     private javax.swing.JTabbedPane TabRawat;
     private widget.Tanggal Tgl1;
     private widget.Tanggal Tgl2;

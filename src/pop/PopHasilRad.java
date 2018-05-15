@@ -49,7 +49,7 @@ public class PopHasilRad extends javax.swing.JDialog
 
         internalFrame = new widget.InternalFrame();
         Scroll7 = new widget.ScrollPane();
-        txtHasil = new widget.EditorPane();
+        txtHasil = new widget.editorpane();
         panelisi6 = new widget.panelisi();
         jPanel1 = new javax.swing.JPanel();
         BtnCloseIn6 = new widget.Button();
@@ -288,7 +288,7 @@ public class PopHasilRad extends javax.swing.JDialog
     private javax.swing.JPanel jPanel4;
     private widget.panelisi panelisi6;
     private widget.panelisi panelisi7;
-    private widget.EditorPane txtHasil;
+    private widget.editorpane txtHasil;
     // End of variables declaration//GEN-END:variables
 
     public void setData(String s)
